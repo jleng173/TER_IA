@@ -1,15 +1,15 @@
 # TER_IA
 15/04
 Réflexion conception du jeu ( type  Age of Empire)
-  Bâtiments
+  -Bâtiments
   
-  Ressources
+  -Ressources
   
-  Carte
+  -Carte
   
-  Modèles
+  -Modèles
   
-  Stratégie unités
+  -Stratégie unités
   
-  Interface
+  -Interface
   
