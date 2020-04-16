@@ -3,15 +3,21 @@
 
 Réflexion conception du jeu ( type  Age of Empire)
 
-  -Bâtiments
+  - Bâtiments
   
-  -Ressources
+  - Ressources
   
-  -Carte
+  - Carte
   
-  -Modèles
+  - Modèles
   
-  -Stratégie unités
+  - Stratégie unités
   
-  -Interface
+  - Interface
   
+--------------------------------------------------
+16/04
+
+Transposition du code C en C++
+Premiers bâtiments modélisé(château, caserne, tour, début ferme)
+Gestion de la caméra et placement des objets via la souris
