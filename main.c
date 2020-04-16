@@ -38,11 +38,14 @@ GLvoid Modelisation()
     if (pose == 1){
       glPushMatrix();{
         glTranslatef(ypose,5.0,xpose);
+        glScalef(0.25,0.25,0.25);
         creer_chateau();
        // pose = 0;
        // printf("Pose\n");
       }glPopMatrix();
     }
+
+    
   }
   glPopMatrix();
 

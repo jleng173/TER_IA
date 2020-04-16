@@ -19,6 +19,7 @@ glPushMatrix();{
                 glTexCoord2f(-1.0,-1.0);
                 glVertex3f(-50,0,-50);
             glEnd();
+            glColor3f(1,1,1);
         }glPopMatrix();
     }glPopMatrix();
 };
