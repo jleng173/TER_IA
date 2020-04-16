@@ -1,2 +1,2 @@
 all:
-	gcc main.c actions.o axes.o init.o lumiere.o switch_blend.o  switch_light.o VM_init.o -lm -lGL -lGLU -lglut -o test
+	gcc main.c actions.c axes.o init.c lumiere.o switch_blend.o switch_light.o VM_init.o -lm -lGL -no-pie -lGLU -lglut -o test
