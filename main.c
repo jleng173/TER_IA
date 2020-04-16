@@ -13,6 +13,7 @@ GLfloat yrot = 0.0f;
 GLfloat z = -5.0f; 
 
 TEXTURE_STRUCT * Texture_tour;
+TEXTURE_STRUCT * Texture_toit;
 
 GLvoid Modelisation()
 {
@@ -24,10 +25,11 @@ GLvoid Modelisation()
   {
     // Ceci, qui n'utilise pas les primitives de calcul d'OpenGL
 		// glTranslatef(-10,0,-15);
-//		creer_chateau();
-//		creer_tour();
-		creer_caserne();
-	}
+    // creer_chateau();
+    // creer_tour();
+		// creer_caserne(Texture_toit);
+		creer_ferme();
+  }
   glPopMatrix();
 
   axes();

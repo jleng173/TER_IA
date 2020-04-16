@@ -50,7 +50,7 @@ void creer_chateau()
 
 }
 
-void creer_caserne()
+void creer_caserne(TEXTURE_STRUCT * Texture_toit)
 {
 		struct cube1 batiment =creer_cube1(3);		
 		struct cube1 mur =creer_cube1(3);
@@ -77,6 +77,21 @@ void creer_caserne()
 			glPopMatrix();
 			glPushMatrix();{
 				glTranslatef(0,6,0);
+				affiche_pyramide(pyramide1);
+			}
+			glPopMatrix();
+		}
+		glPopMatrix();
+}
+
+void creer_ferme()
+{
+		struct cube1 batiment =creer_cube1(2.5);		
+		struct pyramide1 pyramide1 =creer_pyramide1(3);
+		glPushMatrix();{
+			affiche_cube1(batiment);
+			glPushMatrix();{
+				glTranslatef(0,5,0);
 				affiche_pyramide(pyramide1);
 			}
 			glPopMatrix();

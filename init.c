@@ -16,6 +16,7 @@ GLuint  light = 0;
 //extern TEXTURE_STRUCT * Texture_sol;
 //extern TEXTURE_STRUCT * Texture_cube;
 extern TEXTURE_STRUCT * Texture_tour;
+extern TEXTURE_STRUCT * Texture_toit;
 
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
 GLvoid InitGL(GLsizei Width, GLsizei Height)	// We call this right after our OpenGL window is created.
@@ -55,6 +56,7 @@ GLvoid InitGL(GLsizei Width, GLsizei Height)	// We call this right after our Ope
 	glDisable(GL_TEXTURE_2D);*/
 	GLuint text[1];
 	Texture_tour = readPpm ("castle_texture.PPM");
+    Texture_toit = readPpm ("sand_256.ppm");
 	glEnable(GL_TEXTURE_2D);
 	glActiveTexture(GL_TEXTURE0);
 	glGenTextures(1,text);
