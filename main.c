@@ -9,6 +9,10 @@
 float xcam = 0.0;
 float ycam = 0.0;
 
+int pose = 0;
+float xpose = 0.0;
+float ypose = 0.0;
+
 GLfloat xrot = 0.0f;   
 GLfloat yrot = 0.0f;   
 GLfloat z = -15.0f; 
@@ -26,6 +30,14 @@ GLvoid Modelisation()
 					    ycam,2,xcam,
 					    0,1,0);
     solcarte();
+    if (pose == 1){
+      glPushMatrix();{
+        glTranslatef(ypose,5.0,xpose);
+        glutSolidCube(10);
+       // pose = 0;
+       // printf("Pose\n");
+      }glPopMatrix();
+    }
   }
   glPopMatrix();
 
