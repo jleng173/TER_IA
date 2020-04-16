@@ -9,4 +9,6 @@
 #include <stdlib.h>
 
 void touche_pressee(unsigned char key, int x, int y);
+void mouseClicks(int button, int state, int x, int y);
+
 #endif

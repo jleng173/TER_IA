@@ -156,6 +156,8 @@ int notre_init(int argc, char** argv, void (*DrawGLScene)())
     /* Register the function called when the keyboard is pressed. */
     glutKeyboardFunc(&touche_pressee);
 
+    glutMouseFunc(&mouseClicks);
+
     /* Register the function called when special keys (arrows, page down, etc) are pressed. */
     glutSpecialFunc(&specialKeyPressed);
 

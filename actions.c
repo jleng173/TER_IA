@@ -6,11 +6,13 @@ extern GLuint blend;
 extern GLuint light;
 
 extern float xcam;
-extern float ycam;
+extern float zcam;
 
 extern int pose;
 extern float xpose;
 extern float ypose;
+
+extern int mouse;
 
 void touche_pressee(unsigned char key, int x, int y) 
 {
@@ -38,28 +40,28 @@ void touche_pressee(unsigned char key, int x, int y)
 
     case TOUCHE_MIN_Z: 
     case TOUCHE_MAJ_Z:
-      xcam +=2;
+      zcam +=2;
 	    break;
 
     case TOUCHE_MIN_Q: 
     case TOUCHE_MAJ_Q:
-      ycam +=2;
+      xcam +=2;
 	    break;
 
     case TOUCHE_MIN_S: 
     case TOUCHE_MAJ_S:
-      xcam -=2;
+      zcam -=2;
 	    break;
 
     case TOUCHE_MIN_D: 
     case TOUCHE_MAJ_D:
-      ycam -=2;
+      xcam -=2;
 	    break;
 
     case TOUCHE_MIN_E:
       pose = 1;
       xpose = xcam;
-      ypose = ycam;
+      ypose = zcam;
 	    break; 
     case TOUCHE_MAJ_E:
       pose = 0;
@@ -68,3 +70,14 @@ void touche_pressee(unsigned char key, int x, int y)
 
 }
 
+void mouseClicks(int button, int state, int x, int y) {
+  //printf("%d\n",button);
+  mouse = button;
+  float mx = x ;
+  float my = y ;
+    if(button == 0) {
+      pose = 1;
+      xpose = mx;
+      ypose = my;
+    }
+}
