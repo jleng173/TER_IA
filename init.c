@@ -1,5 +1,5 @@
 #include "init.h"
-//#include "./ppm.c"
+#include "./ppm.c"
 
 /* The number of our GLUT window */
 int window; 
@@ -15,6 +15,7 @@ GLuint  blend = 1;
 GLuint  light = 0;
 //extern TEXTURE_STRUCT * Texture_sol;
 //extern TEXTURE_STRUCT * Texture_cube;
+extern TEXTURE_STRUCT * Texture_tour;
 
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
 GLvoid InitGL(GLsizei Width, GLsizei Height)	// We call this right after our OpenGL window is created.
@@ -52,7 +53,18 @@ GLvoid InitGL(GLsizei Width, GLsizei Height)	// We call this right after our Ope
 
 	glGenerateMipmap(GL_TEXTURE_2D);
 	glDisable(GL_TEXTURE_2D);*/
-
+	GLuint text[1];
+	Texture_tour = readPpm ("castle_texture.PPM");
+	glEnable(GL_TEXTURE_2D);
+	glActiveTexture(GL_TEXTURE0);
+	glGenTextures(1,text);
+	glBindTexture(GL_TEXTURE_2D,text[0]);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glGenerateMipmap(GL_TEXTURE_2D);
+	glDisable(GL_TEXTURE_2D);
 	
 }
 
