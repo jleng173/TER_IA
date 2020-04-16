@@ -1,6 +1,6 @@
 // gcc main.c actions.o axes.o init.o lumiere.o switch_blend.o  switch_light.o VM_init.o -lm -lGL -lGLU -lglut -o test
 
-#include "./carte.c"
+#include "carte.c"
 #include "init.h"
 #include "axes.h"
 #include "VM_init.h"
@@ -38,7 +38,7 @@ GLvoid Modelisation()
     if (pose == 1){
       glPushMatrix();{
         glTranslatef(ypose,5.0,xpose);
-        glutSolidCube(10);
+        creer_chateau();
        // pose = 0;
        // printf("Pose\n");
       }glPopMatrix();
