@@ -50,11 +50,43 @@ void creer_chateau()
 
 }
 
+void creer_caserne()
+{
+		struct cube1 batiment =creer_cube1(3);		
+		struct cube1 mur =creer_cube1(3);
+		struct pyramide1 pyramide1 =creer_pyramide1(3);
+		glPushMatrix();{
+			affiche_cube1(batiment);
+			glPushMatrix();{
+				glTranslatef(-2.7,-1.2,4.5);
+				glScalef(0.1,0.6,0.6);
+				affiche_cube1(mur);
+			}
+			glPopMatrix();
+			glPushMatrix();{
+				glTranslatef(2.7,-1.2,4.5);
+				glScalef(0.1,0.6,0.6);
+				affiche_cube1(mur);
+			}
+			glPopMatrix();
+			glPushMatrix();{
+				glTranslatef(0,-1.2,6.6);
+				glScalef(1,0.6,0.1);
+				affiche_cube1(mur);
+			}
+			glPopMatrix();
+			glPushMatrix();{
+				glTranslatef(0,6,0);
+				affiche_pyramide(pyramide1);
+			}
+			glPopMatrix();
+		}
+		glPopMatrix();
+}
+
 void creer_tour()
 {
 		glPushMatrix();{
-//			glEnable(GL_TEXTURE_2D);
-
 			//Tour
 			glPushMatrix();{
 				GLUquadric* params = gluNewQuadric();

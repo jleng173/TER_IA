@@ -4,6 +4,7 @@
 #include "axes.h"
 #include "VM_init.h"
 #include "cube.c"
+#include "pyramide.c"
 #include "ppm.h"
 #include "batiment.c"
 
@@ -22,9 +23,10 @@ GLvoid Modelisation()
   glPushMatrix();
   {
     // Ceci, qui n'utilise pas les primitives de calcul d'OpenGL
-		glTranslatef(-10,0,-15);
+		// glTranslatef(-10,0,-15);
 //		creer_chateau();
-		creer_tour();
+//		creer_tour();
+		creer_caserne();
 	}
   glPopMatrix();
 
