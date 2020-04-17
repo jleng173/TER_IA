@@ -83,9 +83,6 @@ void mouseClicks(int button, int state, int x, int y) {
 }
 
 void mouseMove(int x, int y){
-  if (x < 50){
-    xcam -=2;
-  }else if(x > 1550 ){
-    xcam +=2;
-  }
+  xpose = x;
+  ypose = y;
 }

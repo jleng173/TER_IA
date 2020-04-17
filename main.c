@@ -15,13 +15,13 @@
  int HEIGHT = 900;
 
 //CAMERA
-float xcam = 0.0;
+float xcam = 10.0;
 float ycam = 0.0;
 
 int pose = 0;
 int mouse = 0;
-float xpose = 0.0;
-float ypose = 0.0;
+float xpose = 100.0;
+float ypose = 100.0;
 
 GLfloat xrot = 0.0f;   
 GLfloat yrot = 0.0f;   
@@ -146,10 +146,25 @@ GLvoid Modelisation()
   // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
   glPushMatrix();
   {
+
+    if(xpose < 50){
+      xcam -= 0.02;
+    }else if(xpose > WIDTH -50){
+      xcam += 0.02;
+    }
+
+    if(ypose < 50){
+      ycam += 0.02;
+    }else if(ypose > HEIGHT -50){
+      ycam -= 0.02;
+    }
+
     //Oriente la camera 
         gluLookAt(xcam,ycam,85,
                  xcam,ycam,0,
                0,1,0);
+
+
 
     // Matrice Vue
     float modelViewMat[16];
