@@ -1,3 +1,15 @@
+
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glut.h>
+#include <unistd.h>
+#include <stdio.h> 
+#include <stdlib.h> 
+#include <iostream>
+#include <cmath>
+
+#include "init.hpp"
+
 struct cube1 {
 	float sommet8[3];
 	float sommet7[3];
@@ -147,4 +159,103 @@ GLvoid affiche_cube1(struct cube1 cube){
 			glEnd();
 		}
 		glPopMatrix();
+}
+
+
+GLvoid Modelisation()
+{
+	initGL::VM_init();
+  struct cube1 batiment1 =creer_cube1(5);
+  
+
+  // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
+	//Batiment hotel de ville
+  glPushMatrix();
+  {
+    // Ceci, qui n'utilise pas les primitives de calcul d'OpenGL
+		glTranslatef(-10,0,-15);
+		//1ere Tour
+		glPushMatrix();{
+			glDisable(GL_TEXTURE_2D);		
+			glPushMatrix();{
+			  glColor3f(0.572, 0.545, 0.545);
+				GLUquadric* params = gluNewQuadric();
+				glRotatef(90,1,0,0);
+				glTranslatef(-3,2,-5);
+				gluCylinder(params,2,2,10,20,1);
+				gluDeleteQuadric(params);
+			}
+			glPopMatrix();
+			//2eme Tour
+			glPushMatrix();{
+			  glColor3f(0.572, 0.545, 0.545);
+				GLUquadric* params = gluNewQuadric();
+				glRotatef(90,1,0,0);
+				glTranslatef(3,-2,-5);
+				gluCylinder(params,2,2,10,20,1);
+				gluDeleteQuadric(params);
+			}
+			glPopMatrix();
+			//3eme Tour
+			glPushMatrix();{
+			  glColor3f(0.572, 0.545, 0.545);
+				GLUquadric* params = gluNewQuadric();
+				glRotatef(90,1,0,0);
+				glTranslatef(3,2,-5);
+				gluCylinder(params,2,2,10,20,1);
+				gluDeleteQuadric(params);
+			}
+			glPopMatrix();
+			//4eme Tour
+			glPushMatrix();{
+			  glColor3f(0.572, 0.545, 0.545);
+				GLUquadric* params = gluNewQuadric();
+				glRotatef(90,1,0,0);
+				glTranslatef(3,-2,-5);
+				gluCylinder(params,2,2,10,20,1);
+				gluDeleteQuadric(params);
+			}
+			glPopMatrix();
+			glDisable(GL_TEXTURE_2D);
+		}
+		glPopMatrix();
+
+		glScalef(0.6,1,0.6);
+		affiche_cube1(batiment1);
+
+		affiche_cube1(batiment1);
+
+  }
+  glPopMatrix();
+
+	/*glPushMatrix();
+	{
+		glPushMatrix();{
+		GLUquadric* params = gluNewQuadric();
+		glRotatef(90,1,0,0);
+		glTranslatef(0,1,-1.1);
+		gluCylinder(params,0.5,0.5,0.4,20,1);
+		gluDeleteQuadric(params);
+		}
+		glPopMatrix();		    
+	}
+	glPopMatrix();*/
+  glutSwapBuffers();
+}
+
+   float initGL::z = 0;
+   float initGL::xrot = 0;
+   float initGL::yrot = 0;
+   int initGL::blend = 1;
+
+int main(int argc, char **argv) {
+
+	initGL* init = new initGL();
+
+	init->mainInit(argc,argv,&Modelisation);
+
+
+
+
+	return 0;
 }

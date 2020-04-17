@@ -1,2 +1,10 @@
-all:
-	gcc main.c actions.c axes.o init.c lumiere.o switch_blend.o switch_light.o VM_init.o -lm -lGL -no-pie -lGLU -lglut -o test
+
+all: init.o switch_blend.o
+	g++ init.o switch_blend.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
+
+init.o: init.cpp init.hpp
+	g++ -c init.cpp -o init.o
+
+
+clean:
+	rm -f *.o main
