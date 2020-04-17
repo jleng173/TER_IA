@@ -4,7 +4,7 @@ extern TEXTURE_STRUCT * Texture_pierre;
 extern TEXTURE_STRUCT * Texture_porte;
 extern TEXTURE_STRUCT * Texture_paille;
 
-void creer_chateau()
+GLvoid creer_chateau()
 {
 		struct cube1 batiment1 =creer_cube1(4.5);
 		glEnable(GL_TEXTURE_2D);	
@@ -68,7 +68,7 @@ void creer_chateau()
 		glDisable(GL_TEXTURE_2D);
 }
 
-void creer_caserne()
+GLvoid creer_caserne()
 {
 		struct cube1 batiment =creer_cube1(3);		
 		struct cube1 mur =creer_cube1(3);
@@ -110,7 +110,7 @@ void creer_caserne()
 		glDisable(GL_TEXTURE_2D);
 }
 
-void creer_ferme()
+GLvoid creer_ferme()
 {
 		struct cube1 batiment =creer_cube1(2.5);		
 		struct pyramide1 pyramide1 =creer_pyramide1(3);
@@ -131,7 +131,7 @@ void creer_ferme()
 		glPopMatrix();
 }
 
-void creer_tour()
+GLvoid creer_tour()
 {
 	glPushMatrix();{
 		//Tour

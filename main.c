@@ -7,6 +7,7 @@
 #include "pyramide.c"
 #include "ppm.h"
 #include "batiment.c"
+#include "personnage.c"
 
 GLfloat xrot = 0.0f;   
 GLfloat yrot = 0.0f;   
@@ -30,8 +31,9 @@ GLvoid Modelisation()
 		// glTranslatef(-10,0,-15);
     // creer_chateau();
     // creer_tour();
-		creer_caserne();
+		// creer_caserne();
 		// creer_ferme();
+    creer_paysan();
   }
   glPopMatrix();
 
