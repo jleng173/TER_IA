@@ -4,6 +4,8 @@
 /* The number of our GLUT window */
 int window; 
 
+extern int WIDTH;
+extern int HEIGHT;
 
 // int nombre_returns = 0;
 extern GLfloat z;
@@ -133,7 +135,7 @@ int notre_init(int argc, char** argv, void (*DrawGLScene)())
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);  
 
     /* get a 640 x 480 window */
-    glutInitWindowSize(1080,720);  
+    glutInitWindowSize(WIDTH,HEIGHT);  
 
     /* the window starts at the upper left corner of the screen */
     glutInitWindowPosition(0, 0);  
@@ -158,11 +160,13 @@ int notre_init(int argc, char** argv, void (*DrawGLScene)())
 
     glutMouseFunc(&mouseClicks);
 
+    glutPassiveMotionFunc(&mouseMove);
+
     /* Register the function called when special keys (arrows, page down, etc) are pressed. */
     glutSpecialFunc(&specialKeyPressed);
 
     /* Initialize our window. */
-    InitGL(1080, 720);
+    InitGL(WIDTH, HEIGHT);
 
     /* Start Event Processing Engine */  
     glutMainLoop();  

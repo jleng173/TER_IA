@@ -10,9 +10,13 @@
 #include "carte.c"
 #include <math.h>
 
+//Taille Fenetre
+ int WIDTH = 1600;
+ int HEIGHT = 900;
+
 //CAMERA
 float xcam = 0.0;
-float zcam = 0.0;
+float ycam = 0.0;
 
 int pose = 0;
 int mouse = 0;
@@ -22,6 +26,8 @@ float ypose = 0.0;
 GLfloat xrot = 0.0f;   
 GLfloat yrot = 0.0f;   
 GLfloat z = -15.0f; 
+
+float posx, posy, posz = 0.0;
 
 float m1[16] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
 
@@ -140,18 +146,23 @@ GLvoid Modelisation()
   // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
   glPushMatrix();
   {
-    // Ceci, qui n'utilise pas les primitives de calcul d'OpenGL
-    gluLookAt(xcam,25,-25,
-					    xcam,2,zcam,
-					    0,1,0);
+    //Oriente la camera 
+        gluLookAt(xcam,ycam,85,
+                 xcam,ycam,0,
+               0,1,0);
+
+    // Matrice Vue
     float modelViewMat[16];
     glGetFloatv(GL_MODELVIEW_MATRIX, modelViewMat);
+    // Matrice Projection
     float modelProjetMat[16];
     glGetFloatv(GL_PROJECTION_MATRIX, modelProjetMat);
 
+    // Matrice Projection * Matrice Vue
     float * Mult = (float *)malloc(sizeof(float) * 16);
      Mult = mxm(modelProjetMat,modelViewMat);
 
+    //Inverse du résultat de la matrice
     float * minverse = (float *)malloc(sizeof(float) * 16);
     gluInvertMatrixd(Mult,minverse);
 
@@ -159,40 +170,44 @@ GLvoid Modelisation()
     float * in = (float *)malloc(sizeof(float) * 4);
     float winZ = 1.0;
 
-
-    in[0]=(2.0f*((float)(xpose-0)/(1080-0)))-1.0f,
-    in[1]=1.0f-(2.0f*((float)(ypose-0)/(720-0)));
+    in[0]=(2.0f*((float)(xpose-0)/(WIDTH-0)))-1.0f,
+    in[1]=1.0f-(2.0f*((float)(ypose-0)/(HEIGHT-0)));
     in[2]=2.0* winZ -1.0;
     in[3]=1.0;
 
+    // Vecteur des Positions
     float * Position = (float *)malloc(sizeof(float) * 16);
     Position = mxv(minverse,in);
-
-   // Position[3] = 1.0/Position[3];
 
     Position[0] /= Position[3];
     Position[1] /= Position[3];
     Position[2] /= Position[3];
 
-printf("%f %f %f / %f,%f,%f \n",xcam,zcam,z,Position[0],Position[1],Position[2]);
-   // pretty_printer(minverse);
-    
-    
-    
+printf("%f %f %f / %f,%f,%f \n",xcam,ycam,z,Position[0],Position[1],Position[2]);
+  
     if (pose == 1){
-      glPushMatrix();{
+      posx = Position[0];
+      posy = Position[1];
+      posz = Position[2];
+      pose = 0;
+    }
+    if (pose == 0 && posx != 0){
+       glPushMatrix();{
         
-        glTranslatef(Position[0],Position[1],Position[2]);
+        glTranslatef(posx,posy,2.5);
         //glTranslatef(0,0,+17);
-        //glScalef(0.25,0.25,0.25);
+        glScalef(0.5,0.5,0.5);
         glRotatef(90,1.0,0.0,0.0);
         creer_chateau();
+        //creer_tour();
        // pose = 0;
       // printf("%f\n",xpose);
       }glPopMatrix();
     }
+
+
     glPushMatrix();{
-      glTranslatef(0,0,-85);
+      glTranslatef(0,0,0);
       solcarte();
      }glPopMatrix();
     
