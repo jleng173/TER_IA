@@ -12,8 +12,11 @@ GLfloat xrot = 0.0f;
 GLfloat yrot = 0.0f;   
 GLfloat z = -5.0f; 
 
-TEXTURE_STRUCT * Texture_tour;
+TEXTURE_STRUCT * Texture_chateau;
+TEXTURE_STRUCT * Texture_pierre;
 TEXTURE_STRUCT * Texture_toit;
+TEXTURE_STRUCT * Texture_porte;
+TEXTURE_STRUCT * Texture_paille;
 
 GLvoid Modelisation()
 {
@@ -27,8 +30,8 @@ GLvoid Modelisation()
 		// glTranslatef(-10,0,-15);
     // creer_chateau();
     // creer_tour();
-		// creer_caserne(Texture_toit);
-		creer_ferme();
+		creer_caserne();
+		// creer_ferme();
   }
   glPopMatrix();
 

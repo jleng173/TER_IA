@@ -81,11 +81,11 @@ GLvoid affiche_cube1(struct cube1 cube){
 			{
 				glTexCoord2f(0,1);
 				glVertex3f(cube.sommet4[0],cube.sommet4[1],cube.sommet4[2]);
-				glTexCoord2f(1,1);  
+				glTexCoord2f(0,0);
 				glVertex3f(cube.sommet3[0],cube.sommet3[1],cube.sommet3[2]);
 				glTexCoord2f(1,0);
 				glVertex3f(cube.sommet2[0],cube.sommet2[1],cube.sommet2[2]);
-				glTexCoord2f(0,0);
+				glTexCoord2f(1,1);
 				glVertex3f(cube.sommet1[0],cube.sommet1[1],cube.sommet1[2]);
 			}
 			glPopMatrix();
@@ -123,11 +123,11 @@ GLvoid affiche_cube1(struct cube1 cube){
 			{
 				glTexCoord2f(0,1);
 				glVertex3f(cube.sommet1[0],cube.sommet1[1],cube.sommet1[2]);
-				glTexCoord2f(1,1);  
+				glTexCoord2f(0,0);
 				glVertex3f(cube.sommet2[0],cube.sommet2[1],cube.sommet2[2]);
 				glTexCoord2f(1,0);
 				glVertex3f(cube.sommet6[0],cube.sommet6[1],cube.sommet6[2]);
-				glTexCoord2f(0,0);
+				glTexCoord2f(1,1);
 				glVertex3f(cube.sommet7[0],cube.sommet7[1],cube.sommet7[2]);
 			}
 			glPopMatrix();
