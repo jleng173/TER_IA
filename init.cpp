@@ -30,7 +30,7 @@ void initGL::setWidth(unsigned int width) {
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
 void initGL::generalInit(unsigned int width,unsigned int height)	// We call this right after our OpenGL window is created.
 {
-    //glClearColor(1.0f, 0.2f, 0.2f, 1.0f);	// This Will Clear The Background Color To Black
+    glClearColor(0.1f, 0.4f, 0.7f, 0.0f);	// This Will Clear The Background Color To Black
     glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
     /*    glDepthFunc(GL_LESS);			// The Type Of Depth Test To Do */
     glDepthFunc(GL_LEQUAL);	  // Le type de test de profondeur 
@@ -84,7 +84,7 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)())
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);  
 
     /* get a 640 x 480 window */
-    glutInitWindowSize(640, 480);  
+    glutInitWindowSize(1600, 900);  
 
     /* the window starts at the upper left corner of the screen */
     glutInitWindowPosition(0, 0);  
@@ -107,11 +107,15 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)())
     /* Register the function called when the keyboard is pressed. */
     glutKeyboardFunc(&touche_pressee);
 
+    glutMouseFunc(&mouseClicks);
+
+    glutPassiveMotionFunc(&mouseMove);
+
     /* Register the function called when special keys (arrows, page down, etc) are pressed. */
     //glutSpecialFunc(&specialKeyPressed);
 
     /* Initialize our window. */
-    generalInit(640, 480);
+    generalInit(1600, 900);
 
 
 
@@ -160,6 +164,7 @@ void initGL::VM_init()        {
     glRotatef(yrot,0.0f,1.0f,0.0f);		// Rotate On The Y Axis
 
     glColor3f(1.0f, 1.0f, 1.0f);
+
 }
 
 
@@ -204,9 +209,9 @@ void initGL::specialKeyPressed(int key, int x, int y)
 
 void initGL::touche_pressee(unsigned char key, int x, int y) 
 {
-    printf("Xrot : %f \n",xrot);
+    /*printf("Xrot : %f \n",xrot);
     printf("Yrot : %f \n",yrot);
-    printf("Z : %f \n\n",z);
+    printf("Z : %f \n\n",z);*/
     usleep(100);
 
     switch (key) {    
@@ -226,10 +231,10 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 	   yrot+=30.0f;                	
 	    break;       
     case TOUCHE_MIN_E: 
-	   z-=0.02f;               	
+	   z-=0.25f;               	
 	    break;      
     case TOUCHE_MIN_R: 
-	   z+=0.02f;               	
+	   z+=0.25f;               	
 	    break;        
     case TOUCHE_MIN_B: 
 	   if(blend==1) { 
@@ -238,7 +243,7 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
        else {
            blend=1;
            glDisable(GL_BLEND);}               	
-	    break;  
+	    break;
          
 
 
@@ -259,30 +264,23 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
       break;
 */
 	
-/*
-   case TOUCHE_MIN_Q:
-	if (rota>360) rota=0;
-	else 
-	rota+=1;
-	break;
-
-   case TOUCHE_MIN_D: 
-	if (rota<0) rota=360;
-	else
-	rota-=1;
-	break;
-
-
-   
- case TOUCHE_MIN_R: 
-	if (rotrea==90) rotrea=0;
-	else
-	rotrea=90;
-	break;
-*/
-
-
-
     }	
+
+}
+
+void initGL::mouseClicks(int button, int state, int x, int y){
+    float mx = x ;
+    float my = y ;
+    if(button == 0) {
+      pose = 1;
+      xpose = mx;
+      xpose = mx;
+      ypose = my;
+    }
+}
+
+void initGL::mouseMove(int x, int y){
+  xpose = x;
+  ypose = y;
 }
 

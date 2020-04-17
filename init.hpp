@@ -11,6 +11,7 @@
 
 
 
+
 #ifndef __INIT
 #define __INIT
 
@@ -40,11 +41,12 @@ public:
 
 private: 
 	// init
-	 void generalInit(unsigned int width,unsigned int height);
+	void generalInit(unsigned int width,unsigned int height);
 	static void touche_pressee(unsigned char key, int x, int y) ;
 	static void specialKeyPressed(int key, int x, int y);
 	static GLvoid ReSizeGLScene(int m_width,int m_height);
-	
+	static void mouseClicks(int button, int state, int x, int y);
+	static void mouseMove(int x, int y);
 
 protected:
 
@@ -68,7 +70,12 @@ protected:
  static float z;
  static float xrot;   
  static float yrot; 
-static int  blend;
+ static int  blend;
+ static float xcam;
+ static float ycam;
+ static int pose;
+ static float xpose;
+ static float ypose;
 
 	
 };
