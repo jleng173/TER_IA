@@ -1,7 +1,8 @@
+#ifndef LIB_PPM_H
+#define LIB_PPM_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "ppm.h"
 
 struct TEXTURE_STRUCT
 {
@@ -11,7 +12,9 @@ struct TEXTURE_STRUCT
 
 class ppm{
     public:
+        ppm();
         TEXTURE_STRUCT * readPpm (char *ppmFileName);
         void writePpm (char *filename, unsigned char *data);
         unsigned char * rgb2rgba(TEXTURE_STRUCT * texture);
 };
+#endif

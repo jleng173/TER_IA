@@ -1,6 +1,6 @@
 
-all: init.o switch_blend.o Carte.o PositionSouris.o Batiment.o Forme.o
-	g++ init.o switch_blend.o Carte.o PositionSouris.o Batiment.o  Forme.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
+all: init.o switch_blend.o Carte.o PositionSouris.o ppm.o Batiment.o Forme.o 
+	g++ init.o switch_blend.o Carte.o PositionSouris.o Batiment.o Forme.o ppm.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
@@ -16,6 +16,10 @@ Batiment.o: Batiment.cpp Batiment.hpp
 
 Forme.o: Forme.cpp Forme.hpp
 	g++ -c Forme.cpp -o Forme.o
+
+ppm.o: ppm.cpp ppm.hpp
+	g++ -c ppm.cpp -o ppm.o
+
 
 clean:
 	rm -f *.o main

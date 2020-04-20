@@ -76,11 +76,11 @@ protected:
  static int pose;
  static float xpose;
  static float ypose;
-//  static TEXTURE_STRUCT * Texture_chateau;
-//  static TEXTURE_STRUCT * Texture_pierre;
-//  static TEXTURE_STRUCT * Texture_toit;
-//  static TEXTURE_STRUCT * Texture_porte;
-//  static TEXTURE_STRUCT * Texture_paille;
+ static TEXTURE_STRUCT * Texture_chateau;
+ static TEXTURE_STRUCT * Texture_pierre;
+ static TEXTURE_STRUCT * Texture_toit;
+ static TEXTURE_STRUCT * Texture_porte;
+ static TEXTURE_STRUCT * Texture_paille;
 	
 };
 
@@ -88,16 +88,3 @@ protected:
 
 
 #endif
-
-
-
-
-
-
-
-
-
-
-
-
-

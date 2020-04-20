@@ -1,14 +1,20 @@
 #include "Batiment.hpp"
 #include "Forme.hpp"
 
-Batiment::Batiment(){};
+Batiment::Batiment(TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+        Texture_chateau = T_chateau;
+        Texture_pierre = T_pierre;
+        Texture_toit = T_toit;
+        Texture_porte = T_porte;
+        Texture_paille = T_paille;
+}
 
 void Batiment::creerChateau(){
                 Forme forme;
 		struct cube1 batiment1 =forme.creerCube(4.5);
 		glEnable(GL_TEXTURE_2D);	
 		glPushMatrix();{
-			//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
 			//1ere Tour
 			glPushMatrix();{
 				GLUquadric* params = gluNewQuadric();
@@ -58,7 +64,7 @@ void Batiment::creerChateau(){
 		glPopMatrix();
 		glEnable(GL_TEXTURE_2D);
 		glPushMatrix();{
-			//glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_chateau->width, Texture_chateau->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_chateau->data);
+			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_chateau->width, Texture_chateau->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_chateau->data);
 			glScalef(0.6,0.95,0.6);
 			glTranslatef(0,-0.82,0);
 			forme.afficheCube(batiment1);
@@ -74,7 +80,7 @@ void Batiment::creerCaserne(){
         struct pyramide1 pyramide1 = forme.creerPyramide(4);
         glEnable(GL_TEXTURE_2D);
         glPushMatrix();{
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
             glPushMatrix();{
                     glTranslatef(-2.7,-1.2,4.5);
                     glScalef(0.1,0.6,0.6);
@@ -93,7 +99,7 @@ void Batiment::creerCaserne(){
                     forme.afficheCube(mur);
             }
             glPopMatrix();
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
             glPushMatrix();{
                     glTranslatef(0,6,0);
                     glScalef(1.5,1,1);
@@ -101,7 +107,7 @@ void Batiment::creerCaserne(){
             }
             glPopMatrix();
             glScalef(1.5,1,1);
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_chateau->width, Texture_chateau->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_chateau->data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_chateau->width, Texture_chateau->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_chateau->data);
             forme.afficheCube(batiment);
 
     }
@@ -114,7 +120,8 @@ void Batiment::creerTour(){
         glPushMatrix();{
         //Tour
         glEnable(GL_TEXTURE_2D);
-        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
+        // std::cout <<"Bali balo"<<std::endl;
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
         glPushMatrix();{
                 GLUquadric* params = gluNewQuadric();
                 gluQuadricTexture(params, GL_TRUE);
@@ -125,7 +132,8 @@ void Batiment::creerTour(){
         }
         glPopMatrix();
         //Toiture
-        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+        // std::cout <<"2"<<std::endl;
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
         glPushMatrix();{
                 GLUquadric* params = gluNewQuadric();
                 gluQuadricTexture(params, GL_TRUE);
@@ -137,7 +145,7 @@ void Batiment::creerTour(){
                 gluDeleteQuadric(params);
         }
         glPopMatrix();
-        //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
 
         glPushMatrix();{
                 struct cube1 porte = forme.creerCube(2.5);
@@ -157,12 +165,12 @@ void Batiment::creerFerme(){
         struct pyramide1 pyramide1 = forme.creerPyramide(3);
         glPushMatrix();{
             glEnable(GL_TEXTURE_2D);
-            //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
             forme.afficheCube(batiment);
             glDisable(GL_TEXTURE_2D);
             glPushMatrix();{
                     glEnable(GL_TEXTURE_2D);
-                    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_paille->width, Texture_paille->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_paille->data);
+                    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_paille->width, Texture_paille->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_paille->data);
                     glTranslatef(0,5,0);
                     forme.affichePyramide(pyramide1);
                     glDisable(GL_TEXTURE_2D);

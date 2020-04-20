@@ -2,7 +2,6 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
-#include "ppm.h"
 #include <unistd.h>
 #include <stdio.h> 
 #include <stdlib.h> 
@@ -30,11 +29,14 @@ float initGL::ypose = 100.0;
 
 float posx, posy, posz = 0.0;
 
-// TEXTURE_STRUCT * initGL::Texture_chateau;
-// TEXTURE_STRUCT * initGL::Texture_pierre;
-// TEXTURE_STRUCT * initGL::Texture_toit;
-// TEXTURE_STRUCT * initGL::Texture_porte;
-// TEXTURE_STRUCT * initGL::Texture_paille;
+ppm p;
+
+TEXTURE_STRUCT * initGL::Texture_chateau = p.readPpm ("./texture/castle_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_pierre = p.readPpm ("./texture/castle_walls_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
+
 
 GLvoid Modelisation()
 {
@@ -112,15 +114,15 @@ GLvoid Modelisation()
 			glDisable(GL_TEXTURE_2D);
 		}
 		glPopMatrix();
-
-      Batiment b;
+*/
+      Batiment b(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
       b.creerTour();
-
+		/*
 		glScalef(0.6,1,0.6);
 		f.afficheCube(batiment1);
 
 		affiche_cube1(batiment1);*/
-
+	
 		// Matrice Vue
     	float modelViewMat[16];
     	glGetFloatv(GL_MODELVIEW_MATRIX, modelViewMat);

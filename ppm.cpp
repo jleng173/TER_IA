@@ -1,7 +1,9 @@
 #include "ppm.hpp"
 
+ppm::ppm(){};
+
 TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
-    	FILE *file;
+	FILE *file;
 	TEXTURE_STRUCT *texture = NULL;
 	char buffer[255];
 	int pixelFormat;
