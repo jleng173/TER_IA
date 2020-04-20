@@ -1,6 +1,6 @@
 
-all: init.o switch_blend.o Carte.o PositionSouris.o Batiment.o Forme.o
-	g++ init.o switch_blend.o Carte.o PositionSouris.o Batiment.o  Forme.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
+all: init.o switch_blend.o Carte.o PositionSouris.o Batiment.o Forme.o Ressource.o
+	g++ -std=c++14 init.o switch_blend.o Carte.o PositionSouris.o Batiment.o Forme.o Ressource.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
@@ -16,6 +16,9 @@ Batiment.o: Batiment.cpp Batiment.hpp
 
 Forme.o: Forme.cpp Forme.hpp
 	g++ -c Forme.cpp -o Forme.o
+
+Ressource.o: Ressource.cpp Ressource.hpp
+	g++ -c Ressource.cpp -o Ressource.o
 
 clean:
 	rm -f *.o main
