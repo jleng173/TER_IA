@@ -1,6 +1,9 @@
 #include "Carte.hpp"
 
 Carte::Carte(){};
+Carte::Carte(bool foret){
+	GenerateForet();
+};
 
 void Carte::solcarte(){
     glPushMatrix();{
@@ -21,7 +24,6 @@ void Carte::solcarte(){
             glEnd();
             glColor3f(1,1,1);
         }glPopMatrix();
-        Decor();
     }glPopMatrix();
 }
 
@@ -33,7 +35,7 @@ GLvoid Carte::Arbre(){
 glPushMatrix();
   	{
 	//glTranslatef(3,-0.8,-3);
-	glRotatef(-90,1,0,0);
+	//glRotatef(-90,1,0,0);
 		glPushMatrix();
   	{
 	glColor3f(0.5,0.3,0.2);
@@ -58,6 +60,7 @@ glPushMatrix();
 
 //DECOR
 GLvoid Carte::Decor(){
+ glPushMatrix();{
 int i,j;
 for(i=-200;i<201;i=i+20){
 glPushMatrix();
@@ -84,4 +87,29 @@ glPushMatrix();
   		glPopMatrix();}
 		}
 	}
+
+	 }glPopMatrix();
+}
+
+void Carte::Foret(){
+	//glScalef(0.5,0.5,0.5);
+	glPushMatrix();{
+		for(int i = 0 ; i <_foret.size() ; i++){
+			glTranslatef( _foret[i][0], _foret[i][1], _foret[i][2]);
+			Arbre();
+		}
+
+    }glPopMatrix();
+}
+
+
+void Carte::GenerateForet(){
+	std::srand (time(NULL));
+		for (int i = 0 ; i < 100 ; i++){
+			float x =(float) (std::rand()%1000-500)/100 ;
+			float y = (float) (std::rand()%1000-500)/100;
+			//printf("%f %f \n",x,y);
+			std::vector<float>  add = {x,y, 0.0};
+			_foret.push_back(add);
+		}
 }

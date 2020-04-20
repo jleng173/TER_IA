@@ -35,6 +35,8 @@ float posx, posy, posz = 0.0;
 
 vector< vector<float> > cubes_test;
 
+Carte cforet(true);
+
  TEXTURE_STRUCT * initGL::Texture_chateau;
 // TEXTURE_STRUCT * initGL::Texture_pierre;
 // TEXTURE_STRUCT * initGL::Texture_toit;
@@ -48,15 +50,15 @@ GLvoid Modelisation()
   glPushMatrix();
   {
 	 if(initGL::xpose < 50){
-      initGL::xcam -= 0.02;
+      initGL::xcam -= 0.1;
     }else if(initGL::xpose > WIDTH -50){
-      initGL::xcam += 0.02;
+      initGL::xcam += 0.1;
     }
 
     if(initGL::ypose < 50){
-      initGL::ycam += 0.02;
+      initGL::ycam += 0.1;
     }else if(initGL::ypose > HEIGHT -50){
-      initGL::ycam -= 0.02;
+      initGL::ycam -= 0.1;
     }    
 	  
     //Oriente la camera 
@@ -88,30 +90,40 @@ GLvoid Modelisation()
       posz = SP.positionZ;*/
 		vector<float> add = {SP.positionX,SP.positionY,SP.positionZ};
 		cubes_test.push_back(add);
-		printf("%d \n",cubes_test.size());
     	initGL::pose = 0;
 	}
 	
 	glPushMatrix();{
 		carte.solcarte();
+    cforet.Foret();
+	}glPopMatrix();
+
+  
+
+  glPushMatrix();{
+    
+   // carte.Decor();
+	  glColor3f(1,1,1);
 	}glPopMatrix();
 
     if (initGL::pose == 0){
-		for( int i = 0 ; i < cubes_test.size() ; i++){
-			//printf("%f \n",cubes_test[i][0]);
-		glPushMatrix();{   
-			glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
-			glScalef(0.5,0.5,0.5);
-			glRotatef(90,1.0,0.0,0.0);
-			Batiment B;
-			B.creerTour();
-    	}glPopMatrix();
+      for( int i = 0 ; i < cubes_test.size() ; i++){
+        //printf("%f \n",cubes_test[i][0]);
+      glPushMatrix();{   
+        glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+        //glScalef(0.5,0.5,0.5);
+        glRotatef(90,1.0,0.0,0.0);
+        Batiment B;
+        B.creerChateau();
+        }glPopMatrix();
 
-		}
+      }
     }
 
-  }
-  glPopMatrix();
+
+
+	}glPopMatrix();
+
 
   glutSwapBuffers();
 }
@@ -122,7 +134,7 @@ int main(int argc, char **argv) {
 	initGL* init = new initGL();
 
 	init->mainInit(argc,argv,&Modelisation);
-
+  //cforet.GenerateForet();
 
 
 
