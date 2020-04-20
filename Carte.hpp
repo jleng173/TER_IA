@@ -8,5 +8,7 @@ public:
 	Carte();
 
     void solcarte();
+	GLvoid Decor();
+	GLvoid Arbre();
  
 };
