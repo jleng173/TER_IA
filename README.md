@@ -28,3 +28,10 @@ Réflexion conception du jeu ( type  Age of Empire)
 - Mise en place du projet en c++
 - Texture bâtiments, modélisation unités + animations mouvement
 - Placements objets souris + déplacements caméra souris
+
+---------------------------------------------------
+20/04:
+
+- Passage des textures de C en C++
+- Modélisation arbre
+- Génération foret, réglage problèmes caméra 
