@@ -198,19 +198,19 @@ GLvoid Modelisation()
       initGL::ycam -= 0.02;
     }      
     //Oriente la camera 
-    gluLookAt(initGL::xcam,initGL::ycam,85,
+    gluLookAt(initGL::xcam,initGL::ycam,100,
                  initGL::xcam,initGL::ycam,0,
                  0,1,0);
 
-  struct cube1 batiment1 =creer_cube1(5);
+   //struct cube1 batiment1 =creer_cube1(5);
   
 	Carte carte;
-	carte.solcarte();
+	//carte.solcarte();
   // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
 	//Batiment hotel de ville
 
     // Ceci, qui n'utilise pas les primitives de calcul d'OpenGL
-		glTranslatef(-10,0,-15);
+		/*glTranslatef(-10,0,-15);
 		//1ere Tour
 		glPushMatrix();{
 			glDisable(GL_TEXTURE_2D);		
@@ -260,7 +260,7 @@ GLvoid Modelisation()
 		glScalef(0.6,1,0.6);
 		affiche_cube1(batiment1);
 
-		affiche_cube1(batiment1);
+		affiche_cube1(batiment1);*/
 
 		// Matrice Vue
     	float modelViewMat[16];
@@ -279,19 +279,21 @@ GLvoid Modelisation()
       posz = SP.positionZ;
       initGL::pose = 0;
     }
+	glPushMatrix();{
+		carte.solcarte();
+	}glPopMatrix();
+
     if (initGL::pose == 0 && posx != 0){
        glPushMatrix();{
         
         glTranslatef(posx,posy,posz);
         glScalef(0.5,0.5,0.5);
         glRotatef(90,1.0,0.0,0.0);
-        glutSolidCube(50);
+        glutSolidCube(10);
       }glPopMatrix();
     }	
 
-		glPushMatrix();{
-			carte.solcarte();
-		}glPopMatrix();
+
   }
   glPopMatrix();
 
