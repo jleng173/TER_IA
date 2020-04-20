@@ -1,6 +1,5 @@
 
 #include "init.hpp"
-
 // Constructor
 initGL::initGL() {}
 
@@ -30,6 +29,7 @@ void initGL::setWidth(unsigned int width) {
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
 void initGL::generalInit(unsigned int width,unsigned int height)	// We call this right after our OpenGL window is created.
 {
+    ppm p;
     glClearColor(0.1f, 0.4f, 0.7f, 0.0f);	// This Will Clear The Background Color To Black
     glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
     /*    glDepthFunc(GL_LESS);			// The Type Of Depth Test To Do */
@@ -47,7 +47,23 @@ void initGL::generalInit(unsigned int width,unsigned int height)	// We call this
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);			// Set The Blending Function For Translucency
  
- 	  GLuint text[1];
+ 	GLuint text[1];
+   	// Texture_chateau = p.readPpm ("./texture/castle_texture.PPM");
+	// Texture_pierre = p.readPpm ("./texture/castle_walls_texture.PPM");
+    // Texture_toit = p.readPpm ("./texture/roof_texture.PPM");
+    // Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
+    // Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
+
+	// glEnable(GL_TEXTURE_2D);
+	// glActiveTexture(GL_TEXTURE0);
+	// glGenTextures(1,text);
+	// glBindTexture(GL_TEXTURE_2D,text[0]);
+	// glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	// glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	// glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	// glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	// glGenerateMipmap(GL_TEXTURE_2D);
+	// glDisable(GL_TEXTURE_2D);
    
 
 }
