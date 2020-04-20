@@ -31,10 +31,10 @@ float initGL::xpose = 100.0;
 float initGL::ypose = 100.0;
 
 float posx, posy, posz = 0.0;
-
-ppm p;
 vector< vector<float> > cubes_test;
 Carte cforet(true);
+
+ppm p;
 
 TEXTURE_STRUCT * initGL::Texture_chateau = p.readPpm ("./texture/castle_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_pierre = p.readPpm ("./texture/castle_walls_texture.PPM");
@@ -81,14 +81,7 @@ GLvoid Modelisation()
 
 	//printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
-		affiche_cube1(batiment1);*/
-	
-		// Matrice Vue
-    	float modelViewMat[16];
-    	glGetFloatv(GL_MODELVIEW_MATRIX, modelViewMat);
-    	// Matrice Projection
-    	float modelProjetMat[16];
-    	glGetFloatv(GL_PROJECTION_MATRIX, modelProjetMat);
+	//	affiche_cube1(batiment1);
 
 	if (initGL::pose == 1){
       /*posx = SP.positionX;
@@ -119,7 +112,7 @@ GLvoid Modelisation()
         glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
         //glScalef(0.5,0.5,0.5);
         glRotatef(90,1.0,0.0,0.0);
-        Batiment B;
+        Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
         B.creerChateau();
         }glPopMatrix();
 

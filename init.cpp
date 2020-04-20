@@ -48,11 +48,6 @@ void initGL::generalInit(unsigned int width,unsigned int height)	// We call this
     glBlendFunc(GL_SRC_ALPHA,GL_ONE);			// Set The Blending Function For Translucency
  
  	GLuint text[1];
-   	Texture_chateau = p.readPpm ("./texture/castle_texture.PPM");
-	Texture_pierre = p.readPpm ("./texture/castle_walls_texture.PPM");
-    Texture_toit = p.readPpm ("./texture/roof_texture.PPM");
-    Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
-    Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
 	glEnable(GL_TEXTURE_2D);
 	glActiveTexture(GL_TEXTURE0);
