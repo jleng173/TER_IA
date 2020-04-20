@@ -1,6 +1,6 @@
 
 all: init.o switch_blend.o ppm.o Carte.o PositionSouris.o Batiment.o Forme.o Ressource.o
-	g++ -std=c++14 init.o switch_blend.o Carte.o PositionSouris.o Batiment.o Forme.o Ressource.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
+	g++ -std=c++14 init.o switch_blend.o ppm.o  Carte.o PositionSouris.o Batiment.o Forme.o Ressource.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o

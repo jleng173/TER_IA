@@ -8,6 +8,7 @@
 #include <iostream>
 #include <cmath>
 #include <vector>
+#include "ppm.hpp"
 #include "Carte.hpp"
 #include "Batiment.hpp"
 #include "Forme.hpp"
