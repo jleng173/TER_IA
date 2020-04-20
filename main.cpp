@@ -7,11 +7,14 @@
 #include <stdlib.h> 
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include "Carte.hpp"
 #include "Batiment.hpp"
 #include "Forme.hpp"
 #include "init.hpp"
 #include "PositionSouris.hpp"
+
+using namespace std;
 
 //Taille Fenetre
  int WIDTH = 1600;
@@ -30,6 +33,8 @@ float initGL::ypose = 100.0;
 float posx, posy, posz = 0.0;
 
 ppm p;
+vector< vector<float> > cubes_test;
+Carte cforet(true);
 
 TEXTURE_STRUCT * initGL::Texture_chateau = p.readPpm ("./texture/castle_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_pierre = p.readPpm ("./texture/castle_walls_texture.PPM");
@@ -45,16 +50,17 @@ GLvoid Modelisation()
   glPushMatrix();
   {
 	 if(initGL::xpose < 50){
-      initGL::xcam -= 0.02;
+      initGL::xcam -= 0.1;
     }else if(initGL::xpose > WIDTH -50){
-      initGL::xcam += 0.02;
+      initGL::xcam += 0.1;
     }
 
     if(initGL::ypose < 50){
-      initGL::ycam += 0.02;
+      initGL::ycam += 0.1;
     }else if(initGL::ypose > HEIGHT -50){
-      initGL::ycam -= 0.02;
-    }      
+      initGL::ycam -= 0.1;
+    }    
+	  
     //Oriente la camera 
     gluLookAt(initGL::xcam,initGL::ycam,100,
                  initGL::xcam,initGL::ycam,0,
@@ -63,63 +69,17 @@ GLvoid Modelisation()
    //struct cube1 batiment1 =creer_cube1(5);
   
 	Carte carte;
-	//carte.solcarte();
-  // Entre glPushMatrix et glPopMatrix s'écrit la description de la scène.
-	//Batiment hotel de ville
 
-    // Ceci, qui n'utilise pas les primitives de calcul d'OpenGL
-		/*glTranslatef(-10,0,-15);
-		//1ere Tour
-		glPushMatrix();{
-			glDisable(GL_TEXTURE_2D);		
-			glPushMatrix();{
-			  glColor3f(0.572, 0.545, 0.545);
-				GLUquadric* params = gluNewQuadric();
-				glRotatef(90,1,0,0);
-				glTranslatef(-3,2,-5);
-				gluCylinder(params,2,2,10,20,1);
-				gluDeleteQuadric(params);
-			}
-			glPopMatrix();
-			//2eme Tour
-			glPushMatrix();{
-			  glColor3f(0.572, 0.545, 0.545);
-				GLUquadric* params = gluNewQuadric();
-				glRotatef(90,1,0,0);
-				glTranslatef(3,-2,-5);
-				gluCylinder(params,2,2,10,20,1);
-				gluDeleteQuadric(params);
-			}
-			glPopMatrix();
-			//3eme Tour
-			glPushMatrix();{
-			  glColor3f(0.572, 0.545, 0.545);
-				GLUquadric* params = gluNewQuadric();
-				glRotatef(90,1,0,0);
-				glTranslatef(3,2,-5);
-				gluCylinder(params,2,2,10,20,1);
-				gluDeleteQuadric(params);
-			}
-			glPopMatrix();
-			//4eme Tour
-			glPushMatrix();{
-			  glColor3f(0.572, 0.545, 0.545);
-				GLUquadric* params = gluNewQuadric();
-				glRotatef(90,1,0,0);
-				glTranslatef(3,-2,-5);
-				gluCylinder(params,2,2,10,20,1);
-				gluDeleteQuadric(params);
-			}
-			glPopMatrix();
-			glDisable(GL_TEXTURE_2D);
-		}
-		glPopMatrix();
-*/
-      Batiment b(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-      b.creerTour();
-		/*
-		glScalef(0.6,1,0.6);
-		f.afficheCube(batiment1);
+	// Matrice Vue
+    float modelViewMat[16];
+    glGetFloatv(GL_MODELVIEW_MATRIX, modelViewMat);
+    // Matrice Projection
+    float modelProjetMat[16];
+    glGetFloatv(GL_PROJECTION_MATRIX, modelProjetMat);
+
+	PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
+
+	//printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
 		affiche_cube1(batiment1);*/
 	
@@ -130,47 +90,47 @@ GLvoid Modelisation()
     	float modelProjetMat[16];
     	glGetFloatv(GL_PROJECTION_MATRIX, modelProjetMat);
 
-		PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
-
-		printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
-
 	if (initGL::pose == 1){
-      posx = SP.positionX;
+      /*posx = SP.positionX;
       posy = SP.positionY;
-      posz = SP.positionZ;
-      initGL::pose = 0;
-    }
+      posz = SP.positionZ;*/
+		vector<float> add = {SP.positionX,SP.positionY,SP.positionZ};
+		cubes_test.push_back(add);
+    	initGL::pose = 0;
+	}
+	
 	glPushMatrix();{
 		carte.solcarte();
+    cforet.Foret();
 	}glPopMatrix();
 
-    if (initGL::pose == 0 && posx != 0){
-       glPushMatrix();{
-        
-        glTranslatef(posx,posy,posz);
-        glScalef(0.5,0.5,0.5);
+  
+
+  glPushMatrix();{
+    
+   // carte.Decor();
+	  glColor3f(1,1,1);
+	}glPopMatrix();
+
+    if (initGL::pose == 0){
+      for( int i = 0 ; i < cubes_test.size() ; i++){
+        //printf("%f \n",cubes_test[i][0]);
+      glPushMatrix();{   
+        glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+        //glScalef(0.5,0.5,0.5);
         glRotatef(90,1.0,0.0,0.0);
-        glutSolidCube(10);
-      }glPopMatrix();
-    }	
+        Batiment B;
+        B.creerChateau();
+        }glPopMatrix();
+
+      }
+    }
 
 
-  }
-  glPopMatrix();
+
+	}glPopMatrix();
 
 
-	/*glPushMatrix();
-	{
-		glPushMatrix();{
-		GLUquadric* params = gluNewQuadric();
-		glRotatef(90,1,0,0);
-		glTranslatef(0,1,-1.1);
-		gluCylinder(params,0.5,0.5,0.4,20,1);
-		gluDeleteQuadric(params);
-		}
-		glPopMatrix();		    
-	}
-	glPopMatrix();*/
   glutSwapBuffers();
 }
 
@@ -180,7 +140,7 @@ int main(int argc, char **argv) {
 	initGL* init = new initGL();
 
 	init->mainInit(argc,argv,&Modelisation);
-
+  //cforet.GenerateForet();
 
 
 

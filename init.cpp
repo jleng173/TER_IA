@@ -235,16 +235,16 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 	   exit(1);                   	
 	    break;    
     case TOUCHE_MIN_Z: 
-	   xrot-=30.0f;                 	
+	   xrot-=5.0f;                 	
 	    break;    
     case TOUCHE_MIN_Q: 
-	   yrot-=30.0f;               	
+	   yrot-=5.0f;               	
 	    break;    
     case TOUCHE_MIN_S: 
-	   xrot+=30.0f;                	
+	   xrot+=5.0f;                	
 	    break;    
     case TOUCHE_MIN_D: 
-	   yrot+=30.0f;                	
+	   yrot+=5.0f;                	
 	    break;       
     case TOUCHE_MIN_E: 
 	   z-=0.25f;               	
