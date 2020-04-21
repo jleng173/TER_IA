@@ -115,48 +115,47 @@ void Batiment::creerCaserne(){
     glDisable(GL_TEXTURE_2D);
 }
 
-void Batiment::creerTour(){
-        Forme forme;
-        glPushMatrix();{
-        //Tour
-        glEnable(GL_TEXTURE_2D);
-        // std::cout <<"Bali balo"<<std::endl;
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
-        glPushMatrix();{
-                GLUquadric* params = gluNewQuadric();
-                gluQuadricTexture(params, GL_TRUE);
-                glRotatef(90,1,0,0);
-                glTranslatef(-3,2,-5);
-                gluCylinder(params,1.5,1.5,10,20,1);
-                gluDeleteQuadric(params);
-        }
-        glPopMatrix();
-        //Toiture
-        // std::cout <<"2"<<std::endl;
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
-        glPushMatrix();{
-                GLUquadric* params = gluNewQuadric();
-                gluQuadricTexture(params, GL_TRUE);
-                glRotatef(90,1,0,0);
-                glTranslatef(-3,2,-7);
-                gluCylinder(params,0,2.5,3,20,1);
-                // glTranslatef(0,0,3);
-                // gluDisk(params,0,2.5,20,1);
-                gluDeleteQuadric(params);
-        }
-        glPopMatrix();
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
+GLvoid Batiment::creerTour()
+{
+        Forme f;
+	glPushMatrix();{
+		//Tour
+		glEnable(GL_TEXTURE_2D);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
+		glPushMatrix();{
+			GLUquadric* params = gluNewQuadric();
+			gluQuadricTexture(params, GL_TRUE);
+			glRotatef(90,1,0,0);
+			glTranslatef(0,0,-10);
+			gluCylinder(params,1.5,1.5,10,20,1);
+			gluDeleteQuadric(params);
+		}
+		glPopMatrix();
+		//Toiture			
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+		glPushMatrix();{
+			GLUquadric* params = gluNewQuadric();
+			gluQuadricTexture(params, GL_TRUE);
+			glRotatef(90,1,0,0);
+			glTranslatef(0,0,-12);
+			gluCylinder(params,0,2.5,3,20,1);
+			// glTranslatef(0,0,3);
+			// gluDisk(params,0,2.5,20,1);
+			gluDeleteQuadric(params);
+		}
+		glPopMatrix();
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
 
-        glPushMatrix();{
-                struct cube1 porte = forme.creerCube(2.5);
-                glScalef(0.1,0.4,0.2);
-                glTranslatef(-15,-10,10);
-                forme.afficheCube(porte);
-        }
-        glPopMatrix();
-        glDisable(GL_TEXTURE_2D);
-    }
-    glPopMatrix();
+		glPushMatrix();{
+			struct cube1 porte = f.creerCube(2.5);
+			glScalef(0.1,0.4,0.2);
+			glTranslatef(-15,2.5,0);
+			f.afficheCube(porte);
+		}
+		glPopMatrix();
+		glDisable(GL_TEXTURE_2D);
+	}
+	glPopMatrix();
 }
 
 void Batiment::creerFerme(){

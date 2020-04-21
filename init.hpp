@@ -76,6 +76,8 @@ protected:
  static int pose;
  static float xpose;
  static float ypose;
+ static float avance;
+ static float mouv;
  static TEXTURE_STRUCT * Texture_chateau;
  static TEXTURE_STRUCT * Texture_pierre;
  static TEXTURE_STRUCT * Texture_toit;

@@ -224,7 +224,7 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
     printf("Yrot : %f \n",yrot);
     printf("Z : %f \n\n",z);*/
     usleep(100);
-
+    float limite = 19;
     switch (key) {    
     case ESCAPE: 
 	   exit(1);                   	
@@ -255,7 +255,17 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
            blend=1;
            glDisable(GL_BLEND);}               	
 	    break;
-         
+    case TOUCHE_MIN_A:
+        if(avance<limite && mouv == 0)
+            avance += 1;
+        if(avance==limite && mouv == 0)
+            mouv = 1;
+        if(avance>-limite && mouv == 1)
+        {
+            avance -= 1;
+        }
+        if(avance==-limite && mouv == 1)
+            mouv=0;   
 
 
 /*
