@@ -32,33 +32,25 @@ glPushMatrix();
 }
 
 
-//DECOR
-GLvoid Decor::PlacementArbre(){
-int i,j;
-for(i=-200;i<201;i=i+20){
-glPushMatrix();
-  	{
-	glTranslatef(5,i,-0.1);
-	Arbre();
-	}
-
-  	glPopMatrix();
-glPushMatrix();
-  	{
-	glTranslatef(-5,i,-0.1);
-	Arbre();
-	}
-  	glPopMatrix();
-
-		for(j=-200;j<201;j=j+20){
-		if(j>8 || j<-8){
-		glPushMatrix();
-  		{
-		glTranslatef(j,i,-0.1);
-		Arbre();
+void Decor::Foret(){
+	//glScalef(0.5,0.5,0.5);
+	glPushMatrix();{
+		for(int i = 0 ; i <_foret.size() ; i++){
+			glTranslatef( _foret[i][0], _foret[i][1], _foret[i][2]);
+			Arbre();
 		}
-  		glPopMatrix();}
+
+    }glPopMatrix();
+}
+
+
+void Decor::GenerateForet(int nombre){
+	std::srand (time(NULL));
+		for (int i = 0 ; i < nombre ; i++){
+			float x =(float) (std::rand()%1000-500)/100 ;
+			float y = (float) (std::rand()%1000-500)/100;
+			//printf("%f %f \n",x,y);
+			std::vector<float>  add = {x,y, 0.0};
+			_foret.push_back(add);
 		}
-	}
-	glColor3f(1,1,1);
 }

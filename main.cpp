@@ -37,7 +37,7 @@ float initGL::mouv = 0.0;
 
 float posx, posy, posz = 0.0;
 vector< vector<float> > cubes_test;
-Carte cforet(true);
+Carte c;
 
 ppm p;
 
@@ -87,7 +87,7 @@ GLvoid Modelisation()
 
 	//printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
-      Decor decor;
+
 	if (initGL::pose == 1){
       /*posx = SP.positionX;
       posy = SP.positionY;
@@ -97,11 +97,6 @@ GLvoid Modelisation()
     	initGL::pose = 0;
 	}
 	
-	// glPushMatrix();{
-	// 	carte.solcarte();
-  //   cforet.Foret();
-	// }glPopMatrix();
-
   
 
   glPushMatrix();{
@@ -110,9 +105,7 @@ GLvoid Modelisation()
 	  glColor3f(1,1,1);
 	}glPopMatrix();
 
-  	glPushMatrix();{
-      decor.PlacementArbre();
-	}glPopMatrix();
+
     // if (initGL::pose == 0){
     //   for( int i = 0 ; i < cubes_test.size() ; i++){
     //     //printf("%f \n",cubes_test[i][0]);
@@ -144,9 +137,12 @@ int main(int argc, char **argv) {
 	initGL* init = new initGL();
 
 	init->mainInit(argc,argv,&Modelisation);
-  //cforet.GenerateForet();
 
-
+      Decor decor;
+  	glPushMatrix();{
+      decor.GenerateForet(100);
+      decor.Foret();
+	}glPopMatrix();
 
 	return 0;
 }
