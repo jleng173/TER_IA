@@ -14,11 +14,8 @@ public:
 	Carte(bool foret);
 
     void solcarte();
-	GLvoid Decor();
-	GLvoid Arbre();
 	void GenerateForet();
 	void Foret();
-
 public:
 	std::vector< std::vector<float> > _foret;
  

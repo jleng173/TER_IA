@@ -8,6 +8,9 @@ init.o: init.cpp init.hpp
 Carte.o: Carte.cpp Carte.hpp
 	g++ -std=c++14 -c Carte.cpp -o Carte.o
 
+Decor.o: Decor.cpp Decor.hpp
+	g++ -c Decor.cpp -o Decor.o
+
 PositionSouris.o: PositionSouris.cpp PositionSouris.hpp
 	g++ -c PositionSouris.cpp -o PositionSouris.o
 
