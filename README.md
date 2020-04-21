@@ -35,3 +35,10 @@ Réflexion conception du jeu ( type  Age of Empire)
 - Passage des textures de C en C++
 - Modélisation arbre
 - Génération foret, réglage problèmes caméra 
+
+----------------------------------------------------
+21/04:
+
+- Déplacement personnage via la souris
+- Création classe Decors 
+- Animation attaque / construction
