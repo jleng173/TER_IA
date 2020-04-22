@@ -9,12 +9,12 @@
 
 
 class Personnage {
-public:
-    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX);
-    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX,float mouv);
 
-    GLvoid creerPersonnage();
-
+protected:
+    int hp;
+    int dmg;
+    float hitbox[2];
+    
     float avance;
     float action;
     float mouv;
@@ -26,6 +26,12 @@ public:
     float rotation;
 
     float vitesseMAX;
+
+public:
+    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX);
+    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX,float mouv);
+
+    GLvoid creerPersonnage();
 
     void updatePos( float time);
 
