@@ -14,6 +14,8 @@
 #include "init.hpp"
 #include "PositionSouris.hpp"
 #include "Personnage.hpp"
+// #include "Paysan.hpp"
+// #include "Guerrier.hpp"
 
 using namespace std;
 
@@ -47,7 +49,7 @@ TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
-Personnage Perso1(initGL::avance,initGL::action,0,0,0,3);
+Paysan Perso1(initGL::avance,initGL::action,0,0,0,3);
 
 GLvoid Modelisation()
 {
@@ -122,19 +124,19 @@ carte.solcarte();
     //   }
     // }
     
-  //  glPushMatrix();{
-          
-  //         Perso1.creerPersonnage();
-  //         Perso1.deplacementCible(posx,posy);
-        
-  //         //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
-  //  }
-  // glPopMatrix();
-
    glPushMatrix();{
-          Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
-          Perso2.creerPersonnage();
-  }glPopMatrix();
+          
+          Perso1.creerPersonnage();
+          Perso1.deplacementCible(posx,posy);
+        
+          //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
+   }
+  glPopMatrix();
+
+  //  glPushMatrix();{
+  //         Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
+  //         Perso2.creerPersonnage();
+  // }glPopMatrix();
 
 	}glPopMatrix();
 

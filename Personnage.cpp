@@ -65,7 +65,7 @@ GLvoid Personnage::creerPersonnage()
     
     glPushMatrix();{
 
-        glScalef(5,5,5);
+        // glScalef(5,5,5);
         glRotatef(90,1.0,0.0,0.0);
         glRotatef(orientation,0,1,0);
 
@@ -263,6 +263,76 @@ GLvoid Personnage::creerPersonnage()
             glPopMatrix();
         }
         glPopMatrix();
+    }
+    glPopMatrix();
+}
+
+GLvoid Personnage::drawHalfSphere(int scaley, int scalex, GLfloat r) {
+   int i, j;
+   GLfloat v[scalex*scaley][3];
+
+   for (i=0; i<scalex; ++i) {
+     for (j=0; j<scaley; ++j) {
+       v[i*scaley+j][0]=r*cos(j*2*M_PI/scaley)*cos(i*M_PI/(2*scalex));
+       v[i*scaley+j][1]=r*sin(i*M_PI/(2*scalex));
+       v[i*scaley+j][2]=r*sin(j*2*M_PI/scaley)*cos(i*M_PI/(2*scalex));
+     }
+   }
+
+   glBegin(GL_QUADS);
+     for (i=0; i<scalex-1; ++i) {
+       for (j=0; j<scaley; ++j) {
+         glVertex3fv(v[i*scaley+j]);
+         glVertex3fv(v[i*scaley+(j+1)%scaley]);
+         glVertex3fv(v[(i+1)*scaley+(j+1)%scaley]);
+         glVertex3fv(v[(i+1)*scaley+j]);
+       }
+     }
+   glEnd();
+ }
+
+
+//Classe Paysan
+Paysan::Paysan(float avn,float act,float x, float y,float angle, float vitesseMAX):Personnage(avn,act,x,y,angle,vitesseMAX){
+    hp=75;
+    dmg=2;
+}
+
+GLvoid Paysan::creerBatiment(){
+
+}
+
+GLvoid Paysan::creerChapeau() const{
+    glPushMatrix();{
+        glColor3f(0.7,0.7,0);
+        // glScalef(0.8,0,0);
+        // Personnage::drawHalfSphere(100,100,1);
+        GLUquadric* params = gluNewQuadric();
+        gluQuadricTexture(params, GL_TRUE);
+        glRotatef(90,1,0,0);
+        gluDisk(params,0,1,20,1);
+        gluDeleteQuadric(params);
+    }
+    glPopMatrix();
+}
+
+//Classe Guerrier
+
+Guerrier::Guerrier(float avn,float act,float x, float y,float angle, float vitesseMAX):Personnage(avn,act,x,y,angle,vitesseMAX){
+    hp=150;
+    dmg=5;
+}
+
+GLvoid Guerrier::creerChapeau() const{
+    glPushMatrix();{
+        glColor3f(0.7,0.7,0);
+        // glScalef(0.8,0,0);
+        // Personnage::drawHalfSphere(100,100,1);
+        GLUquadric* params = gluNewQuadric();
+        gluQuadricTexture(params, GL_TRUE);
+        glRotatef(90,1,0,0);
+        gluDisk(params,0,1,20,1);
+        gluDeleteQuadric(params);
     }
     glPopMatrix();
 }

@@ -1,9 +1,10 @@
-#include "Personnage.hpp"
+// #include "Personnage.hpp"
 
 
-class Guerrier : public Personnage{
-    protected:
+// class Guerrier : public Personnage{
+//     protected:
 
-    public:
-        Guerrier(float avn,float act,float x, float y,float angle, float vitesseMAX);
-};
+//     public:
+//         Guerrier(float avn,float act,float x, float y,float angle, float vitesseMAX);
+//         GLvoid creerChapeau() const override;
+// };

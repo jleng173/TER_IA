@@ -4,7 +4,6 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <math.h>
-#include <math.h>
 #include "Forme.hpp"
 
 
@@ -32,8 +31,31 @@ public:
     Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX,float mouv);
 
     GLvoid creerPersonnage();
+    virtual GLvoid creerChapeau() const = 0;
 
     void updatePos( float time);
 
     void deplacementCible(float x, float y);
+
+    GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
+};
+
+//Classe Paysan
+class Paysan:public Personnage{
+protected:
+
+public:
+    Paysan(float avn,float act,float x, float y,float angle, float vitesseMAX);
+    GLvoid creerBatiment();
+    GLvoid creerChapeau() const override;
+
+};
+
+//Classe Guerrier
+class Guerrier : public Personnage{
+    protected:
+
+    public:
+        Guerrier(float avn,float act,float x, float y,float angle, float vitesseMAX);
+        GLvoid creerChapeau() const override;
 };
