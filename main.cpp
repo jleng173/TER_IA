@@ -1,4 +1,3 @@
-
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -35,8 +34,11 @@ float initGL::ypose = 100.0;
 float initGL::avance = 0.0;
 float initGL::action = 0.0;
 float initGL::mouv = 0.0;
+int initGL::selection = 0;
 
 float posx, posy, posz = 0.0;
+float CDposx, CDposy = 0.0;
+float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
 
   	Carte carte;
@@ -79,8 +81,11 @@ GLvoid Modelisation()
                  0,1,0);
 
    //struct cube1 batiment1 =creer_cube1(5);
-  
-
+  glViewport(0, 0, WIDTH, HEIGHT);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,100.0f);
+  glMatrixMode(GL_MODELVIEW);
 
 	// Matrice Vue
     float modelViewMat[16];
@@ -91,6 +96,12 @@ GLvoid Modelisation()
 
 	PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
 
+  glViewport(0, 0, WIDTH, HEIGHT);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,1000.0f);
+  glMatrixMode(GL_MODELVIEW);
+
 	//printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
 
@@ -98,37 +109,35 @@ GLvoid Modelisation()
       posx = SP.positionX;
       posy = SP.positionY;
       posz = SP.positionZ;
-		// vector<float> add = {SP.positionX,SP.positionY,SP.positionZ};
-		// cubes_test.push_back(add);
+		vector<float> add = {SP.positionX,SP.positionY,0};
+		cubes_test.push_back(add);
     	initGL::pose = 0;
 	}
 	
   
 
         glPushMatrix();{   
-carte.solcarte();
+          carte.solcarte();
         }glPopMatrix();
 
 
-    // if (initGL::pose == 0){
-    //   for( int i = 0 ; i < cubes_test.size() ; i++){
-    //     //printf("%f \n",cubes_test[i][0]);
-    //   glPushMatrix();{   
-    //     glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
-    //     //glScalef(0.5,0.5,0.5);
-    //     glRotatef(90,1.0,0.0,0.0);
-    //     Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-    //     B.creerChateau();
-    //     }glPopMatrix();
-    //     }glPopMatrix();
-    //   }
-    // }
+    if (initGL::pose == 0){
+      // for( int i = 0 ; i < cubes_test.size() ; i++){
+      //   //printf("%f \n",cubes_test[i][0]);
+      // glPushMatrix();{   
+      //   glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+      //   //glScalef(0.5,0.5,0.5);
+      //   glRotatef(90,1.0,0.0,0.0);
+      //   Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+      //   B.creerChateau();
+      //   }glPopMatrix();
+      // }
+    }
     
    glPushMatrix();{
           
           Perso1.creerPersonnage();
           Perso1.deplacementCible(posx,posy);
-        
           //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
    }
   glPopMatrix();
@@ -138,8 +147,28 @@ carte.solcarte();
   //         Perso2.creerPersonnage();
   // }glPopMatrix();
 
-	}glPopMatrix();
 
+  glPushMatrix();{
+      if (initGL::selection == 1){
+          CDposx = SP.positionX;
+          CDposy = SP.positionY;
+	    }
+
+      if (initGL::selection == 2){
+          CDposx2 = SP.positionX;
+          CDposy2 = SP.positionY;
+          Forme Fselec;
+          Fselec.rectangleSelection(CDposx,CDposy,CDposx2,CDposy2);
+          //initGL::selection = 2;
+      }
+
+
+  }glPopMatrix();
+
+
+
+
+	}glPopMatrix();
 
   glutSwapBuffers();
 }

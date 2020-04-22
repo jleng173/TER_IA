@@ -204,3 +204,37 @@ GLvoid Forme::affichePyramide(struct pyramide1 pyramide)
     }
     glPopMatrix();
 }
+
+GLvoid Forme::rectangleSelection(float x1, float y1, float x2, float y2){
+
+	glPushMatrix();{
+		//Haut
+ 	glBegin( GL_QUADS );
+	 	glVertex3f(x1, y1, 0);
+		glVertex3f(x1, y1+0.2, 0);
+		glVertex3f(x2, y1+0.2, 0);
+        glVertex3f(x2, y1, 0);   
+    glEnd();
+		//Bas
+	glBegin( GL_QUADS );
+		glVertex3f(x1, y2, 0);
+		glVertex3f(x2, y2, 0);
+		glVertex3f(x2, y2-0.2, 0);
+		glVertex3f(x1, y2-0.2, 0);   
+    glEnd();
+		//Gauche
+	glBegin( GL_QUADS );
+		glVertex3f(x1, y1, 0);
+		glVertex3f(x1, y2, 0);
+		glVertex3f(x1+0.2, y2, 0);
+		glVertex3f(x1+0.2, y1, 0);   
+    glEnd();
+		//Droite
+	glBegin( GL_QUADS );
+		glVertex3f(x2-0.2, y2, 0);
+		glVertex3f(x2, y2, 0);
+		glVertex3f(x2, y1, 0);
+		glVertex3f(x2-0.2, y1, 0);  
+    glEnd();
+	}glPopMatrix();
+}

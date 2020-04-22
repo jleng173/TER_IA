@@ -23,7 +23,6 @@ protected:
     float orientation;
 
     float velocite[2];
-    float rotation;
 
     float vitesseMAX;
 
