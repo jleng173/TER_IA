@@ -39,23 +39,3 @@ public:
 
     GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 };
-
-//Classe Paysan
-class Paysan:public Personnage{
-protected:
-
-public:
-    Paysan(float avn,float act,float x, float y,float angle, float vitesseMAX);
-    GLvoid creerBatiment();
-    GLvoid creerChapeau() const override;
-
-};
-
-//Classe Guerrier
-class Guerrier : public Personnage{
-    protected:
-
-    public:
-        Guerrier(float avn,float act,float x, float y,float angle, float vitesseMAX);
-        GLvoid creerChapeau() const override;
-};
