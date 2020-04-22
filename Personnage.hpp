@@ -4,14 +4,30 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <math.h>
+#include <math.h>
+#include "Forme.hpp"
+
 
 class Personnage {
 public:
-    Personnage(float av, float ac, int mo);
+    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX);
+    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX,float mouv);
 
     GLvoid creerPersonnage();
 
     float avance;
     float action;
-    int mouv;
+    float mouv;
+    
+    float position[2];
+    float orientation;
+
+    float velocite[2];
+    float rotation;
+
+    float vitesseMAX;
+
+    void updatePos( float time);
+
+    void deplacementCible(float x, float y);
 };

@@ -9,7 +9,7 @@ Carte.o: Carte.cpp Carte.hpp
 	g++ -std=c++14 -c Carte.cpp -o Carte.o
 
 Decor.o: Decor.cpp Decor.hpp
-	g++ -c Decor.cpp -o Decor.o
+	g++ -std=c++14 -c Decor.cpp -o Decor.o
 
 PositionSouris.o: PositionSouris.cpp PositionSouris.hpp
 	g++ -c PositionSouris.cpp -o PositionSouris.o
@@ -27,7 +27,7 @@ Ressource.o: Ressource.cpp Ressource.hpp
 	g++ -c Ressource.cpp -o Ressource.o
 
 Personnage.o: Personnage.cpp Personnage.hpp
-	g++ -c Personnage.cpp -o Personnage.o
+	g++ -std=c++14 -c Personnage.cpp -o Personnage.o
 
 clean:
 	rm -f *.o main

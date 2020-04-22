@@ -11,7 +11,6 @@
 #include "ppm.hpp"
 #include "Carte.hpp"
 #include "Batiment.hpp"
-#include "Forme.hpp"
 #include "init.hpp"
 #include "PositionSouris.hpp"
 #include "Personnage.hpp"
@@ -48,6 +47,7 @@ TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
+Personnage Perso1(initGL::avance,initGL::action,0,0,0,3);
 
 GLvoid Modelisation()
 {
@@ -93,11 +93,11 @@ GLvoid Modelisation()
 
 
 	if (initGL::pose == 1){
-      /*posx = SP.positionX;
+      posx = SP.positionX;
       posy = SP.positionY;
-      posz = SP.positionZ;*/
-		vector<float> add = {SP.positionX,SP.positionY,SP.positionZ};
-		cubes_test.push_back(add);
+      posz = SP.positionZ;
+		// vector<float> add = {SP.positionX,SP.positionY,SP.positionZ};
+		// cubes_test.push_back(add);
     	initGL::pose = 0;
 	}
 	
@@ -108,27 +108,33 @@ carte.solcarte();
         }glPopMatrix();
 
 
-
-
-    if (initGL::pose == 0){
-      for( int i = 0 ; i < cubes_test.size() ; i++){
-        //printf("%f \n",cubes_test[i][0]);
-      glPushMatrix();{   
-        glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
-        //glScalef(0.5,0.5,0.5);
-        glRotatef(90,1.0,0.0,0.0);
-        Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-        B.creerChateau();
-        }glPopMatrix();
-
-      }
-    }
-  glPushMatrix();{
-    glRotatef(90,1,0,0);
-    Personnage p(initGL::avance,initGL::action, initGL::mouv);
-    p.creerPersonnage();
-  }
+    // if (initGL::pose == 0){
+    //   for( int i = 0 ; i < cubes_test.size() ; i++){
+    //     //printf("%f \n",cubes_test[i][0]);
+    //   glPushMatrix();{   
+    //     glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+    //     //glScalef(0.5,0.5,0.5);
+    //     glRotatef(90,1.0,0.0,0.0);
+    //     Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+    //     B.creerChateau();
+    //     }glPopMatrix();
+    //     }glPopMatrix();
+    //   }
+    // }
+    
+   glPushMatrix();{
+          
+          Perso1.creerPersonnage();
+          Perso1.deplacementCible(posx,posy);
+        
+          //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
+   }
   glPopMatrix();
+
+   glPushMatrix();{
+          Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
+          Perso2.creerPersonnage();
+  }glPopMatrix();
 
 	}glPopMatrix();
 

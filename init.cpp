@@ -39,7 +39,7 @@ void initGL::generalInit(unsigned int width,unsigned int height)	// We call this
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();				// Reset The Projection Matrix
     
-    gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,1000.0f);	// Calculate The Aspect Ratio Of The Window
+    gluPerspective(180.0f,(GLfloat)width/(GLfloat)height,0.1f,10000.0f);	// Calculate The Aspect Ratio Of The Window
    
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -242,10 +242,10 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 	   yrot+=5.0f;                	
 	    break;       
     case TOUCHE_MIN_E: 
-	   z-=0.25f;               	
+	   z-=0.5f;               	
 	    break;      
     case TOUCHE_MIN_R: 
-	   z+=0.25f;               	
+	   z+=0.5f;               	
 	    break;        
     case TOUCHE_MIN_B: 
 	   if(blend==1) { 
@@ -282,7 +282,6 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
         if(action>0 && mouv==3)
             action-=0.5;
         break;
-
 
 /*
     case ESPACE:
