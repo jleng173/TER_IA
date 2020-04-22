@@ -13,7 +13,7 @@
 #include "Batiment.hpp"
 #include "init.hpp"
 #include "PositionSouris.hpp"
-// #include "Personnage.hpp"
+#include "Personnage.hpp"
 #include "Paysan.hpp"
 #include "Guerrier.hpp"
 

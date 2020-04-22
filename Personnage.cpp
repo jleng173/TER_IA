@@ -1,5 +1,6 @@
 #include "Personnage.hpp"
 
+
 Personnage::Personnage(float avn,float act,float x, float y, float angle, float v){
     avance=avn;
     action=act;
@@ -71,8 +72,8 @@ GLvoid Personnage::creerPersonnage()
 
         Forme f;
         struct cube1 membre = f.creerCube(1.5);
-        
         glPushMatrix();{        
+            creerChapeau();
             glPushMatrix();{
                 glColor3f(0.1,0.1,0.1);
                 glutSolidSphere(0.5,10,100);
