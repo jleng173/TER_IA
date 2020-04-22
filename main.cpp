@@ -15,6 +15,7 @@
 #include "init.hpp"
 #include "PositionSouris.hpp"
 #include "Personnage.hpp"
+#include "Decor.hpp"
 
 using namespace std;
 
@@ -37,7 +38,7 @@ float initGL::mouv = 0.0;
 
 float posx, posy, posz = 0.0;
 vector< vector<float> > cubes_test;
-Carte cforet(true);
+Carte c;
 
 ppm p;
 
@@ -87,7 +88,6 @@ GLvoid Modelisation()
 
 	//printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
-	//	affiche_cube1(batiment1);
 
 	if (initGL::pose == 1){
       /*posx = SP.positionX;
@@ -98,11 +98,6 @@ GLvoid Modelisation()
     	initGL::pose = 0;
 	}
 	
-	// glPushMatrix();{
-	// 	carte.solcarte();
-  //   cforet.Foret();
-	// }glPopMatrix();
-
   
 
   glPushMatrix();{
@@ -110,6 +105,7 @@ GLvoid Modelisation()
    // carte.Decor();
 	  glColor3f(1,1,1);
 	}glPopMatrix();
+
 
     // if (initGL::pose == 0){
     //   for( int i = 0 ; i < cubes_test.size() ; i++){
@@ -143,9 +139,12 @@ int main(int argc, char **argv) {
 	initGL* init = new initGL();
 
 	init->mainInit(argc,argv,&Modelisation);
-  //cforet.GenerateForet();
 
-
+      Decor decor;
+  	glPushMatrix();{
+      decor.GenerateForet(100);
+      decor.Foret();
+	}glPopMatrix();
 
 	return 0;
 }
