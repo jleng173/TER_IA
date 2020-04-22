@@ -255,6 +255,9 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
            blend=1;
            glDisable(GL_BLEND);}               	
 	    break;
+    case TOUCHE_MAJ_A:
+        mouv=0;
+        break;   
     case TOUCHE_MIN_A:
         if(avance<limite && mouv == 0)
             avance += 1;
@@ -265,7 +268,20 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
             avance -= 1;
         }
         if(avance==-limite && mouv == 1)
-            mouv=0;   
+            mouv=0;
+        break;   
+    case TOUCHE_MIN_F:
+        avance=0;
+        if(action==0)
+            mouv=2;
+        if(action<3 && mouv==2){
+            action+=0.5;
+        }
+        if(action==3 && mouv==2)
+            mouv=3;
+        if(action>0 && mouv==3)
+            action-=0.5;
+        break;
 
 
 /*

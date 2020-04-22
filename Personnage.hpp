@@ -7,9 +7,11 @@
 
 class Personnage {
 public:
-    Personnage(float a);
+    Personnage(float av, float ac, int mo);
 
     GLvoid creerPersonnage();
 
     float avance;
+    float action;
+    int mouv;
 };

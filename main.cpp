@@ -32,6 +32,7 @@ int initGL::pose = 0;
 float initGL::xpose = 100.0;
 float initGL::ypose = 100.0;
 float initGL::avance = 0.0;
+float initGL::action = 0.0;
 float initGL::mouv = 0.0;
 
 float posx, posy, posz = 0.0;
@@ -124,7 +125,8 @@ GLvoid Modelisation()
     //   }
     // }
   glPushMatrix();{
-    Personnage p(initGL::avance);
+    glRotatef(90,1,0,0);
+    Personnage p(initGL::avance,initGL::action, initGL::mouv);
     p.creerPersonnage();
   }
   glPopMatrix();

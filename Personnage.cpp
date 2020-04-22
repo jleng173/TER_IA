@@ -1,8 +1,10 @@
 #include "Personnage.hpp"
 #include "Forme.hpp"
 
-Personnage::Personnage(float a){
-    avance=a;
+Personnage::Personnage(float av, float ac, int mo){
+    avance=av;
+    action=ac;
+    mouv=mo;
 }
 
 GLvoid Personnage::creerPersonnage()
@@ -66,6 +68,9 @@ GLvoid Personnage::creerPersonnage()
         //Articulation
     glPushMatrix();{
         glRotatef(-avance,1,0,0);
+        if(mouv==2 || mouv==3){
+            glRotatef(-45+action,1,0,0);
+        }
         glPushMatrix();{
             glColor3f(0,1,1);
             glTranslatef(-0.6,-0.8,0);
@@ -86,17 +91,26 @@ GLvoid Personnage::creerPersonnage()
             glutSolidSphere(0.2,10,100);
         }
         glPopMatrix();
-        glPushMatrix();{
-            glTranslatef(-0.7,-2,0);
-            glColor3f(1,0,0);
-            glScalef(0.1,0.2,0.1);
-            f.afficheCube(membre);
+        if(mouv==2 || mouv==3){
+                glRotatef(-90+action,1,0,0);
+                glTranslatef(0,1.6,-1.6);
         }
-        glPopMatrix();
         glPushMatrix();{
-            glColor3f(0,1,0);
-            glTranslatef(-0.7,-2.4,0);
-            glutSolidSphere(0.15,10,100);
+            glPushMatrix();{
+                // glRotatef(action,1,0,0);
+                glTranslatef(-0.7,-2,0);
+                glColor3f(1,0,0);
+                glScalef(0.1,0.2,0.1);
+                f.afficheCube(membre);
+            }
+            glPopMatrix();
+            //Main droite
+            glPushMatrix();{
+                glColor3f(0,1,0);
+                glTranslatef(-0.7,-2.4,0);
+                glutSolidSphere(0.15,10,100);
+            }
+            glPopMatrix();
         }
         glPopMatrix();
     }

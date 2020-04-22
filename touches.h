@@ -16,6 +16,7 @@
 #define TOUCHE_MIN_W 119
 #define TOUCHE_MIN_X 120
 #define TOUCHE_MIN_A 97
+#define TOUCHE_MAJ_A 65
 #define TOUCHE_MIN_E 101
 #define TOUCHE_MIN_R 114
 
