@@ -15,7 +15,6 @@
 #include "init.hpp"
 #include "PositionSouris.hpp"
 #include "Personnage.hpp"
-#include "Decor.hpp"
 
 using namespace std;
 
@@ -38,7 +37,8 @@ float initGL::mouv = 0.0;
 
 float posx, posy, posz = 0.0;
 vector< vector<float> > cubes_test;
-Carte c;
+
+  	Carte carte;
 
 ppm p;
 
@@ -53,6 +53,9 @@ GLvoid Modelisation()
 {
 	initGL::VM_init();
 	Forme f;
+
+
+
 
   glPushMatrix();
   {
@@ -75,7 +78,7 @@ GLvoid Modelisation()
 
    //struct cube1 batiment1 =creer_cube1(5);
   
-	Carte carte;
+
 
 	// Matrice Vue
     float modelViewMat[16];
@@ -100,26 +103,26 @@ GLvoid Modelisation()
 	
   
 
-  glPushMatrix();{
-    
-   // carte.Decor();
-	  glColor3f(1,1,1);
-	}glPopMatrix();
+        glPushMatrix();{   
+carte.solcarte();
+        }glPopMatrix();
 
 
-    // if (initGL::pose == 0){
-    //   for( int i = 0 ; i < cubes_test.size() ; i++){
-    //     //printf("%f \n",cubes_test[i][0]);
-    //   glPushMatrix();{   
-    //     glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
-    //     //glScalef(0.5,0.5,0.5);
-    //     glRotatef(90,1.0,0.0,0.0);
-    //     Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-    //     B.creerChateau();
-    //     }glPopMatrix();
 
-    //   }
-    // }
+
+    if (initGL::pose == 0){
+      for( int i = 0 ; i < cubes_test.size() ; i++){
+        //printf("%f \n",cubes_test[i][0]);
+      glPushMatrix();{   
+        glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+        //glScalef(0.5,0.5,0.5);
+        glRotatef(90,1.0,0.0,0.0);
+        Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+        B.creerChateau();
+        }glPopMatrix();
+
+      }
+    }
   glPushMatrix();{
     glRotatef(90,1,0,0);
     Personnage p(initGL::avance,initGL::action, initGL::mouv);
@@ -136,15 +139,12 @@ GLvoid Modelisation()
 
 int main(int argc, char **argv) {
 
+
 	initGL* init = new initGL();
+
 
 	init->mainInit(argc,argv,&Modelisation);
 
-      Decor decor;
-  	glPushMatrix();{
-      decor.GenerateForet(100);
-      decor.Foret();
-	}glPopMatrix();
 
 	return 0;
 }
