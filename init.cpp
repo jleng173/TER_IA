@@ -257,6 +257,7 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 	    break;
     case TOUCHE_MAJ_A:
         mouv=0;
+        action=0;
         break;   
     case TOUCHE_MIN_A:
         if(avance<limite && mouv == 0)

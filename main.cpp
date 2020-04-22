@@ -122,14 +122,14 @@ carte.solcarte();
     //   }
     // }
     
-   glPushMatrix();{
+  //  glPushMatrix();{
           
-          Perso1.creerPersonnage();
-          Perso1.deplacementCible(posx,posy);
+  //         Perso1.creerPersonnage();
+  //         Perso1.deplacementCible(posx,posy);
         
-          //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
-   }
-  glPopMatrix();
+  //         //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
+  //  }
+  // glPopMatrix();
 
    glPushMatrix();{
           Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
