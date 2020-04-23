@@ -1,6 +1,8 @@
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
+#include <stdio.h> 
+#include <stdlib.h> 
 
 struct cube1 {
 	float sommet8[3];
@@ -42,6 +44,9 @@ public:
 	GLvoid afficheCube(struct cube1 cube);
 	struct pyramide1 creerPyramide(float taille);
 	GLvoid affichePyramide(pyramide1 pyramide);
+	GLvoid rectangleSelection(float x1, float y1, float x2, float y2);
 
 };
+
+
 

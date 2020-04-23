@@ -1,4 +1,3 @@
-
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -11,10 +10,11 @@
 #include "ppm.hpp"
 #include "Carte.hpp"
 #include "Batiment.hpp"
-#include "Forme.hpp"
 #include "init.hpp"
 #include "PositionSouris.hpp"
 #include "Personnage.hpp"
+#include "Paysan.hpp"
+#include "Guerrier.hpp"
 
 using namespace std;
 
@@ -34,8 +34,11 @@ float initGL::ypose = 100.0;
 float initGL::avance = 0.0;
 float initGL::action = 0.0;
 float initGL::mouv = 0.0;
+int initGL::selection = 0;
 
 float posx, posy, posz = 0.0;
+float CDposx, CDposy = 0.0;
+float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
 
   	Carte carte;
@@ -48,6 +51,8 @@ TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
+Paysan Perso1(initGL::avance,initGL::action,0,0,0,3);
+Guerrier Perso2(initGL::avance,initGL::action,10,10,0,5);;
 int compensationY(int pos){
   if(pos < -20 ) return 0;
   if(pos < -15 ) return 5;
@@ -81,9 +86,6 @@ GLvoid Modelisation()
 {
 	initGL::VM_init();
 	Forme f;
-
-
-
 
   glPushMatrix();
   {
@@ -137,7 +139,7 @@ glViewport(0, 0, WIDTH, HEIGHT);
 
 
 	if (initGL::pose == 1){
-      /*posx = SP.positionX;
+      posx = SP.positionX;
       posy = SP.positionY;
       posz = SP.positionZ;*/
       float compY = compensationY(SP.positionY-initGL::ycam);
@@ -173,10 +175,22 @@ glViewport(0, 0, WIDTH, HEIGHT);
   
 
         glPushMatrix();{   
-carte.solcarte();
+          carte.solcarte();
         }glPopMatrix();
 
 
+    if (initGL::pose == 0){
+      // for( int i = 0 ; i < cubes_test.size() ; i++){
+      //   //printf("%f \n",cubes_test[i][0]);
+      // glPushMatrix();{   
+      //   glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+      //   //glScalef(0.5,0.5,0.5);
+      //   glRotatef(90,1.0,0.0,0.0);
+      //   Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+      //   B.creerChateau();
+      //   }glPopMatrix();
+      // }
+    }
 
 
     if (initGL::pose == 0){
@@ -189,18 +203,44 @@ carte.solcarte();
         Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
         B.creerChateau();
         }glPopMatrix();
+    
+   glPushMatrix();{
+          
+          Perso1.creerPersonnage();
+          Perso1.deplacementCible(posx,posy);
 
-      }
-    }
-  glPushMatrix();{
-    glRotatef(90,1,0,0);
-    Personnage p(initGL::avance,initGL::action, initGL::mouv);
-    p.creerPersonnage();
-  }
+          Perso2.creerPersonnage();
+          Perso2.deplacementCible(posx,posy);
+   }
   glPopMatrix();
 
-	}glPopMatrix();
+  //  glPushMatrix();{
+  //         Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
+  //         Perso2.creerPersonnage();
+  // }glPopMatrix();
 
+
+  glPushMatrix();{
+      if (initGL::selection == 1){
+          CDposx = SP.positionX;
+          CDposy = SP.positionY;
+	    }
+
+      if (initGL::selection == 2){
+          CDposx2 = SP.positionX;
+          CDposy2 = SP.positionY;
+          Forme Fselec;
+          Fselec.rectangleSelection(CDposx,CDposy,CDposx2,CDposy2);
+          //initGL::selection = 2;
+      }
+
+
+  }glPopMatrix();
+
+
+
+
+	}glPopMatrix();
 
   glutSwapBuffers();
 }

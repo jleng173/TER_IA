@@ -66,7 +66,6 @@ GLvoid initGL::ReSizeGLScene(int Width, int Height)
 {
     if (Height==0)				// Prevent A Divide By Zero If The Window Is Too Small
 	Height=1;
-
     glViewport(0, 0, Width, Height);		// Reset The Current Viewport And Perspective Transformation
 
     glMatrixMode(GL_PROJECTION);
@@ -74,6 +73,7 @@ GLvoid initGL::ReSizeGLScene(int Width, int Height)
 
     gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,1000.0f);
     glMatrixMode(GL_MODELVIEW);
+
 }
 
 
@@ -256,6 +256,7 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 	    break;
     case TOUCHE_MAJ_A:
         mouv=0;
+        action=0;
         break;   
     case TOUCHE_MIN_A:
         if(avance<limite && mouv == 0)
@@ -282,7 +283,6 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
             action-=0.5;
         break;
 
-
 /*
     case ESPACE:
       xrot = 0.0f;
@@ -307,12 +307,39 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 void initGL::mouseClicks(int button, int state, int x, int y){
     float mx = x ;
     float my = y ;
+    // Clic gauche 
     if(button == 0) {
       pose = 1;
       xpose = mx;
-      xpose = mx;
       ypose = my;
     }
+    // Clic droit
+    if(button == 2) {
+
+        switch (selection) { 
+        case 0:
+            selection = 1;
+            xpose = mx;
+            ypose = my;
+        break;
+        case 1:
+            selection = 2;
+            xpose = mx;
+            ypose = my;
+        break;
+        case 2:
+            selection = 3;
+            xpose = mx;
+            ypose = my;
+        break;
+        default:
+            selection = 0;
+            xpose = mx;
+            ypose = my;
+        break;
+        
+        }
+    }    
 }
 
 void initGL::mouseMove(int x, int y){
