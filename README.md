@@ -42,3 +42,9 @@ Réflexion conception du jeu ( type  Age of Empire)
 - Déplacement personnage via la souris
 - Création classe Decors 
 - Animation attaque / construction
+
+----------------------------------------------------
+22/04:
+- Modélisation chapeau + mise en place des sous-classes unitées
+- Réglage de la caméra, distance d'affichage et angle
+- Modlisation cadre sélection unités
