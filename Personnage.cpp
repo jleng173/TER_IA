@@ -28,6 +28,7 @@ void Personnage::updatePos( float time){
 }
 
 void Personnage::deplacementCible(float x, float y){
+    if(x != 0 && y !=0){
     //SeekKinematic mouvement
 
     velocite[0] = x - position[0];
@@ -58,15 +59,17 @@ void Personnage::deplacementCible(float x, float y){
     velocite[1] *= vitesseMAX;
 
     updatePos(0.01);
+    }
 }
 
 GLvoid Personnage::creerPersonnage()
 {
+glPushMatrix();{
     glTranslatef(position[0],position[1],0);
     
     glPushMatrix();{
 
-        // glScalef(5,5,5);
+         glScalef(5,5,5);
         glRotatef(90,1.0,0.0,0.0);
         glRotatef(orientation,0,1,0);
 
@@ -266,6 +269,7 @@ GLvoid Personnage::creerPersonnage()
         glPopMatrix();
     }
     glPopMatrix();
+}glPopMatrix();
 }
 
 GLvoid Personnage::drawHalfSphere(int scaley, int scalex, GLfloat r) {

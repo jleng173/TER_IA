@@ -52,6 +52,7 @@ TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM"
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
 Paysan Perso1(initGL::avance,initGL::action,0,0,0,3);
+Guerrier Perso2(initGL::avance,initGL::action,10,10,0,5);;
 
 GLvoid Modelisation()
 {
@@ -133,12 +134,16 @@ GLvoid Modelisation()
       //   }glPopMatrix();
       // }
     }
+
+
     
    glPushMatrix();{
           
           Perso1.creerPersonnage();
           Perso1.deplacementCible(posx,posy);
-          //printf(" %f , %f \n",Perso1.orientation, Perso1.velocite[1]);
+
+          Perso2.creerPersonnage();
+          Perso2.deplacementCible(posx,posy);
    }
   glPopMatrix();
 
