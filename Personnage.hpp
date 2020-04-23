@@ -40,5 +40,5 @@ public:
 
     void deplacementCible(float x, float y);
     GLvoid selectionne();
-    GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
+    static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 };

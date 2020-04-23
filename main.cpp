@@ -207,12 +207,11 @@ GLvoid Modelisation()
       
    glPushMatrix();{
           
-          // Perso1.creerPersonnage();
-          // Perso1.deplacementCible(posx,posy);
+          Perso1.creerPersonnage();
+          Perso1.deplacementCible(posx,posy);
 
           Perso2.creerPersonnage();
           Perso2.deplacementCible(posx,posy);
-          // Perso2.creerAccessoire();
    }
   glPopMatrix();
   }}

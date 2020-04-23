@@ -24,5 +24,46 @@ GLvoid Paysan::creerChapeau() const{
 }
 
 GLvoid Paysan::creerAccessoire() const{
+    Forme f;
+    struct cube1 base = f.creerCube(1);
+    struct pyramide1 pic = f.creerPyramide(1);
+    glPushMatrix();{
+        glTranslatef(0,-2.5,0);
+        //Partie haute
+        glPushMatrix();{
+            glColor3f(0.6,0.6,0.6);
+            glPushMatrix();{     
+                glScalef(0.3,0.3,0.3);
+                glTranslatef(3,0,0);
+                glRotatef(-90,0,0,1);
+                f.affichePyramide(pic);
+            }
+            glPopMatrix();
+            glPushMatrix();{
+                glScalef(0.3,0.3,0.3);
+                glTranslatef(-3,0,0);
+                glRotatef(90,0,0,1);
+                f.affichePyramide(pic);
+            }
+            glPopMatrix();
+            glPushMatrix();{
+                glScalef(0.6,0.3,0.3);
+                f.afficheCube(base);
+            }
+            glPopMatrix();
+        }
+        glPopMatrix();
 
+
+        glPushMatrix();{
+            glColor3f(0.5,0.25,0.25);
+            GLUquadric* params = gluNewQuadric();
+            gluQuadricTexture(params, GL_TRUE);
+            glRotatef(90,1,0,0);
+            glTranslatef(0,0,0);
+            gluCylinder(params,0.2,0.2,4,100,100);
+        }
+        glPopMatrix();
+    }
+    glPopMatrix();
 }
