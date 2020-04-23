@@ -9,6 +9,7 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
     position[1] = y;
     orientation = angle;
     vitesseMAX = v;
+    selected = true;
 }
 
 Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m){
@@ -19,6 +20,7 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
     position[1] = y;
     orientation = angle;
     vitesseMAX = v;
+    selected = true;
 }
 
 void Personnage::updatePos( float time){
@@ -61,6 +63,18 @@ void Personnage::deplacementCible(float x, float y){
     updatePos(0.01);
     }
 }
+GLvoid Personnage::selectionne(){
+    glPushMatrix();{
+        glColor3f(0,1,0);
+        glTranslatef(0,-4,0);
+        glRotatef(90,1.0,0.0,0.0);
+        GLUquadric* params = gluNewQuadric();
+        gluDisk(params,0.9,1,20,1);
+		gluDeleteQuadric(params);
+        glColor3f(1,1,1);
+    }glPopMatrix();
+}
+
 
 GLvoid Personnage::creerPersonnage()
 {
@@ -69,8 +83,9 @@ glPushMatrix();{
     
     glPushMatrix();{
 
-         glScalef(5,5,5);
+        glScalef(5,5,5);
         glRotatef(90,1.0,0.0,0.0);
+        glTranslatef(0,4,0);
         glRotatef(orientation,0,1,0);
 
         Forme f;
@@ -267,6 +282,10 @@ glPushMatrix();{
             glPopMatrix();
         }
         glPopMatrix();
+
+        if (selected){
+            selectionne();
+        }
     }
     glPopMatrix();
 }glPopMatrix();

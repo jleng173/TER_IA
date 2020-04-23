@@ -59,9 +59,6 @@ GLvoid Modelisation()
 	initGL::VM_init();
 	Forme f;
 
-
-
-
   glPushMatrix();
   {
 	 if(initGL::xpose < 50){
