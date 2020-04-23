@@ -31,16 +31,15 @@ void initGL::generalInit(unsigned int width,unsigned int height)	// We call this
 {
     ppm p;
     glClearColor(0.1f, 0.4f, 0.7f, 0.0f);	// This Will Clear The Background Color To Black
-    glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
+   // glClearDepth(1.0);				// Enables Clearing Of The Depth Buffer
     /*    glDepthFunc(GL_LESS);			// The Type Of Depth Test To Do */
-    glDepthFunc(GL_LEQUAL);	  // Le type de test de profondeur 
+     glDepthFunc(GL_LEQUAL);	  // Le type de test de profondeur 
     glShadeModel(GL_SMOOTH);			// Enables Smooth Color Shading
     
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();				// Reset The Projection Matrix
-    
     gluPerspective(45.0f,(GLfloat)width/(GLfloat)height,0.1f,1000.0f);	// Calculate The Aspect Ratio Of The Window
-   
+
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     // setup blending
@@ -73,7 +72,7 @@ GLvoid initGL::ReSizeGLScene(int Width, int Height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,100.0f);
+    gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,1000.0f);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -192,7 +191,7 @@ void initGL::specialKeyPressed(int key, int x, int y)
     
     case GLUT_KEY_PAGE_DOWN: // move the cube closer.
 	z+=0.02f;
-	break;
+	break;lGLU -lglut -o test
 
     case GLUT_KEY_UP: // decrease x rotation speed;
 	xrot-=30.0f;
@@ -230,22 +229,22 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
 	   exit(1);                   	
 	    break;    
     case TOUCHE_MIN_Z: 
-	   xrot-=5.0f;                 	
+	   xrot-=1.0f;                 	
 	    break;    
     case TOUCHE_MIN_Q: 
-	   yrot-=5.0f;               	
+	   yrot-=1.0f;               	
 	    break;    
     case TOUCHE_MIN_S: 
-	   xrot+=5.0f;                	
+	   xrot+=1.0f;                	
 	    break;    
     case TOUCHE_MIN_D: 
-	   yrot+=5.0f;                	
+	   yrot+=1.0f;                	
 	    break;       
     case TOUCHE_MIN_E: 
-	   z-=0.25f;               	
+	   z-=1.0f;               	
 	    break;      
     case TOUCHE_MIN_R: 
-	   z+=0.25f;               	
+	   z+=1.0f;               	
 	    break;        
     case TOUCHE_MIN_B: 
 	   if(blend==1) { 

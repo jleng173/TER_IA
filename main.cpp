@@ -48,6 +48,34 @@ TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
+int compensationY(int pos){
+  if(pos < -20 ) return 0;
+  if(pos < -15 ) return 5;
+  if(pos < -10 ) return 10;
+  if(pos < -5 ) return 15;
+  if(pos < 0 ) return 20;
+  if(pos < 5 ) return 30;
+  if(pos < 10) return 40;
+  if(pos < 15) return 45;
+  if(pos < 20) return 50;
+ return 60;
+
+}
+
+int compensationX(int pos){
+  if(pos < 0 ) return 0;
+  if(pos < 5 ) return 2;
+  if(pos < 10) return 5;
+  if(pos < 15) return 7;
+  if(pos < 20) return 10;
+  if(pos < 25) return 13;
+  if(pos < 30) return 16;
+  if(pos < 40) return 19;
+  if(pos < 50) return 23;
+  if(pos < 70) return 28;
+ return 35;
+
+}
 
 GLvoid Modelisation()
 {
@@ -70,24 +98,40 @@ GLvoid Modelisation()
     }else if(initGL::ypose > HEIGHT -50){
       initGL::ycam -= 0.1;
     }    
-	  
-    //Oriente la camera 
-    gluLookAt(initGL::xcam,initGL::ycam,100,
+
+ gluLookAt(initGL::xcam,initGL::ycam-70,100,
                  initGL::xcam,initGL::ycam,0,
                  0,1,0);
 
-   //struct cube1 batiment1 =creer_cube1(5);
-  
+glViewport(0, 0, WIDTH, HEIGHT);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,100.0f);
+  glMatrixMode(GL_MODELVIEW);
 
 
-	// Matrice Vue
+    // Matrice Vue
     float modelViewMat[16];
     glGetFloatv(GL_MODELVIEW_MATRIX, modelViewMat);
     // Matrice Projection
     float modelProjetMat[16];
     glGetFloatv(GL_PROJECTION_MATRIX, modelProjetMat);
 
-	PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
+    PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
+
+  glViewport(0, 0, WIDTH, HEIGHT);
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,1000.0f);
+  glMatrixMode(GL_MODELVIEW);
+
+   //struct cube1 batiment1 =creer_cube1(5);
+  	  
+ 
+
+
+
+
 
 	//printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
@@ -96,7 +140,32 @@ GLvoid Modelisation()
       /*posx = SP.positionX;
       posy = SP.positionY;
       posz = SP.positionZ;*/
-		vector<float> add = {SP.positionX,SP.positionY,SP.positionZ};
+      float compY = compensationY(SP.positionY-initGL::ycam);
+
+      float compX = 0;
+      float absolutXpos = SP.positionX-initGL::xcam;
+       if(absolutXpos > 0) {
+          compX = compensationX(absolutXpos);
+       }
+        else {
+          compX = -compensationX(-absolutXpos);
+        }
+
+         
+
+      if(SP.positionY >-10){
+        compX /= 1;
+      }else if(SP.positionY >-20){
+        compX /= 2;
+      }else if(SP.positionY >-30){
+        compX /= 3;
+      }else
+      {
+        compX = 0;
+      }
+      
+
+		vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
 		cubes_test.push_back(add);
     	initGL::pose = 0;
 	}
@@ -114,7 +183,7 @@ carte.solcarte();
       for( int i = 0 ; i < cubes_test.size() ; i++){
         //printf("%f \n",cubes_test[i][0]);
       glPushMatrix();{   
-        glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
+        glTranslatef(cubes_test[i][0],cubes_test[i][1],0);
         //glScalef(0.5,0.5,0.5);
         glRotatef(90,1.0,0.0,0.0);
         Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
