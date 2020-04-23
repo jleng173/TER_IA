@@ -198,20 +198,21 @@ GLvoid Modelisation()
       for( int i = 0 ; i < cubes_test.size() ; i++){
         //printf("%f \n",cubes_test[i][0]);
       glPushMatrix();{   
-        glTranslatef(cubes_test[i][0],cubes_test[i][1],0);
-        //glScalef(0.5,0.5,0.5);
-        glRotatef(90,1.0,0.0,0.0);
-        Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-        B.creerChateau();
-        }glPopMatrix();
+        // glTranslatef(cubes_test[i][0],cubes_test[i][1],0);
+        // //glScalef(0.5,0.5,0.5);
+        // glRotatef(90,1.0,0.0,0.0);
+        // Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+        // B.creerChateau();
+      }glPopMatrix();
       
    glPushMatrix();{
           
-          Perso1.creerPersonnage();
-          Perso1.deplacementCible(posx,posy);
+          // Perso1.creerPersonnage();
+          // Perso1.deplacementCible(posx,posy);
 
           Perso2.creerPersonnage();
           Perso2.deplacementCible(posx,posy);
+          // Perso2.creerAccessoire();
    }
   glPopMatrix();
   }}

@@ -194,6 +194,15 @@ glPushMatrix();{
                     glutSolidSphere(0.15,10,100);
                 }
                 glPopMatrix();
+                //Accessoire
+                glPushMatrix();{
+                    glTranslatef(-0.7,-2.5,2.5);
+                    glRotatef(90,1,0,0);
+                    // glRotatef(90,0,1,0);
+                    glScalef(0.4,0.4,0.4);
+                    creerAccessoire();
+                }
+                glPopMatrix();
             }
             glPopMatrix();
         }
