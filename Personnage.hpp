@@ -23,9 +23,10 @@ protected:
     float orientation;
 
     float velocite[2];
-    float rotation;
 
     float vitesseMAX;
+
+    bool selected;
 
 public:
     Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX);
@@ -38,6 +39,6 @@ public:
     void updatePos( float time);
 
     void deplacementCible(float x, float y);
-
-    static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
+    GLvoid selectionne();
+    GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 };

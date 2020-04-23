@@ -27,6 +27,7 @@ glPushMatrix();
 	gluSphere(quad,1,20,20);
 	}
   	glPopMatrix();
+	glColor3f(1,1,1);
 }
   glPopMatrix();
 }

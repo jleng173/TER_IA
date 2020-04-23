@@ -79,6 +79,7 @@ protected:
  static float avance;
  static float action;
  static float mouv;
+ static int selection;
  static TEXTURE_STRUCT * Texture_chateau;
  static TEXTURE_STRUCT * Texture_pierre;
  static TEXTURE_STRUCT * Texture_toit;

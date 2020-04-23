@@ -9,6 +9,7 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
     position[1] = y;
     orientation = angle;
     vitesseMAX = v;
+    selected = true;
 }
 
 Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m){
@@ -19,6 +20,7 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
     position[1] = y;
     orientation = angle;
     vitesseMAX = v;
+    selected = true;
 }
 
 void Personnage::updatePos( float time){
@@ -28,6 +30,7 @@ void Personnage::updatePos( float time){
 }
 
 void Personnage::deplacementCible(float x, float y){
+    if(x != 0 && y !=0){
     //SeekKinematic mouvement
 
     velocite[0] = x - position[0];
@@ -58,16 +61,31 @@ void Personnage::deplacementCible(float x, float y){
     velocite[1] *= vitesseMAX;
 
     updatePos(0.01);
+    }
 }
+GLvoid Personnage::selectionne(){
+    glPushMatrix();{
+        glColor3f(0,1,0);
+        glTranslatef(0,-4,0);
+        glRotatef(90,1.0,0.0,0.0);
+        GLUquadric* params = gluNewQuadric();
+        gluDisk(params,0.9,1,20,1);
+		gluDeleteQuadric(params);
+        glColor3f(1,1,1);
+    }glPopMatrix();
+}
+
 
 GLvoid Personnage::creerPersonnage()
 {
+glPushMatrix();{
     glTranslatef(position[0],position[1],0);
     
     glPushMatrix();{
 
-        // glScalef(5,5,5);
+        glScalef(5,5,5);
         glRotatef(90,1.0,0.0,0.0);
+        glTranslatef(0,4,0);
         glRotatef(orientation,0,1,0);
 
         Forme f;
@@ -264,8 +282,13 @@ GLvoid Personnage::creerPersonnage()
             glPopMatrix();
         }
         glPopMatrix();
+
+        if (selected){
+            selectionne();
+        }
     }
     glPopMatrix();
+}glPopMatrix();
 }
 
 GLvoid Personnage::drawHalfSphere(int scaley, int scalex, GLfloat r) {

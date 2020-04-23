@@ -1,9 +1,6 @@
 #include "Carte.hpp"
 
-Carte::Carte(){Decor d;
-                decor = d;
-            //faire une boucle parcourant tout les Decor puis appelant leur méthode generate
-                decor.GenerateForet(100);};
+Carte::Carte(){};
 
 void Carte::solcarte(){
     glPushMatrix();{
@@ -24,13 +21,6 @@ void Carte::solcarte(){
             glEnd();
             glColor3f(1,1,1);
         }glPopMatrix();
-
-          
-  	glPushMatrix();{
-      
-      decor.Foret();
-	}glPopMatrix();
-
     }glPopMatrix();
 }
 

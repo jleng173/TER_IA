@@ -37,3 +37,4 @@ Paysan.o: Paysan.cpp Paysan.hpp
 
 clean:
 	rm -f *.o main
+
