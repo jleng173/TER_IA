@@ -7,5 +7,6 @@ public:
     Paysan(float avn,float act,float x, float y,float angle, float vitesseMAX);
     GLvoid creerBatiment();
     GLvoid creerChapeau() const override;
+    GLvoid creerAccessoire() const override;
 
 };

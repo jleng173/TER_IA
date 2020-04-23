@@ -33,10 +33,11 @@ public:
 
     GLvoid creerPersonnage();
     virtual GLvoid creerChapeau() const = 0;
+    virtual GLvoid creerAccessoire() const = 0;
 
     void updatePos( float time);
 
     void deplacementCible(float x, float y);
 
-    GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
+    static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 };
