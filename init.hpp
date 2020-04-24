@@ -7,7 +7,6 @@
 #include <iostream>
 #include <cmath>
 #include "touches.h"
-#include "switch_blend.h"
 #include "ppm.hpp"
 
 

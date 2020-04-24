@@ -6,26 +6,7 @@ initGL::initGL() {}
 //Destructor
 initGL::~initGL() {}
 
-/*
-unsigned int initGL::getHeight() {
-	return m_height;
-}
 
-
-unsigned int initGL::getWidth() {
-	return m_width;
-}
-
-
-void initGL::setHeight(unsigned int height) {
-	m_height = height;
-}
-
-
-void initGL::setWidth(unsigned int width) {
-	m_width = width;
-}
-*/
 /* A general OpenGL initialization function.  Sets all of the initial parameters. */
 void initGL::generalInit(unsigned int width,unsigned int height)	// We call this right after our OpenGL window is created.
 {
@@ -121,8 +102,6 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)())
 
     glutPassiveMotionFunc(&mouseMove);
 
-    /* Register the function called when special keys (arrows, page down, etc) are pressed. */
-    //glutSpecialFunc(&specialKeyPressed);
 
     /* Initialize our window. */
     generalInit(1600, 900);
@@ -177,51 +156,9 @@ void initGL::VM_init()        {
 
 }
 
-
-/* The function called whenever a normal key is pressed. */
-/*
-void initGL::specialKeyPressed(int key, int x, int y) 
-{
-    usleep(100);
-
-    switch (key) {    
-    case GLUT_KEY_PAGE_UP: // move the cube into the distance.
-	z-=0.02f;
-	break;
-    
-    case GLUT_KEY_PAGE_DOWN: // move the cube closer.
-	z+=0.02f;
-	break;lGLU -lglut -o test
-
-    case GLUT_KEY_UP: // decrease x rotation speed;
-	xrot-=30.0f;
-	break;
-
-    case GLUT_KEY_DOWN: // increase x rotation speed;
-	xrot+=30.0f;
-	break;
-
-    case GLUT_KEY_LEFT: // decrease y rotation speed;
-	yrot-=30.0f;
-	break;
-    
-    case GLUT_KEY_RIGHT: // increase y rotation speed;
-	yrot+=30.0f;
-	break;
-
-    default:
-	break;
-
-
-    }	
-}
-*/
-
 void initGL::touche_pressee(unsigned char key, int x, int y) 
 {
-    /*printf("Xrot : %f \n",xrot);
-    printf("Yrot : %f \n",yrot);
-    printf("Z : %f \n\n",z);*/
+
     usleep(100);
     float limite = 19;
     switch (key) {    
@@ -283,22 +220,14 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
             action-=0.5;
         break;
 
-/*
+
     case ESPACE:
       xrot = 0.0f;
       yrot = 0.0f;
+      xcam = 0.0f;
+      ycam = 0.0f;
       break;
 
-    case TOUCHE_MIN_B: 
-    
-    case TOUCHE_MAJ_B: 
-      blend =  switch_blend(blend);
-      break;
-
-    case TOUCHE_MIN_L: 
- 
-      break;
-*/
 	
     }	
 
