@@ -12,6 +12,7 @@ class Personnage {
 
 protected:
     int hp;
+    int hpMax;
     int dmg;
     float hitbox[2];
     
@@ -35,10 +36,12 @@ public:
     GLvoid creerPersonnage();
     virtual GLvoid creerChapeau() const = 0;
     virtual GLvoid creerAccessoire() const = 0;
+    GLvoid selectionne();
+    GLvoid barreHp();
 
     void updatePos( float time);
 
     void deplacementCible(float x, float y);
-    GLvoid selectionne();
+    
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 };

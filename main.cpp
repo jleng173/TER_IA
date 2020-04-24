@@ -15,6 +15,7 @@
 #include "Personnage.hpp"
 #include "Paysan.hpp"
 #include "Guerrier.hpp"
+#include "Arbaletrier.hpp"
 
 using namespace std;
 
@@ -41,6 +42,8 @@ float CDposx, CDposy = 0.0;
 float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
 
+float timeProjec = 0.0;
+
   	Carte carte;
 
 ppm p;
@@ -51,8 +54,9 @@ TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
-Paysan Perso1(initGL::avance,initGL::action,0,0,0,3);
+Arbaletrier Perso1(initGL::avance,initGL::action,0,0,0,3);
 Guerrier Perso2(initGL::avance,initGL::action,10,10,0,5);
+//Arbaletrier PersoA(initGL::avance,initGL::action,10,10,0,5);
 
 int compensationY(int pos){
   if(pos < -20 ) return 0;
@@ -173,8 +177,6 @@ GLvoid Modelisation()
     	initGL::pose = 0;
 	  }
 	
-  
-
         glPushMatrix();{   
           carte.solcarte();
         }glPopMatrix();
@@ -193,34 +195,24 @@ GLvoid Modelisation()
       // }
     }
 
-
-    if (initGL::pose == 0){
-      for( int i = 0 ; i < cubes_test.size() ; i++){
-        //printf("%f \n",cubes_test[i][0]);
-      glPushMatrix();{   
-        // glTranslatef(cubes_test[i][0],cubes_test[i][1],0);
-        // //glScalef(0.5,0.5,0.5);
-        // glRotatef(90,1.0,0.0,0.0);
-        // Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-        // B.creerChateau();
-      }glPopMatrix();
-      
+  //PersoA.creerCarreau();
+    
    glPushMatrix();{
           
           Perso1.creerPersonnage();
           Perso1.deplacementCible(posx,posy);
+          Perso1.tirArbalete(10,10);
 
           Perso2.creerPersonnage();
           Perso2.deplacementCible(posx,posy);
    }
   glPopMatrix();
-  }}
   //  glPushMatrix();{
   //         Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
   //         Perso2.creerPersonnage();
   // }glPopMatrix();
 
-
+  //Rectangle de sélection click
   glPushMatrix();{
       if (initGL::selection == 1){
           CDposx = SP.positionX;

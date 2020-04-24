@@ -75,22 +75,46 @@ GLvoid Personnage::selectionne(){
     }glPopMatrix();
 }
 
+GLvoid Personnage::barreHp(){
+
+    float lonHp = (6/(float)hpMax)*hp-3;
+    glPushMatrix();{
+        glColor3f(1,0,0);
+        //glRotatef(90,1.0,0.0,0.0);
+ 	glBegin( GL_QUADS );
+	 	glVertex3f(-3, 1.5, 4);
+		glVertex3f(-3, 1, 4);
+		glVertex3f(3, 1, 4);
+        glVertex3f(3, 1.5, 4);   
+    glEnd();
+    glColor3f(0,1,0);
+     	glBegin( GL_QUADS );
+	 	glVertex3f(-3, 1.5, 4);
+		glVertex3f(-3, 1, 4);
+		glVertex3f(lonHp, 1, 4);
+        glVertex3f(lonHp, 1.5, 4);   
+    glEnd();
+    glColor3f(1,1,1);
+    }glPopMatrix();
+}
 
 GLvoid Personnage::creerPersonnage()
 {
+    
 glPushMatrix();{
     glTranslatef(position[0],position[1],0);
     
     glPushMatrix();{
 
-        glScalef(5,5,5);
+        //glScalef(5,5,5);
+        barreHp();
         glRotatef(90,1.0,0.0,0.0);
         glTranslatef(0,4,0);
         glRotatef(orientation,0,1,0);
-
         Forme f;
         struct cube1 membre = f.creerCube(1.5);
-        glPushMatrix();{        
+        glPushMatrix();{
+             
             creerChapeau();
             glPushMatrix();{
                 glColor3f(0.1,0.1,0.1);
@@ -295,6 +319,8 @@ glPushMatrix();{
         if (selected){
             selectionne();
         }
+
+       
     }
     glPopMatrix();
 }glPopMatrix();
