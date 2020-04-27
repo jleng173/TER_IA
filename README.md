@@ -48,3 +48,9 @@ Réflexion conception du jeu ( type  Age of Empire)
 - Modélisation chapeau + mise en place des sous-classes unitées
 - Réglage de la caméra, distance d'affichage et angle
 - Modlisation cadre sélection unités
+
+----------------------------------------------------
+23-24/04:
+- Modélisation casque guerrier, pioche et épée
+- Cercle de sélection, tir carreaux arbalète
+- Positionnement souris avec caméra angle
