@@ -10,11 +10,14 @@ public:
 	// Constructor
 	Decor();
     void GenerateForet(int nombre);
+    void GenerateMine(int nombre);
     void Foret();
-	
+	void Mine();
+
     private:
 	GLvoid Arbre();
  
  private:
     std::vector< std::vector<float> > _foret;
+    std::vector< std::vector<float> > _mine;
 };
