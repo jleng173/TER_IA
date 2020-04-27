@@ -51,6 +51,6 @@ Réflexion conception du jeu ( type  Age of Empire)
 
 ----------------------------------------------------
 23-24/04:
-- Modélisation casque guerrier, pioche et épée
+- Modélisation casque guerrier, pioche, épée et mine
 - Cercle de sélection, tir carreaux arbalète
 - Positionnement souris avec caméra angle
