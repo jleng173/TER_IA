@@ -4,7 +4,7 @@ Carte::Carte(){Decor d;
                 decor = d;
             //faire une boucle parcourant tout les Decor puis appelant leur méthode generate
                 // decor.GenerateForet(100);
-                decor.GenerateMine(10);
+                // decor.GenerateMine(10);
                 
 };
 

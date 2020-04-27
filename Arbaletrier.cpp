@@ -8,7 +8,94 @@ Arbaletrier::Arbaletrier(float avn,float act,float x, float y,float angle, float
 }
 
 void Arbaletrier::creerAccessoire() const{
+    Forme fa;
+    struct cube1 base = fa.creerCube(1);
+    struct pyramide1 pic = fa.creerPyramide(1);
+    glPushMatrix();{
+        // glRotatef(90,1,0,0);
+        glScalef(2,2,2);
+        glTranslatef(0,-1.5,0);
+        glRotatef(90,0,0,1);
+        //Partie arc
+        glPushMatrix();{
+            glColor3f(0.6,0.4,0.12);
+            glScalef(0.1,0.5,0.1);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
+        glPushMatrix();{
+            glColor3f(0.6,0.4,0.12);
+            glTranslatef(-0.2,0.65,0);
+            glRotatef(45,0,0,1);
+            glScalef(0.1,0.3,0.1);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
+        glPushMatrix();{
+            glColor3f(0.6,0.4,0.12);
+            glTranslatef(-0.2,-0.65,0);
+            glRotatef(-45,0,0,1);
+            glScalef(0.1,0.3,0.1);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
 
+        glPushMatrix();{
+            glColor3f(1,1,1);
+            glRotatef(-45,0,0,1);
+            glTranslatef(-0.2,-0.8,0);
+            glScalef(0.6,0.01,0.01);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
+
+        glPushMatrix();{
+            glColor3f(1,1,1);
+            glRotatef(45,0,0,1);
+            glTranslatef(-0.2,0.8,0);
+            glScalef(0.6,0.01,0.01);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
+
+        //Flèche
+        glPushMatrix();{
+            glTranslatef(0.3,0,0);
+            glPushMatrix();{
+                glColor3f(0.6,0.5,0.4);
+                glTranslatef(-0.2,0,0);
+                glScalef(0.1,0.05,0.05);
+                fa.afficheCube(base);
+            }
+            glPopMatrix();
+            glPushMatrix();{
+                // glTranslatef(0,0,0);
+                glRotatef(-90,0,0,1);
+                glScalef(0.1,0.1,0.07);
+                glColor3f(0.3,0.3,0.3);
+                fa.affichePyramide(pic);
+            }
+            glPopMatrix();
+        }
+        glPopMatrix();
+
+        //Partie centrale
+        glPushMatrix();{
+            glColor3f(0.6,0.4,0.12);
+            glTranslatef(-1,0,0);
+            glScalef(1,0.2,0.1);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
+        glPushMatrix();{
+            glColor3f(0.6,0.4,0.12);
+            glTranslatef(-1.7,0,0.2);
+            glScalef(0.1,0.1,0.2);
+            fa.afficheCube(base);
+        }
+        glPopMatrix();
+    }
+    glPopMatrix();
 }
 
 void Arbaletrier::tirArbalete(float x, float y){
