@@ -27,7 +27,6 @@ void Personnage::updatePos( float time){
     position[0] += velocite[0] * time;
     position[1] += velocite[1] * time;
     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
-    printf(" %f \n",(atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180);
 }
 
 void Personnage::deplacementCible(float x, float y){

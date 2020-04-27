@@ -44,7 +44,7 @@ vector< vector<float> > cubes_test;
 
 float timeProjec = 0.0;
 
-  	Carte carte;
+Carte carte;
 
 ppm p;
 
@@ -110,7 +110,7 @@ GLvoid Modelisation()
       initGL::ycam -= 0.1;
     }    
 
-  gluLookAt(initGL::xcam,initGL::ycam,100,
+  gluLookAt(initGL::xcam,initGL::ycam-70,100,
                  initGL::xcam,initGL::ycam,0,
                  0,1,0);
 
@@ -200,8 +200,8 @@ GLvoid Modelisation()
           A1.deplacementCible(posx,posy);
           A1.tirArbalete(40,0);
 
-          Perso2.creerPersonnage();
-          Perso2.deplacementCible(posx,posy);
+         // Perso2.creerPersonnage();
+          //Perso2.deplacementCible(posx,posy);
           // A2.creerPersonnage();
           // A2.deplacementCible(posx,posy);
           // A2.tirArbalete(40,0);
