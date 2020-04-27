@@ -110,7 +110,7 @@ void Arbaletrier::tirArbalete(float x, float y){
           angledeTir = (angledeTir*angledeTir)/(2-( min(abs(coordX),abs(coordY)) / max(abs(coordX),abs(coordY)) ));
           float arrive[3] = {coordX,coordY,angledeTir};
           float scalaire = 1/sqrt(arrive[0]*arrive[0]+arrive[1]*arrive[1]);
-          printf("         %f\n",scalaire);
+          //printf("         %f  %f\n",coordX,coordY);
           float u[3] = {arrive[0]*scalaire,arrive[1]*scalaire,arrive[2]*scalaire};
           float g[3] = {0.0,0.0,-3.4};
 
@@ -137,13 +137,21 @@ void Arbaletrier::tirArbalete(float x, float y){
           timeProjec+=0.01;
 
           glTranslatef(pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
-          glRotatef(angledeTir,u[0],u[1],u[2]);
-          creerCarreau();
+
+          float angle = position[1] / sqrt(position[0]*position[0] + position[1]*position[1]);
+          angle = acos(angle)* 180 / 3.14159265;
+          if (position[0] > x)
+            angle *=-1;
+          glPushMatrix();{
+            glRotatef(angle,0,0,1);
+            glRotatef(-35+(timeProjec*10),1,0,0);
+            creerCarreau();
+          }glPopMatrix();
 
           if(pt[2] < -0.25)
             timeProjec = 0.0;
 
-      printf("%f, %f, %f \n",pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
+     // printf("%f, %f, %f \n",pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
    }
   glPopMatrix();
@@ -151,7 +159,7 @@ void Arbaletrier::tirArbalete(float x, float y){
 
 GLvoid Arbaletrier::creerCarreau(){
     glPushMatrix();{
-        glRotatef(90,1,0,0);
+        glRotatef(-90,1,0,0);
         //glScalef(15,15,15);
 
         glColor3f(0.65,0.5,0.1);

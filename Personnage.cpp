@@ -26,7 +26,8 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
 void Personnage::updatePos( float time){
     position[0] += velocite[0] * time;
     position[1] += velocite[1] * time;
-    orientation = atan2(-velocite[0],velocite[1]) * 180 / 3.14159265;
+    orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
+    printf(" %f \n",(atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180);
 }
 
 void Personnage::deplacementCible(float x, float y){
@@ -51,6 +52,8 @@ void Personnage::deplacementCible(float x, float y){
         }
         if(avance <=-19 && mouv == 1)
             mouv=0; 
+
+        updatePos(0.04);
     }else{
         mouv=0; 
         avance = 0;
@@ -60,7 +63,7 @@ void Personnage::deplacementCible(float x, float y){
     velocite[0] *= vitesseMAX;
     velocite[1] *= vitesseMAX;
 
-    updatePos(0.01);
+    
     }
 }
 GLvoid Personnage::selectionne(){
