@@ -7,6 +7,10 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
     mouv = 0;
     position[0] = x;
     position[1] = y;
+    hitbox.x1 = position[0]-1;
+    hitbox.y1 = position[1]-1;
+    hitbox.x2 = position[0]+1;
+    hitbox.y2 = position[1]+1;
     orientation = angle;
     vitesseMAX = v;
     selected = true;
@@ -26,6 +30,10 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
 void Personnage::updatePos( float time){
     position[0] += velocite[0] * time;
     position[1] += velocite[1] * time;
+    hitbox.x1 = position[0]-1;
+    hitbox.y1 = position[1]-1;
+    hitbox.x2 = position[0]+1;
+    hitbox.y2 = position[1]+1;
     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
 }
 
@@ -65,6 +73,11 @@ void Personnage::deplacementCible(float x, float y){
     
     }
 }
+
+Hitbox Personnage::getHitbox(){
+    return hitbox;
+}
+
 GLvoid Personnage::selectionne(){
     glPushMatrix();{
         glColor3f(0,1,0);
@@ -99,6 +112,8 @@ GLvoid Personnage::barreHp(){
     glColor3f(1,1,1);
     }glPopMatrix();
 }
+
+
 
 GLvoid Personnage::creerPersonnage()
 {

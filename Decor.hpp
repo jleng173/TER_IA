@@ -16,6 +16,7 @@ public:
 
     private:
 	GLvoid Arbre();
+    GLvoid Roche();
  
  private:
     std::vector< std::vector<float> > _foret;

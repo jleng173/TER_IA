@@ -1,8 +1,12 @@
 #include "Caserne.hpp"
 
-Caserne::Caserne(TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille) : Batiment(T_chateau, T_pierre, T_toit, T_porte, T_paille){
+Caserne::Caserne(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille) : Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte, T_paille){
     hp=700;
     hpMax=700;
+    hitbox.x1 = position[0]-2;
+    hitbox.y1 = position[1]-2;
+    hitbox.x2 = position[0]+2;
+    hitbox.y2 = position[1]+2;
 }
 
 void Caserne::creerBatiment() const{

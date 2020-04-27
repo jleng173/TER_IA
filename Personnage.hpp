@@ -5,8 +5,9 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <math.h>
+#include <vector>
 #include "Forme.hpp"
-
+#include "Batiment.hpp"
 
 class Personnage {
 
@@ -14,7 +15,10 @@ protected:
     int hp;
     int hpMax;
     int dmg;
-    float hitbox[2];
+    //hitbox représenté par 2 cordonnées formant un rectangle
+    //point en bas à gauche (hitbox.x1,hitbox.y1)
+    //point en haut à droite (hitbox.x2,hitbox.y2)
+    Hitbox hitbox;
     
     float avance;
     float action;
@@ -23,6 +27,7 @@ protected:
     float position[2];
     float orientation;
 
+    //acceleration
     float velocite[2];
 
     float vitesseMAX;
@@ -42,6 +47,8 @@ public:
     void updatePos( float time);
 
     void deplacementCible(float x, float y);
+
+    Hitbox getHitbox();
     
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 };

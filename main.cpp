@@ -1,3 +1,4 @@
+#pragma once
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -118,6 +119,7 @@ GLvoid Modelisation()
                  initGL::xcam,initGL::ycam,0,
                  0,1,0);
 
+
     glViewport(0, 0, WIDTH, HEIGHT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -171,7 +173,8 @@ GLvoid Modelisation()
       {
         compX = 0;
       }
-      
+      posx = SP.positionX + compX;
+      posy = SP.positionY + compY;
 
 		vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
 		cubes_test.push_back(add);
@@ -202,10 +205,11 @@ GLvoid Modelisation()
           
           A1.creerPersonnage();
           A1.deplacementCible(posx,posy);
-          A1.tirArbalete(40,0);
+          A1.tirArbalete(10,10);
 
-         // Perso2.creerPersonnage();
-          //Perso2.deplacementCible(posx,posy);
+         Perso2.creerPersonnage();
+        Perso2.deplacementCible(posx,posy);
+
           // A2.creerPersonnage();
           // A2.deplacementCible(posx,posy);
           // A2.tirArbalete(40,0);
@@ -243,10 +247,8 @@ GLvoid Modelisation()
   }glPopMatrix();
 
 
-
-
 	}glPopMatrix();
-
+  
   glutSwapBuffers();
 }
 

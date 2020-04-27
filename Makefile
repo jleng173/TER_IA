@@ -1,6 +1,6 @@
 
-all: init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
-	g++ -std=c++14 init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test && clean
+all: clean init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
+	g++ -std=c++14 init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
