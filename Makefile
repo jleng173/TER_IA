@@ -1,6 +1,6 @@
 
-all: init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
-	g++ -std=c++14 init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test && clean
+all: init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
+	g++ -std=c++14 init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test && clean
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
@@ -14,9 +14,6 @@ Decor.o: Decor.cpp Decor.hpp
 PositionSouris.o: PositionSouris.cpp PositionSouris.hpp
 	g++ -c PositionSouris.cpp -o PositionSouris.o
 
-Batiment.o: Batiment.cpp Batiment.hpp
-	g++ -c Batiment.cpp -o Batiment.o
-
 Forme.o: Forme.cpp Forme.hpp
 	g++ -c Forme.cpp -o Forme.o
 
@@ -26,6 +23,23 @@ ppm.o: ppm.cpp ppm.hpp
 Ressource.o: Ressource.cpp Ressource.hpp
 	g++ -c Ressource.cpp -o Ressource.o
 
+#Batiment
+Batiment.o: Batiment.cpp Batiment.hpp
+	g++ -std=c++14 -c Batiment.cpp -o Batiment.o
+
+Chateau.o: Chateau.cpp Chateau.hpp
+	g++ -std=c++14 -c Chateau.cpp -o Chateau.o
+
+Caserne.o: Caserne.cpp Caserne.hpp
+	g++ -std=c++14 -c Caserne.cpp -o Caserne.o
+
+Tour.o: Tour.cpp Tour.hpp
+	g++ -std=c++14 -c Tour.cpp -o Tour.o
+
+Ferme.o: Ferme.cpp Ferme.hpp
+	g++ -std=c++14 -c Ferme.cpp -o Ferme.o
+
+#Personnage
 Personnage.o: Personnage.cpp Personnage.hpp
 	g++ -std=c++14 -c Personnage.cpp -o Personnage.o
 
