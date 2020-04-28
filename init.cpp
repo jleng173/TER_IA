@@ -148,7 +148,6 @@ void initGL::VM_init()        {
     glLoadIdentity();				// Reset The View
 
     glTranslatef(0,0,z);                  // move z units out from the screen.
-
     glRotatef(xrot,1.0f,0.0f,0.0f);		// Rotate On The X Axis
     glRotatef(yrot,0.0f,1.0f,0.0f);		// Rotate On The Y Axis
 

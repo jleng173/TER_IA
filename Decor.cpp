@@ -32,23 +32,8 @@ glPushMatrix();
   glPopMatrix();
 }
 
-
-void Decor::Foret(){
-	//glScalef(0.5,0.5,0.5);
-	glPushMatrix();{
-		for(int i = 0 ; i <_foret.size() ; i++){
-			glTranslatef( _foret[i][0], _foret[i][1], _foret[i][2]);
-			Arbre();
-		}
-
-    }glPopMatrix();
-}
-
-void Decor::Mine(){
-	glPushMatrix();{
-		for(int i = 0 ; i <_mine.size() ; i++){
+GLvoid Decor::Roche(){
 			glPushMatrix();{
-				glTranslatef( _mine[i][0], _mine[i][1], _mine[i][2]);
 
 				//Face avant
 				glColor3f(0.7,0.7,0.6);
@@ -123,6 +108,25 @@ void Decor::Mine(){
 				glEnd();
 			}
 			glPopMatrix();
+}
+
+
+void Decor::Foret(){
+	//glScalef(0.5,0.5,0.5);
+	glPushMatrix();{
+		for(int i = 0 ; i <_foret.size() ; i++){
+			glTranslatef( _foret[i][0], _foret[i][1], _foret[i][2]);
+			Arbre();
+		}
+
+    }glPopMatrix();
+}
+
+void Decor::Mine(){
+	glPushMatrix();{
+		for(int i = 0 ; i <_mine.size() ; i++){
+			glTranslatef( _mine[i][0], _mine[i][1], _mine[i][2]);
+			Roche();
 		}
     }
     glPopMatrix();
