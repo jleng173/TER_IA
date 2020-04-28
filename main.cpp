@@ -9,6 +9,7 @@
 #include <vector>
 #include "ppm.hpp"
 #include "Carte.hpp"
+#include "InterfaceHUD.hpp"
 #include "Batiment.hpp"
 #include "Chateau.hpp"
 #include "Caserne.hpp"
@@ -94,6 +95,8 @@ int compensationX(int pos){
  return 35;
 
 }
+
+
 
 GLvoid Modelisation()
 {
@@ -240,11 +243,11 @@ GLvoid Modelisation()
       }
 
 
-  }glPopMatrix();
+    }glPopMatrix();
 
-
-
-
+//interface
+    InterfaceHUD interface;
+    interface.creerInterfaceHUD();
 	}glPopMatrix();
 
   glutSwapBuffers();

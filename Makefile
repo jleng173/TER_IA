@@ -1,12 +1,16 @@
 
-all: init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
-	g++ -std=c++14 init.o ppm.o Carte.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test && clean
+all: init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
+	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -I/usr/include/freetype2 -L/usr/local/lib -lfreetype -lm -lGL -no-pie -lGLU -lglut -o test && ./test && clean
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
 
+#Affichage
 Carte.o: Carte.cpp Carte.hpp
 	g++ -std=c++14 -c Carte.cpp -o Carte.o
+
+InterfaceHUD.o: InterfaceHUD.cpp InterfaceHUD.hpp
+	g++ -std=c++14 -c InterfaceHUD.cpp -o InterfaceHUD.o
 
 Decor.o: Decor.cpp Decor.hpp
 	g++ -std=c++14 -c Decor.cpp -o Decor.o
