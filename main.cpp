@@ -249,9 +249,9 @@ GLvoid Modelisation()
 
     }glPopMatrix();
 
-//interface
-    InterfaceHUD interface;
-    interface.creerInterfaceHUD();
+  //interface
+    InterfaceHUD interface(initGL::Texture_pierre);
+    interface.creerInterfaceHUD(Perso2);
 	}glPopMatrix();
   
   glutSwapBuffers();

@@ -367,4 +367,10 @@ GLvoid Personnage::drawHalfSphere(int scaley, int scalex, GLfloat r) {
    glEnd();
  }
 
+int Personnage::getHp(){
+    return hp;
+}
 
+int Personnage::getDmg(){
+    return dmg;
+}

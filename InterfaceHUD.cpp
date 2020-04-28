@@ -1,12 +1,12 @@
 #include "InterfaceHUD.hpp"
 
-InterfaceHUD::InterfaceHUD(){
+InterfaceHUD::InterfaceHUD(TEXTURE_STRUCT * T_pierre):Texture_pierre(T_pierre){
 
 }
 
-GLvoid InterfaceHUD::creerInterfaceHUD(){
+GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p){
 
-        glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_PROJECTION);
     glPushMatrix();{
       glLoadIdentity();
       glOrtho(0.0, GLUT_SCREEN_WIDTH, GLUT_SCREEN_HEIGHT, 0.0, -1.0, 10.0);
@@ -16,31 +16,38 @@ GLvoid InterfaceHUD::creerInterfaceHUD(){
 
       glClear(GL_DEPTH_BUFFER_BIT);
 
-      glBegin(GL_POLYGON);
+      glBegin(GL_QUADS);
           glColor3f(0.5f, 0.5f, 0.5f);
           glVertex2f(0.0, 0.0);
-          glVertex2f(100, 0.0);
-          glVertex2f(100, 10.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2, 0.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2, 10.0);
           glVertex2f(0.0, 10.0);
       glEnd();
 
-      glBegin(GL_POLYGON);
+      glBegin(GL_QUADS);
           glColor3f(0.0f, 0.0f, 0.0f);
-          glVertex2f(100.0, 0.0);
-          glVertex2f(200, 0.0);
-          glVertex2f(200, 10.0);
-          glVertex2f(100.0, 10.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2, 0.0);
+          glVertex2f(GLUT_SCREEN_WIDTH, 0.0);
+          glVertex2f(GLUT_SCREEN_WIDTH, 10.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2, 10.0);
       glEnd();
 
       //Interface du bas
         //1er bloc
+      glEnable(GL_TEXTURE_2D);	
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
       glBegin(GL_QUADS);
-          glColor3f(1.0f, 0.0f, 0.0f);
+          glColor3f(1.0f, 1.0f, 1.0f);
+          glTexCoord2f(0,0);
           glVertex2f(0.0, GLUT_SCREEN_HEIGHT);
+          glTexCoord2f(0,1);
           glVertex2f(0.0, GLUT_SCREEN_HEIGHT-50.0);
+          glTexCoord2f(1,1);
           glVertex2f(GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-50.0);
+          glTexCoord2f(1,0);
           glVertex2f(GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT);
       glEnd();
+      glDisable(GL_TEXTURE_2D);
 
       glBegin(GL_QUADS);
           glColor3f(0.0f, 1.0f, 1.0f);
@@ -58,23 +65,68 @@ GLvoid InterfaceHUD::creerInterfaceHUD(){
           glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-40.0);
           glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT);
       glEnd();
-      
+            //Portrait
+      glBegin(GL_POLYGON);
+          glColor3f(1.0f, 0.0f, 1.0f);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-5);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+7.5, GLUT_SCREEN_HEIGHT-35.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+12.5, GLUT_SCREEN_HEIGHT-35.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+15, GLUT_SCREEN_HEIGHT-30.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+15, GLUT_SCREEN_HEIGHT-5);
+      glEnd();        
+            //Information personnage
+
         //3e bloc
+      glEnable(GL_TEXTURE_2D);	
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
       glBegin(GL_QUADS);
-          glColor3f(1.0f, 1.0f, 0.0f);
+          glColor3f(1.0f, 1.0f, 1.0f);
+          glTexCoord2f(0,0);
           glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT);
+          glTexCoord2f(0,1);
           glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-50.0);
+          glTexCoord2f(1,1);
           glVertex2f(GLUT_SCREEN_WIDTH, GLUT_SCREEN_HEIGHT-50.0);
+          glTexCoord2f(1,0);
           glVertex2f(GLUT_SCREEN_WIDTH, GLUT_SCREEN_HEIGHT);
       glEnd();
+      glDisable(GL_TEXTURE_2D);
 
+            //Cases
       glBegin(GL_QUADS);
           glColor3f(0.0f, 1.0f, 1.0f);
-          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30);
           glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-40.0);
-          glVertex2f(GLUT_SCREEN_WIDTH-5, GLUT_SCREEN_HEIGHT-40.0);
-          glVertex2f(GLUT_SCREEN_WIDTH-5, GLUT_SCREEN_HEIGHT);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-40.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30);
       glEnd();
+
+      glPushMatrix();{
+        glTranslatef(20,0,0);
+        glBegin(GL_QUADS);
+            glColor3f(1.0f, 1.0f, 1.0f);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-40.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-40.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30);
+        glEnd();
+      }
+      glPopMatrix();
+
+      glPushMatrix();{
+        glTranslatef(40,0,0);
+        glBegin(GL_QUADS);
+            glColor3f(1.0f, 0.0f, 1.0f);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-40.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-40.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30);
+        glEnd();
+      }
+      glPopMatrix();
+
+
       // END 2D
       glMatrixMode(GL_PROJECTION);
     }
@@ -82,7 +134,7 @@ GLvoid InterfaceHUD::creerInterfaceHUD(){
     glMatrixMode(GL_MODELVIEW);
     glEnable(GL_DEPTH_TEST);
 
-    std::string texte="Victor attacks Timotei ! It's a critical hit !";
+    std::string texte=std::to_string(p.getHp());
     drawText(texte,texte.size(),1,3);
 
 }
