@@ -301,7 +301,7 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
     glMatrixMode(GL_MODELVIEW);
     glEnable(GL_DEPTH_TEST);
 
-    std::string Title = "COMMAND & CONQUER TOTAL WAR: AGE OF EMPIRECRAFT";
+    std::string Title = "COMMAND & CONQUER TOTAL WAR-CRAFT: AGE OF EMPIRE";
     drawText(Title,Title.size(),5,6);
 
 }
