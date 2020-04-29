@@ -1,6 +1,6 @@
 
-all: init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
-	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -I/usr/include/freetype2 -L/usr/local/lib -lfreetype -lm -lGL -no-pie -lGLU -lglut -o test && ./test && clean
+all: clean init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o
+	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
@@ -26,6 +26,9 @@ ppm.o: ppm.cpp ppm.hpp
 
 Ressource.o: Ressource.cpp Ressource.hpp
 	g++ -c Ressource.cpp -o Ressource.o
+
+Joueur.o: Joueur.cpp Joueur.hpp
+	g++ -std=c++14 -c Joueur.cpp -o Joueur.o
 
 #Batiment
 Batiment.o: Batiment.cpp Batiment.hpp

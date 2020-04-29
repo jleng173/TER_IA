@@ -1,9 +1,10 @@
 #include "Personnage.hpp"
 
+Personnage::Personnage(){}
 
-Personnage::Personnage(float avn,float act,float x, float y, float angle, float v){
-    avance=avn;
-    action=act;
+Personnage::Personnage(float x, float y, float angle, float v){
+    avance=0;
+    action=0;
     mouv = 0;
     position[0] = x;
     position[1] = y;
@@ -46,7 +47,7 @@ void Personnage::deplacementCible(float x, float y){
 
     //Normalisation du vecteur velocite
     float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
-    if (v > 0.02){
+    if (v > 0.02*vitesseMAX){
         velocite[0] = velocite[0]/v;
         velocite[1] = velocite[1]/v;
 
@@ -59,18 +60,19 @@ void Personnage::deplacementCible(float x, float y){
         }
         if(avance <=-19 && mouv == 1)
             mouv=0; 
-
-        updatePos(0.04);
+        
+        velocite[0] *= vitesseMAX;
+        velocite[1] *= vitesseMAX;
+        
     }else{
         mouv=0; 
         avance = 0;
 
     }
-   // printf("a = %f \n",avance);
-    velocite[0] *= vitesseMAX;
-    velocite[1] *= vitesseMAX;
 
-    
+    updatePos(0.04);
+        
+   // printf("a = %f \n",avance)
     }
 }
 
@@ -110,6 +112,7 @@ GLvoid Personnage::barreHp(){
         glVertex3f(lonHp, 1.5, 4);   
     glEnd();
     glColor3f(1,1,1);
+    //creerAccessoire();
     }glPopMatrix();
 }
 

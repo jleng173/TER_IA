@@ -1,14 +1,39 @@
 #include "Paysan.hpp"
 
-Paysan::Paysan(float avn,float act,float x, float y,float angle, float vitesseMAX):Personnage(avn,act,x,y,angle,vitesseMAX){
+Paysan::Paysan(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
     hp=75;
     hpMax=75;
     dmg=2;
 }
 
-GLvoid Paysan::creerBatiment(){
-
+void Paysan::construireCaserne(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+    if(J->getBois() >= 2 && J->getPierre() >= 8){
+        J->subtractBois(2);
+        J->subtractPierre(8);
+        Batiment * cas = new Caserne(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        J->listeBatiments.push_back(cas);
+    }
 }
+
+void Paysan::construireFerme(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+    if(J->getBois() >= 4 && J->getPierre() >= 1){
+        J->subtractBois(4);
+        J->subtractPierre(1);
+        Batiment * ferm = new Ferme(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        J->listeBatiments.push_back(ferm);
+    }
+}
+
+void Paysan::construireTour(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+    if(J->getBois() >= 5 && J->getPierre() >= 5){
+        J->subtractBois(5);
+        J->subtractPierre(5);
+        Batiment * tower = new Tour(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        J->listeBatiments.push_back(tower);
+    }
+}
+
+
 
 GLvoid Paysan::creerChapeau() const{
     glPushMatrix();{

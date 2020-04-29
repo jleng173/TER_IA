@@ -50,6 +50,20 @@ void Caserne::creerBatiment() const{
     glDisable(GL_TEXTURE_2D);
 }
 
-void Caserne::creerUnite(){
+void Caserne::creerGuerrier(Joueur * J){
+        if (J->listeUnites.size() < J->getMaxUnites()){
+                printf("CREATION D'UN GUERRIER \n");
+                Personnage * PersGuerrier = new Guerrier(position[0],position[1]-3,0,5);
+                J->subtractOr(5);
+                J->listeUnites.push_back(PersGuerrier);
+        }       
+}
 
+void Caserne::creerArbaletrier(Joueur * J){
+        if (J->listeUnites.size() < J->getMaxUnites()){
+                printf("CREATION D'UN ARBALETRIER \n");
+                Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-3,0,4);
+                J->subtractOr(4);
+                J->listeUnites.push_back(PersArbaletrier);
+        } 
 }

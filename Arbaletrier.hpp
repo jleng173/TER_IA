@@ -15,7 +15,7 @@ class Arbaletrier : public Personnage{
         float timeProjec;
 
     public:
-        Arbaletrier(float avn,float act,float x, float y,float angle, float vitesseMAX);
+        Arbaletrier(float x, float y,float angle, float vitesseMAX);
         void tirArbalete(float x, float y);
         GLvoid creerCarreau();
         GLvoid creerChapeau() const override;
