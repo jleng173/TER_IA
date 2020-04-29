@@ -1,4 +1,3 @@
-#pragma once
 #include <GL/gl.h>
 #include <GL/glu.h>
 #include <GL/glut.h>
@@ -11,6 +10,7 @@
 #include "ppm.hpp"
 #include "Carte.hpp"
 #include "InterfaceHUD.hpp"
+#include "Joueur.hpp"
 #include "Batiment.hpp"
 #include "Chateau.hpp"
 #include "Caserne.hpp"
@@ -60,13 +60,15 @@ TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 
-Arbaletrier A1(initGL::avance,initGL::action,0,1.5,0,3);
-Arbaletrier A2(initGL::avance,initGL::action,0,5,0,3);
-Arbaletrier A3(initGL::avance,initGL::action,0,-5,0,3);
-Arbaletrier A4(initGL::avance,initGL::action,0,-1.5,0,3);
+Arbaletrier A1(0,1.5,0,3);
 
-Guerrier Perso2(initGL::avance,initGL::action,10,10,0,5);
+Guerrier Perso2(10,10,0,5);
 //Arbaletrier PersoA(initGL::avance,initGL::action,10,10,0,5);
+
+Joueur * Joueur1 = new Joueur();
+Chateau ch(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+Caserne caser(10,10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+Ferme ferm(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
 int compensationY(int pos){
   if(pos < -20 ) return 0;
@@ -205,31 +207,23 @@ GLvoid Modelisation()
   //PersoA.creerCarreau();
     
    glPushMatrix();{
-          
-          A1.creerPersonnage();
-          A1.deplacementCible(posx,posy);
-          A1.tirArbalete(10,10);
+      // printf(" thune main %d \n",Joueur1->getOr());
+       
+      for(int i = 0 ; i < Joueur1->listeUnites.size(); i++){
+        Joueur1->listeUnites[i]->creerPersonnage();
+        Joueur1->listeUnites[i]->deplacementCible(posx,posy);
+      }
 
-         Perso2.creerPersonnage();
-        Perso2.deplacementCible(posx,posy);
+      
+          // A1.creerPersonnage();
+          // A1.deplacementCible(posx,posy);
+          // A1.tirArbalete(10,10);
 
-          // A2.creerPersonnage();
-          // A2.deplacementCible(posx,posy);
-          // A2.tirArbalete(40,0);
-
-          // A3.creerPersonnage();
-          // A3.tirArbalete(40,0);
-
-          // A4.creerPersonnage();
-          // A4.tirArbalete(40,0);
-
+          // Perso2.creerPersonnage();
+          // Perso2.deplacementCible(posx,posy);
 
    }
   glPopMatrix();
-  //  glPushMatrix();{
-  //         Personnage Perso2(initGL::avance,initGL::action,5,5,0,3,initGL::mouv);
-  //         Perso2.creerPersonnage();
-  // }glPopMatrix();
 
   //Rectangle de sélection click
   glPushMatrix();{
@@ -260,12 +254,14 @@ GLvoid Modelisation()
 
 int main(int argc, char **argv){
 
-
+  printf(" TEST \n");
+  ch.creerPaysan(Joueur1);
+  caser.creerGuerrier(Joueur1);
+  printf(" taille max %d \n",Joueur1->getMaxUnites());
 	initGL* init = new initGL();
-
 
 	init->mainInit(argc,argv,&Modelisation);
 
-
+  
 	return 0;
 }

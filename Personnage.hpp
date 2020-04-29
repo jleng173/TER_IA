@@ -35,7 +35,8 @@ protected:
     bool selected;
 
 public:
-    Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX);
+    Personnage();
+    Personnage(float x, float y,float angle, float vitesseMAX);
     Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX,float mouv);
 
     GLvoid creerPersonnage();
