@@ -54,7 +54,7 @@ public:
 
     void updatePos( float time);
 
-    void deplacementCible(float x, float y,std::vector<std::shared_ptr<Element>>  all);
+    void deplacementCible(float x, float y,std::vector<Element *>  all);
 
     Hitbox getHitbox();
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);

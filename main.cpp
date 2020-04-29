@@ -54,7 +54,7 @@ float timeProjec = 0.0;
 
 Carte carte;
 
-vector<shared_ptr<Element>> toutLesElements;
+vector<Element *> toutLesElements;
 
 ppm p;
 
@@ -214,14 +214,17 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
         Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
-        e->setHitbox(Joueur1->getUnites()[i]->getHitbox);
-        toutLesElements.push_back(make_shared<Element>(e));
+        e->setHitbox(Joueur1->getUnites()[i]->getHitbox());
+        toutLesElements.push_back(e);
         }
 
-      for(int i = 0 ; i < Joueur1->getUnites().size(); i++)
-        Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+      for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
+       Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+      }
+       
       
-      
+         }
+  glPopMatrix();
           // A1.creerPersonnage();
           // A1.deplacementCible(posx,posy);
           // A1.tirArbalete(10,10);

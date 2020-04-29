@@ -34,7 +34,7 @@ void Personnage::updatePos( float time){
     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
 }
 
-void Personnage::deplacementCible(float x, float y, std::vector<std::shared_ptr<Element>>  all){
+void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
     if(x != 0 && y !=0){
     //SeekKinematic mouvement
     if(testSiColision(all)){

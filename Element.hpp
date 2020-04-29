@@ -21,8 +21,8 @@ public:
     // Constructor
     Element(float x,float y);
 
-    bool Colision(const std::shared_ptr<Element> autre);
-    bool testSiColision(const std::vector<std::shared_ptr<Element>> all);
+    bool Colision( Element * autre);
+    bool testSiColision(const std::vector<Element *> all);
     Hitbox getHitbox(){return hitbox;};
         void setHitbox(Hitbox h){hitbox = h;};
 
