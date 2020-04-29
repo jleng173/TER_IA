@@ -1,6 +1,6 @@
 #include "InterfaceHUD.hpp"
 
-InterfaceHUD::InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2):Texture_HUD(T_HUD), Texture_HUD2(T_HUD2){
+InterfaceHUD::InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre):Texture_HUD(T_HUD), Texture_HUD2(T_HUD2), Texture_Pierre(T_Pierre){
 
 }
 
@@ -139,15 +139,29 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
           glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT);
       glEnd();
       glDisable(GL_TEXTURE_2D);
+      glEnable(GL_TEXTURE_2D);	
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Pierre->width, Texture_Pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Pierre->data);
+      glBegin(GL_QUADS);
+          glColor3f(1.0f, 1.0f, 1.0f);
+          glTexCoord2f(0,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-40);
+          glTexCoord2f(0,0.5);
+          glVertex2f(GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-50.0);
+          glTexCoord2f(1,0.5);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-50.0);
+          glTexCoord2f(1,0);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3, GLUT_SCREEN_HEIGHT-40);
+      glEnd();
+      glDisable(GL_TEXTURE_2D);
             //Portrait
       glBegin(GL_POLYGON);
           glColor3f(1.0f, 0.0f, 1.0f);
-          glVertex2f(GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-5);
-          glVertex2f(GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30.0);
-          glVertex2f(GLUT_SCREEN_WIDTH/3+7.5, GLUT_SCREEN_HEIGHT-35.0);
-          glVertex2f(GLUT_SCREEN_WIDTH/3+12.5, GLUT_SCREEN_HEIGHT-35.0);
-          glVertex2f(GLUT_SCREEN_WIDTH/3+15, GLUT_SCREEN_HEIGHT-30.0);
-          glVertex2f(GLUT_SCREEN_WIDTH/3+15, GLUT_SCREEN_HEIGHT-5);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+7.5, GLUT_SCREEN_HEIGHT-5);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+7.5, GLUT_SCREEN_HEIGHT-30.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+10, GLUT_SCREEN_HEIGHT-35.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+14, GLUT_SCREEN_HEIGHT-35.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+16.5, GLUT_SCREEN_HEIGHT-30.0);
+          glVertex2f(GLUT_SCREEN_WIDTH/3+16.5, GLUT_SCREEN_HEIGHT-5);
       glEnd();
             //Information personnage
       glBegin(GL_POLYGON);
@@ -184,20 +198,20 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
             //Cases
       glBegin(GL_QUADS);
           glColor3f(0.0f, 1.0f, 1.0f);
-          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30);
-          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-40.0);
-          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-40.0);
-          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-32);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-42.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-42.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-32);
       glEnd();
 
       glPushMatrix();{
         glTranslatef(20,0,0);
         glBegin(GL_QUADS);
             glColor3f(1.0f, 1.0f, 1.0f);
-            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30);
-            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-40.0);
-            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-40.0);
-            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-32);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-42.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-42.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-32);
         glEnd();
       }
       glPopMatrix();
@@ -206,14 +220,79 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
         glTranslatef(40,0,0);
         glBegin(GL_QUADS);
             glColor3f(1.0f, 0.0f, 1.0f);
-            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30);
-            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-40.0);
-            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-40.0);
-            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-32);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-42.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-42.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-32);
         glEnd();
       }
       glPopMatrix();
 
+              //2e rangée
+      glBegin(GL_QUADS);
+          glColor3f(0.0f, 1.0f, 1.0f);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-8);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-18.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-18.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-8);
+      glEnd();
+
+      glPushMatrix();{
+        glTranslatef(20,0,0);
+        glBegin(GL_QUADS);
+            glColor3f(1.0f, 1.0f, 1.0f);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-8);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-18.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-18.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-8);
+        glEnd();
+      }
+      glPopMatrix();
+
+      glPushMatrix();{
+        glTranslatef(40,0,0);
+        glBegin(GL_QUADS);
+            glColor3f(1.0f, 0.0f, 1.0f);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-8);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-18.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-18.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-8);
+        glEnd();
+      }
+      glPopMatrix();
+
+            //3e rangée
+      glBegin(GL_QUADS);
+          glColor3f(0.0f, 1.0f, 1.0f);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-20);
+          glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30.0);
+          glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-20);
+      glEnd();
+
+      glPushMatrix();{
+        glTranslatef(20,0,0);
+        glBegin(GL_QUADS);
+            glColor3f(1.0f, 1.0f, 1.0f);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-20);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-20);
+        glEnd();
+      }
+      glPopMatrix();
+
+      glPushMatrix();{
+        glTranslatef(40,0,0);
+        glBegin(GL_QUADS);
+            glColor3f(1.0f, 0.0f, 1.0f);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-20);
+            glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30.0);
+            glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-20);
+        glEnd();
+      }
+      glPopMatrix();
 
       // END 2D
       glMatrixMode(GL_PROJECTION);
@@ -221,6 +300,9 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
     glEnable(GL_DEPTH_TEST);
+
+    std::string Title = "COMMAND & CONQUER TOTAL WAR: AGE OF EMPIRECRAFT";
+    drawText(Title,Title.size(),5,6);
 
 }
 

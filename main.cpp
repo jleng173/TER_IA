@@ -107,7 +107,7 @@ GLvoid Modelisation()
 {
 	initGL::VM_init();
 	Forme f;
-
+  
   glPushMatrix();
   {
 	 if(initGL::xpose < 50){
@@ -153,7 +153,7 @@ GLvoid Modelisation()
 	  //printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
 
-	  if (initGL::pose == 1){
+	  if (initGL::pose == 1 && initGL::ypose<670 && initGL::ypose>49){
       posx = SP.positionX;
       posy = SP.positionY;
       posz = SP.positionZ;
@@ -182,7 +182,7 @@ GLvoid Modelisation()
       }
       posx = SP.positionX + compX;
       posy = SP.positionY + compY;
-
+      std::cout << initGL::ypose << std::endl;
 		vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
 		cubes_test.push_back(add);
     	initGL::pose = 0;
@@ -246,7 +246,7 @@ GLvoid Modelisation()
     }glPopMatrix();
 
   //interface
-    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2);
+    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre);
     interface.creerInterfaceHUD(Perso2, Joueur1);
 	}glPopMatrix();
   
