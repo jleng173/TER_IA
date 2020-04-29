@@ -13,11 +13,12 @@
 // #include "Ferme.hpp"
 #include "Personnage.hpp"
 #include "Batiment.hpp"
+#include "Joueur.hpp"
 class InterfaceHUD{
     public:
 
     InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2);
-    GLvoid creerInterfaceHUD(Personnage & p);
+    GLvoid creerInterfaceHUD(Personnage & p, Joueur * j);
     GLvoid creerInterfaceHUD(Batiment & b);
 
     void drawText(std::string text, int length, int x, int y);

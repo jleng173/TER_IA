@@ -29,14 +29,17 @@ public:
     void setMaxUnites(int mu);
 
     // std::vector<std::shared_ptr<Batiment> > getBatiments();
-    // std::vector<std::shared_ptr<Personnage> > getUnites();
+    std::vector<Personnage* > getUnites();
+    void addUnites(Personnage* p);
+
 
     std::vector<Batiment*> listeBatiments;
-    std::vector<Personnage*> listeUnites;
 
 private:
     int qteBois;
     int qtePierre;
     int qteOr;
     int maxUnites;
+    std::vector<Personnage*> listeUnites;
+
 };  

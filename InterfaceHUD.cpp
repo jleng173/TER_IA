@@ -4,7 +4,7 @@ InterfaceHUD::InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2):Text
 
 }
 
-GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p){
+GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();{
@@ -16,6 +16,8 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p){
 
       glClear(GL_DEPTH_BUFFER_BIT);
 
+      //Interface du haut
+        //1er bloc
       glBegin(GL_QUADS);
           glColor3f(0.5f, 0.5f, 0.5f);
           glVertex2f(0.0, 0.0);
@@ -24,13 +26,78 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p){
           glVertex2f(0.0, 10.0);
       glEnd();
 
+        //2e bloc
+      glEnable(GL_TEXTURE_2D);	
+      glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_HUD->width, Texture_HUD->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_HUD->data);
       glBegin(GL_QUADS);
-          glColor3f(0.0f, 0.0f, 0.0f);
+          glColor3f(1.0f, 1.0f, 0.0f);
+          glTexCoord2f(0,0);
           glVertex2f(GLUT_SCREEN_WIDTH/2, 0.0);
+          glTexCoord2f(0,1);          
           glVertex2f(GLUT_SCREEN_WIDTH, 0.0);
+          glTexCoord2f(1,1);
           glVertex2f(GLUT_SCREEN_WIDTH, 10.0);
+          glTexCoord2f(1,0);
           glVertex2f(GLUT_SCREEN_WIDTH/2, 10.0);
       glEnd();
+      glDisable(GL_TEXTURE_2D);
+
+        //Info ressources
+      glBegin(GL_QUADS);
+          glColor3f(0.0f, 0.0f, 0.0f);
+          glTexCoord2f(0,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+11, 2.5);
+          glTexCoord2f(0,1);          
+          glVertex2f(GLUT_SCREEN_WIDTH/2+21, 2.5);
+          glTexCoord2f(1,1);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+21, 8.0);
+          glTexCoord2f(1,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+11, 8.0);
+      glEnd();
+      std::string infoOr="Gold: " + std::to_string(j->getOr());
+      drawText(infoOr,infoOr.size(),GLUT_SCREEN_WIDTH/2+12,7);
+
+      glBegin(GL_QUADS);
+          glColor3f(0.0f, 0.0f, 0.0f);
+          glTexCoord2f(0,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+23, 2.5);
+          glTexCoord2f(0,1);          
+          glVertex2f(GLUT_SCREEN_WIDTH/2+33, 2.5);
+          glTexCoord2f(1,1);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+33, 8.0);
+          glTexCoord2f(1,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+23, 8.0);
+      glEnd();
+      std::string infoBois="Wood: " + std::to_string(j->getBois());
+      drawText(infoBois,infoBois.size(),GLUT_SCREEN_WIDTH/2+24,7);
+
+      glBegin(GL_QUADS);
+          glColor3f(0.0f, 0.0f, 0.0f);
+          glTexCoord2f(0,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+35, 2.5);
+          glTexCoord2f(0,1);          
+          glVertex2f(GLUT_SCREEN_WIDTH/2+46, 2.5);
+          glTexCoord2f(1,1);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+46, 8.0);
+          glTexCoord2f(1,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+35, 8.0);
+      glEnd();
+      std::string infoPierre="Stone: " + std::to_string(j->getPierre());
+      drawText(infoPierre,infoPierre.size(),GLUT_SCREEN_WIDTH/2+36,7);
+
+      glBegin(GL_QUADS);
+          glColor3f(0.0f, 0.0f, 0.0f);
+          glTexCoord2f(0,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+48, 2.5);
+          glTexCoord2f(0,1);          
+          glVertex2f(GLUT_SCREEN_WIDTH/2+61, 2.5);
+          glTexCoord2f(1,1);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+61, 8.0);
+          glTexCoord2f(1,0);
+          glVertex2f(GLUT_SCREEN_WIDTH/2+48, 8.0);
+      glEnd();
+      std::string infoUnite="Units: " + std::to_string(j->getUnites().size())+ "/" + std::to_string(j->getMaxUnites());
+      drawText(infoUnite,infoUnite.size(),GLUT_SCREEN_WIDTH/2+49,7);
 
       //Interface du bas
         //1er bloc
@@ -154,9 +221,6 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p){
     glPopMatrix();
     glMatrixMode(GL_MODELVIEW);
     glEnable(GL_DEPTH_TEST);
-
-    std::string texte=std::to_string(p.getHp());
-    drawText(texte,texte.size(),1,3);
 
 }
 

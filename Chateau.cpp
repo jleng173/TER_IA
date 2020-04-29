@@ -11,12 +11,12 @@ Chateau::Chateau(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_
 
 void Chateau::creerPaysan(Joueur * J){
     
-    if (J->listeUnites.size() < J->getMaxUnites()){
+    if (J->getUnites().size() < J->getMaxUnites()){
         printf("CREATION D'UN PAYSAN \n");
         //Paysan pays(position[0],position[1]-3,0,3);
         Personnage * PersPaysan = new Paysan(position[0],position[1]-3,0,3);
         J->subtractOr(2);
-        J->listeUnites.push_back(PersPaysan);
+        J->addUnites(PersPaysan);
     }
 }
 

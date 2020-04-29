@@ -211,9 +211,9 @@ GLvoid Modelisation()
    glPushMatrix();{
       // printf(" thune main %d \n",Joueur1->getOr());
        
-      for(int i = 0 ; i < Joueur1->listeUnites.size(); i++){
-        Joueur1->listeUnites[i]->creerPersonnage();
-        Joueur1->listeUnites[i]->deplacementCible(posx,posy);
+      for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
+        Joueur1->getUnites()[i]->creerPersonnage();
+        Joueur1->getUnites()[i]->deplacementCible(posx,posy);
       }
 
       
@@ -247,7 +247,7 @@ GLvoid Modelisation()
 
   //interface
     InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2);
-    interface.creerInterfaceHUD(Perso2);
+    interface.creerInterfaceHUD(Perso2, Joueur1);
 	}glPopMatrix();
   
   glutSwapBuffers();
