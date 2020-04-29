@@ -371,6 +371,10 @@ int Personnage::getHp(){
     return hp;
 }
 
+int Personnage::getHpMax(){
+    return hpMax;
+}
+
 int Personnage::getDmg(){
     return dmg;
 }

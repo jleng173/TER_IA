@@ -53,5 +53,6 @@ public:
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 
     int getHp();
+    int getHpMax();
     int getDmg();
 };

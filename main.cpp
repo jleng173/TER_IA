@@ -59,6 +59,8 @@ TEXTURE_STRUCT * initGL::Texture_pierre = p.readPpm ("./texture/castle_walls_tex
 TEXTURE_STRUCT * initGL::Texture_toit = p.readPpm ("./texture/roof_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_HUD = p.readPpm ("./texture/HUD_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_HUD2 = p.readPpm ("./texture/HUD2_texture.PPM");
 
 Arbaletrier A1(initGL::avance,initGL::action,0,1.5,0,3);
 Arbaletrier A2(initGL::avance,initGL::action,0,5,0,3);
@@ -250,7 +252,7 @@ GLvoid Modelisation()
     }glPopMatrix();
 
   //interface
-    InterfaceHUD interface(initGL::Texture_pierre);
+    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2);
     interface.creerInterfaceHUD(Perso2);
 	}glPopMatrix();
   

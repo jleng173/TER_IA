@@ -84,6 +84,9 @@ protected:
  static TEXTURE_STRUCT * Texture_toit;
  static TEXTURE_STRUCT * Texture_porte;
  static TEXTURE_STRUCT * Texture_paille;
+ static TEXTURE_STRUCT * Texture_HUD;
+ static TEXTURE_STRUCT * Texture_HUD2;
+
 	
 };
 

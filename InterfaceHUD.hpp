@@ -16,7 +16,7 @@
 class InterfaceHUD{
     public:
 
-    InterfaceHUD(TEXTURE_STRUCT * T_pierre);
+    InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2);
     GLvoid creerInterfaceHUD(Personnage & p);
     GLvoid creerInterfaceHUD(Batiment & b);
 
@@ -24,5 +24,6 @@ class InterfaceHUD{
 
     private:
 
-    TEXTURE_STRUCT * Texture_pierre;
+    TEXTURE_STRUCT * Texture_HUD;
+    TEXTURE_STRUCT * Texture_HUD2;
 };
