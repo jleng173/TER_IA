@@ -7,10 +7,13 @@
 #include <stdbool.h>
 #include <math.h>
 #include <vector>
+#include <memory>
 #include "Forme.hpp"
 #include "Batiment.hpp"
+#include "Element.hpp"
 
-class Personnage {
+
+class Personnage : Element{
 
 protected:
     int hp;
@@ -50,7 +53,9 @@ public:
     void setSelected(int s);
 
     void updatePos( float time);
-    void deplacementCible(float x, float y);
+
+    void deplacementCible(float x, float y,std::vector<std::shared_ptr<Element>>  all);
+
     Hitbox getHitbox();
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 
@@ -59,4 +64,6 @@ public:
     int getDmg();
     float getX();
     float getY();
+    float getOrientation();
+    float getvitesseMAX();
 };

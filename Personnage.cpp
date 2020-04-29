@@ -1,13 +1,10 @@
 #include "Personnage.hpp"
 
-Personnage::Personnage(){}
 
-Personnage::Personnage(float x, float y, float angle, float v){
+Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     avance=0;
     action=0;
     mouv = 0;
-    position[0] = x;
-    position[1] = y;
     hitbox.x1 = position[0]-1;
     hitbox.y1 = position[1]-1;
     hitbox.x2 = position[0]+1;
@@ -17,16 +14,15 @@ Personnage::Personnage(float x, float y, float angle, float v){
     selected = 1;
 }
 
-Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m){
+Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m):Element(x,y){
     avance=avn;
     action=act;
     mouv = m;
-    position[0] = x;
-    position[1] = y;
     orientation = angle;
     vitesseMAX = v;
     selected = 1;
 }
+
 
 void Personnage::updatePos( float time){
     position[0] += velocite[0] * time;
@@ -38,10 +34,12 @@ void Personnage::updatePos( float time){
     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
 }
 
-void Personnage::deplacementCible(float x, float y){
+void Personnage::deplacementCible(float x, float y, std::vector<std::shared_ptr<Element>>  all){
     if(x != 0 && y !=0){
     //SeekKinematic mouvement
-
+    if(testSiColision(all)){
+        printf("COLLISION \n");
+    }
     velocite[0] = x - position[0];
     velocite[1] = y - position[1];
 
@@ -395,4 +393,12 @@ float Personnage::getX(){
 
 float Personnage::getY(){
     return position[1];
+}
+
+float Personnage::getOrientation(){
+    return orientation;
+}
+
+float Personnage::getvitesseMAX(){
+    return vitesseMAX;
 }
