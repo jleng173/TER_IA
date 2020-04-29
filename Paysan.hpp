@@ -1,4 +1,5 @@
 #pragma once
+#include <stdbool.h>
 #include "Personnage.hpp"
 #include "Joueur.hpp"
 #include "Batiment.hpp"

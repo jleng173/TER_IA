@@ -3,7 +3,8 @@
 #include <GL/glut.h>
 #include <unistd.h>
 #include <stdio.h> 
-#include <stdlib.h> 
+#include <stdlib.h>
+#include <stdbool.h>
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -153,10 +154,7 @@ GLvoid Modelisation()
 	  //printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
 
-	  if (initGL::pose == 1 && initGL::ypose<670 && initGL::ypose>49){
-      posx = SP.positionX;
-      posy = SP.positionY;
-      posz = SP.positionZ;
+	  
       float compY = compensationY(SP.positionY-initGL::ycam);
 
       float compX = 0;
@@ -168,8 +166,6 @@ GLvoid Modelisation()
           compX = -compensationX(-absolutXpos);
         }
 
-         
-
       if(SP.positionY >-10){
         compX /= 1;
       }else if(SP.positionY >-20){
@@ -180,11 +176,12 @@ GLvoid Modelisation()
       {
         compX = 0;
       }
+    if (initGL::pose == 1){
       posx = SP.positionX + compX;
       posy = SP.positionY + compY;
-      std::cout << initGL::ypose << std::endl;
-		vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
-		cubes_test.push_back(add);
+
+		// vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
+		// cubes_test.push_back(add);
     	initGL::pose = 0;
 	  }
 	
@@ -213,35 +210,47 @@ GLvoid Modelisation()
        
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
-        Joueur1->getUnites()[i]->deplacementCible(posx,posy);
+        if(Joueur1->getUnites()[i]->isSelected()){
+          Joueur1->getUnites()[i]->deplacementCible(posx,posy);
+        }
+        // printf(" %d",Joueur1->getUnites()[i]->isSelected());
       }
 
-      
-          // A1.creerPersonnage();
-          // A1.deplacementCible(posx,posy);
-          // A1.tirArbalete(10,10);
+   }
+  glPopMatrix();
 
-          // Perso2.creerPersonnage();
-          // Perso2.deplacementCible(posx,posy);
-
+     glPushMatrix();{
+      for(int i = 0 ; i < Joueur1->listeBatiments.size(); i++){
+        Joueur1->listeBatiments[i]->creerBatiment();
+      }
    }
   glPopMatrix();
 
   //Rectangle de sélection click
   glPushMatrix();{
       if (initGL::selection == 1){
-          CDposx = SP.positionX;
-          CDposy = SP.positionY;
+          CDposx = SP.positionX + compX;
+          CDposy = SP.positionY + compY;
 	    }
 
       if (initGL::selection == 2){
-          CDposx2 = SP.positionX;
-          CDposy2 = SP.positionY;
+          CDposx2 = SP.positionX + compX;
+          CDposy2 = SP.positionY + compY;
           Forme Fselec;
           Fselec.rectangleSelection(CDposx,CDposy,CDposx2,CDposy2);
-          //initGL::selection = 2;
       }
 
+      if (initGL::selection == 3){
+          for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
+            float xunit = Joueur1->getUnites()[i]->getX();
+            float yunit = Joueur1->getUnites()[i]->getY();
+            //printf(" rec[(%f,%f)(%f,%f)]  -  Unit(%f,%f) \n",CDposx,CDposy,CDposx2,CDposy2,xunit,yunit);
+            if((xunit >= CDposx) && (xunit <= CDposx2) && (yunit <= CDposy) && (yunit >= CDposy2)){
+                Joueur1->getUnites()[i]->setSelected(1);
+            }else
+              Joueur1->getUnites()[i]->setSelected(0);
+          }
+      }
 
     }glPopMatrix();
 
@@ -258,9 +267,13 @@ int main(int argc, char **argv){
 
   printf(" TEST \n");
   ch.creerPaysan(Joueur1);
+  Paysan * pa = dynamic_cast<Paysan*>(Joueur1->getUnites()[0]);
+  pa->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   caser.creerGuerrier(Joueur1);
-  printf(" taille max %d \n",Joueur1->getMaxUnites());
-	initGL* init = new initGL();
+  printf(" taille batiment %d \n",Joueur1->listeBatiments.size());
+	
+  
+  initGL* init = new initGL();
 
 	init->mainInit(argc,argv,&Modelisation);
 

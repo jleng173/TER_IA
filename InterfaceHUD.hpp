@@ -14,6 +14,7 @@
 #include "Personnage.hpp"
 #include "Batiment.hpp"
 #include "Joueur.hpp"
+
 class InterfaceHUD{
     public:
 

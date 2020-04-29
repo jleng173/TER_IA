@@ -1,5 +1,6 @@
 #pragma once
 #include "Personnage.hpp"
+#include <stdbool.h>
 
 
 class Guerrier : public Personnage{

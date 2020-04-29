@@ -5,6 +5,7 @@ Arbaletrier::Arbaletrier(float x, float y,float angle, float vitesseMAX):Personn
     hpMax=150;
     dmg=5;
     timeProjec = 0.0;
+    selected = 1;
 }
 
 void Arbaletrier::creerAccessoire() const{

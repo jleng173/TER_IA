@@ -4,6 +4,7 @@
 #include <GL/glut.h>
 #include <stdio.h> 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <math.h>
 #include <vector>
 #include "Forme.hpp"
@@ -32,7 +33,7 @@ protected:
 
     float vitesseMAX;
 
-    bool selected;
+    int selected;
 
 public:
     Personnage();
@@ -42,18 +43,20 @@ public:
     GLvoid creerPersonnage();
     virtual GLvoid creerChapeau() const = 0;
     virtual GLvoid creerAccessoire() const = 0;
+
     GLvoid selectionne();
     GLvoid barreHp();
+    bool isSelected();
+    void setSelected(int s);
 
     void updatePos( float time);
-
     void deplacementCible(float x, float y);
-
     Hitbox getHitbox();
-    
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 
     int getHp();
     int getHpMax();
     int getDmg();
+    float getX();
+    float getY();
 };

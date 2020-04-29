@@ -4,6 +4,7 @@ Guerrier::Guerrier(float x, float y,float angle, float vitesseMAX):Personnage(x,
     hp=150;
     hpMax=150;
     dmg=5;
+    selected = 0;
 }
 
 GLvoid Guerrier::creerChapeau() const{

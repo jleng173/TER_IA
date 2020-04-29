@@ -4,6 +4,7 @@
 #include <GL/glut.h>
 #include <stdio.h> 
 #include <stdlib.h>
+#include <stdbool.h>
 #include <algorithm>
 #include "Personnage.hpp"
 

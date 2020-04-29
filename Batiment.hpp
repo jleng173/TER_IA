@@ -21,6 +21,7 @@ public:
     Batiment(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
     virtual void creerBatiment() const = 0;
     Hitbox getHitbox();
+    GLvoid barreHp();
 
     TEXTURE_STRUCT * Texture_chateau;
     TEXTURE_STRUCT * Texture_pierre;

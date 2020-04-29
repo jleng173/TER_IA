@@ -14,7 +14,7 @@ Personnage::Personnage(float x, float y, float angle, float v){
     hitbox.y2 = position[1]+1;
     orientation = angle;
     vitesseMAX = v;
-    selected = true;
+    selected = 1;
 }
 
 Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m){
@@ -25,7 +25,7 @@ Personnage::Personnage(float avn,float act,float x, float y, float angle, float 
     position[1] = y;
     orientation = angle;
     vitesseMAX = v;
-    selected = true;
+    selected = 1;
 }
 
 void Personnage::updatePos( float time){
@@ -52,11 +52,11 @@ void Personnage::deplacementCible(float x, float y){
         velocite[1] = velocite[1]/v;
 
         if(avance<19 && mouv == 0)
-            avance += 0.1;
+            avance += 0.1*vitesseMAX;
         if(avance >= 19 && mouv == 0)
             mouv = 1;
         if(avance>-19 && mouv == 1){
-            avance -= 0.1;
+            avance -= 0.1*vitesseMAX;
         }
         if(avance <=-19 && mouv == 1)
             mouv=0; 
@@ -116,7 +116,13 @@ GLvoid Personnage::barreHp(){
     }glPopMatrix();
 }
 
+bool Personnage::isSelected(){
+    return selected;
+}
 
+void Personnage::setSelected(int s){
+    selected = s;
+}
 
 GLvoid Personnage::creerPersonnage()
 {
@@ -127,7 +133,8 @@ glPushMatrix();{
     glPushMatrix();{
 
         //glScalef(5,5,5);
-        barreHp();
+        if(selected)
+            barreHp();
         glRotatef(90,1.0,0.0,0.0);
         glTranslatef(0,4,0);
         glRotatef(orientation,0,1,0);
@@ -340,7 +347,7 @@ glPushMatrix();{
             selectionne();
         }
 
-       
+       glColor3f(1,1,1);
     }
     glPopMatrix();
 }glPopMatrix();
@@ -380,4 +387,12 @@ int Personnage::getHpMax(){
 
 int Personnage::getDmg(){
     return dmg;
+}
+
+float Personnage::getX(){
+    return position[0];
+}
+
+float Personnage::getY(){
+    return position[1];
 }
