@@ -5,16 +5,10 @@
 #include <vector>
 #include "ppm.hpp"
 #include "init.hpp"
+#include "Element.hpp"
 
-struct Hitbox
-{
-    float x1;
-    float y1;
-    float x2;
-    float y2;
-};
 
-class Batiment {
+class Batiment : Element{
 
 public:
     // Constructor

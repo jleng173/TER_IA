@@ -23,6 +23,7 @@
 #include "Paysan.hpp"
 #include "Guerrier.hpp"
 #include "Arbaletrier.hpp"
+#include "Element.hpp"
 
 using namespace std;
 
@@ -52,6 +53,8 @@ vector< vector<float> > cubes_test;
 float timeProjec = 0.0;
 
 Carte carte;
+
+vector<shared_ptr<Element>> toutLesElements;
 
 ppm p;
 
@@ -180,8 +183,8 @@ GLvoid Modelisation()
       posx = SP.positionX + compX;
       posy = SP.positionY + compY;
 
-		// vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
-		// cubes_test.push_back(add);
+		vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
+		cubes_test.push_back(add);
     	initGL::pose = 0;
 	  }
 	
@@ -191,33 +194,37 @@ GLvoid Modelisation()
 
 
     if (initGL::pose == 0){
-      // for( int i = 0 ; i < cubes_test.size() ; i++){
-      //   //printf("%f \n",cubes_test[i][0]);
-      // glPushMatrix();{   
-      //   glTranslatef(cubes_test[i][0],cubes_test[i][1],cubes_test[i][2]);
-      //   //glScalef(0.5,0.5,0.5);
-      //   glRotatef(90,1.0,0.0,0.0);
-      //   Batiment B(initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-      //   B.creerChateau();
-      //   }glPopMatrix();
-      // }
+      for( int i = 0 ; i < cubes_test.size() ; i++){
+        //printf("%f \n",cubes_test[i][0]);
+      glPushMatrix();{   
+        //glScalef(0.5,0.5,0.5);
+        glRotatef(90,1.0,0.0,0.0);
+        Chateau C(cubes_test[i][0],cubes_test[i][1],initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+        C.creerBatiment();
+        C.creerPaysan(Joueur1);
+
+        }glPopMatrix();
+      }
     }
 
   //PersoA.creerCarreau();
     
    glPushMatrix();{
       // printf(" thune main %d \n",Joueur1->getOr());
-       
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
-        if(Joueur1->getUnites()[i]->isSelected()){
-          Joueur1->getUnites()[i]->deplacementCible(posx,posy);
+        Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
+        e->setHitbox(Joueur1->getUnites()[i]->getHitbox);
+        toutLesElements.push_back(make_shared<Element>(e));
         }
-        // printf(" %d",Joueur1->getUnites()[i]->isSelected());
-      }
 
-   }
-  glPopMatrix();
+      for(int i = 0 ; i < Joueur1->getUnites().size(); i++)
+        Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+      
+      
+          // A1.creerPersonnage();
+          // A1.deplacementCible(posx,posy);
+          // A1.tirArbalete(10,10);
 
      glPushMatrix();{
       for(int i = 0 ; i < Joueur1->listeBatiments.size(); i++){
