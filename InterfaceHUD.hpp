@@ -23,7 +23,7 @@ class InterfaceHUD{
     GLvoid creerInterfaceHUD(Batiment & b);
 
     void drawText(std::string text, int length, int x, int y);
-
+    GLvoid drawIcon();
     private:
 
     TEXTURE_STRUCT * Texture_HUD;

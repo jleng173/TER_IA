@@ -181,33 +181,56 @@ GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, Joueur * j){
         drawText(infoDmg,infoDmg.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-25);
       }
       float translate=0;
+      int nbG = 0;
+      int nbA = 0;
+      int nbP = 0;
+      std::vector<int> nbPerso;
+      nbPerso.clear();
+      bool g,a,paysan;
+      g=false;
+      a=false;
+      paysan=false;
       if(p.size()>1){
           for(int i=0;i<p.size();i++){
             glPushMatrix();{
               glTranslatef(translate,0,0);
               glEnable(GL_TEXTURE_2D);	
-              if(p[i]->getNom()=="Guerrier")
+              // std::cout << p[i]->getNom() << std::endl ;
+              if(p[i]->getNom()=="Guerrier" ){
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
-              if(p[i]->getNom()=="Arbaletrier")
+                drawIcon();
+                g=true;
+                nbG++;
+                translate+=6;
+              }
+              if(p[i]->getNom()=="Arbaletrier"){
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Arbaletrier->width, Texture_Img_Arbaletrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Arbaletrier->data);
-              if(p[i]->getNom()=="Paysan")
+                drawIcon();
+                a=true;
+                nbA++;
+                translate+=6;
+              }
+              if(p[i]->getNom()=="Paysan"){
                 glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
-
-              glBegin(GL_QUADS);
-              glColor3f(1.0f, 1.0f, 1.0f);
-              glTexCoord2f(0,0);
-              glVertex2f(GLUT_SCREEN_WIDTH/3+20, GLUT_SCREEN_HEIGHT-32.5);
-              glTexCoord2f(0,1);
-              glVertex2f(GLUT_SCREEN_WIDTH/3+20, GLUT_SCREEN_HEIGHT-25.0);
-              glTexCoord2f(1,1);
-              glVertex2f(GLUT_SCREEN_WIDTH/3+25, GLUT_SCREEN_HEIGHT-25.0);
-              glTexCoord2f(1,0);
-              glVertex2f(GLUT_SCREEN_WIDTH/3+25, GLUT_SCREEN_HEIGHT-32.5);
-              glEnd();
+                drawIcon();
+                paysan=true;
+                nbP++;
+                translate+=6;
+              }
               glDisable(GL_TEXTURE_2D);
             }
             glPopMatrix();
-            translate+=6;
+          }
+          if(nbG!=0)
+            nbPerso.push_back(nbG);
+          if(nbA!=0)
+            nbPerso.push_back(nbA);
+          if(nbP!=0)
+            nbPerso.push_back(nbP);  
+          for(int i=0;i<nbPerso.size();i++)
+          {
+            std::string texte = std::to_string(nbPerso[i]);
+            drawText(texte,texte.size(),GLUT_SCREEN_WIDTH/3+20+i*6, GLUT_SCREEN_HEIGHT-32.5);
           }
       }
         //3e bloc
@@ -357,4 +380,18 @@ void InterfaceHUD::drawText(std::string text, int length, int x, int y){
   glMatrixMode(GL_PROJECTION);
   glLoadMatrixd(matrix);
   glMatrixMode(GL_MODELVIEW);
+}
+
+GLvoid InterfaceHUD::drawIcon(){
+    glBegin(GL_QUADS);
+    glColor3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0,0);
+    glVertex2f(GLUT_SCREEN_WIDTH/3+20, GLUT_SCREEN_HEIGHT-32.5);
+    glTexCoord2f(0,1);
+    glVertex2f(GLUT_SCREEN_WIDTH/3+20, GLUT_SCREEN_HEIGHT-25.0);
+    glTexCoord2f(1,1);
+    glVertex2f(GLUT_SCREEN_WIDTH/3+25, GLUT_SCREEN_HEIGHT-25.0);
+    glTexCoord2f(1,0);
+    glVertex2f(GLUT_SCREEN_WIDTH/3+25, GLUT_SCREEN_HEIGHT-32.5);
+    glEnd();
 }
