@@ -46,6 +46,7 @@ float initGL::mouv = 0.0;
 int initGL::selection = 0;
 
 float posx, posy, posz = 0.0;
+float lastposx, lastposy = 0.0;
 float CDposx, CDposy = 0.0;
 float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
@@ -217,12 +218,18 @@ GLvoid Modelisation()
         e->setHitbox(Joueur1->getUnites()[i]->getHitbox());
         toutLesElements.push_back(e);
         }
-
+      //printf("%d \n",toutLesElements.size());
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         if(Joueur1->getUnites()[i]->isSelected())
           Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+        else{
+          Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
+        }
       }
-       
+      lastposx = posx;
+      lastposy = posy;
+
+      toutLesElements.clear();
       
          }
   glPopMatrix();
@@ -237,7 +244,7 @@ GLvoid Modelisation()
    }
   glPopMatrix();
 
-  //Rectangle de sélection click
+  //Rectangle de sélection clique droit
   glPushMatrix();{
       if (initGL::selection == 1){
           CDposx = SP.positionX + compX;
@@ -247,6 +254,8 @@ GLvoid Modelisation()
       if (initGL::selection == 2){
           CDposx2 = SP.positionX + compX;
           CDposy2 = SP.positionY + compY;
+          lastposx = posx;
+          lastposy = posy;
           Forme Fselec;
           Fselec.rectangleSelection(CDposx,CDposy,CDposx2,CDposy2);
       }
@@ -255,11 +264,13 @@ GLvoid Modelisation()
           for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
             float xunit = Joueur1->getUnites()[i]->getX();
             float yunit = Joueur1->getUnites()[i]->getY();
-            //printf(" rec[(%f,%f)(%f,%f)]  -  Unit(%f,%f) \n",CDposx,CDposy,CDposx2,CDposy2,xunit,yunit);
+            posx = 0.0;
+            posy = 0.0;
             if((xunit >= CDposx) && (xunit <= CDposx2) && (yunit <= CDposy) && (yunit >= CDposy2)){
                 Joueur1->getUnites()[i]->setSelected(1);
-            }else
+            }else{
               Joueur1->getUnites()[i]->setSelected(0);
+            }
           }
       }
 
@@ -281,6 +292,7 @@ int main(int argc, char **argv){
   Paysan * pa = dynamic_cast<Paysan*>(Joueur1->getUnites()[0]);
   pa->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   caser.creerGuerrier(Joueur1);
+
   printf(" taille batiment %d \n",Joueur1->listeBatiments.size());
 	
   

@@ -64,6 +64,9 @@ public:
     int getDmg();
     float getX();
     float getY();
+
     float getOrientation();
     float getvitesseMAX();
+
+    float lastPosition[2];
 };

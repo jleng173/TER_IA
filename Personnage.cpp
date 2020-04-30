@@ -36,41 +36,43 @@ void Personnage::updatePos( float time){
 
 void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
     if(x != 0 && y !=0){
-    //SeekKinematic mouvement
-    if(testSiColision(all)){
-        printf("COLLISION %f \n",x);
-    }
-    velocite[0] = x - position[0];
-    velocite[1] = y - position[1];
-
-    //Normalisation du vecteur velocite
-    float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
-    if (v > 0.02*vitesseMAX){
-        velocite[0] = velocite[0]/v;
-        velocite[1] = velocite[1]/v;
-
-        if(avance<19 && mouv == 0)
-            avance += 0.1*vitesseMAX;
-        if(avance >= 19 && mouv == 0)
-            mouv = 1;
-        if(avance>-19 && mouv == 1){
-            avance -= 0.1*vitesseMAX;
+        lastPosition[0]=x;
+        lastPosition[1]=y;
+        //SeekKinematic mouvement
+        if(testSiColision(all)){
+            //printf("COLLISION %f \n",x);
         }
-        if(avance <=-19 && mouv == 1)
+        velocite[0] = x - position[0];
+        velocite[1] = y - position[1];
+
+        //Normalisation du vecteur velocite
+        float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
+        if (v > 0.02*vitesseMAX){
+            velocite[0] = velocite[0]/v;
+            velocite[1] = velocite[1]/v;
+
+            if(avance<19 && mouv == 0)
+                avance += 0.1*vitesseMAX;
+            if(avance >= 19 && mouv == 0)
+                mouv = 1;
+            if(avance>-19 && mouv == 1){
+                avance -= 0.1*vitesseMAX;
+            }
+            if(avance <=-19 && mouv == 1)
+                mouv=0; 
+            
+            velocite[0] *= vitesseMAX;
+            velocite[1] *= vitesseMAX;
+            
+        }else{
             mouv=0; 
-        
-        velocite[0] *= vitesseMAX;
-        velocite[1] *= vitesseMAX;
-        
-    }else{
-        mouv=0; 
-        avance = 0;
+            avance = 0;
 
-    }
+        }
 
-    updatePos(0.04);
-        
-   // printf("a = %f \n",avance)
+        updatePos(0.04);
+            
+    // printf("a = %f \n",avance)
     }
 }
 
