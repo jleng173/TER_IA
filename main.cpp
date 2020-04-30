@@ -50,6 +50,7 @@ float lastposx, lastposy = 0.0;
 float CDposx, CDposy = 0.0;
 float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
+std::vector <Personnage *> listePersoInterface;
 
 float timeProjec = 0.0;
 
@@ -66,6 +67,9 @@ TEXTURE_STRUCT * initGL::Texture_porte = p.readPpm ("./texture/gate_texture.PPM"
 TEXTURE_STRUCT * initGL::Texture_paille = p.readPpm ("./texture/straw_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_HUD = p.readPpm ("./texture/HUD_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_HUD2 = p.readPpm ("./texture/HUD2_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Guerrier = p.readPpm ("./texture/Guerrier.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Arbaletrier = p.readPpm ("./texture/Arbaletrier.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Paysan = p.readPpm ("./texture/Paysan.PPM");
 
 Arbaletrier A1(0,1.5,0,3);
 
@@ -261,14 +265,16 @@ GLvoid Modelisation()
       }
 
       if (initGL::selection == 3){
+          listePersoInterface.clear();
           for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
             float xunit = Joueur1->getUnites()[i]->getX();
             float yunit = Joueur1->getUnites()[i]->getY();
             posx = 0.0;
             posy = 0.0;
             if((xunit >= CDposx) && (xunit <= CDposx2) && (yunit <= CDposy) && (yunit >= CDposy2)){
-                Joueur1->getUnites()[i]->setSelected(1);
-            }else{
+              Joueur1->getUnites()[i]->setSelected(1);
+              listePersoInterface.push_back(Joueur1->getUnites()[i]);
+            }else
               Joueur1->getUnites()[i]->setSelected(0);
             }
           }
@@ -277,8 +283,8 @@ GLvoid Modelisation()
     }glPopMatrix();
 
   //interface
-    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre);
-    interface.creerInterfaceHUD(Perso2, Joueur1);
+    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier);
+    interface.creerInterfaceHUD(listePersoInterface, Joueur1);
 	}glPopMatrix();
   
   glutSwapBuffers();

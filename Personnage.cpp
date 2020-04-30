@@ -404,3 +404,7 @@ float Personnage::getOrientation(){
 float Personnage::getvitesseMAX(){
     return vitesseMAX;
 }
+
+std::string Personnage::getNom(){
+    return nom;
+}

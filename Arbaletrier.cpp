@@ -1,6 +1,7 @@
 #include "Arbaletrier.hpp"
 
 Arbaletrier::Arbaletrier(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
+    nom="Arbaletrier";
     hp=150;
     hpMax=150;
     dmg=5;

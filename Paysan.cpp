@@ -1,6 +1,7 @@
 #include "Paysan.hpp"
 
 Paysan::Paysan(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
+    nom="Paysan";
     hp=75;
     hpMax=75;
     dmg=2;

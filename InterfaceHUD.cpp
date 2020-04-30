@@ -1,10 +1,10 @@
 #include "InterfaceHUD.hpp"
 
-InterfaceHUD::InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre):Texture_HUD(T_HUD), Texture_HUD2(T_HUD2), Texture_Pierre(T_Pierre){
+InterfaceHUD::InterfaceHUD(TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier, TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier):Texture_HUD(T_HUD), Texture_HUD2(T_HUD2), Texture_Pierre(T_Pierre), Texture_Img_Guerrier(T_Img_Guerrier), Texture_Img_Paysan(T_Img_Paysan), Texture_Img_Arbaletrier(T_Img_Arbaletrier){
 
 }
 
-GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
+GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, Joueur * j){
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();{
@@ -174,11 +174,42 @@ GLvoid InterfaceHUD::creerInterfaceHUD(Personnage & p, Joueur * j){
           glVertex2f(GLUT_SCREEN_WIDTH/3+60, GLUT_SCREEN_HEIGHT-5);
       glEnd();
 
-      std::string infoHP="HP: " + std::to_string(p.getHp()) + "/" + std::to_string(p.getHpMax());
-      drawText(infoHP,infoHP.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-30);
-      std::string infoDmg="Damages: " + std::to_string(p.getDmg());
-      drawText(infoDmg,infoDmg.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-25);
+      if(p.size()==1){
+        std::string infoHP="HP: " + std::to_string(p[0]->getHp()) + "/" + std::to_string(p[0]->getHpMax());
+        drawText(infoHP,infoHP.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-30);
+        std::string infoDmg="Damages: " + std::to_string(p[0]->getDmg());
+        drawText(infoDmg,infoDmg.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-25);
+      }
+      float translate=0;
+      if(p.size()>1){
+          for(int i=0;i<p.size();i++){
+            glPushMatrix();{
+              glTranslatef(translate,0,0);
+              glEnable(GL_TEXTURE_2D);	
+              if(p[i]->getNom()=="Guerrier")
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
+              if(p[i]->getNom()=="Arbaletrier")
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Arbaletrier->width, Texture_Img_Arbaletrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Arbaletrier->data);
+              if(p[i]->getNom()=="Paysan")
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
 
+              glBegin(GL_QUADS);
+              glColor3f(1.0f, 1.0f, 1.0f);
+              glTexCoord2f(0,0);
+              glVertex2f(GLUT_SCREEN_WIDTH/3+20, GLUT_SCREEN_HEIGHT-32.5);
+              glTexCoord2f(0,1);
+              glVertex2f(GLUT_SCREEN_WIDTH/3+20, GLUT_SCREEN_HEIGHT-25.0);
+              glTexCoord2f(1,1);
+              glVertex2f(GLUT_SCREEN_WIDTH/3+25, GLUT_SCREEN_HEIGHT-25.0);
+              glTexCoord2f(1,0);
+              glVertex2f(GLUT_SCREEN_WIDTH/3+25, GLUT_SCREEN_HEIGHT-32.5);
+              glEnd();
+              glDisable(GL_TEXTURE_2D);
+            }
+            glPopMatrix();
+            translate+=6;
+          }
+      }
         //3e bloc
       glEnable(GL_TEXTURE_2D);	
       glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_HUD2->width, Texture_HUD2->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_HUD2->data);

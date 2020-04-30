@@ -86,8 +86,10 @@ protected:
  static TEXTURE_STRUCT * Texture_paille;
  static TEXTURE_STRUCT * Texture_HUD;
  static TEXTURE_STRUCT * Texture_HUD2;
+ static TEXTURE_STRUCT * Texture_Img_Guerrier;
+ static TEXTURE_STRUCT * Texture_Img_Arbaletrier;
+ static TEXTURE_STRUCT * Texture_Img_Paysan;
 
-	
 };
 
 

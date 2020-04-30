@@ -1,6 +1,7 @@
 #include "Guerrier.hpp"
 
 Guerrier::Guerrier(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
+    nom="Guerrier";
     hp=150;
     hpMax=150;
     dmg=5;

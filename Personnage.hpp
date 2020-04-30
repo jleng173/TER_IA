@@ -16,6 +16,7 @@
 class Personnage : Element{
 
 protected:
+    std::string nom;
     int hp;
     int hpMax;
     int dmg;
@@ -69,4 +70,5 @@ public:
     float getvitesseMAX();
 
     float lastPosition[2];
+    std::string getNom();
 };
