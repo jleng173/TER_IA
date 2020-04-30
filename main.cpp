@@ -193,19 +193,19 @@ GLvoid Modelisation()
         }glPopMatrix();
 
 
-    if (initGL::pose == 0){
-      // for( int i = 0 ; i < cubes_test.size() ; i++){
-      //   //printf("%f \n",cubes_test[i][0]);
-      // glPushMatrix();{   
-      //   //glScalef(0.5,0.5,0.5);
-      //   glRotatef(90,1.0,0.0,0.0);
-      //   Chateau C(cubes_test[i][0],cubes_test[i][1],initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-      //   C.creerBatiment();
-      //   C.creerPaysan(Joueur1);
+    // if (initGL::pose == 0){
+    //   for( int i = 0 ; i < cubes_test.size() ; i++){
+    //     //printf("%f \n",cubes_test[i][0]);
+    //   glPushMatrix();{   
+    //     //glScalef(0.5,0.5,0.5);
+    //     glRotatef(90,1.0,0.0,0.0);
+    //     Chateau C(cubes_test[i][0],cubes_test[i][1],initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+    //     C.creerBatiment();
+    //     C.creerPaysan(Joueur1);
 
-      //   }glPopMatrix();
-      // }
-    }
+    //     }glPopMatrix();
+    //   }
+    // }
 
   //PersoA.creerCarreau();
     
