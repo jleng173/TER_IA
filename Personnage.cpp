@@ -38,7 +38,7 @@ void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all)
     if(x != 0 && y !=0){
     //SeekKinematic mouvement
     if(testSiColision(all)){
-        printf("COLLISION \n");
+        printf("COLLISION %f \n",x);
     }
     velocite[0] = x - position[0];
     velocite[1] = y - position[1];

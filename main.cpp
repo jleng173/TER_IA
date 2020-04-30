@@ -183,8 +183,8 @@ GLvoid Modelisation()
       posx = SP.positionX + compX;
       posy = SP.positionY + compY;
 
-		vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
-		cubes_test.push_back(add);
+		// vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
+		// cubes_test.push_back(add);
     	initGL::pose = 0;
 	  }
 	
@@ -194,17 +194,17 @@ GLvoid Modelisation()
 
 
     if (initGL::pose == 0){
-      for( int i = 0 ; i < cubes_test.size() ; i++){
-        //printf("%f \n",cubes_test[i][0]);
-      glPushMatrix();{   
-        //glScalef(0.5,0.5,0.5);
-        glRotatef(90,1.0,0.0,0.0);
-        Chateau C(cubes_test[i][0],cubes_test[i][1],initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-        C.creerBatiment();
-        C.creerPaysan(Joueur1);
+      // for( int i = 0 ; i < cubes_test.size() ; i++){
+      //   //printf("%f \n",cubes_test[i][0]);
+      // glPushMatrix();{   
+      //   //glScalef(0.5,0.5,0.5);
+      //   glRotatef(90,1.0,0.0,0.0);
+      //   Chateau C(cubes_test[i][0],cubes_test[i][1],initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+      //   C.creerBatiment();
+      //   C.creerPaysan(Joueur1);
 
-        }glPopMatrix();
-      }
+      //   }glPopMatrix();
+      // }
     }
 
   //PersoA.creerCarreau();
@@ -219,7 +219,8 @@ GLvoid Modelisation()
         }
 
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
-       Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+        if(Joueur1->getUnites()[i]->isSelected())
+          Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
       }
        
       
