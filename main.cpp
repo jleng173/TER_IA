@@ -235,8 +235,7 @@ GLvoid Modelisation()
 
       toutLesElements.clear();
       
-         }
-  glPopMatrix();
+   }glPopMatrix();
           // A1.creerPersonnage();
           // A1.deplacementCible(posx,posy);
           // A1.tirArbalete(10,10);
@@ -245,8 +244,7 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur1->listeBatiments.size(); i++){
         Joueur1->listeBatiments[i]->creerBatiment();
       }
-   }
-  glPopMatrix();
+   }glPopMatrix();
 
   //Rectangle de sélection clique droit
   glPushMatrix();{
@@ -277,16 +275,19 @@ GLvoid Modelisation()
             }else
               Joueur1->getUnites()[i]->setSelected(0);
             }
-          }
       }
+  }glPopMatrix();
 
-    }glPopMatrix();
 
+  glPushMatrix();{
   //interface
     InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier);
     interface.creerInterfaceHUD(listePersoInterface, Joueur1);
 	}glPopMatrix();
   
+
+  }glPopMatrix();
+
   glutSwapBuffers();
 }
 
