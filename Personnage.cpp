@@ -5,6 +5,8 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     avance=0;
     action=0;
     mouv = 0;
+    position[0] = x;
+    position[1] = y;
     hitbox.x1 = position[0]-1;
     hitbox.y1 = position[1]-1;
     hitbox.x2 = position[0]+1;

@@ -32,8 +32,9 @@ public:
     std::vector<Personnage* > getUnites();
     void addUnites(Personnage* p);
 
-
-    std::vector<Batiment*> listeBatiments;
+    std::vector<Batiment* > getBatiments();
+    void addBatiment(Batiment* b);
+    
 
 private:
     int qteBois;
@@ -41,5 +42,5 @@ private:
     int qteOr;
     int maxUnites;
     std::vector<Personnage*> listeUnites;
-
+    std::vector<Batiment*> listeBatiments;
 };  

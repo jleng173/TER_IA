@@ -55,3 +55,11 @@ std::vector<Personnage * > Joueur::getUnites(){
 void Joueur::addUnites(Personnage * p){
     listeUnites.push_back(p);
 }
+
+std::vector<Batiment * > Joueur::getBatiments(){
+    return listeBatiments;
+}
+
+void Joueur::addBatiment(Batiment * b){
+    listeBatiments.push_back(b);
+}

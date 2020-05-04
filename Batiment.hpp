@@ -15,13 +15,20 @@ public:
     Batiment(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
     virtual void creerBatiment() const = 0;
     Hitbox getHitbox();
-    GLvoid barreHp();
+    GLvoid barreHp(int z) const;
 
     TEXTURE_STRUCT * Texture_chateau;
     TEXTURE_STRUCT * Texture_pierre;
     TEXTURE_STRUCT * Texture_toit;
     TEXTURE_STRUCT * Texture_porte;
     TEXTURE_STRUCT * Texture_paille;
+
+    bool isSelected();
+    void setSelected(int s);
+    int getHp();
+    int getHpMax();
+    float getX();
+    float getY();
 
 protected:
     float hp;
@@ -31,4 +38,5 @@ protected:
     //point en bas à gauche (hitbox.x1,hitbox.y1)
     //point en haut à droite (hitbox.x2,hitbox.y2)
     Hitbox hitbox;
+    bool selected;
 };

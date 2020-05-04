@@ -10,15 +10,18 @@ Caserne::Caserne(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T
 }
 
 void Caserne::creerBatiment() const{
+
+    glPushMatrix();{
+
     Forme forme;
     struct cube1 batiment = forme.creerCube(3);
     struct cube1 mur = forme.creerCube(3);
     struct pyramide1 pyramide1 = forme.creerPyramide(4);
     glEnable(GL_TEXTURE_2D);
-    
-    glPushMatrix();{
-   // barreHp();
-    glTranslatef(0.0,0.0,3);
+
+    glTranslatef(position[0],position[1],3);
+    if(selected)
+        barreHp(9);
     glRotatef(90,1.0,0.0,0.0);
     
     glPushMatrix();{

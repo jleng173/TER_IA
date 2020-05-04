@@ -71,7 +71,7 @@ TEXTURE_STRUCT * initGL::Texture_Img_Guerrier = p.readPpm ("./texture/Guerrier.P
 TEXTURE_STRUCT * initGL::Texture_Img_Arbaletrier = p.readPpm ("./texture/Arbaletrier.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Paysan = p.readPpm ("./texture/Paysan.PPM");
 
-Arbaletrier A1(0,1.5,0,3);
+Arbaletrier A1(15,15,0,3);
 
 Guerrier Perso2(10,10,0,5);
 //Arbaletrier PersoA(initGL::avance,initGL::action,10,10,0,5);
@@ -216,6 +216,8 @@ GLvoid Modelisation()
     
    glPushMatrix();{
       // printf(" thune main %d \n",Joueur1->getOr());
+
+
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
         Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
@@ -236,13 +238,18 @@ GLvoid Modelisation()
       toutLesElements.clear();
       
    }glPopMatrix();
-          // A1.creerPersonnage();
-          // A1.deplacementCible(posx,posy);
-          // A1.tirArbalete(10,10);
+    
+  //   glPushMatrix();{
+  //       A1.creerPersonnage();
+  //       A1.tirArbalete(1,1);
+  //       A1.deplacementCible(posx,posy,toutLesElements);
+  //  }glPopMatrix();
 
-     glPushMatrix();{
-      for(int i = 0 ; i < Joueur1->listeBatiments.size(); i++){
-        Joueur1->listeBatiments[i]->creerBatiment();
+
+
+    glPushMatrix();{
+      for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
+        Joueur1->getBatiments()[i]->creerBatiment();
       }
    }glPopMatrix();
 
@@ -274,8 +281,23 @@ GLvoid Modelisation()
               listePersoInterface.push_back(Joueur1->getUnites()[i]);
             }else
               Joueur1->getUnites()[i]->setSelected(0);
-            }
+          }
+
+          for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
+            float xunit = Joueur1->getBatiments()[i]->getX();
+            float yunit = Joueur1->getBatiments()[i]->getY();
+            posx = 0.0;
+            posy = 0.0;
+            if((xunit >= CDposx) && (xunit <= CDposx2) && (yunit <= CDposy) && (yunit >= CDposy2)){
+              Joueur1->getBatiments()[i]->setSelected(1);
+              //listePersoInterface.push_back(Joueur1->getBatiments()[i]);
+            }else
+              Joueur1->getBatiments()[i]->setSelected(0);
+          }
+
+          
       }
+
   }glPopMatrix();
 
 
@@ -295,12 +317,15 @@ GLvoid Modelisation()
 int main(int argc, char **argv){
 
   printf(" TEST \n");
-  ch.creerPaysan(Joueur1);
+  Batiment * castle = new Chateau(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  Joueur1->addBatiment(castle);
+  dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
   Paysan * pa = dynamic_cast<Paysan*>(Joueur1->getUnites()[0]);
-  pa->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-  caser.creerGuerrier(Joueur1);
+  //pa->construireCaserne(Joueur1,0,20,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  //caser.creerGuerrier(Joueur1);
+  pa->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
-  printf(" taille batiment %d \n",Joueur1->listeBatiments.size());
+  printf(" taille batiment %d \n",Joueur1->getBatiments().size());
 	
   
   initGL* init = new initGL();

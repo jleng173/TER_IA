@@ -13,7 +13,7 @@ void Paysan::construireCaserne(Joueur * J,float x, float y,TEXTURE_STRUCT * T_ch
         J->subtractBois(2);
         J->subtractPierre(8);
         Batiment * cas = new Caserne(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
-        J->listeBatiments.push_back(cas);
+        J->addBatiment(cas);
     }
 }
 
@@ -22,7 +22,7 @@ void Paysan::construireFerme(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chat
         J->subtractBois(4);
         J->subtractPierre(1);
         Batiment * ferm = new Ferme(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
-        J->listeBatiments.push_back(ferm);
+        J->addBatiment(ferm);
     }
 }
 
@@ -31,7 +31,7 @@ void Paysan::construireTour(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chate
         J->subtractBois(5);
         J->subtractPierre(5);
         Batiment * tower = new Tour(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
-        J->listeBatiments.push_back(tower);
+        J->addBatiment(tower);
     }
 }
 
