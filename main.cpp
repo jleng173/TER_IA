@@ -70,6 +70,14 @@ TEXTURE_STRUCT * initGL::Texture_HUD2 = p.readPpm ("./texture/HUD2_texture.PPM")
 TEXTURE_STRUCT * initGL::Texture_Img_Guerrier = p.readPpm ("./texture/Guerrier.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Arbaletrier = p.readPpm ("./texture/Arbaletrier.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Paysan = p.readPpm ("./texture/Paysan.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Or = p.readPpm ("./texture/coin.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Pierre = p.readPpm ("./texture/stone.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Nourriture = p.readPpm ("./texture/food.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Bois = p.readPpm ("./texture/wood.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Mouvement = p.readPpm ("./texture/move_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Stop = p.readPpm ("./texture/defend_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Attaquer = p.readPpm ("./texture/battle_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Construire = p.readPpm ("./texture/build_texture.PPM");
 
 Arbaletrier A1(15,15,0,3);
 
@@ -303,7 +311,7 @@ GLvoid Modelisation()
 
   glPushMatrix();{
   //interface
-    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier);
+    InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire);
     interface.creerInterfaceHUD(listePersoInterface, Joueur1);
 	}glPopMatrix();
   

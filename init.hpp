@@ -89,7 +89,14 @@ protected:
  static TEXTURE_STRUCT * Texture_Img_Guerrier;
  static TEXTURE_STRUCT * Texture_Img_Arbaletrier;
  static TEXTURE_STRUCT * Texture_Img_Paysan;
-
+ static TEXTURE_STRUCT * Texture_Img_Or;
+ static TEXTURE_STRUCT * Texture_Img_Pierre;
+ static TEXTURE_STRUCT * Texture_Img_Nourriture;
+ static TEXTURE_STRUCT * Texture_Img_Bois;
+ static TEXTURE_STRUCT * Texture_Img_Mouvement;
+ static TEXTURE_STRUCT * Texture_Img_Stop;
+ static TEXTURE_STRUCT * Texture_Img_Attaquer;
+ static TEXTURE_STRUCT * Texture_Img_Construire;
 };
 
 
