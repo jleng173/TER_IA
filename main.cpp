@@ -193,12 +193,15 @@ GLvoid Modelisation()
         compX = 0;
       }
     if (initGL::pose == 1){
-      posx = SP.positionX + compX;
-      posy = SP.positionY + compY;
+      std::cout << initGL::xpose << " " << initGL::ypose << std::endl;  
+      if(initGL::ypose<676 && initGL::ypose>49){
+        posx = SP.positionX + compX;
+        posy = SP.positionY + compY;
 
-		// vector<float> add = {SP.positionX + compX,SP.positionY+compY,SP.positionZ};
-		// cubes_test.push_back(add);
++
+      }
     	initGL::pose = 0;
+
 	  }
 	
         glPushMatrix();{   

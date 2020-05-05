@@ -272,12 +272,10 @@ GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, Joueur * j){
         if(p[0]->getNom()=="Paysan")
         {
           drawIconAction(true);
-          std::cout << "true" << std::endl;
         }
         else
         {
           drawIconAction(false);
-          std::cout << "false" << std::endl;
         }
       }
       float translate=0;
