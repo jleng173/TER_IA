@@ -7,6 +7,7 @@ Arbaletrier::Arbaletrier(float x, float y,float angle, float vitesseMAX):Personn
     dmg=5;
     timeProjec = 0.0;
     selected = 1;
+    range = 50;
 }
 
 void Arbaletrier::creerAccessoire() const{
@@ -136,7 +137,7 @@ void Arbaletrier::tirArbalete(float x, float y){
           pt[1] = usmt[1] + gt2[1];
           pt[2] = usmt[2] + gt2[2];
 
-          timeProjec+=0.01;
+          timeProjec+=0.02;
 
           glTranslatef(pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
@@ -218,4 +219,47 @@ GLvoid Arbaletrier::creerChapeau() const{
         gluDeleteQuadric(params);
     }
     glPopMatrix();
+}
+
+void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Element *>  all) {
+    std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
+    //printf("%d  distance %f, range %f, %f- %f\n",etat,ennemieProche[2],((float)range/3),ennemieProche[0],ennemieProche[1]);
+    switch(etat){
+        case SLEEP:
+            if(ennemieCourtePortee(ennemieProche)){
+                etat = FLEE;
+            }else if(ennemieLongPortee(ennemieProche)){
+                etat = FIRE;
+            }
+        break;
+
+        case FIRE:
+            tirArbalete(ennemieProche[0],ennemieProche[1]);
+            if(ennemieCourtePortee(ennemieProche)){
+                etat = FLEE;
+            }else if(!ennemieLongPortee(ennemieProche)){
+                etat = SLEEP;
+            }
+        break;
+
+        case FLEE:
+            this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+            if(!ennemieCourtePortee(ennemieProche)){
+                etat = SLEEP;
+            }
+        break;
+
+        default :
+            etat = SLEEP;
+        break;
+    }
+}
+
+bool Arbaletrier::ennemieCourtePortee(std::vector<float> ennemieProche){
+    return ( ennemieProche[2] <= ((float)range/3));
+}
+
+bool Arbaletrier::ennemieLongPortee(std::vector<float> ennemieProche) {
+    return ( ennemieProche[2] > ((float)range/3) && ennemieProche[2] <= range );
+
 }

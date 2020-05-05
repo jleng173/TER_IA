@@ -2,6 +2,7 @@
 #include "Batiment.hpp"
 #include "Forme.hpp"
 #include "Paysan.hpp"
+#include "Element.hpp"
 #include "Joueur.hpp"
 
 

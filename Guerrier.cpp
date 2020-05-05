@@ -6,6 +6,7 @@ Guerrier::Guerrier(float x, float y,float angle, float vitesseMAX):Personnage(x,
     hpMax=150;
     dmg=5;
     selected = 0;
+    vision = 30.0;
 }
 
 GLvoid Guerrier::creerChapeau() const{
@@ -121,4 +122,72 @@ GLvoid Guerrier::creerAccessoire() const{
         glPopMatrix();
     }
     glPopMatrix();
+}
+
+void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<Element *>  all) {
+    std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
+    switch(etat){
+        case SLEEP:
+            if(voitEnnemie(ennemieProche) && !basHp()){
+                etat = PURSUIT;
+            } else if(voitEnnemie(ennemieProche) && basHp()){
+                etat = FLEE;
+            }
+        break;
+
+        case PURSUIT:
+            deplacementCible(ennemieProche[0],ennemieProche[1],all);
+            if(basHp()){
+                etat = FLEE;
+            }else if(contactEnnemie(ennemieProche)){
+                etat = ATTACK;
+            }else if(!voitEnnemie(ennemieProche)){
+                etat = SLEEP;
+            }
+        break;
+
+        case ATTACK:
+        //Animation bras à revoire
+            if(action==0)
+                mouvementbras=2;
+            if(action<30 && mouvementbras==2){
+                action+=0.5;
+            }
+            if(action >= 30 && mouvementbras==2)
+                mouvementbras=3;
+            if(action>0 && mouvementbras==3)
+                action-=0.5;
+
+            if(basHp()){
+                etat = FLEE;
+            }else if(!contactEnnemie(ennemieProche)){
+                etat = PURSUIT;
+            }
+        break;
+
+        case FLEE:
+            this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+            if(!voitEnnemie(ennemieProche)){
+                etat = SLEEP;
+            }else if(!basHp()){
+                etat = PURSUIT;
+            }
+        break;
+
+        default :
+            etat = SLEEP;
+        break;
+    }
+}
+
+bool Guerrier::voitEnnemie(std::vector<float> ennemieProche){
+    return (ennemieProche[2] <= vision);
+}
+
+bool Guerrier::basHp(){
+    return (hp < hpMax/4);
+}
+
+bool Guerrier::contactEnnemie(std::vector<float> ennemieProche){
+    return (ennemieProche[2] <=2);
 }

@@ -5,6 +5,7 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     avance=0;
     action=0;
     mouv = 0;
+    mouvementbras = 0;
     position[0] = x;
     position[1] = y;
     hitbox.x1 = position[0]-1;
@@ -14,6 +15,7 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     orientation = angle;
     vitesseMAX = v;
     selected = 1;
+    etat = SLEEP;
 }
 
 Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m):Element(x,y){
@@ -37,9 +39,10 @@ void Personnage::updatePos( float time){
 }
 
 void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
+    lastPosition[0]=x;
+    lastPosition[1]=y;
     if(x != 0 && y !=0){
-        lastPosition[0]=x;
-        lastPosition[1]=y;
+
         //SeekKinematic mouvement
         if(testSiColision(all)){
             //printf("COLLISION %f \n",x);
@@ -69,11 +72,48 @@ void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all)
         }else{
             mouv=0; 
             avance = 0;
-
         }
 
         updatePos(0.04);
+    // printf("a = %f \n",avance)
+    }
+}
+
+void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
+    if(x != 0 && y !=0){
+
+        //SeekKinematic mouvement
+        if(testSiColision(all)){
+            //printf("COLLISION %f \n",x);
+        }
+        velocite[0] =  position[0] - x;
+        velocite[1] =  position[1] - y;
+
+        //Normalisation du vecteur velocite
+        float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
+        if (v > 0.02*vitesseMAX){
+            velocite[0] = velocite[0]/v;
+            velocite[1] = velocite[1]/v;
+
+            if(avance<19 && mouv == 0)
+                avance += 0.1*vitesseMAX;
+            if(avance >= 19 && mouv == 0)
+                mouv = 1;
+            if(avance>-19 && mouv == 1){
+                avance -= 0.1*vitesseMAX;
+            }
+            if(avance <=-19 && mouv == 1)
+                mouv=0; 
             
+            velocite[0] *= vitesseMAX;
+            velocite[1] *= vitesseMAX;
+            
+        }else{
+            mouv=0; 
+            avance = 0;
+        }
+
+        updatePos(0.04);
     // printf("a = %f \n",avance)
     }
 }
@@ -204,7 +244,7 @@ glPushMatrix();{
             //Articulation
         glPushMatrix();{
             glRotatef(-avance,1,0,0);
-            if(mouv==2 || mouv==3){
+            if(mouvementbras==2 || mouvementbras==3){
                 glRotatef(-45+action,1,0,0);
             }
             glPushMatrix();{
@@ -227,7 +267,7 @@ glPushMatrix();{
                 glutSolidSphere(0.2,10,100);
             }
             glPopMatrix();
-            if(mouv==2 || mouv==3){
+            if(mouvementbras==2 || mouvementbras==3){
                     glRotatef(-90+action,1,0,0);
                     glTranslatef(0,1.6,-1.6);
             }
@@ -409,4 +449,26 @@ float Personnage::getvitesseMAX(){
 
 std::string Personnage::getNom(){
     return nom;
+}
+
+State Personnage::setEtat(State e){
+    etat = e;
+}
+
+std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {
+    std::vector<float> ennemyproche= {0,0,INFINITY};
+    float distanceMin = INFINITY;
+    for(int i = 0 ; i < listeEnnemies.size() ; i++){
+        float calculx = listeEnnemies[i]->getX()-position[0];
+        float calculy = listeEnnemies[i]->getY()-position[1];
+        float distance = sqrtf((calculx*calculx)+(calculy*calculy));
+        
+        if(distance < distanceMin){
+            distanceMin = distance;
+            ennemyproche[0] = listeEnnemies[i]->getX();
+            ennemyproche[1] = listeEnnemies[i]->getY();
+        }
+    }
+    ennemyproche[2] = distanceMin;
+    return ennemyproche;
 }

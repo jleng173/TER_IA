@@ -12,8 +12,15 @@
 #include "Batiment.hpp"
 #include "Element.hpp"
 
+enum State {
+    SLEEP = 1,
+    FIRE,
+    FLEE,
+    ATTACK,
+    PURSUIT
+};
 
-class Personnage : Element{
+class Personnage : public Element{
 
 protected:
     std::string nom;
@@ -28,16 +35,19 @@ protected:
     float avance;
     float action;
     float mouv;
+    float mouvementbras;
     
     float position[2];
     float orientation;
 
     //acceleration
     float velocite[2];
-
     float vitesseMAX;
 
     int selected;
+
+
+    State etat;
 
 public:
     Personnage();
@@ -53,9 +63,10 @@ public:
     bool isSelected();
     void setSelected(int s);
 
+    virtual void comportement(std::vector<Personnage*> listeEnnemies, std::vector<Element *>  all) =  0;
     void updatePos( float time);
-
     void deplacementCible(float x, float y,std::vector<Element *>  all);
+    void fuirCible(float x, float y,std::vector<Element *>  all);
 
     Hitbox getHitbox();
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
@@ -71,4 +82,9 @@ public:
 
     float lastPosition[2];
     std::string getNom();
+    
+    State setEtat(State e);
+
+    //Retourne les coordonnées x,y et la distance de l'ennemie le plus proche
+    std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
 };

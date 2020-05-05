@@ -6,6 +6,7 @@ Paysan::Paysan(float x, float y,float angle, float vitesseMAX):Personnage(x,y,an
     hpMax=75;
     dmg=2;
     selected = 0;
+    vision = 25.0;
 }
 
 void Paysan::construireCaserne(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
@@ -103,4 +104,30 @@ GLvoid Paysan::creerAccessoire() const{
         gluCylinder(params,0.2,0.2,4,100,100);
     }
     glPopMatrix();
+}
+
+void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Element *>  all){
+    std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
+    switch(etat){
+        case SLEEP:
+            if(voitEnnemie(ennemieProche)){
+                etat = FLEE;
+            }
+        break;
+
+        case FLEE:
+            fuirCible(ennemieProche[0],ennemieProche[1],all);
+            if(!voitEnnemie(ennemieProche)){
+                etat = SLEEP;
+            }
+        break;
+
+        default :
+            etat = SLEEP;
+        break;
+    }
+}
+
+bool Paysan::voitEnnemie(std::vector<float> ennemieProche){
+    return(ennemieProche[2] <= vision);
 }

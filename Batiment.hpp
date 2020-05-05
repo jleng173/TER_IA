@@ -8,7 +8,7 @@
 #include "Element.hpp"
 
 
-class Batiment : Element{
+class Batiment : public Element{
 
 public:
     // Constructor
