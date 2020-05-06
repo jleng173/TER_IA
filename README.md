@@ -55,3 +55,20 @@ Réflexion conception du jeu ( type  Age of Empire)
 - Modélisation casque guerrier, pioche, épée, arbalète et mine
 - Cercle de sélection, tir carreaux arbalète
 - Positionnement souris avec caméra angle
+
+----------------------------------------------------
+
+27-30/04:
+- Modélisation mine, arbalète, Tour, barre de vie
+- Début implémentation hitbox
+- Création interface utilisateur
+- Mise en place des règles de Jeu
+- Sélection des unités
+- Orientation caméra
+
+----------------------------------------------------
+
+04-06/04:
+- Comportement des unités
+- Amélioration Interface
+- Début Pathfinding
