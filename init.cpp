@@ -164,6 +164,9 @@ void initGL::touche_pressee(unsigned char key, int x, int y)
     case ESCAPE: 
 	   exit(1);                   	
 	    break;    
+    case TOUCHE_MIN_X:
+        construction=1;
+        break;
     case TOUCHE_MIN_Z: 
 	   xrot-=1.0f;                 	
 	    break;    

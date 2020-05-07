@@ -439,6 +439,14 @@ float Personnage::getY(){
     return position[1];
 }
 
+float Personnage::getLastX(){
+    return lastPosition[0];
+}
+
+float Personnage::getLastY(){
+    return lastPosition[1];
+}
+
 float Personnage::getOrientation(){
     return orientation;
 }

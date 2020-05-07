@@ -1,9 +1,9 @@
 #include "Joueur.hpp"
 
 Joueur::Joueur(){
-    qteBois = 10;
+    qteBois = 100;
     qteOr = 10;
-    qtePierre = 10;
+    qtePierre = 100;
     maxUnites = 5;
 
 }

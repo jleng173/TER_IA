@@ -11,6 +11,8 @@ Batiment::Batiment(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * 
         selected = 0;
 }
 
+
+
 GLvoid Batiment::barreHp(int z) const{
 
     float lonHp = (6/(float)hpMax)*hp-3;
@@ -51,6 +53,10 @@ int Batiment::getHp(){
     return hp;
 }
 
+void Batiment::setHp(int h){
+    hp=h;
+}
+
 int Batiment::getHpMax(){
     return hpMax;
 }
@@ -61,4 +67,12 @@ float Batiment::getX(){
 
 float Batiment::getY(){
     return position[1];
+}
+
+bool Batiment::getEnConstuction(){
+    return enConstruction;
+}
+
+void Batiment::setEnConstuction(bool b){
+    enConstruction=b;
 }
