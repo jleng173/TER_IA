@@ -56,6 +56,15 @@ void Joueur::addUnites(Personnage * p){
     listeUnites.push_back(p);
 }
 
+void Joueur::removeUnites(){
+    // Baisse des pv
+    for(int i = 0; i < listeUnites.size(); i++){
+        if(listeUnites[i]->getHp() <= 0){
+            listeUnites.erase(listeUnites.begin()+i);
+        }
+    }
+}
+
 std::vector<Batiment * > Joueur::getBatiments(){
     return listeBatiments;
 }

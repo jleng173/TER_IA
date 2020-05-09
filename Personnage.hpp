@@ -72,6 +72,7 @@ public:
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 
     int getHp();
+    void setHp(int h);
     int getHpMax();
     int getDmg();
     float getX();

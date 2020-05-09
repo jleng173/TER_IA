@@ -423,6 +423,10 @@ int Personnage::getHp(){
     return hp;
 }
 
+void Personnage::setHp(int h){
+    hp=h;
+}
+
 int Personnage::getHpMax(){
     return hpMax;
 }

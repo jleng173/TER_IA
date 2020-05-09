@@ -262,6 +262,7 @@ GLvoid Modelisation()
           Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
         }
       }
+      Joueur1->removeUnites();
 
   //Joueur 2
       for(int i = 0 ; i < Joueur2->getUnites().size(); i++){
@@ -285,7 +286,7 @@ GLvoid Modelisation()
         //Délai de construction
         if(Joueur1->getBatiments()[i]->getEnConstuction()==true){
             if(Joueur1->getBatiments()[i]->getHp() < Joueur1->getBatiments()[i]->getHpMax())
-                Joueur1->getBatiments()[i]->setHp(Joueur1->getBatiments()[i]->getHp()+0.01);
+                Joueur1->getBatiments()[i]->setHp(Joueur1->getBatiments()[i]->getHp()+1);
             if(Joueur1->getBatiments()[i]->getHp() == Joueur1->getBatiments()[i]->getHpMax())
                 Joueur1->getBatiments()[i]->setEnConstuction(false);
         }
@@ -367,16 +368,16 @@ int main(int argc, char **argv){
   Joueur1->addBatiment(castle);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
   Paysan * pa = dynamic_cast<Paysan*>(Joueur1->getUnites()[0]);
+
   //pa->construireCaserne(Joueur1,0,20,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   //caser.creerGuerrier(Joueur1);
   pa->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
   Joueur2->addBatiment(caser);
-  caser->creerGuerrier(Joueur2);
+  caser->creerArbaletrier(Joueur2);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
 
   printf(" taille batiment %d \n",Joueur1->getBatiments().size());
-	
   
   initGL* init = new initGL();
 

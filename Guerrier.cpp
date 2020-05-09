@@ -149,7 +149,14 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<
         case ATTACK:
         //Animation bras à revoire
             if(action==0)
+            {
                 mouvementbras=2;
+                for(int i = 0; i < listeEnnemies.size(); i++){
+                if(listeEnnemies[i]->getX()==ennemieProche[0] && listeEnnemies[i]->getY()==ennemieProche[1]){
+                    listeEnnemies[i]->setHp(listeEnnemies[i]->getHp() - dmg);
+                }
+            }
+            }
             if(action<30 && mouvementbras==2){
                 action+=0.5;
             }

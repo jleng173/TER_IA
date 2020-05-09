@@ -31,6 +31,8 @@ public:
     // std::vector<std::shared_ptr<Batiment> > getBatiments();
     std::vector<Personnage* > getUnites();
     void addUnites(Personnage* p);
+    //Enleve les personnages morts
+    void removeUnites();
 
     std::vector<Batiment* > getBatiments();
     void addBatiment(Batiment* b);
