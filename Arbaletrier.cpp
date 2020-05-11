@@ -151,7 +151,7 @@ void Arbaletrier::tirArbalete(float x, float y, std::vector<Personnage*> listeEn
             creerCarreau();
           }glPopMatrix();
 
-          if(pt[2] < -0.25)
+          if(pt[2] < -0.25){
             timeProjec = 0.0;
 
             // Baisse des pv
@@ -160,6 +160,7 @@ void Arbaletrier::tirArbalete(float x, float y, std::vector<Personnage*> listeEn
                     listeEnnemies[i]->setHp(listeEnnemies[i]->getHp() - dmg);
                 }
             }
+          }
      // printf("%f, %f, %f \n",pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
    }
