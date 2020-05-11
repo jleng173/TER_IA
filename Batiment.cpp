@@ -37,10 +37,6 @@ GLvoid Batiment::barreHp(int z) const{
     }glPopMatrix();
 }
 
-Hitbox Batiment::getHitbox(){
-    return hitbox;
-}
-
 bool Batiment::isSelected(){
     return selected;
 }

@@ -233,6 +233,7 @@ void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vecto
     //printf("%d  distance %f, range %f, %f- %f\n",etat,ennemieProche[2],((float)range/3),ennemieProche[0],ennemieProche[1]);
     switch(etat){
         case SLEEP:
+            timeProjec = 0.0;
             if(ennemieCourtePortee(ennemieProche)){
                 etat = FLEE;
             }else if(ennemieLongPortee(ennemieProche)){
@@ -251,6 +252,7 @@ void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vecto
 
         case FLEE:
             this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+            timeProjec = 0.0;
             if(!ennemieCourtePortee(ennemieProche)){
                 etat = SLEEP;
             }
