@@ -52,6 +52,8 @@ float CDposx, CDposy = 0.0;
 float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
 std::vector <Personnage *> listePersoInterface;
+std::vector <Batiment *> listeBatimentInterface;
+
 
 float timeProjec = 0.0;
 
@@ -169,7 +171,7 @@ GLvoid Modelisation()
     glMatrixMode(GL_MODELVIEW);
 
    //struct cube1 batiment1 =creer_cube1(5);
-	  //printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
+   //printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
 
 	  
@@ -284,11 +286,11 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
         Joueur1->getBatiments()[i]->creerBatiment();
         //Délai de construction
-        if(Joueur1->getBatiments()[i]->getEnConstuction()==true){
+        if(Joueur1->getBatiments()[i]->getEnConstruction()==true){
             if(Joueur1->getBatiments()[i]->getHp() < Joueur1->getBatiments()[i]->getHpMax())
                 Joueur1->getBatiments()[i]->setHp(Joueur1->getBatiments()[i]->getHp()+1);
             if(Joueur1->getBatiments()[i]->getHp() == Joueur1->getBatiments()[i]->getHpMax())
-                Joueur1->getBatiments()[i]->setEnConstuction(false);
+                Joueur1->getBatiments()[i]->setEnConstruction(false);
         }
       }
    }glPopMatrix();
@@ -318,6 +320,7 @@ GLvoid Modelisation()
 
       if (initGL::selection == 3){
           listePersoInterface.clear();
+          listeBatimentInterface.clear();
           for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
             float xunit = Joueur1->getUnites()[i]->getX();
             float yunit = Joueur1->getUnites()[i]->getY();
@@ -337,7 +340,7 @@ GLvoid Modelisation()
             posy = 0.0;
             if((xunit >= CDposx) && (xunit <= CDposx2) && (yunit <= CDposy) && (yunit >= CDposy2)){
               Joueur1->getBatiments()[i]->setSelected(1);
-              //listePersoInterface.push_back(Joueur1->getBatiments()[i]);
+              listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
             }else
               Joueur1->getBatiments()[i]->setSelected(0);
           }
@@ -351,7 +354,7 @@ GLvoid Modelisation()
   glPushMatrix();{
   //interface
     InterfaceHUD interface(initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire);
-    interface.creerInterfaceHUD(listePersoInterface, Joueur1);
+    interface.creerInterfaceHUD(listePersoInterface, listeBatimentInterface, Joueur1);
 	}glPopMatrix();
   
 

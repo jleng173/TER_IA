@@ -18,7 +18,7 @@ Texture_Img_Construire(T_Img_Construire){
 
 }
 
-GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, Joueur * j){
+GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, std::vector<Batiment *> b,Joueur * j){
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();{
@@ -264,81 +264,8 @@ GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, Joueur * j){
       glEnd();
       glDisable(GL_TEXTURE_2D);
 
-      if(p.size()==1){
-        std::string infoHP="HP: " + std::to_string(p[0]->getHp()) + "/" + std::to_string(p[0]->getHpMax());
-        drawText(infoHP,infoHP.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-30);
-        std::string infoDmg="Damages: " + std::to_string(p[0]->getDmg());
-        drawText(infoDmg,infoDmg.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-25);
-        if(p[0]->getNom()=="Paysan")
-        {
-          drawIconAction(true);
-        }
-        else
-        {
-          drawIconAction(false);
-        }
-      }
-      float translate=0;
-      int nbG = 0;
-      int nbA = 0;
-      int nbP = 0;
-      std::vector<int> nbPerso;
-      nbPerso.clear();
-      bool g,a,paysan;
-      g=false;
-      a=false;
-      paysan=false;
-      if(p.size()>1){
-          drawIconAction(false);
-          for(int i=0;i<p.size();i++){
-            glPushMatrix();{
-              glTranslatef(translate,0,0);
-              glEnable(GL_TEXTURE_2D);	
-              // std::cout << p[i]->getNom() << std::endl ;
-              if(p[i]->getNom()=="Guerrier"){
-                if(g==false){
-                  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
-                  drawIconCharacter();
-                  translate+=6;
-                }
-                g=true;
-                nbG++;
-              }
-              if(p[i]->getNom()=="Arbaletrier"){
-                if(a==false){
-                  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Arbaletrier->width, Texture_Img_Arbaletrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Arbaletrier->data);
-                  drawIconCharacter();
-                  translate+=6;
-                }
-                a=true;
-                nbA++;
-              }
-              if(p[i]->getNom()=="Paysan"){
-                if(paysan == false){
-                  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
-                  drawIconCharacter();
-                  translate+=6;
-                }
-                paysan=true;
-                nbP++;
-              }
-              glDisable(GL_TEXTURE_2D);
-            }
-            glPopMatrix();
-          }
-          if(nbP!=0)
-            nbPerso.push_back(nbP);  
-          if(nbG!=0)
-            nbPerso.push_back(nbG);
-          if(nbA!=0)
-            nbPerso.push_back(nbA);
-          for(int i=0;i<nbPerso.size();i++)
-          {
-            std::string texte = std::to_string(nbPerso[i]);
-            drawText(texte,texte.size(),GLUT_SCREEN_WIDTH/3+20+i*6, GLUT_SCREEN_HEIGHT-32.5);
-          }
-
-      }
+      
+      drawUnitInformation(p,b);
         //3e bloc
 
 
@@ -393,6 +320,7 @@ GLvoid InterfaceHUD::drawIconCharacter(){
     glEnd();
 }
 
+// Si bool est à true, affiche l'icone construire
 GLvoid InterfaceHUD::drawIconAction(bool paysan){
 
       glPushMatrix();{
@@ -531,4 +459,148 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan){
         glEnd();
       }
       glPopMatrix();
+}
+
+void InterfaceHUD::drawUnitInformation(std::vector<Personnage *> p, std::vector<Batiment *> b){
+      float translate=0;
+      int nbG = 0;
+      int nbA = 0;
+      int nbP = 0;
+      std::vector<int> nbPerso;
+      nbPerso.clear();
+      bool g,a,paysan;
+      g=false;
+      a=false;
+      paysan=false;
+      if(p.size()==1){
+        std::string infoNom=p[0]->getNom();
+        drawText(infoNom,infoNom.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-30);
+        std::string infoHP="HP: " + std::to_string(p[0]->getHp()) + "/" + std::to_string(p[0]->getHpMax());
+        drawText(infoHP,infoHP.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-25);
+        std::string infoDmg="Damages: " + std::to_string(p[0]->getDmg());
+        drawText(infoDmg,infoDmg.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-20);
+        if(p[0]->getNom()=="Paysan")
+        {
+          drawIconAction(true);
+        }
+        else
+        {
+          drawIconAction(false);
+        }
+      }
+      if(p.size()>1){
+          drawIconAction(false);
+          for(int i=0;i<p.size();i++){
+            glPushMatrix();{
+              glTranslatef(translate,0,0);
+              glEnable(GL_TEXTURE_2D);	
+              // std::cout << p[i]->getNom() << std::endl ;
+              if(p[i]->getNom()=="Guerrier"){
+                if(g==false){
+                  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
+                  drawIconCharacter();
+                  translate+=6;
+                }
+                g=true;
+                nbG++;
+              }
+              if(p[i]->getNom()=="Arbaletrier"){
+                if(a==false){
+                  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Arbaletrier->width, Texture_Img_Arbaletrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Arbaletrier->data);
+                  drawIconCharacter();
+                  translate+=6;
+                }
+                a=true;
+                nbA++;
+              }
+              if(p[i]->getNom()=="Paysan"){
+                if(paysan == false){
+                  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
+                  drawIconCharacter();
+                  translate+=6;
+                }
+                paysan=true;
+                nbP++;
+              }
+              glDisable(GL_TEXTURE_2D);
+            }
+            glPopMatrix();
+          }
+          if(nbP!=0)
+            nbPerso.push_back(nbP);  
+          if(nbG!=0)
+            nbPerso.push_back(nbG);
+          if(nbA!=0)
+            nbPerso.push_back(nbA);
+          for(int i=0;i<nbPerso.size();i++)
+          {
+            std::string texte = std::to_string(nbPerso[i]);
+            drawText(texte,texte.size(),GLUT_SCREEN_WIDTH/3+20+i*6, GLUT_SCREEN_HEIGHT-32.5);
+          }
+
+      }
+
+      if(b.size()==1 && p.size()<=0){
+        std::string infoBatiment=b[0]->getNom();
+        drawText(infoBatiment,infoBatiment.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-30);
+        std::string infoHP="HP: " + std::to_string(b[0]->getHp()) + "/" + std::to_string(b[0]->getHpMax());
+        drawText(infoHP,infoHP.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-25);
+        if(b[0]->getNom()=="Tour"){
+          std::string infoDmg="Damages: " + std::to_string(dynamic_cast<Tour *>(b[0])->getDmg());
+          drawText(infoDmg,infoDmg.size(),GLUT_SCREEN_WIDTH/3+20,GLUT_SCREEN_HEIGHT-20);
+        }
+        drawIconAction(false);
+      }
+
+      if(b.size()>1 && p.size()<=0){
+          // drawIconAction(false);
+          // for(int i=0;i<b.size();i++){
+          //   glPushMatrix();{
+          //     glTranslatef(translate,0,0);
+          //     glEnable(GL_TEXTURE_2D);	
+          //     // std::cout << p[i]->getNom() << std::endl ;
+          //     if(p[i]->getNom()=="Guerrier"){
+          //       if(g==false){
+          //         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
+          //         drawIconCharacter();
+          //         translate+=6;
+          //       }
+          //       g=true;
+          //       nbG++;
+          //     }
+          //     if(p[i]->getNom()=="Arbaletrier"){
+          //       if(a==false){
+          //         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Arbaletrier->width, Texture_Img_Arbaletrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Arbaletrier->data);
+          //         drawIconCharacter();
+          //         translate+=6;
+          //       }
+          //       a=true;
+          //       nbA++;
+          //     }
+          //     if(p[i]->getNom()=="Paysan"){
+          //       if(paysan == false){
+          //         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
+          //         drawIconCharacter();
+          //         translate+=6;
+          //       }
+          //       paysan=true;
+          //       nbP++;
+          //     }
+          //     glDisable(GL_TEXTURE_2D);
+          //   }
+          //   glPopMatrix();
+          // }
+          // if(nbP!=0)
+          //   nbPerso.push_back(nbP);  
+          // if(nbG!=0)
+          //   nbPerso.push_back(nbG);
+          // if(nbA!=0)
+          //   nbPerso.push_back(nbA);
+          // for(int i=0;i<nbPerso.size();i++)
+          // {
+          //   std::string texte = std::to_string(nbPerso[i]);
+          //   drawText(texte,texte.size(),GLUT_SCREEN_WIDTH/3+20+i*6, GLUT_SCREEN_HEIGHT-32.5);
+          // }
+
+      }     
 }

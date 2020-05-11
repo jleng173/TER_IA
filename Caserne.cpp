@@ -9,6 +9,7 @@ Caserne::Caserne(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T
     hitbox.y2 = position[1]+2;
     delaiConstruction=20;
     enConstruction=false;
+    nom="Caserne";
 }
 
 void Caserne::creerBatiment() const{

@@ -11,6 +11,7 @@ Tour::Tour(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre
     hitbox.y2 = position[1]+0.75;
 	enConstruction=true;
 	delaiConstruction=20;
+	nom="Tour";
 }
 
 void Tour::creerBatiment() const{
@@ -60,4 +61,8 @@ void Tour::creerBatiment() const{
 		glPopMatrix();
 	}
 	glPopMatrix();
+}
+
+int Tour::getDmg(){
+	return dmg;
 }
