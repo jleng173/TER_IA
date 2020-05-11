@@ -44,6 +44,7 @@ float initGL::avance = 0.0;
 float initGL::action = 0.0;
 float initGL::mouv = 0.0;
 int initGL::selection = 0;
+int initGL::construction = 0;
 
 float posx, posy, posz = 0.0;
 float lastposx, lastposy = 0.0;
@@ -194,7 +195,7 @@ GLvoid Modelisation()
         compX = 0;
       }
     if (initGL::pose == 1){
-      std::cout << initGL::xpose << " " << initGL::ypose << std::endl;  
+      std::cout << posx << " " << posy << std::endl;  
       if(initGL::ypose<676 && initGL::ypose>49){
         posx = SP.positionX + compX;
         posy = SP.positionY + compY;
@@ -204,6 +205,23 @@ GLvoid Modelisation()
     	initGL::pose = 0;
 
 	  }
+
+    //Construction par un paysan en appuyant sur x
+    if(Joueur1->getUnites().size()==1 && Joueur1->getUnites()[0]->getNom()=="Paysan")
+    {
+      // std::cout << "Construction "<< Joueur1->getUnites()[0]->getNom()<<std::endl;
+      if(initGL::construction==1){
+        std::cout << "Construction "<< Joueur1->getUnites()[0]->getX() << "  " << Joueur1->getUnites()[0]->getY() <<std::endl;
+        glPushMatrix();{
+          glEnable(GL_BLEND);
+          glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
+          dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireTour(Joueur1,Joueur1->getUnites()[0]->getX(),Joueur1->getUnites()[0]->getY(),initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+          glDisable(GL_BLEND);
+        }
+        glPopMatrix();
+        initGL::construction=0;
+      }
+    }
 	
         glPushMatrix();{   
           carte.solcarte();
@@ -244,6 +262,7 @@ GLvoid Modelisation()
           Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
         }
       }
+      Joueur1->removeUnites();
 
   //Joueur 2
       for(int i = 0 ; i < Joueur2->getUnites().size(); i++){
@@ -264,6 +283,13 @@ GLvoid Modelisation()
     glPushMatrix();{
       for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
         Joueur1->getBatiments()[i]->creerBatiment();
+        //Délai de construction
+        if(Joueur1->getBatiments()[i]->getEnConstuction()==true){
+            if(Joueur1->getBatiments()[i]->getHp() < Joueur1->getBatiments()[i]->getHpMax())
+                Joueur1->getBatiments()[i]->setHp(Joueur1->getBatiments()[i]->getHp()+1);
+            if(Joueur1->getBatiments()[i]->getHp() == Joueur1->getBatiments()[i]->getHpMax())
+                Joueur1->getBatiments()[i]->setEnConstuction(false);
+        }
       }
    }glPopMatrix();
 
@@ -342,16 +368,16 @@ int main(int argc, char **argv){
   Joueur1->addBatiment(castle);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
   Paysan * pa = dynamic_cast<Paysan*>(Joueur1->getUnites()[0]);
+
   //pa->construireCaserne(Joueur1,0,20,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   //caser.creerGuerrier(Joueur1);
   pa->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
   Joueur2->addBatiment(caser);
-  caser->creerGuerrier(Joueur2);
+  caser->creerArbaletrier(Joueur2);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
 
   printf(" taille batiment %d \n",Joueur1->getBatiments().size());
-	
   
   initGL* init = new initGL();
 

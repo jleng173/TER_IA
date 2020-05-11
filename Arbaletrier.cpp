@@ -101,7 +101,7 @@ void Arbaletrier::creerAccessoire() const{
     glPopMatrix();
 }
 
-void Arbaletrier::tirArbalete(float x, float y){
+void Arbaletrier::tirArbalete(float x, float y, std::vector<Personnage*> listeEnnemies){
      glPushMatrix();{
           
           float posDepart[3] = {position[0],position[1],0.0};
@@ -151,9 +151,16 @@ void Arbaletrier::tirArbalete(float x, float y){
             creerCarreau();
           }glPopMatrix();
 
-          if(pt[2] < -0.25)
+          if(pt[2] < -0.25){
             timeProjec = 0.0;
 
+            // Baisse des pv
+            for(int i = 0; i < listeEnnemies.size(); i++){
+                if(listeEnnemies[i]->getX()==x && listeEnnemies[i]->getY()==y){
+                    listeEnnemies[i]->setHp(listeEnnemies[i]->getHp() - dmg);
+                }
+            }
+          }
      // printf("%f, %f, %f \n",pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
    }
@@ -234,7 +241,7 @@ void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vecto
         break;
 
         case FIRE:
-            tirArbalete(ennemieProche[0],ennemieProche[1]);
+            tirArbalete(ennemieProche[0],ennemieProche[1],listeEnnemies);
             if(ennemieCourtePortee(ennemieProche)){
                 etat = FLEE;
             }else if(!ennemieLongPortee(ennemieProche)){

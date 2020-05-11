@@ -32,6 +32,7 @@ void Paysan::construireTour(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chate
         J->subtractBois(5);
         J->subtractPierre(5);
         Batiment * tower = new Tour(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        
         J->addBatiment(tower);
     }
 }

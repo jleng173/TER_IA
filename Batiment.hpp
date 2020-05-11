@@ -26,9 +26,12 @@ public:
     bool isSelected();
     void setSelected(int s);
     int getHp();
+    void setHp(int h);
     int getHpMax();
     float getX();
     float getY();
+    bool getEnConstuction();
+    void setEnConstuction(bool b);
 
 protected:
     float hp;
@@ -39,4 +42,7 @@ protected:
     //point en haut à droite (hitbox.x2,hitbox.y2)
     Hitbox hitbox;
     bool selected;
+    bool enConstruction;
+    float delaiConstruction;
+    float debutDelai;
 };

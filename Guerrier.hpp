@@ -7,6 +7,7 @@
 class Guerrier : public Personnage {
     protected:
         float vision;
+        float range;
     public:
         Guerrier(float x, float y,float angle, float vitesseMAX);
         GLvoid creerChapeau() const override;

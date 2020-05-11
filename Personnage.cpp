@@ -423,6 +423,10 @@ int Personnage::getHp(){
     return hp;
 }
 
+void Personnage::setHp(int h){
+    hp=h;
+}
+
 int Personnage::getHpMax(){
     return hpMax;
 }
@@ -437,6 +441,14 @@ float Personnage::getX(){
 
 float Personnage::getY(){
     return position[1];
+}
+
+float Personnage::getLastX(){
+    return lastPosition[0];
+}
+
+float Personnage::getLastY(){
+    return lastPosition[1];
 }
 
 float Personnage::getOrientation(){

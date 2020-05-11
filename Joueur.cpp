@@ -1,9 +1,9 @@
 #include "Joueur.hpp"
 
 Joueur::Joueur(){
-    qteBois = 10;
+    qteBois = 100;
     qteOr = 10;
-    qtePierre = 10;
+    qtePierre = 100;
     maxUnites = 5;
 
 }
@@ -54,6 +54,15 @@ std::vector<Personnage * > Joueur::getUnites(){
 
 void Joueur::addUnites(Personnage * p){
     listeUnites.push_back(p);
+}
+
+void Joueur::removeUnites(){
+    // Baisse des pv
+    for(int i = 0; i < listeUnites.size(); i++){
+        if(listeUnites[i]->getHp() <= 0){
+            listeUnites.erase(listeUnites.begin()+i);
+        }
+    }
 }
 
 std::vector<Batiment * > Joueur::getBatiments(){

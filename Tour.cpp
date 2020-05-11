@@ -1,7 +1,7 @@
 #include "Tour.hpp"
 
 Tour::Tour(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Batiment(x,y,T_chateau,T_pierre,T_toit,T_porte, T_paille){
-    hp=400;
+    hp=1;
     hpMax=400;
     dmg=10;
     range=5;
@@ -9,6 +9,8 @@ Tour::Tour(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre
     hitbox.y1 = position[1]-0.75;
     hitbox.x2 = position[0]+0.75;
     hitbox.y2 = position[1]+0.75;
+	enConstruction=true;
+	delaiConstruction=20;
 }
 
 void Tour::creerBatiment() const{

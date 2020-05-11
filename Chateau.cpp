@@ -7,6 +7,7 @@ Chateau::Chateau(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_
     hitbox.y1 = position[1]-2.5;
     hitbox.x2 = position[0]+2.5;
     hitbox.y2 = position[1]+2.5;
+    enConstruction=false;
 }
 
 void Chateau::creerPaysan(Joueur * J){
