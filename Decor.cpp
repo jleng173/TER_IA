@@ -33,6 +33,8 @@ glPushMatrix();
 }
 
 GLvoid Decor::Roche(){
+	glPushMatrix();{
+		glTranslatef(0,0,3);
 			glPushMatrix();{
 
 				//Face avant
@@ -108,6 +110,7 @@ GLvoid Decor::Roche(){
 				glEnd();
 			}
 			glPopMatrix();
+	}glPopMatrix();	
 }
 
 

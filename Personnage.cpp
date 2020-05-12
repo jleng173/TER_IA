@@ -93,11 +93,10 @@ void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
         velocite[0] =  position[0] - x;
         velocite[1] =  position[1] - y;
 
-        if(testSiColision(all)){
-            velocite[0] =  x - position[0];
-            velocite[1] =  y - position[1];
-
-        }
+        // if(testSiColision(all)){
+        //     velocite[0] =  x - position[0];
+        //     velocite[1] =  y - position[1];
+        // }
 
         //Normalisation du vecteur velocite
         float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);

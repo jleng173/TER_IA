@@ -199,10 +199,11 @@ GLvoid Modelisation()
     if (initGL::pose == 1){
       //std::cout << initGL::xpose << " " << initGL::ypose << std::endl;  
       if(initGL::ypose<676 && initGL::ypose>49){
-        posx = SP.positionX + compX;
-        posy = SP.positionY + compY;
-
-
+        int limiteC = sqrt((carte.getTailleCarte()*2)*(carte.getTailleCarte()*2)/2);
+        if( (SP.positionX + compX <= limiteC -(SP.positionY + compY)) && (SP.positionY + compY <= limiteC -(SP.positionX + compX)) && (SP.positionX + compX >= -1*limiteC +(SP.positionY + compY)) && (SP.positionY + compY >= -1*limiteC +(SP.positionX + compX))){
+            posx = SP.positionX + compX;
+            posy = SP.positionY + compY;
+        }
       }
     	initGL::pose = 0;
 
@@ -385,8 +386,9 @@ int main(int argc, char **argv){
   Batiment * castle = new Chateau(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur1->addBatiment(castle);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
-  dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-  //pa->construireCaserne(Joueur1,0,20,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  //dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  dynamic_cast<Caserne*>(Joueur1->getBatiments()[1])->creerGuerrier(Joueur1);
   //caser.creerGuerrier(Joueur1);
 
   Joueur2->addBatiment(caser);

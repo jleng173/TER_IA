@@ -24,7 +24,7 @@ void Chateau::creerPaysan(Joueur * J){
 
 void Chateau::creerBatiment() const{
     glPushMatrix();{
-        glTranslatef(position[0],position[1],3);
+        glTranslatef(position[0],position[1],4.5);
         if(selected)
             barreHp(9);
         glRotatef(90,1.0,0.0,0.0);

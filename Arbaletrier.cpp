@@ -2,8 +2,8 @@
 
 Arbaletrier::Arbaletrier(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
     nom="Arbaletrier";
-    hp=150;
-    hpMax=150;
+    hp=100;
+    hpMax=100;
     dmg=5;
     timeProjec = 0.0;
     selected = 1;
