@@ -65,10 +65,14 @@ float Batiment::getY(){
     return position[1];
 }
 
-bool Batiment::getEnConstuction(){
+bool Batiment::getEnConstruction(){
     return enConstruction;
 }
 
-void Batiment::setEnConstuction(bool b){
+void Batiment::setEnConstruction(bool b){
     enConstruction=b;
+}
+
+std::string Batiment::getNom(){
+    return nom;
 }

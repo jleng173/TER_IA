@@ -29,8 +29,9 @@ public:
     int getHpMax();
     float getX();
     float getY();
-    bool getEnConstuction();
-    void setEnConstuction(bool b);
+    bool getEnConstruction();
+    void setEnConstruction(bool b);
+    std::string getNom();
 
 protected:
     float hp;
@@ -43,4 +44,5 @@ protected:
     bool enConstruction;
     float delaiConstruction;
     float debutDelai;
+    std::string nom;
 };

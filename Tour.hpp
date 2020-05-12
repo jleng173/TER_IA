@@ -5,6 +5,7 @@ class Tour : public Batiment{
     public:
         Tour(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
         void creerBatiment() const override;
+        int getDmg();
 
     private:
         int dmg;
