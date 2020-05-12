@@ -64,7 +64,7 @@ void Caserne::creerBatiment() const{
 }
 
 void Caserne::creerGuerrier(Joueur * J){
-        if (J->getUnites().size() < J->getMaxUnites()){
+        if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 5) > 0){
                 printf("CREATION D'UN GUERRIER \n");
                 Personnage * PersGuerrier = new Guerrier(position[0],position[1]-3,0,5);
                 J->subtractOr(5);
@@ -73,7 +73,7 @@ void Caserne::creerGuerrier(Joueur * J){
 }
 
 void Caserne::creerArbaletrier(Joueur * J){
-        if (J->getUnites().size() < J->getMaxUnites()){
+        if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 4) > 0){
                 printf("CREATION D'UN ARBALETRIER \n");
                 Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-3,0,4);
                 J->subtractOr(4);
