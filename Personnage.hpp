@@ -30,7 +30,7 @@ protected:
     //hitbox représenté par 2 cordonnées formant un rectangle
     //point en bas à gauche (hitbox.x1,hitbox.y1)
     //point en haut à droite (hitbox.x2,hitbox.y2)
-    Hitbox hitbox;
+    //Hitbox hitbox;
     
     float avance;
     float action;

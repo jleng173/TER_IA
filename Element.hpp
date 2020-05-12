@@ -24,12 +24,15 @@ public:
     bool Colision( Element * autre);
     bool testSiColision(const std::vector<Element *> all);
     Hitbox getHitbox(){return hitbox;};
-        void setHitbox(Hitbox h){hitbox = h;};
+    void setHitbox(Hitbox h);
 
     float getPositionX(){return position[0];};
     float getPositionY(){return position[1];};
 
-private:
+    static int current_id;
+    int id;
+protected:
     Hitbox hitbox;
     float position[2];
+ 
     };

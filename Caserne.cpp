@@ -3,10 +3,10 @@
 Caserne::Caserne(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille) : Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte, T_paille){
     hp=700;
     hpMax=700;
-    hitbox.x1 = position[0]-2;
-    hitbox.y1 = position[1]-2;
-    hitbox.x2 = position[0]+2;
-    hitbox.y2 = position[1]+2;
+    hitbox.x1 = position[0]-5;
+    hitbox.y1 = position[1]-5;
+    hitbox.x2 = position[0]+5;
+    hitbox.y2 = position[1]+5;
     delaiConstruction=20;
     enConstruction=false;
     nom="Caserne";
@@ -66,7 +66,7 @@ void Caserne::creerBatiment() const{
 void Caserne::creerGuerrier(Joueur * J){
         if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 5) > 0){
                 printf("CREATION D'UN GUERRIER \n");
-                Personnage * PersGuerrier = new Guerrier(position[0],position[1]-3,0,5);
+                Personnage * PersGuerrier = new Guerrier(position[0],position[1]-6,0,5);
                 J->subtractOr(5);
                 J->addUnites(PersGuerrier);
         }       
@@ -75,7 +75,7 @@ void Caserne::creerGuerrier(Joueur * J){
 void Caserne::creerArbaletrier(Joueur * J){
         if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 4) > 0){
                 printf("CREATION D'UN ARBALETRIER \n");
-                Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-3,0,4);
+                Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-6,0,4);
                 J->subtractOr(4);
                 J->addUnites(PersArbaletrier);
         } 

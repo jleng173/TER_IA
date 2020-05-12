@@ -5,10 +5,10 @@ Tour::Tour(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre
     hpMax=400;
     dmg=10;
     range=5;
-	hitbox.x1 = position[0]-0.75;
-    hitbox.y1 = position[1]-0.75;
-    hitbox.x2 = position[0]+0.75;
-    hitbox.y2 = position[1]+0.75;
+	hitbox.x1 = position[0]-1;
+    hitbox.y1 = position[1]-1;
+    hitbox.x2 = position[0]+1;
+    hitbox.y2 = position[1]+1;
 	enConstruction=true;
 	delaiConstruction=20;
 	nom="Tour";
@@ -17,10 +17,11 @@ Tour::Tour(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre
 void Tour::creerBatiment() const{
 	glPushMatrix();{
 		Forme f;
-		glTranslatef(position[0],position[1],3);
+		glTranslatef(position[0],position[1],1);
 		if(selected)
 			barreHp(11);
 		glRotatef(90,1.0,0.0,0.0);
+		glRotatef(90,0.0,1.0,0.0);
 		glPushMatrix();{
 			//Tour
 			glEnable(GL_TEXTURE_2D);

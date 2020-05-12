@@ -126,6 +126,7 @@ GLvoid Guerrier::creerAccessoire() const{
 
 void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<Element *>  all) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
+    
     switch(etat){
         case SLEEP:
             if(voitEnnemie(ennemieProche) && !basHp()){
@@ -196,5 +197,5 @@ bool Guerrier::basHp(){
 }
 
 bool Guerrier::contactEnnemie(std::vector<float> ennemieProche){
-    return (ennemieProche[2] <=2);
+    return (ennemieProche[2] <=3);
 }

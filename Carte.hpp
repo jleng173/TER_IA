@@ -10,9 +10,10 @@ public:
 	Carte();
 
     void solcarte();
-	
+	int getTailleCarte();
+
 private:
 	Decor decor;
-
+	int tailleCarte;
  
 };

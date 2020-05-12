@@ -83,9 +83,9 @@ TEXTURE_STRUCT * initGL::Texture_Img_Stop = p.readPpm ("./texture/defend_texture
 TEXTURE_STRUCT * initGL::Texture_Img_Attaquer = p.readPpm ("./texture/battle_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Construire = p.readPpm ("./texture/build_texture.PPM");
 
-Arbaletrier A1(15,15,0,3);
+//Arbaletrier A1(15,15,0,3);
 
-Guerrier Perso2(10,10,0,5);
+//Guerrier Perso2(10,10,0,5);
 //Arbaletrier PersoA(initGL::avance,initGL::action,10,10,0,5);
 
 Joueur * Joueur1 = new Joueur();
@@ -133,15 +133,15 @@ GLvoid Modelisation()
   glPushMatrix();
   {
 	 if(initGL::xpose < 50){
-      initGL::xcam -= 0.1;
+      initGL::xcam -= 0.2;
     }else if(initGL::xpose > WIDTH -50){
-      initGL::xcam += 0.1;
+      initGL::xcam += 0.2;
     }
 
     if(initGL::ypose < 50){
-      initGL::ycam += 0.1;
+      initGL::ycam += 0.2;
     }else if(initGL::ypose > HEIGHT -50){
-      initGL::ycam -= 0.1;
+      initGL::ycam -= 0.2;
     }    
 
   gluLookAt(initGL::xcam,initGL::ycam-70,100,
@@ -198,10 +198,13 @@ GLvoid Modelisation()
         compX = 0;
       }
     if (initGL::pose == 1){
-      std::cout << initGL::xpose << " " << initGL::ypose << std::endl;  
+      //std::cout << initGL::xpose << " " << initGL::ypose << std::endl;  
       if(initGL::ypose<676 && initGL::ypose>49){
-        posx = SP.positionX + compX;
-        posy = SP.positionY + compY;
+        int limiteC = sqrt((carte.getTailleCarte()*2)*(carte.getTailleCarte()*2)/2);
+        if( (SP.positionX + compX <= limiteC -(SP.positionY + compY)) && (SP.positionY + compY <= limiteC -(SP.positionX + compX)) && (SP.positionX + compX >= -1*limiteC +(SP.positionY + compY)) && (SP.positionY + compY >= -1*limiteC +(SP.positionX + compX))){
+            posx = SP.positionX + compX;
+            posy = SP.positionY + compY;
+        }
       }
       clickX = initGL::xpose;
       clickY = initGL::ypose;
@@ -249,41 +252,32 @@ GLvoid Modelisation()
   //PersoA.creerCarreau();
     
    glPushMatrix();{
+      Element::current_id = 0;
 
-  //Joueur 1
+  // Affichage des Unités
+    // Joueur 1
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
-        Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
-        e->setHitbox(Joueur1->getUnites()[i]->getHitbox());
-        toutLesElements.push_back(e);
+        //Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
+        //e->setHitbox(Joueur1->getUnites()[i]->getHitbox());
+        //printf(" hitbox e (%f,%f) et (%f,%f)  \n",e->getHitbox().x1,e->getHitbox().y1,e->getHitbox().x2,e->getHitbox().y2);
+        toutLesElements.push_back(dynamic_cast<Element*>(Joueur1->getUnites()[i]));
         }
+        Joueur1->removeUnites();
 
-      //printf("%d \n",toutLesElements.size());
-      for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
-        if(Joueur1->getUnites()[i]->isSelected())
-          Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
-        else{
-          Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
-        }
-      }
-      Joueur1->removeUnites();
-
-  //Joueur 2
+    //Joueur 2
       for(int i = 0 ; i < Joueur2->getUnites().size(); i++){
         Joueur2->getUnites()[i]->creerPersonnage();
         Joueur2->getUnites()[i]->comportement(Joueur1->getUnites(),toutLesElements);
-        Element * e = new Element(Joueur2->getUnites()[i]->getX(),Joueur2->getUnites()[i]->getY());
-        e->setHitbox(Joueur2->getUnites()[i]->getHitbox());
-        toutLesElements.push_back(e);
+        //Element * e = new Element(Joueur2->getUnites()[i]->getX(),Joueur2->getUnites()[i]->getY());
+        //e->setHitbox(Joueur2->getUnites()[i]->getHitbox());
+        toutLesElements.push_back(dynamic_cast<Element*>(Joueur2->getUnites()[i]));
       }
-      lastposx = posx;
-      lastposy = posy;
+      Joueur2->removeUnites();
 
-      toutLesElements.clear();
-      
-   }glPopMatrix();
-
-// Batiment Joueur 1
+  
+  // Affichage des Batiments
+    // Batiments Joueur 1
     glPushMatrix();{
       for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
         Joueur1->getBatiments()[i]->creerBatiment();
@@ -294,15 +288,39 @@ GLvoid Modelisation()
             if(Joueur1->getBatiments()[i]->getHp() == Joueur1->getBatiments()[i]->getHpMax())
                 Joueur1->getBatiments()[i]->setEnConstruction(false);
         }
+        toutLesElements.push_back(dynamic_cast<Element*>(Joueur1->getBatiments()[i]));
       }
    }glPopMatrix();
 
-// Batiment Joueur 2
+    // Batiments Joueur 2
     glPushMatrix();{
       for(int i = 0 ; i < Joueur2->getBatiments().size(); i++){
         Joueur2->getBatiments()[i]->creerBatiment();
+        toutLesElements.push_back(dynamic_cast<Element*>(Joueur2->getBatiments()[i]));
       }
    }glPopMatrix();
+
+
+  // Gestion déplacement des unités
+      for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
+        if(Joueur1->getUnites()[i]->isSelected()){
+          Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+        }else{
+          Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
+          Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),toutLesElements);
+        }
+      }
+
+      //printf(" coord elem %f %f \n",toutLesElements[0]->getPositionX(), toutLesElements[0]->getPositionY());
+      lastposx = posx;
+      lastposy = posy;
+
+      //printf("%d \n",toutLesElements.size());
+
+   }glPopMatrix();
+
+
+    toutLesElements.clear();
 
   //Rectangle de sélection clique droit
   glPushMatrix();{
@@ -378,15 +396,14 @@ int main(int argc, char **argv){
   Joueur1->addBatiment(castle);
   Joueur1->addBatiment(caserne);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
-  Paysan * pa = dynamic_cast<Paysan*>(Joueur1->getUnites()[0]);
-
-  //pa->construireCaserne(Joueur1,0,20,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  //dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  dynamic_cast<Caserne*>(Joueur1->getBatiments()[1])->creerGuerrier(Joueur1);
   //caser.creerGuerrier(Joueur1);
-  pa->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
   Joueur2->addBatiment(caser);
   caser->creerArbaletrier(Joueur2);
-  dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
+  //dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
 
   printf(" taille batiment %d \n",Joueur1->getBatiments().size());
   

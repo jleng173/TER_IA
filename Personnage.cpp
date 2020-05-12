@@ -41,14 +41,19 @@ void Personnage::updatePos( float time){
 void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
     lastPosition[0]=x;
     lastPosition[1]=y;
+
     if(x != 0 && y !=0){
 
         //SeekKinematic mouvement
-        if(testSiColision(all)){
-            //printf("COLLISION %f \n",x);
-        }
+
         velocite[0] = x - position[0];
         velocite[1] = y - position[1];
+
+        if(testSiColision(all)){
+            velocite[0] =  position[0] - x;
+            velocite[1] =  position[1] - y;
+
+        }
 
         //Normalisation du vecteur velocite
         float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
@@ -80,14 +85,18 @@ void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all)
 }
 
 void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
+
     if(x != 0 && y !=0){
 
-        //SeekKinematic mouvement
-        if(testSiColision(all)){
-            //printf("COLLISION %f \n",x);
-        }
+        //FleeKinematic mouvement
+
         velocite[0] =  position[0] - x;
         velocite[1] =  position[1] - y;
+
+        // if(testSiColision(all)){
+        //     velocite[0] =  x - position[0];
+        //     velocite[1] =  y - position[1];
+        // }
 
         //Normalisation du vecteur velocite
         float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
