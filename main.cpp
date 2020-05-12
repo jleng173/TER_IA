@@ -170,11 +170,9 @@ GLvoid Modelisation()
     gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,1000.0f);
     glMatrixMode(GL_MODELVIEW);
 
-   //struct cube1 batiment1 =creer_cube1(5);
    //printf("%f %f %f / %f,%f,%f \n",initGL::xcam,initGL::ycam,initGL::z,SP.positionX,SP.positionY,SP.positionZ);
 
 
-	  
       float compY = compensationY(SP.positionY-initGL::ycam);
 
       float compX = 0;
@@ -205,7 +203,7 @@ GLvoid Modelisation()
             posy = SP.positionY + compY;
         }
       }
-    	initGL::pose = 0;
+    	initGL::pose = 2;
 
 	  }
 
@@ -230,22 +228,6 @@ GLvoid Modelisation()
           carte.solcarte();
         }glPopMatrix();
 
-
-    // if (initGL::pose == 0){
-    //   for( int i = 0 ; i < cubes_test.size() ; i++){
-    //     //printf("%f \n",cubes_test[i][0]);
-    //   glPushMatrix();{   
-    //     //glScalef(0.5,0.5,0.5);
-    //     glRotatef(90,1.0,0.0,0.0);
-    //     Chateau C(cubes_test[i][0],cubes_test[i][1],initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-    //     C.creerBatiment();
-    //     C.creerPaysan(Joueur1);
-
-    //     }glPopMatrix();
-    //   }
-    // }
-
-  //PersoA.creerCarreau();
     
    glPushMatrix();{
       Element::current_id = 0;

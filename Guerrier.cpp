@@ -148,7 +148,7 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<
         break;
 
         case ATTACK:
-        //Animation bras à revoire
+        //Animation bras à revoir
             if(action==0)
             {
                 mouvementbras=2;
