@@ -583,7 +583,6 @@ void InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment 
     }
   }
   if(x>1265 && x<1392 && b.size()==1 && b[0]->getNom()=="Caserne"){
-    std::cout << "Je rentre" << std::endl;
     if(y>713 && y<757){
       dynamic_cast<Caserne *>(b[0])->creerArbaletrier(j);
     }

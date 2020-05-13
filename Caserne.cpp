@@ -75,7 +75,7 @@ void Caserne::creerGuerrier(Joueur * J){
 void Caserne::creerArbaletrier(Joueur * J){
         if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 4) > 0){
                 printf("CREATION D'UN ARBALETRIER \n");
-                Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-6,0,4);
+                Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-10,0,4);
                 J->subtractOr(4);
                 J->addUnites(PersArbaletrier);
         } 

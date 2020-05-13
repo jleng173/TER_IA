@@ -2,7 +2,7 @@
 
 Joueur::Joueur(){
     qteBois = 100;
-    qteOr = 10;
+    qteOr = 100;
     qtePierre = 100;
     maxUnites = 5;
 
