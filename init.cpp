@@ -240,9 +240,9 @@ void initGL::mouseClicks(int button, int state, int x, int y){
     float my = y ;
     // Clic gauche 
     if(button == 0) {
-        if(pose==2)
-            pose =0;
-        else if(pose == 0){
+        if ( pose == 2)
+            pose = 0;
+        else if (pose == 0) {
             pose = 1;
             xpose = mx;
             ypose = my;
