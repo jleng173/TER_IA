@@ -19,6 +19,7 @@
 class InterfaceHUD{
     public:
 
+    InterfaceHUD(float _x, float _y, TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier,TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier, TEXTURE_STRUCT * T_Img_Or, TEXTURE_STRUCT * T_Img_Pierre,TEXTURE_STRUCT * T_Img_Nourriture, TEXTURE_STRUCT * T_Img_Bois, TEXTURE_STRUCT * T_Img_Mouvement, TEXTURE_STRUCT * T_Img_Stop, TEXTURE_STRUCT * T_Img_Attaquer, TEXTURE_STRUCT * T_Img_Construire, TEXTURE_STRUCT * T_Img_Hache, TEXTURE_STRUCT * T_Img_Pioche);
     InterfaceHUD(float _x, float _y, int mode, TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier,TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier, TEXTURE_STRUCT * T_Img_Or, TEXTURE_STRUCT * T_Img_Pierre,TEXTURE_STRUCT * T_Img_Nourriture, TEXTURE_STRUCT * T_Img_Bois, TEXTURE_STRUCT * T_Img_Mouvement, TEXTURE_STRUCT * T_Img_Stop, TEXTURE_STRUCT * T_Img_Attaquer, TEXTURE_STRUCT * T_Img_Construire, TEXTURE_STRUCT * T_Img_Caserne, TEXTURE_STRUCT * T_Img_Ferme, TEXTURE_STRUCT * T_Img_Tour, TEXTURE_STRUCT * T_Img_Cancel);
     GLvoid creerInterfaceHUD(std::vector<Personnage *> p, std::vector<Batiment *> b,Joueur * j);
 
@@ -47,6 +48,8 @@ class InterfaceHUD{
     TEXTURE_STRUCT * Texture_Img_Attaquer;
     TEXTURE_STRUCT * Texture_Img_Stop;
     TEXTURE_STRUCT * Texture_Img_Construire;
+    TEXTURE_STRUCT * Texture_Img_Hache;
+    TEXTURE_STRUCT * Texture_Img_Pioche;
     TEXTURE_STRUCT * Texture_Img_Caserne;
     TEXTURE_STRUCT * Texture_Img_Ferme;
     TEXTURE_STRUCT * Texture_Img_Tour;

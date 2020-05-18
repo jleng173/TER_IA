@@ -14,7 +14,7 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     hitbox.y2 = position[1]+1;
     orientation = angle;
     vitesseMAX = v;
-    selected = 1;
+    selected = 0;
     etat = SLEEP;
 }
 
@@ -33,8 +33,8 @@ void Personnage::updatePos( float time){
 void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
     lastPosition[0]=x;
     lastPosition[1]=y;
-
-    if(x != 0 && y !=0){
+    int limiteC = sqrt((Carte::tailleCarte*2)*(Carte::tailleCarte*2)/2);
+    if((x != 0) && (y !=0) && (x <= limiteC-y ) && (y  <= limiteC-x) && (x >= -1*limiteC+y) && (y >= -1*limiteC+x)){
 
         //SeekKinematic mouvement
 
@@ -78,7 +78,9 @@ void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all)
 
 void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
 
-    if(x != 0 && y !=0){
+    int limiteC = sqrt((Carte::tailleCarte*2)*(Carte::tailleCarte*2)/2);
+
+    if((x != 0) && (y !=0) && (position[0] <= limiteC-position[1] ) && (position[1]  <= limiteC-position[0]) && (position[0] >= -1*limiteC+position[1]) && (position[1] >= -1*limiteC+position[0])){
 
         //FleeKinematic mouvement
 
@@ -116,6 +118,8 @@ void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
 
         updatePos(0.04);
     // printf("a = %f \n",avance)
+    }else{
+        deplacementCible(x-5,y-5,all);
     }
 }
 

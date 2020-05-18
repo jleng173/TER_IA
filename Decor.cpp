@@ -1,8 +1,8 @@
 #include "Decor.hpp"
 
 Decor::Decor(float dx, float dy){
-	decox = dx;
-	decoy = dy;
+	positionDecorX = dx;
+	positionDecorY = dy;
 };
 
 //ARBRE
@@ -34,7 +34,9 @@ glPushMatrix();
 
 GLvoid Decor::Roche(){
 	glPushMatrix();{
+		glRotatef(90,1,0,0);
 		glTranslatef(0,0,1.25);
+		
 			glPushMatrix();{
 
 				//Face avant
@@ -116,11 +118,12 @@ GLvoid Decor::Roche(){
 
 void Decor::Foret(){
 	glPushMatrix();{
-		glTranslatef(decox,decoy,0);
 		glPushMatrix();{
 			for(int i = 0 ; i <_foret.size() ; i++){
-				glTranslatef( _foret[i][0], _foret[i][1], _foret[i][2]);
-				Arbre();
+				glPushMatrix();{
+					glTranslatef( _foret[i][0], _foret[i][1], 0.0);
+					Arbre();
+				}glPopMatrix();
 			}
 
 		}glPopMatrix();
@@ -129,11 +132,12 @@ void Decor::Foret(){
 
 void Decor::Mine(){
 	glPushMatrix();{
-		glTranslatef(decox,decoy,0);
 		glPushMatrix();{
 			for(int i = 0 ; i <_mine.size() ; i++){
-				glTranslatef( _mine[i][0], _mine[i][1], _mine[i][2]);
-				Roche();
+				glPushMatrix();{
+					glTranslatef( _mine[i][0], _mine[i][1],0.0);
+					Roche();
+				}glPopMatrix();
 			}
 		}
 		glPopMatrix();
@@ -143,20 +147,55 @@ void Decor::Mine(){
 void Decor::GenerateForet(int nombre){
 	std::srand (time(NULL));
 		for (int i = 0 ; i < nombre ; i++){
-			float x =(float) (std::rand()%1000-500)/100 ;
-			float y = (float) (std::rand()%1000-500)/100;
-			std::vector<float>  add = {x,y, 0.0};
+			float x =(float) (std::rand()%5000-2500)/100 ;
+			float y = (float) (std::rand()%5000-2500)/100;
+			//vector avec coordonées de l'arbre et sa résistance
+			std::vector<float>  add = {x+positionDecorX,y+positionDecorY,150.0};
 			_foret.push_back(add);
 		}
 }
 
 void Decor::GenerateMine(int nombre){
-	std::srand(time(NULL)/3);
+	std::srand(time(NULL));
 		for (int i = 0 ; i < nombre ; i++){
 			float x =(float) (std::rand()%1000-500)/100 ;
 			float y = (float) (std::rand()%1000-500)/100;
-			//printf("%f %f \n",x,y);
-			std::vector<float>  add = {x,y, 0.0};
+			//vector avec coordonées du rocher et sa résistance
+			std::vector<float>  add = {x+positionDecorX,y+positionDecorY,300.0};
 			_mine.push_back(add);
 		}
+}
+
+std::vector< std::vector<float> > Decor::getForet(){
+	return _foret;
+}
+
+std::vector< std::vector<float> > Decor::getMine(){
+	return _mine;
+}
+
+float Decor::getpositionDecorX(){
+	return positionDecorX;
+}
+
+float Decor::getpositionDecorY(){
+	return positionDecorY;
+}
+
+void Decor::deleteArbre(int id){
+	//printf("%d \n",id);
+	_foret.erase(_foret.begin()+id);
+
+}
+
+void Decor::deleteRoche(int id){
+	_mine.erase(_mine.begin()+id);
+}
+
+void Decor::degatArbre(int id, float degat){
+	_foret[id][2] -= degat;
+}
+
+void Decor::degatRoche(int id, float degat){
+	_mine[id][2] -= degat;
 }

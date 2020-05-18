@@ -87,6 +87,8 @@ TEXTURE_STRUCT * initGL::Texture_Img_Caserne = p.readPpm ("./texture/barrack.PPM
 TEXTURE_STRUCT * initGL::Texture_Img_Ferme = p.readPpm ("./texture/farm.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Tour = p.readPpm ("./texture/tower.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Cancel = p.readPpm ("./texture/cancel.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Hache = p.readPpm ("./texture/hache.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Pioche = p.readPpm ("./texture/pioche.PPM");
 
 //Arbaletrier A1(15,15,0,3);
 
@@ -95,9 +97,8 @@ TEXTURE_STRUCT * initGL::Texture_Img_Cancel = p.readPpm ("./texture/cancel.PPM")
 
 Joueur * Joueur1 = new Joueur();
 Joueur * Joueur2 = new Joueur();
-Chateau ch(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-Caserne * caser = new Caserne(40,40,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-Ferme ferm(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+//Chateau ch(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+//Ferme ferm(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
 int compensationY(int pos){
   if(pos < -20 ) return 0;
@@ -134,6 +135,7 @@ GLvoid Modelisation()
 {
 	initGL::VM_init();
 	Forme f;
+  //Element::current_id = 0;
   
   glPushMatrix();
   {
@@ -170,7 +172,7 @@ GLvoid Modelisation()
 
     PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
 
-   glViewport(0, 0, WIDTH, HEIGHT);
+    glViewport(0, 0, WIDTH, HEIGHT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,1000.0f);
@@ -239,14 +241,12 @@ GLvoid Modelisation()
 
     
    glPushMatrix();{
-      Element::current_id = 0;
+      
 
   // Affichage des Unités
     // Joueur 1
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
-        //Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
-        //e->setHitbox(Joueur1->getUnites()[i]->getHitbox());
         //printf(" hitbox e (%f,%f) et (%f,%f)  \n",e->getHitbox().x1,e->getHitbox().y1,e->getHitbox().x2,e->getHitbox().y2);
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur1->getUnites()[i]));
         }
@@ -256,8 +256,6 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur2->getUnites().size(); i++){
         Joueur2->getUnites()[i]->creerPersonnage();
         Joueur2->getUnites()[i]->comportement(Joueur1->getUnites(),toutLesElements);
-        //Element * e = new Element(Joueur2->getUnites()[i]->getX(),Joueur2->getUnites()[i]->getY());
-        //e->setHitbox(Joueur2->getUnites()[i]->getHitbox());
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur2->getUnites()[i]));
       }
       Joueur2->removeUnites();
@@ -366,6 +364,7 @@ GLvoid Modelisation()
   glPushMatrix();{
   //interface
     InterfaceHUD interface(clickX, clickY, initGL::modeAction, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Caserne, initGL::Texture_Img_Ferme, initGL::Texture_Img_Tour, initGL::Texture_Img_Cancel);
+    InterfaceHUD interface(clickX, clickY, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Hache, initGL::Texture_Img_Pioche);
     interface.creerInterfaceHUD(listePersoInterface, listeBatimentInterface, Joueur1);
     //check l'action des clicks
     initGL::modeAction=interface.ActionClick(listePersoInterface, listeBatimentInterface, Joueur1);
@@ -384,8 +383,8 @@ GLvoid Modelisation()
 int main(int argc, char **argv){
 
   printf(" TEST \n");
-  Batiment * castle = new Chateau(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-  Batiment * caserne = new Caserne(-20,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  Batiment * castle = new Chateau(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  Batiment * caserne = new Caserne(10,10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur1->addBatiment(castle);
   Joueur1->addBatiment(caserne);
   // Joueur1->addBatiment(tower);
@@ -395,6 +394,7 @@ int main(int argc, char **argv){
   dynamic_cast<Caserne*>(Joueur1->getBatiments()[1])->creerArbaletrier(Joueur1);
   //caser.creerGuerrier(Joueur1);
 
+  Caserne * caser = new Caserne(40,40,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur2->addBatiment(caser);
   caser->creerArbaletrier(Joueur2);
   //dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
