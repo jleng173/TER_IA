@@ -8,6 +8,7 @@
 #include <math.h>
 #include <vector>
 #include <memory>
+#include "Carte.hpp"
 #include "Forme.hpp"
 #include "Batiment.hpp"
 #include "Element.hpp"

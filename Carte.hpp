@@ -17,10 +17,10 @@ public:
 	int getTailleCarte();
 
 	std::vector<Decor*> decors;
-
+	static int tailleCarte;
 private:
 	float xdecor;
 	float ydecor;
-	int tailleCarte;
+	
  
 };

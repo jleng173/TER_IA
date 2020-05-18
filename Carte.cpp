@@ -25,6 +25,8 @@ Carte::Carte(){
                 
 };
 
+int Carte::tailleCarte;
+
 void Carte::solcarte(){
     glPushMatrix();{
 
