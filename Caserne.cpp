@@ -20,13 +20,14 @@ void Caserne::creerBatiment() const{
     struct cube1 batiment = forme.creerCube(3);
     struct cube1 mur = forme.creerCube(3);
     struct pyramide1 pyramide1 = forme.creerPyramide(4);
-    glEnable(GL_TEXTURE_2D);
+
 
     glTranslatef(position[0],position[1],3);
     if(selected)
         barreHp(9);
+
     glRotatef(90,1.0,0.0,0.0);
-    
+        glEnable(GL_TEXTURE_2D);
     glPushMatrix();{
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
         glPushMatrix();{

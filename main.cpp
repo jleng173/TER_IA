@@ -130,6 +130,7 @@ GLvoid Modelisation()
 {
 	initGL::VM_init();
 	Forme f;
+  //Element::current_id = 0;
   
   glPushMatrix();
   {
@@ -235,7 +236,7 @@ GLvoid Modelisation()
 
     
    glPushMatrix();{
-      Element::current_id = 0;
+      
 
   // Affichage des Unités
     // Joueur 1
