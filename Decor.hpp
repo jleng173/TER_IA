@@ -16,13 +16,25 @@ public:
     void Foret();
 	void Mine();
 
-    private:
+    std::vector< std::vector<float> > getForet();
+    std::vector< std::vector<float> > getMine();
+
+    float getpositionDecorX();
+    float getpositionDecorY();
+
+    void deleteArbre(int id);
+    void deleteRoche(int id);
+
+    void degatArbre(int id, float degat);
+    void degatRoche(int id,float degat);
+
+private:
 	GLvoid Arbre();
     GLvoid Roche();
  
  private:
-    float decox;
-    float decoy;
+    float positionDecorX;
+    float positionDecorY;
     std::vector< std::vector<float> > _foret;
     std::vector< std::vector<float> > _mine;
 };

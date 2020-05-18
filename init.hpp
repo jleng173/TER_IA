@@ -99,6 +99,8 @@ protected:
  static TEXTURE_STRUCT * Texture_Img_Stop;
  static TEXTURE_STRUCT * Texture_Img_Attaquer;
  static TEXTURE_STRUCT * Texture_Img_Construire;
+ static TEXTURE_STRUCT * Texture_Img_Hache;
+ static TEXTURE_STRUCT * Texture_Img_Pioche;
 };
 
 

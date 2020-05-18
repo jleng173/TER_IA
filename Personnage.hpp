@@ -17,7 +17,11 @@ enum State {
     FIRE,
     FLEE,
     ATTACK,
-    PURSUIT
+    PURSUIT,
+    SEEKWOOD,
+    SEEKSTONE,
+    CHOP,
+    MINE
 };
 
 class Personnage : public Element{
@@ -26,7 +30,7 @@ protected:
     std::string nom;
     int hp;
     int hpMax;
-    int dmg;
+    float dmg;
     //hitbox représenté par 2 cordonnées formant un rectangle
     //point en bas à gauche (hitbox.x1,hitbox.y1)
     //point en haut à droite (hitbox.x2,hitbox.y2)

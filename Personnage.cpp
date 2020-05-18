@@ -14,7 +14,7 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     hitbox.y2 = position[1]+1;
     orientation = angle;
     vitesseMAX = v;
-    selected = 1;
+    selected = 0;
     etat = SLEEP;
 }
 

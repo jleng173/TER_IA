@@ -1,6 +1,6 @@
 #include "InterfaceHUD.hpp"
 
-InterfaceHUD::InterfaceHUD(float _x, float _y, TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier,TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier, TEXTURE_STRUCT * T_Img_Or, TEXTURE_STRUCT * T_Img_Pierre,TEXTURE_STRUCT * T_Img_Nourriture, TEXTURE_STRUCT * T_Img_Bois, TEXTURE_STRUCT * T_Img_Mouvement, TEXTURE_STRUCT * T_Img_Stop, TEXTURE_STRUCT * T_Img_Attaquer, TEXTURE_STRUCT * T_Img_Construire):
+InterfaceHUD::InterfaceHUD(float _x, float _y, TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier,TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier, TEXTURE_STRUCT * T_Img_Or, TEXTURE_STRUCT * T_Img_Pierre,TEXTURE_STRUCT * T_Img_Nourriture, TEXTURE_STRUCT * T_Img_Bois, TEXTURE_STRUCT * T_Img_Mouvement, TEXTURE_STRUCT * T_Img_Stop, TEXTURE_STRUCT * T_Img_Attaquer, TEXTURE_STRUCT * T_Img_Construire, TEXTURE_STRUCT * T_Img_Hache, TEXTURE_STRUCT * T_Img_Pioche):
 x(_x),
 y(_y),
 Texture_HUD(T_HUD),
@@ -16,7 +16,9 @@ Texture_Img_Bois(T_Img_Bois),
 Texture_Img_Mouvement(T_Img_Mouvement),
 Texture_Img_Stop(T_Img_Stop),
 Texture_Img_Attaquer(T_Img_Attaquer),
-Texture_Img_Construire(T_Img_Construire){
+Texture_Img_Construire(T_Img_Construire),
+Texture_Img_Hache(T_Img_Hache),
+Texture_Img_Pioche(T_Img_Pioche){
 
 }
 
@@ -400,6 +402,10 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
       glPopMatrix();
 
             //2e rangée
+      if(paysan){
+        glEnable(GL_TEXTURE_2D);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Hache->width, Texture_Img_Hache->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Hache->data);
+      }
       glBegin(GL_QUADS);
           glColor3f(1.0f, 1.0f, 1.0f);
           glTexCoord2f(0,1);
@@ -410,19 +416,35 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
           glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30.0);
           glTexCoord2f(1,1);
           glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-20);
-      glEnd(); 
+      glEnd();
+      if(paysan)
+        glDisable(GL_TEXTURE_2D);
+
 
       glPushMatrix();{
         glTranslatef(20,0,0);
+        if(paysan){
+          glEnable(GL_TEXTURE_2D);
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Pioche->width, Texture_Img_Pioche->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Pioche->data);
+        }
         glBegin(GL_QUADS);
             glColor3f(1.0f, 1.0f, 1.0f);
+            glTexCoord2f(0,1);
             glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-20);
+            glTexCoord2f(0,0);
             glVertex2f(2*GLUT_SCREEN_WIDTH/3+5, GLUT_SCREEN_HEIGHT-30.0);
+            glTexCoord2f(1,0);
             glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-30.0);
+            glTexCoord2f(1,1);
             glVertex2f((2*GLUT_SCREEN_WIDTH/3+5)+(GLUT_SCREEN_WIDTH/12), GLUT_SCREEN_HEIGHT-20);
         glEnd();
+
+        if(paysan)
+          glDisable(GL_TEXTURE_2D);
       }
       glPopMatrix();
+
+
 
       glPushMatrix();{
         glTranslatef(40,0,0);
@@ -583,9 +605,27 @@ void InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment 
     }
   }
   if(x>1265 && x<1392 && b.size()==1 && b[0]->getNom()=="Caserne"){
-    std::cout << "Je rentre" << std::endl;
+    //std::cout << "Je rentre" << std::endl;
     if(y>713 && y<757){
       dynamic_cast<Caserne *>(b[0])->creerArbaletrier(j);
+    }
+  }
+
+  if(x>1105 && x<1232 && b.size()==1 && b[0]->getNom()=="Chateau"){
+    if(y>713 && y<757){
+      dynamic_cast<Chateau *>(b[0])->creerPaysan(j);
+    }
+  }
+
+  if(x>1105 && x<1232 && p.size()==1 && p[0]->getNom()=="Paysan"){
+    if(y>767 && y<811){
+      dynamic_cast<Paysan *>(p[0])->modeBois();
+    }
+  }
+
+  if(x>1265 && x<1392 && p.size()==1 && p[0]->getNom()=="Paysan"){
+    if(y>767 && y<811){
+      dynamic_cast<Paysan *>(p[0])->modePierre();
     }
   }
 }

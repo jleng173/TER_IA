@@ -6,7 +6,7 @@ Arbaletrier::Arbaletrier(float x, float y,float angle, float vitesseMAX):Personn
     hpMax=100;
     dmg=5;
     timeProjec = 0.0;
-    selected = 1;
+    selected = 0;
     range = 50;
 }
 

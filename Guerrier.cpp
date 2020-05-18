@@ -137,7 +137,9 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<
         break;
 
         case PURSUIT:
-            deplacementCible(ennemieProche[0],ennemieProche[1],all);
+            //deplacementCible(ennemieProche[0],ennemieProche[1],all);
+            lastPosition[0] = ennemieProche[0];
+            lastPosition[1] = ennemieProche[1];
             if(basHp()){
                 etat = FLEE;
             }else if(contactEnnemie(ennemieProche)){

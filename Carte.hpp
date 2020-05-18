@@ -16,10 +16,11 @@ public:
     void solcarte();
 	int getTailleCarte();
 
+	std::vector<Decor*> decors;
+
 private:
 	float xdecor;
 	float ydecor;
-	std::vector<Decor*> decors;
 	int tailleCarte;
  
 };

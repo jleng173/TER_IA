@@ -82,6 +82,8 @@ TEXTURE_STRUCT * initGL::Texture_Img_Mouvement = p.readPpm ("./texture/move_text
 TEXTURE_STRUCT * initGL::Texture_Img_Stop = p.readPpm ("./texture/defend_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Attaquer = p.readPpm ("./texture/battle_texture.PPM");
 TEXTURE_STRUCT * initGL::Texture_Img_Construire = p.readPpm ("./texture/build_texture.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Hache = p.readPpm ("./texture/hache.PPM");
+TEXTURE_STRUCT * initGL::Texture_Img_Pioche = p.readPpm ("./texture/pioche.PPM");
 
 //Arbaletrier A1(15,15,0,3);
 
@@ -90,9 +92,8 @@ TEXTURE_STRUCT * initGL::Texture_Img_Construire = p.readPpm ("./texture/build_te
 
 Joueur * Joueur1 = new Joueur();
 Joueur * Joueur2 = new Joueur();
-Chateau ch(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-Caserne * caser = new Caserne(40,40,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-Ferme ferm(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+//Chateau ch(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+//Ferme ferm(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 
 int compensationY(int pos){
   if(pos < -20 ) return 0;
@@ -165,7 +166,7 @@ GLvoid Modelisation()
 
     PositionSouris SP(modelViewMat,modelProjetMat,initGL::xpose,initGL::ypose,WIDTH,HEIGHT);
 
-   glViewport(0, 0, WIDTH, HEIGHT);
+    glViewport(0, 0, WIDTH, HEIGHT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(45.0f,(GLfloat)WIDTH/(GLfloat)HEIGHT,0.1f,1000.0f);
@@ -240,8 +241,6 @@ GLvoid Modelisation()
     // Joueur 1
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
         Joueur1->getUnites()[i]->creerPersonnage();
-        //Element * e = new Element(Joueur1->getUnites()[i]->getX(),Joueur1->getUnites()[i]->getY());
-        //e->setHitbox(Joueur1->getUnites()[i]->getHitbox());
         //printf(" hitbox e (%f,%f) et (%f,%f)  \n",e->getHitbox().x1,e->getHitbox().y1,e->getHitbox().x2,e->getHitbox().y2);
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur1->getUnites()[i]));
         }
@@ -251,8 +250,6 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur2->getUnites().size(); i++){
         Joueur2->getUnites()[i]->creerPersonnage();
         Joueur2->getUnites()[i]->comportement(Joueur1->getUnites(),toutLesElements);
-        //Element * e = new Element(Joueur2->getUnites()[i]->getX(),Joueur2->getUnites()[i]->getY());
-        //e->setHitbox(Joueur2->getUnites()[i]->getHitbox());
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur2->getUnites()[i]));
       }
       Joueur2->removeUnites();
@@ -355,7 +352,7 @@ GLvoid Modelisation()
 
   glPushMatrix();{
   //interface
-    InterfaceHUD interface(clickX, clickY, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire);
+    InterfaceHUD interface(clickX, clickY, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Hache, initGL::Texture_Img_Pioche);
     interface.creerInterfaceHUD(listePersoInterface, listeBatimentInterface, Joueur1);
     interface.ActionClick(listePersoInterface, listeBatimentInterface, Joueur1);
     // std::cout << "click " << clickX << " " << clickY << std::endl;
@@ -373,16 +370,17 @@ GLvoid Modelisation()
 int main(int argc, char **argv){
 
   printf(" TEST \n");
-  Batiment * castle = new Chateau(0,0,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
+  Batiment * castle = new Chateau(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Batiment * caserne = new Caserne(10,10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur1->addBatiment(castle);
   Joueur1->addBatiment(caserne);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
   //dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
-  dynamic_cast<Caserne*>(Joueur1->getBatiments()[1])->creerGuerrier(Joueur1);
+  dynamic_cast<Caserne*>(Joueur1->getBatiments()[1])->creerArbaletrier(Joueur1);
   //caser.creerGuerrier(Joueur1);
 
+  Caserne * caser = new Caserne(40,40,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur2->addBatiment(caser);
   caser->creerArbaletrier(Joueur2);
   //dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);

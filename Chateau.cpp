@@ -1,6 +1,6 @@
 #include "Chateau.hpp"
 
-Chateau::Chateau(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte,  T_paille){
+Chateau::Chateau(float x, float y, std::vector<Decor*> decors,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte,  T_paille){
     hp=1000;
     hpMax=1000;
     hitbox.x1 = position[0]-5;
@@ -9,14 +9,15 @@ Chateau::Chateau(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_
     hitbox.y2 = position[1]+5;
     enConstruction=false;
     nom="Chateau";
+    _decors = decors;
 }
 
 void Chateau::creerPaysan(Joueur * J){
     
-    if (J->getUnites().size() < J->getMaxUnites()){
-        printf("CREATION D'UN PAYSAN \n");
+    if (J->getUnites().size() < J->getMaxUnites() && (J->getOr()-2) > 0){
+        printf("CREATION D'UN PAYSAN \n"); 
         //Paysan pays(position[0],position[1]-3,0,3);
-        Personnage * PersPaysan = new Paysan(position[0],position[1]-15,0,3);
+        Personnage * PersPaysan = new Paysan(position[0],position[1]-15,0,3, _decors, J);
         J->subtractOr(2);
         J->addUnites(PersPaysan);
     }

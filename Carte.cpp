@@ -4,11 +4,7 @@ Carte::Carte(){
 
     //std::srand (time(NULL));
     tailleCarte = 250;
-    //Decor d;
-   // decor = d;
     //faire une boucle parcourant tous les Decor puis appelant leur méthode generate
-   // decor.GenerateForet(100);
-    //decor.GenerateMine(20);
 
     printf("GENERATION DE LA CARTE ");
     for (int i = 2 ; i <= 10 ; i++){
@@ -20,7 +16,7 @@ Carte::Carte(){
         printf(".\n");
         //printf("%f %f \n",xdecor,ydecor);
         Decor * d = new Decor(xdecor,ydecor);
-        d->GenerateForet(100);
+        d->GenerateForet(50);
         d->GenerateMine(20);
         decors.push_back(d);
     }
@@ -32,9 +28,9 @@ Carte::Carte(){
 void Carte::solcarte(){
     glPushMatrix();{
 
-    glRotatef(45,0.0,0.0,1.0);
+    
         glPushMatrix();{
-        
+        glRotatef(45,0.0,0.0,1.0);
             glColor3f(0.2,0.8,0.2);
             glBegin(GL_QUADS);
                 glTexCoord2f(-1.0,2.0);
