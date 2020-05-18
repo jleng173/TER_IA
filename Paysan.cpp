@@ -1,6 +1,6 @@
 #include "Paysan.hpp"
 
-Paysan::Paysan(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
+Paysan::Paysan(float x, float y,float angle, float vitesseMAX,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Personnage(x,y,angle,vitesseMAX),Texture_chateau(T_chateau),Texture_pierre(T_pierre),Texture_toit(T_toit),Texture_porte(Texture_porte),Texture_paille(T_paille){
     nom="Paysan";
     hp=60;
     hpMax=60;
@@ -9,29 +9,29 @@ Paysan::Paysan(float x, float y,float angle, float vitesseMAX):Personnage(x,y,an
     vision = 25.0;
 }
 
-void Paysan::construireCaserne(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+void Paysan::construireCaserne(Joueur * J,float x, float y){
     if(J->getBois() >= 2 && J->getPierre() >= 8){
         J->subtractBois(2);
         J->subtractPierre(8);
-        Batiment * cas = new Caserne(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        Batiment * cas = new Caserne(x,y,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
         J->addBatiment(cas);
     }
 }
 
-void Paysan::construireFerme(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+void Paysan::construireFerme(Joueur * J,float x, float y){
     if(J->getBois() >= 4 && J->getPierre() >= 1){
         J->subtractBois(4);
         J->subtractPierre(1);
-        Batiment * ferm = new Ferme(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        Batiment * ferm = new Ferme(J,x,y,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
         J->addBatiment(ferm);
     }
 }
 
-void Paysan::construireTour(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille){
+void Paysan::construireTour(Joueur * J,float x, float y){
     if(J->getBois() >= 5 && J->getPierre() >= 5){
         J->subtractBois(5);
         J->subtractPierre(5);
-        Batiment * tower = new Tour(x,y,T_chateau,T_pierre,T_toit,T_porte,T_paille);
+        Batiment * tower = new Tour(x,y,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
         
         J->addBatiment(tower);
     }

@@ -1,8 +1,9 @@
 #include "InterfaceHUD.hpp"
 
-InterfaceHUD::InterfaceHUD(float _x, float _y, TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier,TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier, TEXTURE_STRUCT * T_Img_Or, TEXTURE_STRUCT * T_Img_Pierre,TEXTURE_STRUCT * T_Img_Nourriture, TEXTURE_STRUCT * T_Img_Bois, TEXTURE_STRUCT * T_Img_Mouvement, TEXTURE_STRUCT * T_Img_Stop, TEXTURE_STRUCT * T_Img_Attaquer, TEXTURE_STRUCT * T_Img_Construire):
+InterfaceHUD::InterfaceHUD(float _x, float _y, int mode,TEXTURE_STRUCT * T_HUD, TEXTURE_STRUCT * T_HUD2, TEXTURE_STRUCT * T_Pierre, TEXTURE_STRUCT * T_Img_Guerrier,TEXTURE_STRUCT * T_Img_Paysan, TEXTURE_STRUCT * T_Img_Arbaletrier, TEXTURE_STRUCT * T_Img_Or, TEXTURE_STRUCT * T_Img_Pierre,TEXTURE_STRUCT * T_Img_Nourriture, TEXTURE_STRUCT * T_Img_Bois, TEXTURE_STRUCT * T_Img_Mouvement, TEXTURE_STRUCT * T_Img_Stop, TEXTURE_STRUCT * T_Img_Attaquer, TEXTURE_STRUCT * T_Img_Construire, TEXTURE_STRUCT * T_Img_Caserne, TEXTURE_STRUCT * T_Img_Ferme, TEXTURE_STRUCT * T_Img_Tour, TEXTURE_STRUCT * Texture_Img_Cancel):
 x(_x),
 y(_y),
+modeAction(mode),
 Texture_HUD(T_HUD),
 Texture_HUD2(T_HUD2),
 Texture_Pierre(T_Pierre),
@@ -16,7 +17,11 @@ Texture_Img_Bois(T_Img_Bois),
 Texture_Img_Mouvement(T_Img_Mouvement),
 Texture_Img_Stop(T_Img_Stop),
 Texture_Img_Attaquer(T_Img_Attaquer),
-Texture_Img_Construire(T_Img_Construire){
+Texture_Img_Construire(T_Img_Construire),
+Texture_Img_Caserne(T_Img_Caserne),
+Texture_Img_Ferme(T_Img_Ferme),
+Texture_Img_Tour(T_Img_Tour),
+Texture_Img_Cancel(Texture_Img_Cancel){
 
 }
 
@@ -325,17 +330,22 @@ GLvoid InterfaceHUD::drawIconCharacter(){
 // Si bool est à true, affiche l'icone construire
 GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std::vector<Batiment *> b){
 
+      //1ere rangée
       glPushMatrix();{
 
-        if(p.empty() && b.size()==1 && b[0]->getNom()=="Caserne"){
+        if(p.empty() && b.size()==1 && b[0]->getNom()=="Caserne" && modeAction==0){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
         }
-        if(p.empty() && b.size()==1 && b[0]->getNom()=="Chateau"){
+        if(p.empty() && b.size()==1 && b[0]->getNom()=="Chateau" && modeAction==0){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
         }
-        if(p.size()>=1){
+        if(p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+          glEnable(GL_TEXTURE_2D);
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Caserne->width, Texture_Img_Caserne->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Caserne->data);
+        }
+        if(p.size()>=1 && modeAction==0){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Mouvement->width, Texture_Img_Mouvement->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Mouvement->data);
         }
@@ -357,11 +367,15 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
 
       glPushMatrix();{
         glTranslatef(20,0,0);
-        if(p.empty() && b.size()==1 && b[0]->getNom()=="Caserne"){
+        if(p.empty() && b.size()==1 && b[0]->getNom()=="Caserne" && modeAction==0){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Arbaletrier->width, Texture_Img_Arbaletrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Arbaletrier->data);
         }
-        if(p.size()>=1){
+        if(p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+          glEnable(GL_TEXTURE_2D);
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Ferme->width, Texture_Img_Ferme->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Ferme->data);
+        }
+        if(p.size()>=1 && modeAction==0){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Stop->width, Texture_Img_Stop->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Stop->data);
         }
@@ -382,7 +396,11 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
 
       glPushMatrix();{
         glTranslatef(40,0,0);
-        if(p.size()>=1)
+        if(p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+          glEnable(GL_TEXTURE_2D);
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Tour->width, Texture_Img_Tour->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Tour->data);
+        }
+        if(p.size()>=1 && modeAction==0)
         {
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Attaquer->width, Texture_Img_Attaquer->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Attaquer->data);
@@ -441,9 +459,13 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
       glPopMatrix();
 
             //3e rangée
-      if(paysan){
+      if(paysan && modeAction==0){
         glEnable(GL_TEXTURE_2D);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Construire->width, Texture_Img_Construire->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Construire->data);
+      }
+      if(paysan && modeAction==1){
+        glEnable(GL_TEXTURE_2D);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Cancel->width, Texture_Img_Cancel->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Cancel->data);
       }
       glBegin(GL_QUADS);
           glColor3f(1.0f, 1.0f, 1.0f);
@@ -580,22 +602,56 @@ void InterfaceHUD::drawUnitInformation(std::vector<Personnage *> p, std::vector<
       }     
 }
 
-void InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *> b, Joueur * j){
+int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *> b, Joueur * j){
   //Creation d'unites pour la caserne
-  if(x>1105 && x<1232 && b.size()==1 && b[0]->getNom()=="Caserne"){
+  if(x>1105 && x<1232 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
     if(y>713 && y<757){
       dynamic_cast<Caserne *>(b[0])->creerGuerrier(j);
+      return 0;
     }
   }
-  if(x>1265 && x<1392 && b.size()==1 && b[0]->getNom()=="Caserne"){
+  if(x>1265 && x<1392 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
     if(y>713 && y<757){
       dynamic_cast<Caserne *>(b[0])->creerArbaletrier(j);
+      return 0;
     }
   }
   //Creation d'unites pour le chateau
-  if(x>1105 && x<1232 && b.size()==1 && b[0]->getNom()=="Chateau"){
+  if(x>1105 && x<1232 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Chateau"){
     if(y>713 && y<757){
       dynamic_cast<Chateau *>(b[0])->creerPaysan(j);
+      return 0;
     }
   }
+
+  //Construction depuis le menu du paysan
+  if(x>1105 && x<1231 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
+      if(y>821 && y<863){
+        return 1;
+      }
+  }
+  if(x>1105 && x<1232 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+    if(y>713 && y<757){
+      dynamic_cast<Paysan *>(p[0])->construireCaserne(j, p[0]->getX()+10, p[0]->getY()+10);
+      return 0;
+    }
+  }
+  if(x>1265 && x<1392 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+    if(y>713 && y<757){
+      dynamic_cast<Paysan *>(p[0])->construireFerme(j, p[0]->getX()+10, p[0]->getY()+10);
+      return 0;
+    }
+  }
+  if(x>1424 && x<1552 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+    if(y>713 && y<757){
+      dynamic_cast<Paysan *>(p[0])->construireTour(j, p[0]->getX()+10, p[0]->getY()+10);
+      return 0;
+    }
+  }
+  if(x>1105 && x<1231 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+      if(y>821 && y<863){
+        return 0;
+      }
+  }
+  return modeAction;
 }

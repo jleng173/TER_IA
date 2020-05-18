@@ -1,16 +1,5 @@
 #include "Ferme.hpp"
 
-Ferme::Ferme(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille) : Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte, T_paille){
-    hp=250;
-    hpMax=250;
-    hitbox.x1 = position[0]-3;
-    hitbox.y1 = position[1]-3;
-    hitbox.x2 = position[0]+3;
-    hitbox.y2 = position[1]+3;
-    enConstruction=false;
-    nom="Ferme";
-}
-
 Ferme::Ferme(Joueur * J, float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille) : Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte, T_paille){
     hp=250;
     hpMax=250;
@@ -19,6 +8,8 @@ Ferme::Ferme(Joueur * J, float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STR
     hitbox.x2 = position[0]+1.25;
     hitbox.y2 = position[1]+1.25;
     J->setMaxUnites(J->getMaxUnites()+1);
+    enConstruction=false;
+    nom="Ferme";
 }
 
 void Ferme::creerBatiment() const{

@@ -18,14 +18,6 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     etat = SLEEP;
 }
 
-Personnage::Personnage(float avn,float act,float x, float y, float angle, float v, float m):Element(x,y){
-    avance=avn;
-    action=act;
-    mouv = m;
-    orientation = angle;
-    vitesseMAX = v;
-    selected = 1;
-}
 
 
 void Personnage::updatePos( float time){

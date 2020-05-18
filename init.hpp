@@ -81,6 +81,7 @@ protected:
  static float mouv;
  static int selection;
  static int construction;
+ static int modeAction;		//    //Sert a changer le menu du Paysan
  static TEXTURE_STRUCT * Texture_chateau;
  static TEXTURE_STRUCT * Texture_pierre;
  static TEXTURE_STRUCT * Texture_toit;
@@ -99,6 +100,10 @@ protected:
  static TEXTURE_STRUCT * Texture_Img_Stop;
  static TEXTURE_STRUCT * Texture_Img_Attaquer;
  static TEXTURE_STRUCT * Texture_Img_Construire;
+ static TEXTURE_STRUCT * Texture_Img_Caserne;
+ static TEXTURE_STRUCT * Texture_Img_Ferme;
+ static TEXTURE_STRUCT * Texture_Img_Tour;
+ static TEXTURE_STRUCT * Texture_Img_Cancel;
 };
 
 
