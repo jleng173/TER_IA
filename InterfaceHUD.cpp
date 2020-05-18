@@ -333,6 +333,10 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Guerrier->width, Texture_Img_Guerrier->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Guerrier->data);
         }
+        if(p.empty() && b.size()==1 && b[0]->getNom()=="Chateau"){
+          glEnable(GL_TEXTURE_2D);
+          glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Paysan->width, Texture_Img_Paysan->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Paysan->data);
+        }
         if(p.size()>=1){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Mouvement->width, Texture_Img_Mouvement->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Mouvement->data);
@@ -599,13 +603,14 @@ void InterfaceHUD::drawUnitInformation(std::vector<Personnage *> p, std::vector<
 }
 
 void InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *> b, Joueur * j){
+  //Creation d'unites pour la caserne
   if(x>1105 && x<1232 && b.size()==1 && b[0]->getNom()=="Caserne"){
     if(y>713 && y<757){
       dynamic_cast<Caserne *>(b[0])->creerGuerrier(j);
     }
   }
   if(x>1265 && x<1392 && b.size()==1 && b[0]->getNom()=="Caserne"){
-    //std::cout << "Je rentre" << std::endl;
+    std::cout << "Je rentre" << std::endl;
     if(y>713 && y<757){
       dynamic_cast<Caserne *>(b[0])->creerArbaletrier(j);
     }

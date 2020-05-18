@@ -7,7 +7,6 @@
 // #include "Guerrier.hpp"
 // #include "Paysan.hpp"
 // #include "Arbaletrier.hpp"
-// #include "Chateau.hpp"
 // #include "Tour.hpp"
 // #include "Ferme.hpp"
 #include "Personnage.hpp"

@@ -289,7 +289,12 @@ GLvoid Modelisation()
           Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),toutLesElements);
         }
       }
-
+  //Gestion des tours
+      for(int i = 0 ; i < Joueur2->getBatiments().size(); i++){
+          if(Joueur2->getBatiments()[i]->getNom()=="Tour"){
+            dynamic_cast<Tour *>(Joueur2->getBatiments()[i])->comportement(Joueur1->getUnites(),toutLesElements);
+          }
+      }
       //printf(" coord elem %f %f \n",toutLesElements[0]->getPositionX(), toutLesElements[0]->getPositionY());
       lastposx = posx;
       lastposy = posy;
@@ -354,6 +359,7 @@ GLvoid Modelisation()
   //interface
     InterfaceHUD interface(clickX, clickY, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Hache, initGL::Texture_Img_Pioche);
     interface.creerInterfaceHUD(listePersoInterface, listeBatimentInterface, Joueur1);
+    //check l'action des clicks
     interface.ActionClick(listePersoInterface, listeBatimentInterface, Joueur1);
     // std::cout << "click " << clickX << " " << clickY << std::endl;
     clickX=0;
@@ -374,6 +380,7 @@ int main(int argc, char **argv){
   Batiment * caserne = new Caserne(10,10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur1->addBatiment(castle);
   Joueur1->addBatiment(caserne);
+  // Joueur1->addBatiment(tower);
   dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur1);
   //dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireTour(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   dynamic_cast<Paysan*>(Joueur1->getUnites()[0])->construireCaserne(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
