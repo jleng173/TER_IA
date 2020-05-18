@@ -7,13 +7,13 @@
 // #include "Guerrier.hpp"
 // #include "Paysan.hpp"
 // #include "Arbaletrier.hpp"
-// #include "Chateau.hpp"
 // #include "Tour.hpp"
 // #include "Ferme.hpp"
 #include "Personnage.hpp"
 #include "Batiment.hpp"
 #include "Tour.hpp"
 #include "Caserne.hpp"
+#include "Chateau.hpp"
 #include "Joueur.hpp"
 
 class InterfaceHUD{

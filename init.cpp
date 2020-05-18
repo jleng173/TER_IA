@@ -46,14 +46,16 @@ void initGL::generalInit(unsigned int width,unsigned int height)	// We call this
 GLvoid initGL::ReSizeGLScene(int Width, int Height)
 {
     if (Height==0)				// Prevent A Divide By Zero If The Window Is Too Small
-	Height=1;
+	    Height=1;
     glViewport(0, 0, Width, Height);		// Reset The Current Viewport And Perspective Transformation
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
     gluPerspective(45.0f,(GLfloat)Width/(GLfloat)Height,0.1f,1000.0f);
+    
     glMatrixMode(GL_MODELVIEW);
+    // glLoadIdentity();
 
 }
 
