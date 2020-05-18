@@ -363,8 +363,7 @@ GLvoid Modelisation()
 
   glPushMatrix();{
   //interface
-    InterfaceHUD interface(clickX, clickY, initGL::modeAction, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Caserne, initGL::Texture_Img_Ferme, initGL::Texture_Img_Tour, initGL::Texture_Img_Cancel);
-    InterfaceHUD interface(clickX, clickY, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Hache, initGL::Texture_Img_Pioche);
+    InterfaceHUD interface(clickX, clickY, initGL::modeAction, initGL::Texture_HUD, initGL::Texture_HUD2, initGL::Texture_pierre,initGL::Texture_Img_Guerrier,initGL::Texture_Img_Paysan,initGL::Texture_Img_Arbaletrier,initGL::Texture_Img_Or,initGL::Texture_Img_Pierre,initGL::Texture_Img_Nourriture,initGL::Texture_Img_Bois, initGL::Texture_Img_Mouvement, initGL::Texture_Img_Stop, initGL::Texture_Img_Attaquer, initGL::Texture_Img_Construire, initGL::Texture_Img_Caserne, initGL::Texture_Img_Ferme, initGL::Texture_Img_Tour, initGL::Texture_Img_Cancel, initGL::Texture_Img_Hache, initGL::Texture_Img_Pioche);
     interface.creerInterfaceHUD(listePersoInterface, listeBatimentInterface, Joueur1);
     //check l'action des clicks
     initGL::modeAction=interface.ActionClick(listePersoInterface, listeBatimentInterface, Joueur1);

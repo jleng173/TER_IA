@@ -1,7 +1,6 @@
 #include "Paysan.hpp"
 
-Paysan::Paysan(float x, float y,float angle, float vitesseMAX,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Personnage(x,y,angle,vitesseMAX),Texture_chateau(T_chateau),Texture_pierre(T_pierre),Texture_toit(T_toit),Texture_porte(Texture_porte),Texture_paille(T_paille){
-Paysan::Paysan(float x, float y,float angle, float vitesseMAX,std::vector<Decor*> decors, Joueur * J):Personnage(x,y,angle,vitesseMAX){
+Paysan::Paysan(float x, float y,float angle, float vitesseMAX,std::vector<Decor*> decors, Joueur * J, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Personnage(x,y,angle,vitesseMAX),Texture_chateau(T_chateau),Texture_pierre(T_pierre),Texture_toit(T_toit),Texture_porte(Texture_porte),Texture_paille(T_paille){
     nom="Paysan";
     hp=60;
     hpMax=60;

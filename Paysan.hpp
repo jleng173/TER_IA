@@ -20,14 +20,10 @@ protected:
     TEXTURE_STRUCT * Texture_porte;
     TEXTURE_STRUCT * Texture_paille;
 public:
-    Paysan(float x, float y,float angle, float vitesseMAX, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
+    Paysan(float x, float y,float angle, float vitesseMAX, std::vector<Decor*> decors, Joueur * J, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
     void construireCaserne(Joueur * J,float x, float y);
     void construireFerme(Joueur * J,float x, float y);
     void construireTour(Joueur * J,float x, float y);
-    Paysan(float x, float y,float angle, float vitesseMAX, std::vector<Decor*> decors, Joueur * J);
-    void construireCaserne(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
-    void construireFerme(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
-    void construireTour(Joueur * J,float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille);
     GLvoid creerChapeau() const override;
     GLvoid creerAccessoire() const override;
     //recherche la ressource la plus proche, Pierre 'P' ou Bois 'B' en fonction de l'argument
