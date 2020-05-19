@@ -31,6 +31,10 @@ using namespace std;
  int WIDTH = 1600;
  int HEIGHT = 900;
 
+std::array<float,3> rouge={1,0,0};
+std::array<float,3> bleu ={0,0,1};
+
+
 float initGL::z = 0;
 float initGL::xrot = 0;
 float initGL::yrot = 0;
@@ -95,8 +99,8 @@ TEXTURE_STRUCT * initGL::Texture_Img_Pioche = p.readPpm ("./texture/pioche.PPM")
 //Guerrier Perso2(10,10,0,5);
 //Arbaletrier PersoA(initGL::avance,initGL::action,10,10,0,5);
 
-Joueur * Joueur1 = new Joueur();
-Joueur * Joueur2 = new Joueur();
+Joueur * Joueur1 = new Joueur(bleu);
+Joueur * Joueur2 = new Joueur(rouge);
 //Chateau ch(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 //Ferme ferm(Joueur1,-10,-10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
 

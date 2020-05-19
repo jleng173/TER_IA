@@ -1,6 +1,6 @@
 #include "Guerrier.hpp"
 
-Guerrier::Guerrier(float x, float y,float angle, float vitesseMAX):Personnage(x,y,angle,vitesseMAX){
+Guerrier::Guerrier(float x, float y,float angle, float vitesseMAX, std::array<float,3> col):Personnage(x,y,angle,vitesseMAX,col){
     nom="Guerrier";
     hp=150;
     hpMax=150;

@@ -1,11 +1,11 @@
 #include "Joueur.hpp"
 
-Joueur::Joueur(){
+Joueur::Joueur(std::array<float,3> col){
     qteBois = 100;
     qteOr = 100;
     qtePierre = 100;
     maxUnites = 5;
-
+    std::copy(std::begin(col), std::end(col), std::begin(couleur));
 }
 
 void Joueur::addBois(int b){
@@ -36,6 +36,10 @@ void Joueur::subtractOr(int o){
 }
 int Joueur::getOr(){
     return qteOr;
+}
+
+std::array<float,3> Joueur::getCouleur(){
+    return couleur;
 }
 
 int Joueur::getMaxUnites(){

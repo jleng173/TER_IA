@@ -1,7 +1,7 @@
 #include "Personnage.hpp"
 
 
-Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
+Personnage::Personnage(float x, float y, float angle, float v, std::array<float,3> col):Element(x,y){
     avance=0;
     action=0;
     mouv = 0;
@@ -16,6 +16,7 @@ Personnage::Personnage(float x, float y, float angle, float v):Element(x,y){
     vitesseMAX = v;
     selected = 0;
     etat = SLEEP;
+    std::copy(std::begin(col), std::end(col), std::begin(couleur));
 }
 
 
@@ -198,7 +199,7 @@ glPushMatrix();{
             //Corps
             glPushMatrix();{
                 glTranslatef(0,-1.5,0);
-                glColor3f(0.1,0.1,0.1);
+                glColor3f(couleur[0],couleur[1],couleur[2]);
                 glScalef(0.3,0.7,0.2);
                 f.afficheCube(membre);
             }
@@ -208,35 +209,35 @@ glPushMatrix();{
             glPushMatrix();{
                 glRotatef(avance,1,0,0);
                 glPushMatrix();{
-                    glColor3f(0,1,1);
+                    glColor3f(1,1,1);
                     glTranslatef(0.6,-0.8,0);
                     glutSolidSphere(0.2,10,100);
                 }
                 glPopMatrix();
                 glPushMatrix();{
                     glTranslatef(0.7,-1.2,0);
-                    glColor3f(0,0,1);
+                    glColor3f(0,0,0);
                     glScalef(0.1,0.2,0.1);
                     f.afficheCube(membre);
                 }
                 glPopMatrix();
                     //2e Articulation
                 glPushMatrix();{
-                    glColor3f(0,1,1);
+                    glColor3f(1,1,1);
                     glTranslatef(0.7,-1.6,0);
                     glutSolidSphere(0.2,10,100);
                 }
                 glPopMatrix();
                 glPushMatrix();{
                     glTranslatef(0.7,-2,0);
-                    glColor3f(1,0,0);
+                    glColor3f(0,0,0);
                     glScalef(0.1,0.2,0.1);
                     f.afficheCube(membre);
                 }
                 glPopMatrix();
                     //Main Gauche
                 glPushMatrix();{
-                    glColor3f(0,1,0);
+                    glColor3f(0,0,0);
                     glTranslatef(0.7,-2.4,0);
                     glutSolidSphere(0.15,10,100);
                 }
@@ -253,21 +254,21 @@ glPushMatrix();{
                 glRotatef(-45+action,1,0,0);
             }
             glPushMatrix();{
-                glColor3f(0,1,1);
+                glColor3f(1,1,1);
                 glTranslatef(-0.6,-0.8,0);
                 glutSolidSphere(0.2,10,100);
             }
             glPopMatrix();
             glPushMatrix();{
                 glTranslatef(-0.7,-1.2,0);
-                glColor3f(0,0,1);
+                glColor3f(0,0,0);
                 glScalef(0.1,0.2,0.1);
                 f.afficheCube(membre);
             }
             glPopMatrix();
                 //Articulation    
             glPushMatrix();{
-                glColor3f(0,1,1);
+                glColor3f(1,1,1);
                 glTranslatef(-0.7,-1.6,0);
                 glutSolidSphere(0.2,10,100);
             }
@@ -280,14 +281,14 @@ glPushMatrix();{
                 glPushMatrix();{
                     // glRotatef(action,1,0,0);
                     glTranslatef(-0.7,-2,0);
-                    glColor3f(1,0,0);
+                    glColor3f(0,0,0);
                     glScalef(0.1,0.2,0.1);
                     f.afficheCube(membre);
                 }
                 glPopMatrix();
                 //Main droite
                 glPushMatrix();{
-                    glColor3f(0,1,0);
+                    glColor3f(0,0,0);
                     glTranslatef(-0.7,-2.4,0);
                     glutSolidSphere(0.15,10,100);
                 }
@@ -315,34 +316,34 @@ glPushMatrix();{
             glTranslatef(-0.25,-1.8,0);
             glRotatef(-avance,1,0,0);
             glPushMatrix();{
-                glColor3f(0,1,1);
+                glColor3f(1,1,1);
                 glTranslatef(0.6,-0.8,0);
                 glutSolidSphere(0.2,10,100);
             }
             glPopMatrix();
             glPushMatrix();{
                 glTranslatef(0.7,-1.2,0);
-                glColor3f(0,0,1);
+                glColor3f(0,0,0);
                 glScalef(0.1,0.2,0.1);
                 f.afficheCube(membre);
             }
             glPopMatrix();
                 //Articulation
             glPushMatrix();{
-                glColor3f(0,1,1);
+                glColor3f(1,1,1);
                 glTranslatef(0.7,-1.6,0);
                 glutSolidSphere(0.2,10,100);
             }
             glPopMatrix();
             glPushMatrix();{
                 glTranslatef(0.7,-2,0);
-                glColor3f(1,0,0);
+                glColor3f(0,0,0);
                 glScalef(0.1,0.2,0.1);
                 f.afficheCube(membre);
             }
             glPopMatrix();
             glPushMatrix();{
-                glColor3f(0,1,0);
+                glColor3f(0,0,0);
                 glTranslatef(0.7,-2.4,0);
                 glutSolidSphere(0.15,10,100);
             }
@@ -355,34 +356,34 @@ glPushMatrix();{
             glTranslatef(0.25,-1.8,0);
             glRotatef(avance,1,0,0);
             glPushMatrix();{
-                glColor3f(0,1,1);
+                glColor3f(1,1,1);
                 glTranslatef(-0.6,-0.8,0);
                 glutSolidSphere(0.2,10,100);
             }
             glPopMatrix();
             glPushMatrix();{
                 glTranslatef(-0.7,-1.2,0);
-                glColor3f(0,0,1);
+                glColor3f(0,0,0);
                 glScalef(0.1,0.2,0.1);
                 f.afficheCube(membre);
             }
             glPopMatrix();
                 //Articulation    
             glPushMatrix();{
-                glColor3f(0,1,1);
+                glColor3f(1,1,1);
                 glTranslatef(-0.7,-1.6,0);
                 glutSolidSphere(0.2,10,100);
             }
             glPopMatrix();
             glPushMatrix();{
                 glTranslatef(-0.7,-2,0);
-                glColor3f(1,0,0);
+                glColor3f(0,0,0);
                 glScalef(0.1,0.2,0.1);
                 f.afficheCube(membre);
             }
             glPopMatrix();
             glPushMatrix();{
-                glColor3f(0,1,0);
+                glColor3f(0,0,0);
                 glTranslatef(-0.7,-2.4,0);
                 glutSolidSphere(0.15,10,100);
             }

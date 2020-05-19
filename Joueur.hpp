@@ -11,7 +11,7 @@ class Joueur {
 
 public:
     // Constructor
-    Joueur();
+    Joueur(std::array<float,3> col);
 
     int getBois();
     void addBois(int b);
@@ -28,6 +28,7 @@ public:
     int getMaxUnites();
     void setMaxUnites(int mu);
 
+    std::array<float,3> getCouleur();
     // std::vector<std::shared_ptr<Batiment> > getBatiments();
     std::vector<Personnage* > getUnites();
     void addUnites(Personnage* p);
@@ -45,4 +46,5 @@ private:
     int maxUnites;
     std::vector<Personnage*> listeUnites;
     std::vector<Batiment*> listeBatiments;
+    std::array<float,3> couleur;
 };  
