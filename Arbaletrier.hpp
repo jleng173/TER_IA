@@ -19,12 +19,12 @@ class Arbaletrier : public Personnage{
 
     public:
         Arbaletrier(float x, float y,float angle, float vitesseMAX);
-        void tirArbalete(float x, float y, std::vector<Personnage*> listeEnnemies);
+        void tirArbalete(float x, float y, std::vector<Element*> listeElements);
         GLvoid creerCarreau();
         GLvoid creerChapeau() const override;
         GLvoid creerAccessoire() const override;
-        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Element *>  all) override;
+        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all) override;
         //Transitions
-        bool ennemieCourtePortee(std::vector<float> ennemieProche);
-        bool ennemieLongPortee(std::vector<float> ennemieProche);
+        bool CourtePortee(std::vector<float> elementProche);
+        bool LongPortee(std::vector<float> elementProche);
 };

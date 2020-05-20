@@ -29,20 +29,14 @@ class Personnage : public Element{
 
 protected:
     std::string nom;
-    int hp;
-    int hpMax;
     float dmg;
-    //hitbox représenté par 2 cordonnées formant un rectangle
-    //point en bas à gauche (hitbox.x1,hitbox.y1)
-    //point en haut à droite (hitbox.x2,hitbox.y2)
-    //Hitbox hitbox;
     
     float avance;
     float action;
     float mouv;
     float mouvementbras;
     
-    float position[2];
+    //float position[2];
     float orientation;
 
     //acceleration
@@ -68,7 +62,7 @@ public:
     bool isSelected();
     void setSelected(int s);
 
-    virtual void comportement(std::vector<Personnage*> listeEnnemies, std::vector<Element *>  all) =  0;
+    virtual void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment, std::vector<Element *>  all) =  0;
     void updatePos( float time);
     void deplacementCible(float x, float y,std::vector<Element *>  all);
     void fuirCible(float x, float y,std::vector<Element *>  all);
@@ -76,12 +70,7 @@ public:
     Hitbox getHitbox();
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
 
-    int getHp();
-    void setHp(int h);
-    int getHpMax();
     int getDmg();
-    float getX();
-    float getY();
     float getLastX();
     float getLastY();
 
@@ -96,4 +85,6 @@ public:
 
     //Retourne les coordonnées x,y et la distance de l'ennemie le plus proche
     std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
+
+    std::vector<float> rangeBatiment(std::vector<Batiment*> listeBatiment);
 };

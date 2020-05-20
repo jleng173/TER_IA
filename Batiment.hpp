@@ -24,22 +24,12 @@ public:
 
     bool isSelected();
     void setSelected(int s);
-    int getHp();
-    void setHp(int h);
-    int getHpMax();
-    float getX();
-    float getY();
     bool getEnConstruction();
     void setEnConstruction(bool b);
     std::string getNom();
 
 protected:
-    float hp;
-    float hpMax;
-    float position[2];
-    //hitbox représenté par 2 cordonnées formant un rectangle
-    //point en bas à gauche (hitbox.x1,hitbox.y1)
-    //point en haut à droite (hitbox.x2,hitbox.y2)
+    //float position[2];
     bool selected;
     bool enConstruction;
     float delaiConstruction;

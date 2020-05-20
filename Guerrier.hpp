@@ -13,9 +13,9 @@ class Guerrier : public Personnage {
         GLvoid creerChapeau() const override;
         GLvoid creerAccessoire() const override;
         //Gestion des états
-        void comportement(std::vector<Personnage*> listeEnnemies,const std::vector<Element *>  all) override;
+        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,const std::vector<Element *>  all) override;
         //Transitions
-        bool voitEnnemie(std::vector<float> ennemieProche);
+        bool voitElement(std::vector<float> elementProche);
         bool basHp();
-        bool contactEnnemie(std::vector<float> ennemieProche);
+        bool contactElement(std::vector<float> elementProche, std::string elem);
 };

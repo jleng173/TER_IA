@@ -26,13 +26,21 @@ public:
     Hitbox getHitbox(){return hitbox;};
     void setHitbox(Hitbox h);
 
-    float getPositionX(){return position[0];};
-    float getPositionY(){return position[1];};
+    float getX(){return position[0];};
+    float getY(){return position[1];};
+    int getHp(){return hp;};
+    void setHp(int h){hp = h;};
+    int getHpMax(){return hpMax;};
 
     static int current_id;
     int id;
 protected:
+    //hitbox représenté par 2 cordonnées formant un rectangle
+    //point en bas à gauche (hitbox.x1,hitbox.y1)
+    //point en haut à droite (hitbox.x2,hitbox.y2)
     Hitbox hitbox;
     float position[2];
+    int hp;
+    int hpMax;
  
     };

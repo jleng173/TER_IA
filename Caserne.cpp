@@ -1,14 +1,14 @@
 #include "Caserne.hpp"
 
 Caserne::Caserne(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille) : Batiment(x,y,T_chateau, T_pierre, T_toit, T_porte, T_paille){
-    hp=700;
+    hp=1;
     hpMax=700;
     hitbox.x1 = position[0]-5;
     hitbox.y1 = position[1]-5;
     hitbox.x2 = position[0]+5;
     hitbox.y2 = position[1]+5;
     delaiConstruction=20;
-    enConstruction=false;
+    enConstruction=true;
     nom="Caserne";
 }
 

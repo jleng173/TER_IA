@@ -32,7 +32,7 @@ public:
     std::vector<Personnage* > getUnites();
     void addUnites(Personnage* p);
     //Enleve les personnages morts
-    void removeUnites();
+    void removeElements();
 
     std::vector<Batiment* > getBatiments();
     void addBatiment(Batiment* b);

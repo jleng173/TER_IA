@@ -9,6 +9,7 @@
 // #include "Arbaletrier.hpp"
 // #include "Tour.hpp"
 // #include "Ferme.hpp"
+#include "Element.hpp"
 #include "Personnage.hpp"
 #include "Batiment.hpp"
 #include "Tour.hpp"

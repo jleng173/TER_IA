@@ -1,6 +1,6 @@
 #include "Paysan.hpp"
 
-Paysan::Paysan(float x, float y,float angle, float vitesseMAX,std::vector<Decor*> decors, Joueur * J, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Personnage(x,y,angle,vitesseMAX),Texture_chateau(T_chateau),Texture_pierre(T_pierre),Texture_toit(T_toit),Texture_porte(Texture_porte),Texture_paille(T_paille){
+Paysan::Paysan(float x, float y,float angle, float vitesseMAX,std::vector<Decor*> decors, Joueur * J, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre,TEXTURE_STRUCT * T_toit,TEXTURE_STRUCT * T_porte, TEXTURE_STRUCT * T_paille):Personnage(x,y,angle,vitesseMAX),Texture_chateau(T_chateau),Texture_pierre(T_pierre),Texture_toit(T_toit),Texture_porte(T_porte),Texture_paille(T_paille){
     nom="Paysan";
     hp=60;
     hpMax=60;
@@ -36,7 +36,6 @@ void Paysan::construireTour(Joueur * J,float x, float y){
         J->subtractBois(5);
         J->subtractPierre(5);
         Batiment * tower = new Tour(x,y,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
-        
         J->addBatiment(tower);
     }
 }
@@ -189,7 +188,7 @@ std::vector<float> Paysan::rangeRessource(char r){
 }
 
 
-void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Element *>  all){
+void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all){
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     // ressourceProche -> (position x, position y, resistance, 
     //                     numéro du décor, position dans le vecteur, distance)
@@ -310,7 +309,7 @@ void Paysan::ajoutRessource(Joueur * J, char r){
         J->addBois(2);
         J->addOr(1);
     } else if( r == 'P'){
-        J->addPierre(6);
+        J->addPierre(4);
         J->addOr(3);
     }
 }

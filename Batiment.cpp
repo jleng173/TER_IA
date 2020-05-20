@@ -45,25 +45,6 @@ void Batiment::setSelected(int s){
     selected = s;
 }
 
-int Batiment::getHp(){
-    return hp;
-}
-
-void Batiment::setHp(int h){
-    hp=h;
-}
-
-int Batiment::getHpMax(){
-    return hpMax;
-}
-
-float Batiment::getX(){
-    return position[0];
-}
-
-float Batiment::getY(){
-    return position[1];
-}
 
 bool Batiment::getEnConstruction(){
     return enConstruction;

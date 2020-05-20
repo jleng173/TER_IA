@@ -12,7 +12,7 @@ class Tour : public Batiment{
         int getDmg();
         void tirArbalete(float x, float y, std::vector<Personnage*> listeEnnemies);
         GLvoid creerCarreau();
-        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Element *>  all);
+        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all);
         std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
         bool ennemieLongPortee(std::vector<float> ennemieProche);
 

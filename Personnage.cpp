@@ -119,7 +119,7 @@ void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
         updatePos(0.04);
     // printf("a = %f \n",avance)
     }else{
-        deplacementCible(x-5,y-5,all);
+       // deplacementCible(x-5,y-5,all);
     }
 }
 
@@ -424,28 +424,9 @@ GLvoid Personnage::drawHalfSphere(int scaley, int scalex, GLfloat r) {
    glEnd();
  }
 
-int Personnage::getHp(){
-    return hp;
-}
-
-void Personnage::setHp(int h){
-    hp=h;
-}
-
-int Personnage::getHpMax(){
-    return hpMax;
-}
 
 int Personnage::getDmg(){
     return dmg;
-}
-
-float Personnage::getX(){
-    return position[0];
-}
-
-float Personnage::getY(){
-    return position[1];
 }
 
 float Personnage::getLastX(){
@@ -489,3 +470,21 @@ std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemie
     ennemyproche[2] = distanceMin;
     return ennemyproche;
 }
+
+ std::vector<float> Personnage::rangeBatiment(std::vector<Batiment*> listeBatiment){
+    std::vector<float> batimentproche= {0,0,INFINITY};
+    float distanceMin = INFINITY;
+    for(int i = 0 ; i < listeBatiment.size() ; i++){
+        float calculx = listeBatiment[i]->getX()-position[0];
+        float calculy = listeBatiment[i]->getY()-position[1];
+        float distance = sqrtf((calculx*calculx)+(calculy*calculy));
+        
+        if(distance < distanceMin){
+            distanceMin = distance;
+            batimentproche[0] = listeBatiment[i]->getX();
+            batimentproche[1] = listeBatiment[i]->getY();
+        }
+    }
+    batimentproche[2] = distanceMin;
+    return batimentproche;
+ }

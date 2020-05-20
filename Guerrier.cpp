@@ -124,27 +124,34 @@ GLvoid Guerrier::creerAccessoire() const{
     glPopMatrix();
 }
 
-void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<Element *>  all) {
+void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment, std::vector<Element *>  all) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
-    
+    std::vector<float> batimentProche = rangeBatiment(listeBatiment);
     switch(etat){
         case SLEEP:
-            if(voitEnnemie(ennemieProche) && !basHp()){
+            if((voitElement(ennemieProche) || voitElement(batimentProche)) && !basHp()){
                 etat = PURSUIT;
-            } else if(voitEnnemie(ennemieProche) && basHp()){
+            } else if(voitElement(ennemieProche) && basHp()){
                 etat = FLEE;
             }
         break;
 
         case PURSUIT:
-            //deplacementCible(ennemieProche[0],ennemieProche[1],all);
-            lastPosition[0] = ennemieProche[0];
-            lastPosition[1] = ennemieProche[1];
+            if(voitElement(ennemieProche)){
+                //deplacementCible(ennemieProche[0],ennemieProche[1],all);
+                lastPosition[0] = ennemieProche[0];
+                lastPosition[1] = ennemieProche[1];
+            }else if(voitElement(batimentProche)){
+                //deplacementCible(batimentProche[0],batimentProche[1],all);
+                lastPosition[0] = batimentProche[0];
+                lastPosition[1] = batimentProche[1];
+            }
+
             if(basHp()){
                 etat = FLEE;
-            }else if(contactEnnemie(ennemieProche)){
+            }else if(contactElement(ennemieProche,"Personnage") || contactElement(batimentProche,"Batiment")){
                 etat = ATTACK;
-            }else if(!voitEnnemie(ennemieProche)){
+            }else if(!voitElement(ennemieProche) && !voitElement(batimentProche)){
                 etat = SLEEP;
             }
         break;
@@ -154,11 +161,19 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<
             if(action==0)
             {
                 mouvementbras=2;
-                for(int i = 0; i < listeEnnemies.size(); i++){
-                if(listeEnnemies[i]->getX()==ennemieProche[0] && listeEnnemies[i]->getY()==ennemieProche[1]){
-                    listeEnnemies[i]->setHp(listeEnnemies[i]->getHp() - dmg);
+                if(contactElement(ennemieProche,"Personnage")) {
+                    for(int i = 0; i < listeEnnemies.size(); i++){
+                        if(listeEnnemies[i]->getX()==ennemieProche[0] && listeEnnemies[i]->getY()==ennemieProche[1]){
+                            listeEnnemies[i]->setHp(listeEnnemies[i]->getHp() - dmg);
+                        }
+                    }
+                }else if(contactElement(batimentProche,"Batiment")) {
+                    for(int i = 0; i < listeBatiment.size(); i++){
+                        if(listeBatiment[i]->getX()==batimentProche[0] && listeBatiment[i]->getY()==batimentProche[1]){
+                            listeBatiment[i]->setHp(listeBatiment[i]->getHp() - dmg);
+                        }
+                    }
                 }
-            }
             }
             if(action<30 && mouvementbras==2){
                 action+=0.5;
@@ -170,14 +185,18 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<
 
             if(basHp()){
                 etat = FLEE;
-            }else if(!contactEnnemie(ennemieProche)){
+            }else if(!contactElement(ennemieProche,"Personnage") || !contactElement(batimentProche,"Batiment")){
                 etat = PURSUIT;
             }
         break;
 
         case FLEE:
-            this->fuirCible(ennemieProche[0],ennemieProche[1],all);
-            if(!voitEnnemie(ennemieProche)){
+            if(voitElement(ennemieProche)){
+                this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+            }else if (voitElement(batimentProche)){
+                this->fuirCible(batimentProche[0],batimentProche[1],all);
+            }
+            if(!voitElement(ennemieProche)){
                 etat = SLEEP;
             }else if(!basHp()){
                 etat = PURSUIT;
@@ -190,14 +209,18 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies, std::vector<
     }
 }
 
-bool Guerrier::voitEnnemie(std::vector<float> ennemieProche){
-    return (ennemieProche[2] <= vision);
+bool Guerrier::voitElement(std::vector<float> elementProche){
+    return (elementProche[2] <= vision);
 }
 
 bool Guerrier::basHp(){
     return (hp < hpMax/4);
 }
 
-bool Guerrier::contactEnnemie(std::vector<float> ennemieProche){
-    return (ennemieProche[2] <=3);
+bool Guerrier::contactElement(std::vector<float> elementProche,std::string elem){
+    if (elem == "Personnage"){
+        return (elementProche[2] <=3);
+    } else if (elem == "Batiment"){
+        return (elementProche[2] <=6);
+    }
 }

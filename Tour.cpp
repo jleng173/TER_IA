@@ -35,8 +35,7 @@ void Tour::creerBatiment() const{
 				glTranslatef(0,0,-10);
 				gluCylinder(params,1.5,1.5,10,20,1);
 				gluDeleteQuadric(params);
-			}
-			glPopMatrix();
+			}glPopMatrix();
 			//Toiture			
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
 			glPushMatrix();{
@@ -50,6 +49,7 @@ void Tour::creerBatiment() const{
 				gluDeleteQuadric(params);
 			}
 			glPopMatrix();
+            
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
 
 			glPushMatrix();{
@@ -183,7 +183,7 @@ GLvoid Tour::creerCarreau(){
     }glPopMatrix();
 }
 
-void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Element *>  all) {
+void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     //printf("%d  distance %f, range %f, %f- %f\n",etat,ennemieProche[2],((float)range/3),ennemieProche[0],ennemieProche[1]);
     switch(etat){
@@ -196,7 +196,6 @@ void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Eleme
 
         case FIRE:
             tirArbalete(ennemieProche[0],ennemieProche[1],listeEnnemies);
-            std::cout << "Hello" << std::endl;
         break;
 
         default :

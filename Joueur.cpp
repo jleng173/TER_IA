@@ -56,11 +56,17 @@ void Joueur::addUnites(Personnage * p){
     listeUnites.push_back(p);
 }
 
-void Joueur::removeUnites(){
+void Joueur::removeElements(){
     // Baisse des pv
     for(int i = 0; i < listeUnites.size(); i++){
         if(listeUnites[i]->getHp() <= 0){
             listeUnites.erase(listeUnites.begin()+i);
+        }
+    }
+
+    for(int i = 0; i < listeBatiments.size(); i++){
+        if(listeBatiments[i]->getHp() <= 0){
+            listeBatiments.erase(listeBatiments.begin()+i);
         }
     }
 }
