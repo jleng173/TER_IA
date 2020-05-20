@@ -45,12 +45,13 @@ protected:
 
     int selected;
 
+    std::array<float,3> couleur;
 
     State etat;
 
 public:
     Personnage();
-    Personnage(float x, float y,float angle, float vitesseMAX);
+    Personnage(float x, float y,float angle, float vitesseMAX, std::array<float,3> couleur);
     Personnage(float avn,float act,float x, float y,float angle, float vitesseMAX,float mouv);
 
     GLvoid creerPersonnage();

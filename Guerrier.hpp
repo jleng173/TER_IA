@@ -9,7 +9,7 @@ class Guerrier : public Personnage {
         float vision;
         float range;
     public:
-        Guerrier(float x, float y,float angle, float vitesseMAX);
+        Guerrier(float x, float y,float angle, float vitesseMAX,std::array<float,3> col);
         GLvoid creerChapeau() const override;
         GLvoid creerAccessoire() const override;
         //Gestion des états

@@ -424,7 +424,7 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
       glPopMatrix();
 
             //2e rangée
-      if(paysan){
+      if(paysan && modeAction == 0){
         glEnable(GL_TEXTURE_2D);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Hache->width, Texture_Img_Hache->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Hache->data);
       }
@@ -445,7 +445,7 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
 
       glPushMatrix();{
         glTranslatef(20,0,0);
-        if(paysan){
+        if(paysan && modeAction == 0){
           glEnable(GL_TEXTURE_2D);
           glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_Img_Pioche->width, Texture_Img_Pioche->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_Img_Pioche->data);
         }
@@ -666,7 +666,7 @@ int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *
   }
   if(x>1424 && x<1552 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
     if(y>713 && y<757){
-      dynamic_cast<Paysan *>(p[0])->construireTour(j, p[0]->getX()+10, p[0]->getY()+10);
+      dynamic_cast<Paysan *>(p[0])->construireTour(j, 10, 10);
       return 0;
     }
   }
@@ -676,14 +676,15 @@ int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *
       }
   }
 
-  if(x>1105 && x<1232 && p.size()==1 && p[0]->getNom()=="Paysan"){
+  //Action du paysan
+  if(x>1105 && x<1232 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
     if(y>767 && y<811){
       dynamic_cast<Paysan *>(p[0])->modeBois();
       return 0;
     }
   }
 
-  if(x>1265 && x<1392 && p.size()==1 && p[0]->getNom()=="Paysan"){
+  if(x>1265 && x<1392 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
     if(y>767 && y<811){
       dynamic_cast<Paysan *>(p[0])->modePierre();
       return 0;

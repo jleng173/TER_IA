@@ -18,7 +18,7 @@ class Arbaletrier : public Personnage{
         float range;
 
     public:
-        Arbaletrier(float x, float y,float angle, float vitesseMAX);
+        Arbaletrier(float x, float y,float angle, float vitesseMAX, std::array<float,3> col);
         void tirArbalete(float x, float y, std::vector<Element*> listeElements);
         GLvoid creerCarreau();
         GLvoid creerChapeau() const override;

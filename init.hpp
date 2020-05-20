@@ -81,7 +81,7 @@ protected:
  static float mouv;
  static int selection;
  static int construction;
- static int modeAction;		//    //Sert a changer le menu du Paysan
+ static int modeAction;		    //Sert a changer le menu du Paysan
  static TEXTURE_STRUCT * Texture_chateau;
  static TEXTURE_STRUCT * Texture_pierre;
  static TEXTURE_STRUCT * Texture_toit;
