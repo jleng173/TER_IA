@@ -75,13 +75,13 @@ GLvoid Forme::afficheCube(struct cube1 cube){
 			/* 3e face */
 			glPushMatrix();
 			{
-				glTexCoord2f(0,1);
+				// glTexCoord2f(0,1);
 				glVertex3f(cube.sommet3[0],cube.sommet3[1],cube.sommet3[2]);
-				glTexCoord2f(1,1);  
+				// glTexCoord2f(1,1);  
 				glVertex3f(cube.sommet5[0],cube.sommet5[1],cube.sommet5[2]);
-				glTexCoord2f(1,0);
+				// glTexCoord2f(1,0);
 				glVertex3f(cube.sommet6[0],cube.sommet6[1],cube.sommet6[2]);
-				glTexCoord2f(0,0);
+				// glTexCoord2f(0,0);
 				glVertex3f(cube.sommet2[0],cube.sommet2[1],cube.sommet2[2]);
 			}
 			glPopMatrix();

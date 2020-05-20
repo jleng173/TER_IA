@@ -33,15 +33,18 @@ void Chateau::creerBatiment() const{
         struct cube1 batiment1 =forme.creerCube(4.5);
         glEnable(GL_TEXTURE_2D);	
         glPushMatrix();{
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
             //1ere Tour
             glPushMatrix();{
                 GLUquadric* params = gluNewQuadric();
                 gluQuadricTexture(params, GL_TRUE);
                 glRotatef(90,1,0,0);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
                 glTranslatef(-3,3,-5);
                 gluCylinder(params,1.5,1.5,10,20,1);
                 gluDisk(params,0,1.5,20,1);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+				glTranslatef(0,0,-1.8);
+				gluCylinder(params,0,2,2,20,1);
                 gluDeleteQuadric(params);
             }
             glPopMatrix();
@@ -50,9 +53,13 @@ void Chateau::creerBatiment() const{
                 GLUquadric* params = gluNewQuadric();
                 gluQuadricTexture(params, GL_TRUE);
                 glRotatef(90,1,0,0);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
                 glTranslatef(3,-3,-5);
                 gluCylinder(params,1.5,1.5,10,20,1);
                 gluDisk(params,0,1.5,20,1);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+				glTranslatef(0,0,-1.8);
+				gluCylinder(params,0,2,2,20,1);
                 gluDeleteQuadric(params);
             }
             glPopMatrix();
@@ -61,9 +68,13 @@ void Chateau::creerBatiment() const{
                 GLUquadric* params = gluNewQuadric();
                 gluQuadricTexture(params, GL_TRUE);
                 glRotatef(90,1,0,0);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
                 glTranslatef(3,3,-5);
                 gluCylinder(params,1.5,1.5,10,20,1);
                 gluDisk(params,0,1.5,20,1);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+				glTranslatef(0,0,-1.8);
+				gluCylinder(params,0,2,2,20,1);
                 gluDeleteQuadric(params);
             }
             glPopMatrix();
@@ -72,9 +83,13 @@ void Chateau::creerBatiment() const{
                 GLUquadric* params = gluNewQuadric();
                 gluQuadricTexture(params, GL_TRUE);
                 glRotatef(90,1,0,0);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
                 glTranslatef(-3,-3,-5);
                 gluCylinder(params,1.5,1.5,10,20,1);
                 gluDisk(params,0,1.5,20,1);
+                glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
+				glTranslatef(0,0,-1.8);
+				gluCylinder(params,0,2,2,20,1);
                 gluDeleteQuadric(params);
             }
             glPopMatrix();

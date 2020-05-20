@@ -26,15 +26,21 @@ void Ferme::creerBatiment() const{
             glEnable(GL_TEXTURE_2D);
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
             forme.afficheCube(batiment);
-            glDisable(GL_TEXTURE_2D);
             glPushMatrix();{
-                    glEnable(GL_TEXTURE_2D);
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_paille->width, Texture_paille->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_paille->data);
                     glTranslatef(0,5,0);
                     forme.affichePyramide(pyramide1);
-                    glDisable(GL_TEXTURE_2D);
             }
             glPopMatrix();
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
+			glPushMatrix();{
+				struct cube1 porte = forme.creerCube(2.5);
+				glScalef(0.1,0.5,0.3);
+				glTranslatef(-25,-2.5,0);
+				forme.afficheCube(porte);
+			}
+			glPopMatrix();
+			glDisable(GL_TEXTURE_2D);
         }
         glPopMatrix();
         
