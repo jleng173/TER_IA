@@ -70,7 +70,7 @@ int Tour::getDmg(){
 	return dmg;
 }
 
-void Tour::tirArbalete(float x, float y, std::vector<Personnage*> listeEnnemies){
+void Tour::tirArbalete(float x, float y,  std::vector<Element*> listeElements){
      glPushMatrix();{
           
           float posDepart[3] = {position[0],position[1],0.0};
@@ -124,9 +124,9 @@ void Tour::tirArbalete(float x, float y, std::vector<Personnage*> listeEnnemies)
             timeProjec = 0.0;
 
             // Baisse des pv
-            for(int i = 0; i < listeEnnemies.size(); i++){
-                if(listeEnnemies[i]->getX()==x && listeEnnemies[i]->getY()==y){
-                    listeEnnemies[i]->setHp(listeEnnemies[i]->getHp() - dmg);
+            for(int i = 0; i < listeElements.size(); i++){
+                if(listeElements[i]->getX()==x && listeElements[i]->getY()==y){
+                    listeElements[i]->setHp(listeElements[i]->getHp() - dmg);
                 }
             }
           }
@@ -185,17 +185,36 @@ GLvoid Tour::creerCarreau(){
 
 void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
+    std::vector<float> batimentProche = rangeBatiment(listeBatiment);
     //printf("%d  distance %f, range %f, %f- %f\n",etat,ennemieProche[2],((float)range/3),ennemieProche[0],ennemieProche[1]);
     switch(etat){
         case SLEEP:
             timeProjec = 0.0;
-            if(ennemieLongPortee(ennemieProche)){
+            if(elementPortee(ennemieProche) || elementPortee(batimentProche) ){
                 etat = FIRE;
             }
         break;
 
         case FIRE:
-            tirArbalete(ennemieProche[0],ennemieProche[1],listeEnnemies);
+        if( elementPortee(ennemieProche) ){
+
+            std::vector<Element*> elemEnnemies = {};
+            for (int i = 0 ; i < listeEnnemies.size() ; i++){
+                elemEnnemies.push_back(dynamic_cast<Element*>(listeEnnemies[i]));
+            }
+            tirArbalete(ennemieProche[0],ennemieProche[1],elemEnnemies);
+
+        }else if (elementPortee(batimentProche)){
+
+            std::vector<Element*> elemBatiment = {};
+            for (int i = 0 ; i < listeBatiment.size() ; i++){
+                elemBatiment.push_back(dynamic_cast<Element*>(listeBatiment[i]));
+            }
+            tirArbalete(batimentProche[0],batimentProche[1],elemBatiment);
+
+        } else {
+            etat = SLEEP;
+        }
         break;
 
         default :
@@ -222,7 +241,26 @@ std::vector<float> Tour::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {
     return ennemyproche;
 }
 
-bool Tour::ennemieLongPortee(std::vector<float> ennemieProche) {
-    return ( ennemieProche[2] > ((float)range/3) && ennemieProche[2] <= range );
+
+ std::vector<float> Tour::rangeBatiment(std::vector<Batiment*> listeBatiment){
+    std::vector<float> batimentproche= {0,0,INFINITY};
+    float distanceMin = INFINITY;
+    for(int i = 0 ; i < listeBatiment.size() ; i++){
+        float calculx = listeBatiment[i]->getX()-position[0];
+        float calculy = listeBatiment[i]->getY()-position[1];
+        float distance = sqrtf((calculx*calculx)+(calculy*calculy));
+        
+        if(distance < distanceMin){
+            distanceMin = distance;
+            batimentproche[0] = listeBatiment[i]->getX();
+            batimentproche[1] = listeBatiment[i]->getY();
+        }
+    }
+    batimentproche[2] = distanceMin;
+    return batimentproche;
+ }
+
+bool Tour::elementPortee(std::vector<float> elementProche) {
+    return ( elementProche[2] > 2 && elementProche[2] <= range );
 
 }
