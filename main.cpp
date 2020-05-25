@@ -53,6 +53,7 @@ int initGL::selection = 0;
 int initGL::construction = 0;
 int initGL::modeAction = 0;
 
+bool isFormed = false;
 float posx, posy, posz = 0.0;
 float lastposx, lastposy = 0.0;
 float CDposx, CDposy = 0.0;
@@ -353,7 +354,7 @@ GLvoid Modelisation()
                std::cout <<destination.x<<destination.y<< "ASTAR :" << node.x << node.y << std::endl;
                 //std::cout <<destination.x<<destination.y<< " ASTARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR : " << nodoo.x << nodoo.y << std::endl;
                if(node.x <10000 && node.y <10000){
-               
+               isFormed = false;
 //sleep(1);
 
                //Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
@@ -423,18 +424,28 @@ GLvoid Modelisation()
   //formation en carré
   int ligne = 0;
   int colonne = 0;
-for(int i :formation){
-  if(ligne == 9){
-    ligne = 0;
-    colonne+=3;
-  }else{
-    ligne+=3;
+  if (isFormed == false){
+    for(int i :formation){
+     if(ligne == 6){
+       ligne = 0;
+       colonne+=2;
+      }else{
+       ligne+=2;
+    }
+  int x = Joueur1->getUnites()[i]->getX()+ligne;
+  int y =Joueur1->getUnites()[i]->getY()+colonne;
+  while(astar::obstacle[x+250][y+250]==true){
+    colonne +=2;
+    y =Joueur1->getUnites()[i]->getY()+colonne;
   }
-
-  std::cout << i <<"Formation " << posx+ligne << posy+colonne << std::endl;
-  Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->getX()+ligne,Joueur1->getUnites()[i]->getY()+colonne,toutLesElements);
+  if(formation.back()==i)
+    isFormed = true;
+  std::cout << i <<"Formation " << x << y << std::endl;
+  Joueur1->getUnites()[i]->tpCible(x,y);
 
 }
+  }
+
 
   // //Gestion des tours
   //     for(int i = 0 ; i < Joueur2->getBatiments().size(); i++){
