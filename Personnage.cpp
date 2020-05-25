@@ -31,6 +31,18 @@ void Personnage::updatePos( float time){
     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
 }
 
+void Personnage::tpCible(float x, float y){
+position[0] = x;
+position[1] = y;
+    hitbox.x1 = position[0]-1;
+    hitbox.y1 = position[1]-1;
+    hitbox.x2 = position[0]+1;
+    hitbox.y2 = position[1]+1;
+        orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
+
+}
+
+
 void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
     lastPosition[0]=x;
     lastPosition[1]=y;
@@ -42,11 +54,11 @@ void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all)
         velocite[0] = x - position[0];
         velocite[1] = y - position[1];
 
-        if(testSiColision(all)){
-            velocite[0] =  position[0] - x;
-            velocite[1] =  position[1] - y;
+        // if(testSiColision(all)){
+        //     velocite[0] =  position[0] - x;
+        //     velocite[1] =  position[1] - y;
 
-        }
+        // }
 
         //Normalisation du vecteur velocite
         float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
@@ -452,6 +464,10 @@ std::string Personnage::getNom(){
 
 State Personnage::setEtat(State e){
     etat = e;
+}
+
+State Personnage::getEtat(){
+   return etat;
 }
 
 std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {

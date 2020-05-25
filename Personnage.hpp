@@ -58,6 +58,9 @@ public:
     virtual GLvoid creerChapeau() const = 0;
     virtual GLvoid creerAccessoire() const = 0;
 
+void tpCible(float x, float y);
+
+
     GLvoid selectionne();
     GLvoid barreHp();
     bool isSelected();
@@ -83,7 +86,7 @@ public:
     std::string getNom();
     
     State setEtat(State e);
-
+    State getEtat();
     //Retourne les coordonnées x,y et la distance de l'ennemie le plus proche
     std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
 
