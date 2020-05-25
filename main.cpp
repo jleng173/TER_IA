@@ -323,6 +323,7 @@ GLvoid Modelisation()
 
   // Gestion déplacement des unités
       //printf("%d \n",toutLesElements.size());
+  std::vector<int> formation;
 
 
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
@@ -335,13 +336,16 @@ GLvoid Modelisation()
             destination.x = posx+250;
             destination.y = posy+250;
 
+        if(Joueur1->getUnites()[i]->isSelected()){
+           formation.push_back(i);
+        }
 
               //Joueur1->getUnites()[i]->tpCible(100,100);
 
         if(Joueur1->getUnites()[i]->isSelected() && !(unite.x-3 <= destination.x && destination.x<= unite.x+3 && unite.y-3 <= destination.y &&  destination.y<= unite.y+3)){
 
 
-//A faire : deplacement de groupe, formations, autre hitbox, deplacement naturel
+//A faire : deplacement de groupe ?, formations, autre hitbox, deplacement naturel
 
              for (Node node : astar::aStar(unite, destination)) {
 
@@ -415,6 +419,22 @@ GLvoid Modelisation()
   	glPopMatrix();
           }
         }}
+
+  //formation en carré
+  int ligne = 0;
+  int colonne = 0;
+for(int i :formation){
+  if(ligne == 9){
+    ligne = 0;
+    colonne+=3;
+  }else{
+    ligne+=3;
+  }
+
+  std::cout << i <<"Formation " << posx+ligne << posy+colonne << std::endl;
+  Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->getX()+ligne,Joueur1->getUnites()[i]->getY()+colonne,toutLesElements);
+
+}
 
   // //Gestion des tours
   //     for(int i = 0 ; i < Joueur2->getBatiments().size(); i++){
