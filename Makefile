@@ -1,6 +1,6 @@
 
-all: clean init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Element.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o 
-	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Element.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test
+all: clean init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o Element.o astar.o
+	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o Element.o astar.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
@@ -58,6 +58,9 @@ Arbaletrier.o: Arbaletrier.cpp Arbaletrier.hpp
 
 Element.o: Element.cpp Element.hpp
 	g++ -std=c++14 -c Element.cpp -o Element.o
+
+astar.o: astar.cpp astar.hpp
+	g++ -std=c++14 -c astar.cpp -o astar.o
 
 clean:
 	rm -f *.o

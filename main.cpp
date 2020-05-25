@@ -24,6 +24,9 @@
 #include "Paysan.hpp"
 #include "Guerrier.hpp"
 #include "Arbaletrier.hpp"
+#include "Element.hpp"
+#include "astar.hpp"
+
 using namespace std;
 
 //Taille Fenetre
@@ -58,13 +61,14 @@ float CDposx2, CDposy2 = 0.0;
 vector< vector<float> > cubes_test;
 std::vector <Personnage *> listePersoInterface;
 std::vector <Batiment *> listeBatimentInterface;
-
+bool astar::obstacle[500][500];
 
 float timeProjec = 0.0;
 
 Carte carte;
 
 vector<Element *> toutLesElements;
+
 
 ppm p;
 
@@ -132,6 +136,13 @@ int compensationX(int pos){
 
 }
 
+void hitboxToObstacle(Hitbox h){
+  for(int i= h.x1; i <= h.x2; i++){
+    for(int j= h.y1; j<= h.y2;j++){
+      astar::obstacle[i+250][j+250]=true;
+    }
+  }
+}
 
 
 GLvoid Modelisation()
@@ -210,6 +221,8 @@ GLvoid Modelisation()
       if(initGL::ypose<676 && initGL::ypose>49){
         int limiteC = sqrt((carte.getTailleCarte()*2)*(carte.getTailleCarte()*2)/2);
         if( (SP.positionX + compX <= limiteC -(SP.positionY + compY)) && (SP.positionY + compY <= limiteC -(SP.positionX + compX)) && (SP.positionX + compX >= -1*limiteC +(SP.positionY + compY)) && (SP.positionY + compY >= -1*limiteC +(SP.positionX + compX))){
+        //if( (SP.positionX <= limiteC -(SP.positionY )) && (SP.positionY  <= limiteC -(SP.positionX)) && (SP.positionX >= -1*limiteC +(SP.positionY )) && (SP.positionY  >= -1*limiteC +(SP.positionX ))){
+
             posx = SP.positionX + compX;
             posy = SP.positionY + compY;
         }
@@ -246,6 +259,14 @@ GLvoid Modelisation()
    glPushMatrix();{
       
 
+  //reset des obstacles car hitbox peut changer à chaque tour
+      for(int i = 0 ; i < 500; i++){
+        for(int j = 0 ; j < 500; j++){
+          astar::obstacle[i][j] = false;
+        }}
+
+
+
   // Affichage des Unités
     // Joueur 1
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
@@ -273,6 +294,8 @@ GLvoid Modelisation()
          if(Joueur1->getBatiments()[i]->getNom()=="Tour"){
             dynamic_cast<Tour *>(Joueur1->getBatiments()[i])->comportement(Joueur2->getUnites(),Joueur2->getBatiments(),toutLesElements);
           }
+        hitboxToObstacle(Joueur1->getBatiments()[i]->getHitbox());
+        //Hitbox pour le pathfinding
         //Délai de construction
         if(Joueur1->getBatiments()[i]->getEnConstruction()==true){
             if(Joueur1->getBatiments()[i]->getHp() < Joueur1->getBatiments()[i]->getHpMax())
@@ -291,20 +314,108 @@ GLvoid Modelisation()
          if(Joueur2->getBatiments()[i]->getNom()=="Tour"){
             dynamic_cast<Tour *>(Joueur2->getBatiments()[i])->comportement(Joueur1->getUnites(),Joueur1->getBatiments(),toutLesElements);
           }
+                //Hitbox pour le pathfinding
+        hitboxToObstacle(Joueur2->getBatiments()[i]->getHitbox());
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur2->getBatiments()[i]));
       }
    }glPopMatrix();
 
 
   // Gestion déplacement des unités
+      //printf("%d \n",toutLesElements.size());
+
+
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
-        if(Joueur1->getUnites()[i]->isSelected()){
-          Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
-        }else{
-          Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
-          Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),Joueur2->getBatiments(),toutLesElements);
-        }
-      }
+                            Node unite;
+            unite.x = Joueur1->getUnites()[i]->getX()+250;
+            unite.y = Joueur1->getUnites()[i]->getY()+250;//+15;
+                  std::vector<Node> path;
+
+            Node destination;
+            destination.x = posx+250;
+            destination.y = posy+250;
+
+
+              //Joueur1->getUnites()[i]->tpCible(100,100);
+
+        if(Joueur1->getUnites()[i]->isSelected() && !(unite.x-3 <= destination.x && destination.x<= unite.x+3 && unite.y-3 <= destination.y &&  destination.y<= unite.y+3)){
+
+
+//A faire : deplacement de groupe, formations, autre hitbox, deplacement naturel
+
+             for (Node node : astar::aStar(unite, destination)) {
+
+               //sleep(1);
+               std::cout <<destination.x<<destination.y<< "ASTAR :" << node.x << node.y << std::endl;
+                //std::cout <<destination.x<<destination.y<< " ASTARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR : " << nodoo.x << nodoo.y << std::endl;
+               if(node.x <10000 && node.y <10000){
+               
+//sleep(1);
+
+               //Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
+               Joueur1->getUnites()[i]->tpCible(node.x-250,node.y-250);
+
+               }
+               //std::cout <<Joueur1->getUnites()[i]->getX() << "OUI OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK" << Joueur1->getUnites()[i]->getY() << std::endl;
+
+            }
+
+            //test basé sur la boucle de modelisation à exploré pour déplacements normaux 
+            //    std::vector<Node>::iterator it;
+            // if(path.empty()){
+            //                  std::cout << destination.x << destination.y << "ASTAR DEBUT :"<< unite.x << unite.y << std::endl;
+
+            //   path = astar::aStar(unite, destination);
+            //   it = path.begin();
+            // }
+
+            //        it = next(it);
+            //         Node node = *it;
+            //   //sleep(1);
+            //    Joueur1->getUnites()[i]->deplacementCible(node.x,node.y,toutLesElements);
+            //    std::cout << "ASTAR :" << node.x << node.y << std::endl;
+
+            // it = next(it);
+            // if(it == path.end()){
+            //   path.clear();
+            // }
+          }
+          
+        // else{
+
+        //     Node destination;
+        //     destination.x = Joueur1->getUnites()[i]->lastPosition[0]+250;
+        //     destination.y = Joueur1->getUnites()[i]->lastPosition[1]+250;
+
+        //     for (Node node : astar::aStar(player, destination)) {
+        //        Joueur1->getUnites()[i]->deplacementCible(node.x,node.y,toutLesElements);
+        //     }
+        // }
+
+        //PRE MERGE à enlever ?
+      //   if(Joueur1->getUnites()[i]->isSelected()){
+      //     Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+      //   }else{
+      //     Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
+      //     Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),Joueur2->getBatiments(),toutLesElements);
+      //   }
+     }
+
+      for(int i = 0 ; i < 500; i++){
+        for(int j = 0 ; j < 500; j++){
+          if(astar::obstacle[i][j] == true){
+            	glPushMatrix();
+  	{
+      	glTranslatef(i-250,j-250,4.5);
+	glColor3f(0.5,0.3,0.2);
+	GLUquadric* qobj;
+	qobj = gluNewQuadric();
+	gluCylinder(qobj, 0.3, 0.3, 3.2, 10, 16);
+	}
+  	glPopMatrix();
+          }
+        }}
+
   // //Gestion des tours
   //     for(int i = 0 ; i < Joueur2->getBatiments().size(); i++){
   //         if(Joueur2->getBatiments()[i]->getNom()=="Tour"){
@@ -367,7 +478,7 @@ GLvoid Modelisation()
 
           
       }
-
+    //std::cout << "END Modelisation" << std::endl;
   }glPopMatrix();
 
 
@@ -384,7 +495,6 @@ GLvoid Modelisation()
   
 
   }glPopMatrix();
-
   glutSwapBuffers();
 }
 
