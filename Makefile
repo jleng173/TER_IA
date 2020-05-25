@@ -1,6 +1,6 @@
 
-all: clean init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o Element.o astar.o
-	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Ressource.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o Element.o astar.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test
+all: clean init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o Element.o astar.o
+	g++ -std=c++14 init.o ppm.o Carte.o InterfaceHUD.o Decor.o PositionSouris.o Joueur.o Batiment.o Chateau.o Caserne.o Tour.o Ferme.o Forme.o Personnage.o Guerrier.o Paysan.o Arbaletrier.o Element.o astar.o main.cpp -lm -lGL -no-pie -lGLU -lglut -o test && ./test
 
 init.o: init.cpp init.hpp
 	g++ -c init.cpp -o init.o
@@ -23,9 +23,6 @@ Forme.o: Forme.cpp Forme.hpp
 
 ppm.o: ppm.cpp ppm.hpp
 	g++ -c ppm.cpp -o ppm.o
-
-Ressource.o: Ressource.cpp Ressource.hpp
-	g++ -c Ressource.cpp -o Ressource.o
 
 Joueur.o: Joueur.cpp Joueur.hpp
 	g++ -std=c++14 -c Joueur.cpp -o Joueur.o
