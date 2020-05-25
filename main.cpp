@@ -344,25 +344,23 @@ GLvoid Modelisation()
 //A faire : deplacement de groupe, formations, autre hitbox, deplacement naturel
 
              for (Node node : astar::aStar(unite, destination)) {
-               //Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
-               //Joueur1->getUnites()[i]->tpCible(node.x-250,node.y-250);
+
                //sleep(1);
                std::cout <<destination.x<<destination.y<< "ASTAR :" << node.x << node.y << std::endl;
                 //std::cout <<destination.x<<destination.y<< " ASTARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR : " << nodoo.x << nodoo.y << std::endl;
                if(node.x <10000 && node.y <10000){
                
-                 //Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
-                                 //sleep(1);
+//sleep(1);
 
-Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
-
+               //Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
+               Joueur1->getUnites()[i]->tpCible(node.x-250,node.y-250);
 
                }
                //std::cout <<Joueur1->getUnites()[i]->getX() << "OUI OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK" << Joueur1->getUnites()[i]->getY() << std::endl;
 
             }
 
-            //test basé sur la boucle de modelisation 
+            //test basé sur la boucle de modelisation à exploré pour déplacements normaux 
             //    std::vector<Node>::iterator it;
             // if(path.empty()){
             //                  std::cout << destination.x << destination.y << "ASTAR DEBUT :"<< unite.x << unite.y << std::endl;
@@ -393,13 +391,15 @@ Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements)
         //        Joueur1->getUnites()[i]->deplacementCible(node.x,node.y,toutLesElements);
         //     }
         // }
-        if(Joueur1->getUnites()[i]->isSelected()){
-          Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
-        }else{
-          Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
-          Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),Joueur2->getBatiments(),toutLesElements);
-        }
-      }
+
+        //PRE MERGE à enlever ?
+      //   if(Joueur1->getUnites()[i]->isSelected()){
+      //     Joueur1->getUnites()[i]->deplacementCible(posx,posy,toutLesElements);
+      //   }else{
+      //     Joueur1->getUnites()[i]->deplacementCible(Joueur1->getUnites()[i]->lastPosition[0],Joueur1->getUnites()[i]->lastPosition[1],toutLesElements);
+      //     Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),Joueur2->getBatiments(),toutLesElements);
+      //   }
+     }
 
       for(int i = 0 ; i < 500; i++){
         for(int j = 0 ; j < 500; j++){
