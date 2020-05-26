@@ -147,8 +147,8 @@ void Decor::Mine(){
 void Decor::GenerateForet(int nombre){
 	std::srand (time(NULL));
 		for (int i = 0 ; i < nombre ; i++){
-			float x =(float) (std::rand()%5000-2500)/100 ;
-			float y = (float) (std::rand()%5000-2500)/100;
+			float x =(float) (std::rand()%50-25) ;
+			float y = (float) (std::rand()%50-25);
 			//vector avec coordonées de l'arbre et sa résistance
 			std::vector<float>  add = {x+positionDecorX,y+positionDecorY,150.0};
 			_foret.push_back(add);
@@ -158,8 +158,8 @@ void Decor::GenerateForet(int nombre){
 void Decor::GenerateMine(int nombre){
 	std::srand(time(NULL));
 		for (int i = 0 ; i < nombre ; i++){
-			float x =(float) (std::rand()%1000-500)/100 ;
-			float y = (float) (std::rand()%1000-500)/100;
+			float x =(float) (std::rand()%10-5) ;
+			float y = (float) (std::rand()%10-5);
 			//vector avec coordonées du rocher et sa résistance
 			std::vector<float>  add = {x+positionDecorX,y+positionDecorY,300.0};
 			_mine.push_back(add);
