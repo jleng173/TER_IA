@@ -1,4 +1,4 @@
-
+#pragma once
 #define arbre
 #include <string>
 #include <list>

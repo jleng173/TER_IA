@@ -652,19 +652,19 @@ int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *
         return 1;
       }
   }
-  if(x>1105 && x<1232 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+  if(x>1105 && x<1232 && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==1){
     if(y>713 && y<757){
       dynamic_cast<Paysan *>(p[0])->construireCaserne(j, p[0]->getX(), p[0]->getY()+10);
       return 0;
     }
   }
-  if(x>1265 && x<1392 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+  if(x>1265 && x<1392 && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==1){
     if(y>713 && y<757){
       dynamic_cast<Paysan *>(p[0])->construireFerme(j, p[0]->getX(), p[0]->getY()+10);
       return 0;
     }
   }
-  if(x>1424 && x<1552 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+  if(x>1424 && x<1552 && p.size()==1 && p[0]->isSelected() &&  p[0]->getNom()=="Paysan" && modeAction==1){
     if(y>713 && y<757){
       dynamic_cast<Paysan *>(p[0])->construireTour(j, p[0]->getX(), p[0]->getY()+10);
       return 0;
@@ -677,14 +677,14 @@ int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *
   }
 
   //Action du paysan
-  if(x>1105 && x<1232 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
+  if(x>1105 && x<1232 && p.size()==1 &&  p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==0){
     if(y>767 && y<811){
       dynamic_cast<Paysan *>(p[0])->modeBois();
       return 0;
     }
   }
 
-  if(x>1265 && x<1392 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
+  if(x>1265 && x<1392 && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==0){
     if(y>767 && y<811){
       dynamic_cast<Paysan *>(p[0])->modePierre();
       return 0;

@@ -17,7 +17,7 @@ void Chateau::creerPaysan(Joueur * J){
     if (J->getUnites().size() < J->getMaxUnites() && (J->getOr()-2) > 0){
         printf("CREATION D'UN PAYSAN \n"); 
         //Paysan pays(position[0],position[1]-3,0,3);
-        Personnage * PersPaysan = new Paysan(position[0],position[1]-15,0,3,J->getCouleur(),_decors, J,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
+        Personnage * PersPaysan = new Paysan(position[0],position[1]-15,0,7,J->getCouleur(),_decors, J,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
         J->subtractOr(2);
         J->addUnites(PersPaysan);
     }

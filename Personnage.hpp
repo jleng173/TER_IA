@@ -12,6 +12,7 @@
 #include "Forme.hpp"
 #include "Batiment.hpp"
 #include "Element.hpp"
+#include "astar.hpp"
 
 enum State {
     SLEEP = 1,
@@ -58,7 +59,7 @@ public:
     virtual GLvoid creerChapeau() const = 0;
     virtual GLvoid creerAccessoire() const = 0;
 
-void tpCible(float x, float y);
+    void setPosition(float x, float y);
 
 
     GLvoid selectionne();
@@ -91,4 +92,10 @@ void tpCible(float x, float y);
     std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
 
     std::vector<float> rangeBatiment(std::vector<Batiment*> listeBatiment);
+
+    std::vector<std::vector<float>> ListPositions;
+    void deplacementCibleAStar(float x, float y);
+    void tpCibleAStar();
+    std::vector<std::vector<float>> GenerateListPos(float x, float y);
+    std::vector<std::vector<float>> GenerateListPosFuite(float x, float y);
 };

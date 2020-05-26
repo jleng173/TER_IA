@@ -281,7 +281,7 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur2->getUnites().size(); i++){
         Joueur2->getUnites()[i]->creerPersonnage();
         Joueur2->getUnites()[i]->comportement(Joueur1->getUnites(),Joueur1->getBatiments(), toutLesElements);
-        Joueur2->getUnites()[i]->deplacementCible(Joueur2->getUnites()[i]->lastPosition[0],Joueur2->getUnites()[i]->lastPosition[1], toutLesElements);
+        Joueur2->getUnites()[i]->tpCibleAStar();
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur2->getUnites()[i]));
       }
        Joueur2->removeElements();
@@ -328,10 +328,10 @@ GLvoid Modelisation()
 
 
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
-                            Node unite;
+            Node unite;
             unite.x = Joueur1->getUnites()[i]->getX()+250;
             unite.y = Joueur1->getUnites()[i]->getY()+250;//+15;
-                  std::vector<Node> path;
+            std::vector<Node> path;
 
             Node destination;
             destination.x = posx+250;
@@ -348,22 +348,14 @@ GLvoid Modelisation()
 
 //A faire : deplacement de groupe ?, formations, autre hitbox, deplacement naturel
 
-             for (Node node : astar::aStar(unite, destination)) {
-
-               //sleep(1);
-               std::cout <<destination.x<<destination.y<< "ASTAR :" << node.x << node.y << std::endl;
-                //std::cout <<destination.x<<destination.y<< " ASTARRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR : " << nodoo.x << nodoo.y << std::endl;
-               if(node.x <10000 && node.y <10000){
-               isFormed = false;
-//sleep(1);
-
-               //Joueur1->getUnites()[i]->deplacementCible(node.x-250,node.y-250,toutLesElements);
-               Joueur1->getUnites()[i]->tpCible(node.x-250,node.y-250);
-
-               }
-               //std::cout <<Joueur1->getUnites()[i]->getX() << "OUI OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK" << Joueur1->getUnites()[i]->getY() << std::endl;
-
+            if(Joueur1->getUnites()[i]->ListPositions.empty()){
+                Joueur1->getUnites()[i]->ListPositions = Joueur1->getUnites()[i]->GenerateListPos(posx,posy);
             }
+            else if(initGL::pose == 2){
+                Joueur1->getUnites()[i]->ListPositions.clear();
+                Joueur1->getUnites()[i]->ListPositions = Joueur1->getUnites()[i]->GenerateListPos(posx,posy);
+            }
+              Joueur1->getUnites()[i]->tpCibleAStar();
 
             //test basé sur la boucle de modelisation à exploré pour déplacements normaux 
             //    std::vector<Node>::iterator it;
@@ -384,6 +376,9 @@ GLvoid Modelisation()
             // if(it == path.end()){
             //   path.clear();
             // }
+          }else{
+            Joueur1->getUnites()[i]->comportement(Joueur2->getUnites(),Joueur2->getBatiments(),toutLesElements);
+            Joueur1->getUnites()[i]->tpCibleAStar();
           }
           
         // else{
@@ -409,42 +404,44 @@ GLvoid Modelisation()
       for(int i = 0 ; i < 500; i++){
         for(int j = 0 ; j < 500; j++){
           if(astar::obstacle[i][j] == true){
-            	glPushMatrix();
-  	{
-      	glTranslatef(i-250,j-250,4.5);
-	glColor3f(0.5,0.3,0.2);
-	GLUquadric* qobj;
-	qobj = gluNewQuadric();
-	gluCylinder(qobj, 0.3, 0.3, 3.2, 10, 16);
-	}
-  	glPopMatrix();
+            	glPushMatrix();{
+      	        glTranslatef(i-250,j-250,4.5);
+	              glColor3f(0.5,0.3,0.2);
+	              GLUquadric* qobj;
+	              qobj = gluNewQuadric();
+	              gluCylinder(qobj, 0.3, 0.3, 3.2, 10, 16);
+	            }glPopMatrix();
           }
-        }}
+        }
+      }
 
   //formation en carré
+  
   int ligne = 0;
   int colonne = 0;
   if (isFormed == false){
     for(int i :formation){
-     if(ligne == 6){
-       ligne = 0;
-       colonne+=2;
+      
+      if(ligne == 6){
+        ligne = 0;
+        colonne+=2;
       }else{
-       ligne+=2;
-    }
-  int x = Joueur1->getUnites()[i]->getX()+ligne;
-  int y =Joueur1->getUnites()[i]->getY()+colonne;
-  while(astar::obstacle[x+250][y+250]==true){
-    colonne +=2;
-    y =Joueur1->getUnites()[i]->getY()+colonne;
-  }
-  if(formation.back()==i)
-    isFormed = true;
-  std::cout << i <<"Formation " << x << y << std::endl;
-  Joueur1->getUnites()[i]->tpCible(x,y);
+        ligne+=2;
+      }
+      int x = Joueur1->getUnites()[i]->getX()+ligne;
+      int y = Joueur1->getUnites()[i]->getY()+colonne;
+      while(astar::obstacle[x+250][y+250]==true){
+        colonne +=2;
+        y =Joueur1->getUnites()[i]->getY()+colonne;
+      }
+      if(formation.back()==i)
+        isFormed = true;
 
-}
+      std::cout << i <<" Formation " << x <<"   "<< y << std::endl;
+      
+      Joueur1->getUnites()[i]->setPosition(x,y);
   }
+}
 
 
   // //Gestion des tours
@@ -506,7 +503,6 @@ GLvoid Modelisation()
             }else
               Joueur1->getBatiments()[i]->setSelected(0);
           }
-
           
       }
     //std::cout << "END Modelisation" << std::endl;
@@ -546,7 +542,7 @@ int main(int argc, char **argv){
 
    Caserne * caser = new Caserne(40,40,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
    Joueur2->addBatiment(caser);
-   caser->creerGuerrier(Joueur2);
+   caser->creerArbaletrier(Joueur2);
   //dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
 
   // printf(" taille batiment %d \n",Joueur1->getBatiments().size());

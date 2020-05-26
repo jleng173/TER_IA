@@ -17,6 +17,7 @@ Personnage::Personnage(float x, float y, float angle, float v, std::array<float,
     selected = 0;
     etat = SLEEP;
     std::copy(std::begin(col), std::end(col), std::begin(couleur));
+    ListPositions = {};
 }
 
 
@@ -31,17 +32,103 @@ void Personnage::updatePos( float time){
     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
 }
 
-void Personnage::tpCible(float x, float y){
-position[0] = x;
-position[1] = y;
-    hitbox.x1 = position[0]-1;
-    hitbox.y1 = position[1]-1;
-    hitbox.x2 = position[0]+1;
-    hitbox.y2 = position[1]+1;
-        orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
+void Personnage::setPosition(float x, float y){
+    position[0] = x;
+    position[1] = y;
+    // hitbox.x1 = position[0]-1;
+    // hitbox.y1 = position[1]-1;
+    // hitbox.x2 = position[0]+1;
+    // hitbox.y2 = position[1]+1;
+    //     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
+    // ListPositions.erase(ListPositions.begin()+0);
 
 }
 
+void Personnage::tpCibleAStar(){
+
+    if(!ListPositions.empty()){
+        deplacementCibleAStar(ListPositions[0][0],ListPositions[0][1]);
+            if(avance<19 && mouv == 0)
+                avance += 1;
+            if(avance >= 19 && mouv == 0)
+                mouv = 1;
+            if(avance>-19 && mouv == 1){
+                avance -= 1;
+            }
+            if(avance <=-19 && mouv == 1)
+                mouv=0; 
+    }else {
+        //ListPositions.insert()
+    }
+    
+}
+
+std::vector<std::vector<float>> Personnage::GenerateListPos(float x, float y){
+    Node unite;
+    unite.x = getX()+250;
+    unite.y = getY()+250;
+
+    Node destination;
+    destination.x = x+250;
+    destination.y = y+250;
+
+    std::vector<std::vector<float>> GListpos = {};
+
+    for (Node node : astar::aStar(unite, destination)) {
+        if(node.x <10000 && node.y <10000){
+            std::vector<float> unePos = {(float)node.x-250,(float)node.y-250};
+            GListpos.push_back(unePos);
+        }
+                
+    }
+    return GListpos;
+}
+
+std::vector<std::vector<float>> Personnage::GenerateListPosFuite(float x, float y){
+    Node unite;
+    unite.x = getX()+250;
+    unite.y = getY()+250;
+
+    Node destination;
+    destination.x = getX()-x+250;
+    destination.y = getY()-y+250;
+
+    std::vector<std::vector<float>> GListpos = {};
+
+    for (Node node : astar::aStar(unite, destination)) {
+        if(node.x <10000 && node.y <10000){
+            std::vector<float> unePos = {(float)node.x-250,(float)node.y-250};
+            GListpos.push_back(unePos);
+        }
+                
+    }
+    return GListpos;
+}
+
+void Personnage::deplacementCibleAStar(float x, float y){
+     //SeekKinematic mouvement
+
+        velocite[0] = x - position[0];
+        velocite[1] = y - position[1] ;
+
+        //Normalisation du vecteur velocite
+        float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
+        if (v > 0.05*vitesseMAX){
+            velocite[0] = velocite[0]/v;
+            velocite[1] = velocite[1]/v;
+            
+            velocite[0] *= vitesseMAX;
+            velocite[1] *= vitesseMAX;
+            
+         }else{
+             mouv=0; 
+             avance = 0;
+             ListPositions.erase(ListPositions.begin()+0);
+         }
+
+        updatePos(0.04);
+
+}
 
 void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
     lastPosition[0]=x;

@@ -198,24 +198,30 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
         case SLEEP:
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(_bois){
                 etat = SEEKWOOD;
+                this->ListPositions.clear();
             }else if(_pierre){
                 etat = SEEKSTONE;
+                this->ListPositions.clear();
             }
         break;
 
         case SEEKWOOD :
             ressourceProche = rangeRessource('B');
-            lastPosition[0] = ressourceProche[0];
-            lastPosition[1] = ressourceProche[1];
-            //deplacementCible(ressourceProche[0],ressourceProche[1],all);
+            if (this->ListPositions.empty()){
+                this->ListPositions = GenerateListPos(ressourceProche[0],ressourceProche[1]);
+            }
+            //tpCibleAStar();
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(contact(ressourceProche)){
                 etat = CHOP;
             }else if(_pierre){
                 etat = SEEKSTONE;
+                this->ListPositions.clear();
             }else if(!_bois){
                 etat = SLEEP;
             }
@@ -223,15 +229,18 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
 
         case SEEKSTONE :
             ressourceProche = rangeRessource('P');
-            lastPosition[0] = ressourceProche[0];
-            lastPosition[1] = ressourceProche[1];
-            //deplacementCible(ressourceProche[0],ressourceProche[1],all);
+            if (this->ListPositions.empty()){
+                this->ListPositions = GenerateListPos(ressourceProche[0],ressourceProche[1]);
+            }
+            //tpCibleAStar();
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(contact(ressourceProche)){
                 etat = MINE;
             }else if(_bois){
                 etat = SEEKWOOD;
+                this->ListPositions.clear();
             }else if(!_pierre){
                 etat = SLEEP;
             }
@@ -258,8 +267,10 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
         
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(_pierre){
                 etat = SEEKSTONE;
+                this->ListPositions.clear();
             }else if(!contact(ressourceProche)){
                 etat = SLEEP;
             }
@@ -284,15 +295,20 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
             }
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(_bois){
                 etat = SEEKWOOD;
+                this->ListPositions.clear();
             }else if(!contact(ressourceProche)){
                 etat = SLEEP;
             }
         break;
 
         case FLEE:
-            fuirCible(ennemieProche[0],ennemieProche[1],all);
+            //fuirCible(ennemieProche[0],ennemieProche[1],all);
+            if (this->ListPositions.empty()){
+                this->ListPositions = GenerateListPosFuite(ennemieProche[0],ennemieProche[1]);
+            }
             if(!voitEnnemie(ennemieProche)){
                 etat = SLEEP;
             }
@@ -341,6 +357,6 @@ void Paysan::modeBois(){
 }
 
 bool Paysan::contact(std::vector<float> ressource){
-    return (ressource.back() <= 0.5);
+    return (ressource.back() <= 1);
 }
 

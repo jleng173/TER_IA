@@ -131,24 +131,27 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<B
         case SLEEP:
             if((voitElement(ennemieProche) || voitElement(batimentProche)) && !basHp()){
                 etat = PURSUIT;
+                this->ListPositions.clear();
             } else if(voitElement(ennemieProche) && basHp()){
                 etat = FLEE;
+                this->ListPositions.clear();
             }
         break;
 
         case PURSUIT:
             if(voitElement(ennemieProche)){
-                //deplacementCible(ennemieProche[0],ennemieProche[1],all);
-                lastPosition[0] = ennemieProche[0];
-                lastPosition[1] = ennemieProche[1];
+                if (this->ListPositions.empty()){
+                    this->ListPositions = GenerateListPos(ennemieProche[0],ennemieProche[1]);
+                }
             }else if(voitElement(batimentProche)){
-                //deplacementCible(batimentProche[0],batimentProche[1],all);
-                lastPosition[0] = batimentProche[0];
-                lastPosition[1] = batimentProche[1];
+                if (this->ListPositions.empty()){
+                    this->ListPositions = GenerateListPos(batimentProche[0],batimentProche[1]);
+                }
             }
 
             if(basHp()){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(contactElement(ennemieProche,"Personnage") || contactElement(batimentProche,"Batiment")){
                 etat = ATTACK;
             }else if(!voitElement(ennemieProche) && !voitElement(batimentProche)){
@@ -185,21 +188,30 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<B
 
             if(basHp()){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(!contactElement(ennemieProche,"Personnage") || !contactElement(batimentProche,"Batiment")){
                 etat = PURSUIT;
+                this->ListPositions.clear();
             }
         break;
 
         case FLEE:
             if(voitElement(ennemieProche)){
-                this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+                //this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+                if (this->ListPositions.empty()){
+                    this->ListPositions = GenerateListPosFuite(ennemieProche[0],ennemieProche[1]);
+                }
             }else if (voitElement(batimentProche)){
-                this->fuirCible(batimentProche[0],batimentProche[1],all);
+                //this->fuirCible(batimentProche[0],batimentProche[1],all);
+                if (this->ListPositions.empty()){
+                    this->ListPositions = GenerateListPosFuite(batimentProche[0],batimentProche[1]);
+                }
             }
             if(!voitElement(ennemieProche)){
                 etat = SLEEP;
             }else if(!basHp()){
                 etat = PURSUIT;
+                this->ListPositions.clear();
             }
         break;
 

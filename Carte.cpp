@@ -2,7 +2,6 @@
 
 Carte::Carte(){
 
-    //std::srand (time(NULL));
     tailleCarte = 250;
     //faire une boucle parcourant tous les Decor puis appelant leur méthode generate
 
@@ -14,7 +13,6 @@ Carte::Carte(){
         xdecor =(std::rand()%(i*20*2))-i*20;
 	    ydecor =(std::rand()%(i*20*2))-i*20;
         printf(".\n");
-        //printf("%f %f \n",xdecor,ydecor);
         Decor * d = new Decor(xdecor,ydecor);
         d->GenerateForet(50);
         d->GenerateMine(20);
@@ -57,8 +55,6 @@ void Carte::solcarte(){
                 decors[i]->Mine();
             }glPopMatrix();
         }
-        //decor.Mine();
-        //decor.Foret();
 	}glPopMatrix();
 
     }glPopMatrix();

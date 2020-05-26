@@ -237,6 +237,7 @@ void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vecto
             timeProjec = 0.0;
             if(CourtePortee(ennemieProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(LongPortee(ennemieProche) || LongPortee(batimentProche) ){
                 etat = FIRE;
             }
@@ -260,13 +261,17 @@ void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vecto
 
             if(CourtePortee(ennemieProche) || CourtePortee(batimentProche)){
                 etat = FLEE;
+                this->ListPositions.clear();
             }else if(!LongPortee(ennemieProche) && !LongPortee(batimentProche) ){
                 etat = SLEEP;
             }
         break;
 
         case FLEE:
-            this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+            //this->fuirCible(ennemieProche[0],ennemieProche[1],all);
+            if (this->ListPositions.empty()){
+                this->ListPositions = GenerateListPosFuite(ennemieProche[0],ennemieProche[1]);
+            }
             timeProjec = 0.0;
             if(!CourtePortee(ennemieProche)){
                 etat = SLEEP;
