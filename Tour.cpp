@@ -44,8 +44,6 @@ void Tour::creerBatiment() const{
 				glRotatef(90,1,0,0);
 				glTranslatef(0,0,-12);
 				gluCylinder(params,0,2.5,3,20,1);
-				// glTranslatef(0,0,3);
-				// gluDisk(params,0,2.5,20,1);
 				gluDeleteQuadric(params);
 			}
 			glPopMatrix();
@@ -82,7 +80,6 @@ void Tour::tirArbalete(float x, float y,  std::vector<Element*> listeElements){
           angledeTir = (angledeTir*angledeTir)/(2-( std::min(abs(coordX),abs(coordY)) / std::max(abs(coordX),abs(coordY)) ));
           float arrive[3] = {coordX,coordY,angledeTir};
           float scalaire = 1/sqrt(arrive[0]*arrive[0]+arrive[1]*arrive[1]);
-          //printf("         %f  %f\n",coordX,coordY);
           float u[3] = {arrive[0]*scalaire,arrive[1]*scalaire,arrive[2]*scalaire};
           float g[3] = {0.0,0.0,-3.4};
 
@@ -130,7 +127,6 @@ void Tour::tirArbalete(float x, float y,  std::vector<Element*> listeElements){
                 }
             }
           }
-     // printf("%f, %f, %f \n",pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
    }
   glPopMatrix();
@@ -139,7 +135,6 @@ void Tour::tirArbalete(float x, float y,  std::vector<Element*> listeElements){
 GLvoid Tour::creerCarreau(){
     glPushMatrix();{
         glRotatef(-90,1,0,0);
-        //glScalef(15,15,15);
 
         glColor3f(0.65,0.5,0.1);
         GLUquadric* params = gluNewQuadric();
@@ -183,10 +178,9 @@ GLvoid Tour::creerCarreau(){
     }glPopMatrix();
 }
 
-void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all) {
+void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     std::vector<float> batimentProche = rangeBatiment(listeBatiment);
-    //printf("%d  distance %f, range %f, %f- %f\n",etat,ennemieProche[2],((float)range/3),ennemieProche[0],ennemieProche[1]);
     switch(etat){
         case SLEEP:
             timeProjec = 0.0;

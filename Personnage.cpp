@@ -130,99 +130,6 @@ void Personnage::deplacementCibleAStar(float x, float y){
 
 }
 
-void Personnage::deplacementCible(float x, float y, std::vector<Element *>  all){
-    lastPosition[0]=x;
-    lastPosition[1]=y;
-    int limiteC = sqrt((Carte::tailleCarte*2)*(Carte::tailleCarte*2)/2);
-    if((x != 0) && (y !=0) && (x <= limiteC-y ) && (y  <= limiteC-x) && (x >= -1*limiteC+y) && (y >= -1*limiteC+x)){
-
-        //SeekKinematic mouvement
-
-        velocite[0] = x - position[0];
-        velocite[1] = y - position[1];
-
-        // if(testSiColision(all)){
-        //     velocite[0] =  position[0] - x;
-        //     velocite[1] =  position[1] - y;
-
-        // }
-
-        //Normalisation du vecteur velocite
-        float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
-        if (v > 0.02*vitesseMAX){
-            velocite[0] = velocite[0]/v;
-            velocite[1] = velocite[1]/v;
-
-            if(avance<19 && mouv == 0)
-                avance += 0.1*vitesseMAX;
-            if(avance >= 19 && mouv == 0)
-                mouv = 1;
-            if(avance>-19 && mouv == 1){
-                avance -= 0.1*vitesseMAX;
-            }
-            if(avance <=-19 && mouv == 1)
-                mouv=0; 
-            
-            velocite[0] *= vitesseMAX;
-            velocite[1] *= vitesseMAX;
-            
-        }else{
-            mouv=0; 
-            avance = 0;
-        }
-
-        updatePos(0.04);
-    // printf("a = %f \n",avance)
-    }
-}
-
-void Personnage::fuirCible(float x, float y,std::vector<Element *>  all){
-
-    int limiteC = sqrt((Carte::tailleCarte*2)*(Carte::tailleCarte*2)/2);
-
-    if((x != 0) && (y !=0) && (position[0] <= limiteC-position[1] ) && (position[1]  <= limiteC-position[0]) && (position[0] >= -1*limiteC+position[1]) && (position[1] >= -1*limiteC+position[0])){
-
-        //FleeKinematic mouvement
-
-        velocite[0] =  position[0] - x;
-        velocite[1] =  position[1] - y;
-
-        // if(testSiColision(all)){
-        //     velocite[0] =  x - position[0];
-        //     velocite[1] =  y - position[1];
-        // }
-
-        //Normalisation du vecteur velocite
-        float v = sqrt(velocite[0]*velocite[0]+velocite[1]*velocite[1]);
-        if (v > 0.02*vitesseMAX){
-            velocite[0] = velocite[0]/v;
-            velocite[1] = velocite[1]/v;
-
-            if(avance<19 && mouv == 0)
-                avance += 0.1*vitesseMAX;
-            if(avance >= 19 && mouv == 0)
-                mouv = 1;
-            if(avance>-19 && mouv == 1){
-                avance -= 0.1*vitesseMAX;
-            }
-            if(avance <=-19 && mouv == 1)
-                mouv=0; 
-            
-            velocite[0] *= vitesseMAX;
-            velocite[1] *= vitesseMAX;
-            
-        }else{
-            mouv=0; 
-            avance = 0;
-        }
-
-        updatePos(0.04);
-    // printf("a = %f \n",avance)
-    }else{
-       // deplacementCible(x-5,y-5,all);
-    }
-}
-
 Hitbox Personnage::getHitbox(){
     return hitbox;
 }
@@ -244,7 +151,6 @@ GLvoid Personnage::barreHp(){
     float lonHp = (6/(float)hpMax)*hp-3;
     glPushMatrix();{
         glColor3f(1,0,0);
-        //glRotatef(90,1.0,0.0,0.0);
  	glBegin( GL_QUADS );
 	 	glVertex3f(-3, 1.5, 4);
 		glVertex3f(-3, 1, 4);
@@ -259,7 +165,6 @@ GLvoid Personnage::barreHp(){
         glVertex3f(lonHp, 1.5, 4);   
     glEnd();
     glColor3f(1,1,1);
-    //creerAccessoire();
     }glPopMatrix();
 }
 
@@ -278,10 +183,9 @@ glPushMatrix();{
     glTranslatef(position[0],position[1],0);
     
     glPushMatrix();{
-
-        //glScalef(5,5,5);
         if(selected)
             barreHp();
+
         glRotatef(90,1.0,0.0,0.0);
         glTranslatef(0,4,0);
         glRotatef(orientation,0,1,0);
@@ -378,7 +282,6 @@ glPushMatrix();{
             }
             glPushMatrix();{
                 glPushMatrix();{
-                    // glRotatef(action,1,0,0);
                     glTranslatef(-0.7,-2,0);
                     glColor3f(0,0,0);
                     glScalef(0.1,0.2,0.1);
@@ -396,7 +299,6 @@ glPushMatrix();{
                 glPushMatrix();{
                     glTranslatef(-0.7,-2.5,2.5);
                     glRotatef(90,1,0,0);
-                    // glRotatef(90,0,1,0);
                     glScalef(0.4,0.4,0.4);
                     creerAccessoire();
                 }

@@ -23,16 +23,6 @@ public:
 	//Destructor
 	~initGL();
 
-/*
-	// Getters
-	unsigned int getHeight();
-	unsigned int getWidth();
-
-	// Setters
-	void setHeight(unsigned int m_height);
-	void setWidth(unsigned int m_width);
-*/
-
 	//init
 	int mainInit(int argc, char** argv, void (*DrawGLScene)());
 
@@ -61,7 +51,6 @@ protected:
 //VM_init
  float hauteur;
  float avs;
-//action.c
  float av;
  int lightswap;
 

@@ -15,7 +15,7 @@ class Tour : public Batiment{
         GLvoid creerCarreau();
         std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
         std::vector<float> rangeBatiment(std::vector<Batiment*> listeBatiment);
-        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all);
+        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment);
         bool elementPortee(std::vector<float> elementProche);
         
     private:

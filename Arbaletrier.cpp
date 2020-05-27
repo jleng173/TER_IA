@@ -15,7 +15,6 @@ void Arbaletrier::creerAccessoire() const{
     struct cube1 base = fa.creerCube(1);
     struct pyramide1 pic = fa.creerPyramide(1);
     glPushMatrix();{
-        // glRotatef(90,1,0,0);
         glScalef(2,2,2);
         glTranslatef(0,-1.5,0);
         glRotatef(90,0,0,1);
@@ -72,7 +71,6 @@ void Arbaletrier::creerAccessoire() const{
             }
             glPopMatrix();
             glPushMatrix();{
-                // glTranslatef(0,0,0);
                 glRotatef(-90,0,0,1);
                 glScalef(0.1,0.1,0.07);
                 glColor3f(0.3,0.3,0.3);
@@ -113,7 +111,6 @@ void Arbaletrier::tirArbalete(float x, float y, std::vector<Element*> listeEleme
           angledeTir = (angledeTir*angledeTir)/(2-( min(abs(coordX),abs(coordY)) / max(abs(coordX),abs(coordY)) ));
           float arrive[3] = {coordX,coordY,angledeTir};
           float scalaire = 1/sqrt(arrive[0]*arrive[0]+arrive[1]*arrive[1]);
-          //printf("         %f  %f\n",coordX,coordY);
           float u[3] = {arrive[0]*scalaire,arrive[1]*scalaire,arrive[2]*scalaire};
           float g[3] = {0.0,0.0,-3.4};
 
@@ -161,7 +158,6 @@ void Arbaletrier::tirArbalete(float x, float y, std::vector<Element*> listeEleme
                 }
             }
           }
-     // printf("%f, %f, %f \n",pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
    }
   glPopMatrix();
@@ -170,7 +166,6 @@ void Arbaletrier::tirArbalete(float x, float y, std::vector<Element*> listeEleme
 GLvoid Arbaletrier::creerCarreau(){
     glPushMatrix();{
         glRotatef(-90,1,0,0);
-        //glScalef(15,15,15);
 
         glColor3f(0.65,0.5,0.1);
         GLUquadric* params = gluNewQuadric();
@@ -217,8 +212,6 @@ GLvoid Arbaletrier::creerCarreau(){
 GLvoid Arbaletrier::creerChapeau() const{
     glPushMatrix();{
         glColor3f(0.7,0.7,0);
-        // glScalef(0.8,0,0);
-        // Personnage::drawHalfSphere(100,100,1);
         GLUquadric* params = gluNewQuadric();
         gluQuadricTexture(params, GL_TRUE);
         glRotatef(90,1,0,0);
@@ -228,10 +221,9 @@ GLvoid Arbaletrier::creerChapeau() const{
     glPopMatrix();
 }
 
-void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all) {
+void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     std::vector<float> batimentProche = rangeBatiment(listeBatiment);
-    //printf("%d  distance %f, range %f, %f- %f\n",etat,ennemieProche[2],((float)range/3),ennemieProche[0],ennemieProche[1]);
     switch(etat){
         case SLEEP:
             timeProjec = 0.0;
@@ -268,7 +260,6 @@ void Arbaletrier::comportement(std::vector<Personnage*> listeEnnemies,std::vecto
         break;
 
         case FLEE:
-            //this->fuirCible(ennemieProche[0],ennemieProche[1],all);
             if (this->ListPositions.empty()){
                 this->ListPositions = GenerateListPosFuite(ennemieProche[0],ennemieProche[1]);
             }

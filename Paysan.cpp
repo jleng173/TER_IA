@@ -45,7 +45,6 @@ void Paysan::construireTour(Joueur * J,float x, float y){
 GLvoid Paysan::creerChapeau() const{
     glPushMatrix();{
         glColor3f(0.7,0.7,0);
-        // glScalef(0.8,0,0);
         Personnage::drawHalfSphere(100,100,1);
         GLUquadric* params = gluNewQuadric();
         gluQuadricTexture(params, GL_TRUE);
@@ -188,7 +187,7 @@ std::vector<float> Paysan::rangeRessource(char r){
 }
 
 
-void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all){
+void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment){
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     // ressourceProche -> (position x, position y, resistance, 
     //                     numéro du décor, position dans le vecteur, distance)
@@ -213,7 +212,6 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
             if (this->ListPositions.empty()){
                 this->ListPositions = GenerateListPos(ressourceProche[0],ressourceProche[1]);
             }
-            //tpCibleAStar();
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
                 this->ListPositions.clear();
@@ -232,7 +230,6 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
             if (this->ListPositions.empty()){
                 this->ListPositions = GenerateListPos(ressourceProche[0],ressourceProche[1]);
             }
-            //tpCibleAStar();
             if(voitEnnemie(ennemieProche)){
                 etat = FLEE;
                 this->ListPositions.clear();
@@ -305,7 +302,6 @@ void Paysan::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Bat
         break;
 
         case FLEE:
-            //fuirCible(ennemieProche[0],ennemieProche[1],all);
             if (this->ListPositions.empty()){
                 this->ListPositions = GenerateListPosFuite(ennemieProche[0],ennemieProche[1]);
             }

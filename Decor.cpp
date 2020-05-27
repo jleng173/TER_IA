@@ -9,7 +9,6 @@ Decor::Decor(float dx, float dy){
 GLvoid Decor::Arbre(){
 glPushMatrix();
   	{
-	//glTranslatef(3,-0.8,-3);
 		glPushMatrix();
   	{
 	glColor3f(0.5,0.3,0.2);
@@ -183,7 +182,6 @@ float Decor::getpositionDecorY(){
 }
 
 void Decor::deleteArbre(int id){
-	//printf("%d \n",id);
 	_foret.erase(_foret.begin()+id);
 
 }

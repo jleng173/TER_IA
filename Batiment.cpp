@@ -18,7 +18,6 @@ GLvoid Batiment::barreHp(int z) const{
     float lonHp = (6/(float)hpMax)*hp-3;
     glPushMatrix();{
         glColor3f(1,0,0);
-        //glRotatef(90,1.0,0.0,0.0);
  	glBegin( GL_QUADS );
 	 	glVertex3f(-3, 1.5, z);
 		glVertex3f(-3, 1, z);
@@ -33,7 +32,6 @@ GLvoid Batiment::barreHp(int z) const{
         glVertex3f(lonHp, 1.5, z);   
     glEnd();
     glColor3f(1,1,1);
-    //creerAccessoire();
     }glPopMatrix();
 }
 

@@ -29,7 +29,6 @@ public:
     void setMaxUnites(int mu);
 
     std::array<float,3> getCouleur();
-    // std::vector<std::shared_ptr<Batiment> > getBatiments();
     std::vector<Personnage* > getUnites();
     void addUnites(Personnage* p);
     //Enleve les personnages morts

@@ -48,8 +48,6 @@ GLvoid Guerrier::creerAccessoire() const{
         //Partie haute
         glPushMatrix();{
             glColor3f(0.7,0.7,0.7);
-            // glRotatef(45,0,1,0);
-            // glScalef(0.3,0.5,0.2);
             glBegin( GL_TRIANGLES );
                 //Face lame 1
                 glVertex3f( -0.4f, 0.0f, 0.0f );
@@ -124,7 +122,7 @@ GLvoid Guerrier::creerAccessoire() const{
     glPopMatrix();
 }
 
-void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment, std::vector<Element *>  all) {
+void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     std::vector<float> batimentProche = rangeBatiment(listeBatiment);
     switch(etat){
@@ -160,7 +158,6 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<B
         break;
 
         case ATTACK:
-        //Animation bras à revoir
             if(action==0)
             {
                 mouvementbras=2;
@@ -197,12 +194,10 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<B
 
         case FLEE:
             if(voitElement(ennemieProche)){
-                //this->fuirCible(ennemieProche[0],ennemieProche[1],all);
                 if (this->ListPositions.empty()){
                     this->ListPositions = GenerateListPosFuite(ennemieProche[0],ennemieProche[1]);
                 }
             }else if (voitElement(batimentProche)){
-                //this->fuirCible(batimentProche[0],batimentProche[1],all);
                 if (this->ListPositions.empty()){
                     this->ListPositions = GenerateListPosFuite(batimentProche[0],batimentProche[1]);
                 }

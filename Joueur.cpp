@@ -49,9 +49,6 @@ void Joueur::setMaxUnites(int mu){
     maxUnites = mu;
 }
 
-// std::vector<std::shared_ptr<Batiment> > Joueur::getBatiments(){
-//     return listeBatiments;
-// }
 std::vector<Personnage * > Joueur::getUnites(){
     return listeUnites;
 }

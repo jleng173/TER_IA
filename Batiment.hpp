@@ -29,7 +29,6 @@ public:
     std::string getNom();
 
 protected:
-    //float position[2];
     bool selected;
     bool enConstruction;
     float delaiConstruction;

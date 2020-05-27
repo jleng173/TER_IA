@@ -23,7 +23,8 @@ class Arbaletrier : public Personnage{
         GLvoid creerCarreau();
         GLvoid creerChapeau() const override;
         GLvoid creerAccessoire() const override;
-        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element *>  all) override;
+        //Gestion des états
+        void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) override;
         //Transitions
         bool CourtePortee(std::vector<float> elementProche);
         bool LongPortee(std::vector<float> elementProche);

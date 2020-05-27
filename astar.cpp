@@ -1,13 +1,6 @@
 #include "astar.hpp"
 
 bool astar::isValid(int x, int y) { 
-            //std::cout << "Obstacle " <<     obstacle[x][y] << std::endl;
-    //   for(int i = 0 ; i < 500; i++){
-    //                   std::cout << std::endl;
-
-    //     for(int j = 0 ; j < 500; j++){
-    //         std::cout << obstacle[i][j];
-    //     }}
         if (!obstacle[x][y]) {
 
             if (x < 0 || y < 0 || x >= (X_MAX / X_STEP) || y >= (Y_MAX / Y_STEP)) {
@@ -15,7 +8,6 @@ bool astar::isValid(int x, int y) {
             }
             return true;
         }
-        //sleep(1);
         return false;
     }
 
@@ -85,18 +77,14 @@ std::vector<Node> astar::aStar(Node player, Node dest) {
                 for (std::set<Node>::iterator it = openList.begin();
                     it != openList.end(); ++it) {
                     Node n = *it;
-                    //std::cout <<n.x<< "UUUU" << n.y<<std::endl;
-
                     if (n.fCost < temp) {
                         temp = n.fCost;
                         node = n;
                     }
                 }
 
-               // node = *itNode;
 
                 openList.erase(node);
-                //std::cout <<node.x<< "COU"<<node.fCost<<"COU" << node.y<<std::endl;
 
             } while (isValid(node.x, node.y) == false);
 
@@ -174,7 +162,6 @@ std::vector<Node> astar::aStar(Node player, Node dest) {
                 path.pop();
                 usablePath.emplace_back(top);
             }
-            //std::reverse(usablePath.begin(), usablePath.end());
             return usablePath;
         }
         catch(const std::exception& e){

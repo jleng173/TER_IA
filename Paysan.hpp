@@ -29,7 +29,7 @@ public:
     //recherche la ressource la plus proche, Pierre 'P' ou Bois 'B' en fonction de l'argument
     std::vector<float> rangeRessource( char r);
     //Gestion des états
-    void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment,std::vector<Element*>  all) override;
+    void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) override;
     //Transitions
     bool voitEnnemie(std::vector<float> ennemieProche);
     void modePierre();

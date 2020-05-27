@@ -37,7 +37,6 @@ protected:
     float mouv;
     float mouvementbras;
     
-    //float position[2];
     float orientation;
 
     //acceleration
@@ -67,10 +66,8 @@ public:
     bool isSelected();
     void setSelected(int s);
 
-    virtual void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment, std::vector<Element *>  all) =  0;
+    virtual void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) =  0;
     void updatePos( float time);
-    void deplacementCible(float x, float y,std::vector<Element *>  all);
-    void fuirCible(float x, float y,std::vector<Element *>  all);
 
     Hitbox getHitbox();
     static GLvoid drawHalfSphere(int scaley, int scalex, GLfloat r);
