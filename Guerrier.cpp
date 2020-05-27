@@ -179,12 +179,12 @@ void Guerrier::comportement(std::vector<Personnage*> listeEnnemies,std::vector<B
                 }
             }
             if(action<30 && mouvementbras==2){
-                action+=0.5;
+                action+=1;
             }
             if(action >= 30 && mouvementbras==2)
                 mouvementbras=3;
             if(action>0 && mouvementbras==3)
-                action-=0.5;
+                action-=1;
 
             if(basHp()){
                 etat = FLEE;

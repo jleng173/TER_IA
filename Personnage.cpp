@@ -48,17 +48,10 @@ void Personnage::tpCibleAStar(){
 
     if(!ListPositions.empty()){
         deplacementCibleAStar(ListPositions[0][0],ListPositions[0][1]);
-            if(avance<19 && mouv == 0)
-                avance += 1;
-            if(avance >= 19 && mouv == 0)
-                mouv = 1;
-            if(avance>-19 && mouv == 1){
-                avance -= 1;
-            }
-            if(avance <=-19 && mouv == 1)
-                mouv=0; 
+ 
     }else {
-        //ListPositions.insert()
+        mouv=0; 
+        avance = 0;
     }
     
 }
@@ -121,8 +114,15 @@ void Personnage::deplacementCibleAStar(float x, float y){
             velocite[1] *= vitesseMAX;
             
          }else{
-             mouv=0; 
-             avance = 0;
+            if(avance<19 && mouv == 0)
+                avance += 3;
+            if(avance >= 19 && mouv == 0)
+                mouv = 1;
+            if(avance>-19 && mouv == 1){
+                avance -= 3;
+            }
+            if(avance <=-19 && mouv == 1)
+                mouv=0;
              ListPositions.erase(ListPositions.begin()+0);
          }
 

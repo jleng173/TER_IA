@@ -542,7 +542,7 @@ int main(int argc, char **argv){
 
    Caserne * caser = new Caserne(40,40,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
    Joueur2->addBatiment(caser);
-   caser->creerArbaletrier(Joueur2);
+   caser->creerGuerrier(Joueur2);
   //dynamic_cast<Chateau*>(castle)->creerPaysan(Joueur2);
 
   // printf(" taille batiment %d \n",Joueur1->getBatiments().size());
