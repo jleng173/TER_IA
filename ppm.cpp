@@ -12,7 +12,7 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 
 	if ((file = fopen(ppmFileName, "rb")) == NULL)
 	{
-		printf ("(ERROR) : C function fopen failed in readPpm(%s)\n", ppmFileName);
+		////printf ("(ERROR) : C function fopen failed in readPpm(%s)\n", ppmFileName);
 		getchar();
 		return NULL;
 	}
@@ -22,7 +22,7 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 	buffer[2] = '\0';
 	if (strncmp(buffer, "P3", 2) & strncmp(buffer, "P6", 2))
 	{
-		printf ("(ERROR) : File %s doesn't seem to be a ppm, the header says %s [function readPpm]\n", ppmFileName, buffer);
+		////printf ("(ERROR) : File %s doesn't seem to be a ppm, the header says %s [function readPpm]\n", ppmFileName, buffer);
 		getchar();
 		return NULL;
 	}
@@ -30,7 +30,7 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 	//Allocation of the pointer to the TEXTURE_STRUCT variable
 	if ((texture = (TEXTURE_STRUCT *)malloc(sizeof(TEXTURE_STRUCT))) == NULL)
 	{
-		printf ("(ERROR) : C function malloc failed in readPpm(%s)\n", ppmFileName);
+		////printf ("(ERROR) : C function malloc failed in readPpm(%s)\n", ppmFileName);
 		getchar();
 		return NULL;
 	}
@@ -90,11 +90,11 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 	buffer[i] = '\0';
 	pixelFormat = atoi(buffer);
 	pixelFormat++;
-	printf ("%d %d %d\n", texture->width, texture->height, pixelFormat);
+	// printf ("%d %d %d\n", texture->width, texture->height, pixelFormat);
 	//Finding the number of bits fitting the pixel format, if available
 	if (pixelFormat <= 0)
 	{
-		printf ("(ERROR) : Pixel Format of the %s ppm file is less or equal to 0\n", ppmFileName);
+		//printf ("(ERROR) : Pixel Format of the %s ppm file is less or equal to 0\n", ppmFileName);
 		getchar();
 		free (texture);
 		return NULL;
@@ -114,7 +114,7 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 	//	if ((texture->data = (unsigned char *)malloc(texture->width*texture->height*3*sizeof(unsigned char))) == NULL)
 	if ((texture->data = (unsigned char *)malloc(256*256*3*sizeof(unsigned char))) == NULL)
 	{
-		printf ("(ERROR) : C function malloc failed in readPpm(%s)\n", ppmFileName);
+		//printf ("(ERROR) : C function malloc failed in readPpm(%s)\n", ppmFileName);
 		getchar();
 		free(texture);
 		return NULL;
@@ -128,7 +128,7 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 	}
 	// fread(texture->data, sizeof(unsigned char), 3*texture->width*texture->height, file);
 	
-	printf ("(OK) : The file %s was correctly parsed and uploaded in memory [function readPpm]\n", ppmFileName);
+	// printf ("(OK) : The file %s was correctly parsed and uploaded in memory [function readPpm]\n", ppmFileName);
 	//printf ("%d %d %d\n", texture->width, texture->height, texture->bpp);getchar();getchar();
 
 	texture->width = 256;
@@ -143,21 +143,21 @@ void ppm::writePpm (char *filename, unsigned char *data){
   char buffer[256];
 
   buffer[0] = '\0';
-  sprintf (buffer, "P6\n%u %u\n255\n", width, height); 
+//   sprintf (buffer, "P6\n%u %u\n255\n", width, height); 
   file = fopen (filename, "wb");
   if (file == NULL)
     {
-      printf ("Could not open the file %s\n", filename);
+     //printf ("Could not open the file %s\n", filename);
       exit(0);
     }
   if (fwrite (buffer, sizeof(unsigned char), strlen(buffer), file) != strlen(buffer))
     {
-      printf ("Error writing header of Ppm File\n");
+     //printf ("Error writing header of Ppm File\n");
       exit(0);
     }
   if (fwrite (data, sizeof(unsigned char), 3*width*height, file) != (3*width*height))
     {
-      printf("Error in writing data image in Ppm file\n");
+     //printf("Error in writing data image in Ppm file\n");
       exit(0);
     }
   fclose(file);

@@ -441,7 +441,6 @@ GLvoid Modelisation()
 
 int main(int argc, char **argv){
 
-  printf(" TEST \n");
   Batiment * castle = new Chateau(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Batiment * caserne = new Caserne(10,10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur1->addBatiment(castle);

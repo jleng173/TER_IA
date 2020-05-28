@@ -6,7 +6,6 @@ Element::Element(float x,float y){
     current_id += 1;
     position[0] = x;
     position[1] = y;
-    printf(" id %d \n",id);
 }
 
 int Element::current_id;

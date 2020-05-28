@@ -28,12 +28,10 @@ std::vector<Node> astar::aStar(Node player, Node dest) {
 
         std::vector<Node> empty;
         if (isValid(dest.x, dest.y) == false) {
-            std::cout << "La destination est un obstacle " << dest.x << dest.y << std::endl;
             return empty;
             //Destination invalide
         }
         if (isDestination(player.x, player.y, dest)) {
-            std::cout << "Immobile" << std::endl;
             return empty;
         }
         bool closedList[(X_MAX / X_STEP)][(Y_MAX / Y_STEP)];
@@ -132,14 +130,12 @@ std::vector<Node> astar::aStar(Node player, Node dest) {
             
             }
             if (destinationFound == false) {
-                std::cout << "Destination not found" << std::endl;
                 return empty;
         }
     }
 
  std::vector<Node> astar::makePath(std::array<std::array<Node, (Y_MAX / Y_STEP)>, (X_MAX / X_STEP)>  &map, Node dest) {
         try {
-            std::cout << "path trouvé" << std::endl;
             int x = dest.x;
             int y = dest.y;
             std::stack<Node> path;
@@ -165,6 +161,5 @@ std::vector<Node> astar::aStar(Node player, Node dest) {
             return usablePath;
         }
         catch(const std::exception& e){
-            std::cout << e.what() << std::endl;
         }
  }

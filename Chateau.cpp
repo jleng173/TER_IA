@@ -15,7 +15,6 @@ Chateau::Chateau(float x, float y, std::vector<Decor*> decors,TEXTURE_STRUCT * T
 void Chateau::creerPaysan(Joueur * J){
     
     if (J->getUnites().size() < J->getMaxUnites() && (J->getOr()-2) > 0){
-        printf("CREATION D'UN PAYSAN \n"); 
         Personnage * PersPaysan = new Paysan(position[0],position[1]-15,0,7,J->getCouleur(),_decors, J,Texture_chateau,Texture_pierre,Texture_toit,Texture_porte,Texture_paille);
         J->subtractOr(2);
         J->addUnites(PersPaysan);
