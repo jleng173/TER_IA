@@ -16,6 +16,7 @@ Tour::Tour(float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T_pierre
     etat=SLEEP;
 }
 
+//Modélisation du batiment
 void Tour::creerBatiment() const{
 	glPushMatrix();{
 		Forme f;
@@ -68,6 +69,8 @@ int Tour::getDmg(){
 	return dmg;
 }
 
+//Modélisation du carrreau et translation vers la cible
+//Baisse des points de vie de l'ennemi lorsqu'il atteint la cible
 void Tour::tirArbalete(float x, float y,  std::vector<Element*> listeElements){
      glPushMatrix();{
           
@@ -132,6 +135,7 @@ void Tour::tirArbalete(float x, float y,  std::vector<Element*> listeElements){
   glPopMatrix();
 }
 
+//Modelisation du carreau
 GLvoid Tour::creerCarreau(){
     glPushMatrix();{
         glRotatef(-90,1,0,0);
@@ -178,6 +182,9 @@ GLvoid Tour::creerCarreau(){
     }glPopMatrix();
 }
 
+//Comportement de la tour en présence d'ennemi
+//Attaque si un ennemi est à sa portée
+//Reste endormie sinon
 void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) {
     std::vector<float> ennemieProche = rangeEnnemy(listeEnnemies);
     std::vector<float> batimentProche = rangeBatiment(listeBatiment);
@@ -217,6 +224,7 @@ void Tour::comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batim
     }
 }
 
+//Détection d'unité ennemi
 std::vector<float> Tour::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {
     std::vector<float> ennemyproche= {0,0,INFINITY};
     float distanceMin = INFINITY;
@@ -235,8 +243,8 @@ std::vector<float> Tour::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {
     return ennemyproche;
 }
 
-
- std::vector<float> Tour::rangeBatiment(std::vector<Batiment*> listeBatiment){
+//Détection de batiment ennemi
+std::vector<float> Tour::rangeBatiment(std::vector<Batiment*> listeBatiment){
     std::vector<float> batimentproche= {0,0,INFINITY};
     float distanceMin = INFINITY;
     for(int i = 0 ; i < listeBatiment.size() ; i++){

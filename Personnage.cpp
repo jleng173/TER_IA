@@ -146,6 +146,7 @@ GLvoid Personnage::selectionne(){
     }glPopMatrix();
 }
 
+//Génère la barre de vie
 GLvoid Personnage::barreHp(){
 
     float lonHp = (6/(float)hpMax)*hp-3;
@@ -176,6 +177,7 @@ void Personnage::setSelected(int s){
     selected = s;
 }
 
+//Modélisation du personnage et de sa barre de vie si l'unité est sélectionnée
 GLvoid Personnage::creerPersonnage()
 {
     
@@ -459,6 +461,7 @@ State Personnage::getEtat(){
    return etat;
 }
 
+//Détecte l'unité ennemi
 std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {
     std::vector<float> ennemyproche= {0,0,INFINITY};
     float distanceMin = INFINITY;
@@ -477,7 +480,8 @@ std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemie
     return ennemyproche;
 }
 
- std::vector<float> Personnage::rangeBatiment(std::vector<Batiment*> listeBatiment){
+//Détecte le batiment ennemi
+std::vector<float> Personnage::rangeBatiment(std::vector<Batiment*> listeBatiment){
     std::vector<float> batimentproche= {0,0,INFINITY};
     float distanceMin = INFINITY;
     for(int i = 0 ; i < listeBatiment.size() ; i++){
@@ -493,4 +497,4 @@ std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemie
     }
     batimentproche[2] = distanceMin;
     return batimentproche;
- }
+}

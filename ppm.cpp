@@ -26,7 +26,7 @@ TEXTURE_STRUCT * ppm::readPpm (char *ppmFileName){
 		getchar();
 		return NULL;
 	}
-	printf("%s\n", buffer);
+	// printf("%s\n", buffer);
 	//Allocation of the pointer to the TEXTURE_STRUCT variable
 	if ((texture = (TEXTURE_STRUCT *)malloc(sizeof(TEXTURE_STRUCT))) == NULL)
 	{

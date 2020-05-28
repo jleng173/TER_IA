@@ -355,4 +355,3 @@ void Paysan::modeBois(){
 bool Paysan::contact(std::vector<float> ressource){
     return (ressource.back() <= 1);
 }
-
