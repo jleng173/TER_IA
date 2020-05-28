@@ -370,21 +370,6 @@ GLvoid Modelisation()
 
      }
 
-      for(int i = 0 ; i < 500; i++){
-        for(int j = 0 ; j < 500; j++){
-          if(astar::obstacle[i][j] == true){
-            	glPushMatrix();{
-      	        glTranslatef(i-250,j-250,4.5);
-	              glColor3f(0.5,0.3,0.2);
-	              GLUquadric* qobj;
-	              qobj = gluNewQuadric();
-	              gluCylinder(qobj, 0.3, 0.3, 3.2, 10, 16);
-	            }glPopMatrix();
-          }
-        }
-      }
-
-
    }glPopMatrix();
 
 
