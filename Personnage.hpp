@@ -44,7 +44,7 @@ protected:
     float vitesseMAX;
 
     int selected;
-
+    bool formed;
     std::array<float,3> couleur;
 
     State etat;
@@ -64,8 +64,9 @@ public:
     GLvoid selectionne();
     GLvoid barreHp();
     bool isSelected();
+    bool isFormed();
     void setSelected(int s);
-
+    void setFormed(bool f);
     virtual void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) =  0;
     void updatePos( float time);
 

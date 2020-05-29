@@ -50,6 +50,9 @@ void Personnage::tpCibleAStar(){
         deplacementCibleAStar(ListPositions[0][0],ListPositions[0][1]);
  
     }else {
+        if(mouv !=0 && avance !=0) //switch pour faire le setFormed qu'une fois 
+        setFormed(false);
+        
         mouv=0; 
         avance = 0;
     }
@@ -59,7 +62,7 @@ void Personnage::tpCibleAStar(){
 std::vector<std::vector<float>> Personnage::GenerateListPos(float x, float y){
     Node unite;
     unite.x = getX()+250;
-    unite.y = getY()+250;
+    unite.y = getY()+250; 
 
     Node destination;
     destination.x = x+250;
@@ -176,6 +179,14 @@ void Personnage::setSelected(int s){
     selected = s;
 }
 
+bool Personnage::isFormed(){
+    return formed;
+} 
+
+void Personnage::setFormed(bool f){
+    formed = f;
+}
+    
 GLvoid Personnage::creerPersonnage()
 {
     

@@ -53,7 +53,6 @@ int initGL::selection = 0;
 int initGL::construction = 0;
 int initGL::modeAction = 0;
 
-bool isFormed = false;
 float posx, posy, posz = 0.0;
 float lastposx, lastposy = 0.0;
 float CDposx, CDposy = 0.0;
@@ -298,55 +297,33 @@ GLvoid Modelisation()
       for(int i = 0 ; i < Joueur1->getUnites().size(); i++){
             Node unite;
             unite.x = Joueur1->getUnites()[i]->getX()+250;
-            unite.y = Joueur1->getUnites()[i]->getY()+250;//+15;
+            unite.y = Joueur1->getUnites()[i]->getY()+250;;
             std::vector<Node> path;
 
             Node destination;
             destination.x = posx+250;
             destination.y = posy+250;
 
-        if(Joueur1->getUnites()[i]->isSelected()){
+        if(Joueur1->getUnites()[i]->isSelected() && !Joueur1->getUnites()[i]->isFormed() ){
            formation.push_back(i);
         }
 
         if(Joueur1->getUnites()[i]->isSelected() && !(unite.x-3 <= destination.x && destination.x<= unite.x+3 && unite.y-3 <= destination.y &&  destination.y<= unite.y+3)){
           
 
-  //formation en carré
-          // int ligne = 0;
-          // int colonne = 0;
-          // int x = Joueur1->getUnites()[i]->getX();
-          // int y = Joueur1->getUnites()[i]->getY();
-          // if (isFormed == false){
-          //   for(int i :formation){
-              
-          //     if(ligne == 6){
-          //       ligne = 0;
-          //       colonne+=2;
-          //     }else{
-          //       ligne+=2;
-          //     }
-          //     x += ligne;
-          //     y += colonne;
-          //     while(astar::obstacle[x+250][y+250]==true){
-          //       colonne +=2;
-          //     }
-          //     if(formation.back()==i)
-          //       isFormed = true;
 
-          //     std::cout << i <<" Formation " << x <<"   "<< y << std::endl;
-          //   }
-          // }
-          // Joueur1->getUnites()[i]->setPosition(x,y);
+
 
       //A faire : deplacement de groupe ?, formations, autre hitbox, deplacement naturel
 
             if(Joueur1->getUnites()[i]->ListPositions.empty()){
                 Joueur1->getUnites()[i]->ListPositions = Joueur1->getUnites()[i]->GenerateListPos(posx,posy);
+
             }
             else if(initGL::pose == 2){
                 Joueur1->getUnites()[i]->ListPositions.clear();
                 Joueur1->getUnites()[i]->ListPositions = Joueur1->getUnites()[i]->GenerateListPos(posx,posy);
+
             }
               Joueur1->getUnites()[i]->tpCibleAStar();
 
@@ -357,20 +334,33 @@ GLvoid Modelisation()
 
      }
 
-      for(int i = 0 ; i < 500; i++){
-        for(int j = 0 ; j < 500; j++){
-          if(astar::obstacle[i][j] == true){
-            	glPushMatrix();{
-      	        glTranslatef(i-250,j-250,4.5);
-	              glColor3f(0.5,0.3,0.2);
-	              GLUquadric* qobj;
-	              qobj = gluNewQuadric();
-	              gluCylinder(qobj, 0.3, 0.3, 3.2, 10, 16);
-	            }glPopMatrix();
-          }
-        }
-      }
+       //formation en carré
+       if(!formation.empty()){
+          int startForm = formation.size();
+          int ligne = 0 - startForm;
+          int colonne = 0;
+          int x = Joueur1->getUnites()[formation.front()]->getX();
+          int y = Joueur1->getUnites()[formation.front()]->getY();
+            for(int i :formation){
+              
+              if(ligne == startForm){
+                ligne = -startForm;
+                colonne+=2;
+              }else{
+                ligne+=2;
+              }
+              x += ligne;
+              y += colonne;
+              while(astar::obstacle[x+250][y+250]==true){
+                colonne +=2;
+              }
 
+              Joueur1->getUnites()[i]->setPosition(x,y);
+              Joueur1->getUnites()[i]->setFormed(true);
+
+            }
+       }
+          
 
    }glPopMatrix();
 
@@ -419,7 +409,6 @@ GLvoid Modelisation()
             }else
               Joueur1->getBatiments()[i]->setSelected(0);
           }
-          isFormed = false;
       }
   }glPopMatrix();
 
