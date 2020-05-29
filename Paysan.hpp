@@ -30,11 +30,16 @@ public:
     std::vector<float> rangeRessource( char r);
     //Gestion des états
     void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) override;
-    //Transitions
+    //Transitions :
+    // Si il y a un ennemi dans le champ de vision
     bool voitEnnemie(std::vector<float> ennemieProche);
+    // Si le Joueur veut que le paysan récupère des pierres
     void modePierre();
+    // Si le Joueur veut que le paysan coupe du bois
     void modeBois();
+    // Si le paysan est proche d'une ressource      
     bool contact(std::vector<float> ressource);
+    // Attribue la ressource récolté au Joueur
     void ajoutRessource(Joueur * J, char r);
 
 private :

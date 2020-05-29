@@ -15,7 +15,10 @@ class Tour : public Batiment{
         GLvoid creerCarreau();
         std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
         std::vector<float> rangeBatiment(std::vector<Batiment*> listeBatiment);
+        //Gestion des états
         void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment);
+        //Tansition :
+        // Vérifie si il y a une unité ou un batiment ennemi dans la portée de la Tour
         bool elementPortee(std::vector<float> elementProche);
         
     private:

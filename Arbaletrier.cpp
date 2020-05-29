@@ -102,16 +102,24 @@ void Arbaletrier::creerAccessoire() const{
 void Arbaletrier::tirArbalete(float x, float y, std::vector<Element*> listeElements){
      glPushMatrix();{
           
+          //Formule de la position(en 3 dimension) du carreau à un temps t :
+          //    Position de départ + (direction du tir * la vitesse du carreau * le temps écoulé depuis le début du tir) +
+          //    (l'accélération due à la gravité * le temps écoulé) / 2
+
+          // Position de départ du tir
           float posDepart[3] = {position[0],position[1],0.0};
-          float posCible[3] = {x,y,0.0};
+          //Vitesse du carreau lors du tir
           float sm = 10 ;
+          float posCible[3] = {x,y,0.0};
           float coordX = posCible[0]-posDepart[0];
           float coordY = posCible[1]-posDepart[1];
           float angledeTir = 0.183*( max(abs(coordX),abs(coordY)) );
           angledeTir = (angledeTir*angledeTir)/(2-( min(abs(coordX),abs(coordY)) / max(abs(coordX),abs(coordY)) ));
           float arrive[3] = {coordX,coordY,angledeTir};
           float scalaire = 1/sqrt(arrive[0]*arrive[0]+arrive[1]*arrive[1]);
+          //vecteur normalisé repésentant la direction du tir
           float u[3] = {arrive[0]*scalaire,arrive[1]*scalaire,arrive[2]*scalaire};
+          // Gravité (non réel) attribué dans le jeu
           float g[3] = {0.0,0.0,-3.4};
 
           
@@ -134,12 +142,14 @@ void Arbaletrier::tirArbalete(float x, float y, std::vector<Element*> listeEleme
           pt[1] = usmt[1] + gt2[1];
           pt[2] = usmt[2] + gt2[2];
 
+          //variable qui simule le temps qui s'écoule
           timeProjec+=0.02;
 
           glTranslatef(pt[0]+posDepart[0],pt[1]+posDepart[1],pt[2]);
 
           float angle = position[1] / sqrt(position[0]*position[0] + position[1]*position[1]);
           angle = acos(angle)* 180 / 3.14159265;
+
           if (position[0] > x)
             angle *=-1;
           glPushMatrix();{

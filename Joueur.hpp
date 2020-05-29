@@ -43,7 +43,9 @@ private:
     int qtePierre;
     int qteOr;
     int maxUnites;
+    //Liste des unités que le joueur possède
     std::vector<Personnage*> listeUnites;
+    //Liste des batiments que le joueur possède 
     std::vector<Batiment*> listeBatiments;
     std::array<float,3> couleur;
 };  

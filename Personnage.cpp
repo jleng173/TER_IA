@@ -35,13 +35,6 @@ void Personnage::updatePos( float time){
 void Personnage::setPosition(float x, float y){
     position[0] = x;
     position[1] = y;
-    // hitbox.x1 = position[0]-1;
-    // hitbox.y1 = position[1]-1;
-    // hitbox.x2 = position[0]+1;
-    // hitbox.y2 = position[1]+1;
-    //     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
-    // ListPositions.erase(ListPositions.begin()+0);
-
 }
 
 void Personnage::tpCibleAStar(){
@@ -433,13 +426,6 @@ int Personnage::getDmg(){
     return dmg;
 }
 
-float Personnage::getLastX(){
-    return lastPosition[0];
-}
-
-float Personnage::getLastY(){
-    return lastPosition[1];
-}
 
 float Personnage::getOrientation(){
     return orientation;
