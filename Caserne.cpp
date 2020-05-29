@@ -12,6 +12,7 @@ Caserne::Caserne(float x, float y, TEXTURE_STRUCT * T_chateau,TEXTURE_STRUCT * T
     nom="Caserne";
 }
 
+//Modélisation du batiment
 void Caserne::creerBatiment() const{
 
     glPushMatrix();{
@@ -29,6 +30,7 @@ void Caserne::creerBatiment() const{
     glRotatef(90,1.0,0.0,0.0);
         glEnable(GL_TEXTURE_2D);
     glPushMatrix();{
+        //Cour de la caserne
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
         glPushMatrix();{
                 glTranslatef(-2.7,-1.2,4.5);
@@ -48,6 +50,7 @@ void Caserne::creerBatiment() const{
                 forme.afficheCube(mur);
         }
         glPopMatrix();
+        //Toiture
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_toit->width, Texture_toit->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_toit->data);
         glPushMatrix();{
                 glTranslatef(0,6,0);
@@ -55,6 +58,7 @@ void Caserne::creerBatiment() const{
                 forme.affichePyramide(pyramide1);
         }
         glPopMatrix();
+        //Fondation
         glScalef(1.5,1,1);
         glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_chateau->width, Texture_chateau->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_chateau->data);
         forme.afficheCube(batiment);
@@ -64,6 +68,7 @@ void Caserne::creerBatiment() const{
     }glPopMatrix();
 }
 
+//Creation du guerrier et ajout dans la liste des unités disponibles du Joueur J
 void Caserne::creerGuerrier(Joueur * J){
         if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 5) > 0){
                 Personnage * PersGuerrier = new Guerrier(position[0],position[1]-10,0,10,J->getCouleur());
@@ -72,6 +77,7 @@ void Caserne::creerGuerrier(Joueur * J){
         }       
 }
 
+//Creation de l'arbaletrier et ajout dans la liste des unités disponibles du Joueur J
 void Caserne::creerArbaletrier(Joueur * J){
         if (J->getUnites().size() < J->getMaxUnites() && (J->getOr() - 4) > 0){
                 Personnage * PersArbaletrier = new Arbaletrier(position[0],position[1]-10,0,9,J->getCouleur());

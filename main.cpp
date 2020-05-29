@@ -217,8 +217,17 @@ GLvoid Modelisation()
       }
       clickX = initGL::xpose;
       clickY = initGL::ypose;
-      initGL::pose = 2;
 
+      for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
+        if( posx >= Joueur1->getBatiments()[i]->getHitbox().x1 && posx <= Joueur1->getBatiments()[i]->getHitbox().x2 && posy >= Joueur1->getBatiments()[i]->getHitbox().y1 && posy <= Joueur1->getBatiments()[i]->getHitbox().y2){
+          Joueur1->getBatiments()[i]->setSelected(1);
+          
+        }else{
+          Joueur1->getBatiments()[i]->setSelected(0);
+          //listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
+        }
+      }
+      initGL::pose = 2;
 	  }
 	
     glPushMatrix();{   
@@ -271,6 +280,10 @@ GLvoid Modelisation()
                 Joueur1->getBatiments()[i]->setHp(Joueur1->getBatiments()[i]->getHp()+1);
             if(Joueur1->getBatiments()[i]->getHp() == Joueur1->getBatiments()[i]->getHpMax())
                 Joueur1->getBatiments()[i]->setEnConstruction(false);
+        }
+        if (Joueur1->getBatiments()[i]->isSelected()){
+          listeBatimentInterface.clear();
+          listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
         }
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur1->getBatiments()[i]));
       }
@@ -334,34 +347,6 @@ GLvoid Modelisation()
 
      }
 
-       //formation en carré
-       if(!formation.empty()){
-          int startForm = formation.size();
-          int ligne = 0 - startForm;
-          int colonne = 0;
-          int x = Joueur1->getUnites()[formation.front()]->getX();
-          int y = Joueur1->getUnites()[formation.front()]->getY();
-            for(int i :formation){
-              
-              if(ligne == startForm){
-                ligne = -startForm;
-                colonne+=2;
-              }else{
-                ligne+=2;
-              }
-              x += ligne;
-              y += colonne;
-              while(astar::obstacle[x+250][y+250]==true){
-                colonne +=2;
-              }
-
-              Joueur1->getUnites()[i]->setPosition(x,y);
-              Joueur1->getUnites()[i]->setFormed(true);
-
-            }
-       }
-          
-
    }glPopMatrix();
 
 
@@ -410,6 +395,7 @@ GLvoid Modelisation()
               Joueur1->getBatiments()[i]->setSelected(0);
           }
       }
+
   }glPopMatrix();
 
 

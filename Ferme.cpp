@@ -12,6 +12,7 @@ Ferme::Ferme(Joueur * J, float x, float y,TEXTURE_STRUCT * T_chateau,TEXTURE_STR
     nom="Ferme";
 }
 
+//Modélisation du batiment
 void Ferme::creerBatiment() const{
     glPushMatrix();{
 
@@ -24,14 +25,17 @@ void Ferme::creerBatiment() const{
         struct pyramide1 pyramide1 = forme.creerPyramide(3);
         glPushMatrix();{
             glEnable(GL_TEXTURE_2D);
+            //Fondation
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_pierre->width, Texture_pierre->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_pierre->data);
             forme.afficheCube(batiment);
+            //Toiture
             glPushMatrix();{
                     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_paille->width, Texture_paille->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_paille->data);
                     glTranslatef(0,5,0);
                     forme.affichePyramide(pyramide1);
             }
             glPopMatrix();
+            //Porte
             glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, Texture_porte->width, Texture_porte->height, 0, GL_RGB, GL_UNSIGNED_BYTE, Texture_porte->data);
 			glPushMatrix();{
 				struct cube1 porte = forme.creerCube(2.5);

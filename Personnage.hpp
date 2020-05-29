@@ -32,6 +32,7 @@ protected:
     std::string nom;
     float dmg;
     
+    //variables gèrent les animations de mouvement du personnage
     float avance;
     float action;
     float mouv;
@@ -60,7 +61,6 @@ public:
 
     void setPosition(float x, float y);
 
-
     GLvoid selectionne();
     GLvoid barreHp();
     bool isSelected();
@@ -77,23 +77,25 @@ public:
     float getLastX();
     float getLastY();
 
-
     float getOrientation();
     float getvitesseMAX();
 
-    float lastPosition[2];
     std::string getNom();
     
     State setEtat(State e);
     State getEtat();
-    //Retourne les coordonnées x,y et la distance de l'ennemie le plus proche
+    //Retourne les coordonnées x,y et la distance de l'ennemi le plus proche
     std::vector<float> rangeEnnemy(std::vector<Personnage*> listeEnnemies);
-
+     //Retourne les coordonnées x,y et la distance de du batiment ennemi le plus proche
     std::vector<float> rangeBatiment(std::vector<Batiment*> listeBatiment);
 
+    //Liste de toutes les coordonnées que le personnage va emprunter pour aller à une certaine position
     std::vector<std::vector<float>> ListPositions;
+    //Fonction qui permet le déplacement d'un personnage entre sa postion actuel et une coordonnée 
     void deplacementCibleAStar(float x, float y);
     void tpCibleAStar();
+    //Génère une liste de coordonnées partant du personnage jusqu'à un point donné
     std::vector<std::vector<float>> GenerateListPos(float x, float y);
+    //Génère une liste de coordonnées partant du personnage jusqu'à l'opposé d'un point donné
     std::vector<std::vector<float>> GenerateListPosFuite(float x, float y);
 };

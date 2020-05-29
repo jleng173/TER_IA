@@ -25,7 +25,9 @@ class Arbaletrier : public Personnage{
         GLvoid creerAccessoire() const override;
         //Gestion des états
         void comportement(std::vector<Personnage*> listeEnnemies,std::vector<Batiment*> listeBatiment) override;
-        //Transitions
+        //Transitions :
+        // Si il y a un ennemi à courte portée
         bool CourtePortee(std::vector<float> elementProche);
+        // Si il y a un enemmi à longue portée
         bool LongPortee(std::vector<float> elementProche);
 };

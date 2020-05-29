@@ -33,7 +33,7 @@ class InterfaceHUD{
 
     float x;
     float y;
-    int modeAction;
+    int modeAction; // Entier permettant, au paysan notamment, de rentrer dans son "second" menu correspondant à la création de batiment, 0 étant le menu principal de chaque unité
     TEXTURE_STRUCT * Texture_HUD;
     TEXTURE_STRUCT * Texture_HUD2;
     TEXTURE_STRUCT * Texture_Pierre;

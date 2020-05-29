@@ -35,13 +35,6 @@ void Personnage::updatePos( float time){
 void Personnage::setPosition(float x, float y){
     position[0] = x;
     position[1] = y;
-    // hitbox.x1 = position[0]-1;
-    // hitbox.y1 = position[1]-1;
-    // hitbox.x2 = position[0]+1;
-    // hitbox.y2 = position[1]+1;
-    //     orientation = (atan2(-velocite[0],velocite[1]) * 180 / 3.14159265)-180;
-    // ListPositions.erase(ListPositions.begin()+0);
-
 }
 
 void Personnage::tpCibleAStar(){
@@ -149,6 +142,7 @@ GLvoid Personnage::selectionne(){
     }glPopMatrix();
 }
 
+//Génère la barre de vie
 GLvoid Personnage::barreHp(){
 
     float lonHp = (6/(float)hpMax)*hp-3;
@@ -187,6 +181,7 @@ void Personnage::setFormed(bool f){
     formed = f;
 }
     
+//Modélisation du personnage et de sa barre de vie si l'unité est sélectionnée
 GLvoid Personnage::creerPersonnage()
 {
     
@@ -442,13 +437,6 @@ int Personnage::getDmg(){
     return dmg;
 }
 
-float Personnage::getLastX(){
-    return lastPosition[0];
-}
-
-float Personnage::getLastY(){
-    return lastPosition[1];
-}
 
 float Personnage::getOrientation(){
     return orientation;
@@ -470,6 +458,7 @@ State Personnage::getEtat(){
    return etat;
 }
 
+//Détecte l'unité ennemi
 std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemies) {
     std::vector<float> ennemyproche= {0,0,INFINITY};
     float distanceMin = INFINITY;
@@ -488,7 +477,8 @@ std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemie
     return ennemyproche;
 }
 
- std::vector<float> Personnage::rangeBatiment(std::vector<Batiment*> listeBatiment){
+//Détecte le batiment ennemi
+std::vector<float> Personnage::rangeBatiment(std::vector<Batiment*> listeBatiment){
     std::vector<float> batimentproche= {0,0,INFINITY};
     float distanceMin = INFINITY;
     for(int i = 0 ; i < listeBatiment.size() ; i++){
@@ -504,4 +494,4 @@ std::vector<float> Personnage::rangeEnnemy(std::vector<Personnage*> listeEnnemie
     }
     batimentproche[2] = distanceMin;
     return batimentproche;
- }
+}

@@ -293,6 +293,8 @@ GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, std::vector<
 
 }
 
+//Affichage de texte dans l'application OpenGL
+//Prend en parametre le texte a afficher, la taille du texte et sa position dans la fenêtre
 void InterfaceHUD::drawText(std::string text, int length, int x, int y){
   glMatrixMode(GL_PROJECTION);
   double *matrix = new double[16];
@@ -315,6 +317,7 @@ void InterfaceHUD::drawText(std::string text, int length, int x, int y){
   glMatrixMode(GL_MODELVIEW);
 }
 
+//Affichage des icones des unités en cas de sélection de plusieurs unités
 GLvoid InterfaceHUD::drawIconCharacter(){
     glBegin(GL_QUADS);
     glColor3f(1.0f, 1.0f, 1.0f);
@@ -529,6 +532,7 @@ GLvoid InterfaceHUD::drawIconAction(bool paysan, std::vector<Personnage *> p,std
       glPopMatrix();
 }
 
+//Affiche les informations lorsqu'une seule unité ou batiment est sélectionné
 void InterfaceHUD::drawUnitInformation(std::vector<Personnage *> p, std::vector<Batiment *> b){
       float translate=0;
       int nbG = 0;
@@ -624,6 +628,8 @@ void InterfaceHUD::drawUnitInformation(std::vector<Personnage *> p, std::vector<
       }     
 }
 
+//Affiche les icones d'actions possibles d'une unité ou d'un batiment
+//Renvoie un entier permettant, au paysan notamment, de rentrer dans son "second" menu correspondant à la création de batiment, 0 étant le menu principal de chaque unité
 int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *> b, Joueur * j){
   //Creation d'unites pour la caserne
   if(x>1105 && x<1232 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
