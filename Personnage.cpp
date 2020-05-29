@@ -45,7 +45,7 @@ void Personnage::tpCibleAStar(){
     }else {
         if(mouv !=0 && avance !=0) //switch pour faire le setFormed qu'une fois 
         setFormed(false);
-        
+
         mouv=0; 
         avance = 0;
     }
