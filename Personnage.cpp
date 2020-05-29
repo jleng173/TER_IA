@@ -41,7 +41,6 @@ void Personnage::setPosition(float x, float y){
 void Personnage::tpCibleAStar(){
 
     if(!ListPositions.empty()){
-                std::cout<< " MAIS POURQUOI " << avance << std::endl;
         deplacementCibleAStar(ListPositions[0][0],ListPositions[0][1]);
         setFormedOnce = true;
     }else {
@@ -98,8 +97,6 @@ std::vector<std::vector<float>> Personnage::GenerateListPosFuite(float x, float 
 
 void Personnage::deplacementCibleAStar(float x, float y){
      //SeekKinematic mouvement
-             std::cout<< " DEPLACEMENT" << avance << std::endl;
-
         velocite[0] = x - position[0];
         velocite[1] = y - position[1] ;
 

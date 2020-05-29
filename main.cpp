@@ -308,7 +308,7 @@ GLvoid Modelisation()
            formation.push_back(i);
         }
 
-        if(Joueur1->getUnites()[i]->isSelected() && !(unite.x-1 <= destination.x && destination.x<= unite.x+1 && unite.y-1 <= destination.y &&  destination.y<= unite.y+1)){
+        if(Joueur1->getUnites()[i]->isSelected() && !(unite.x-3 <= destination.x && destination.x<= unite.x+3 && unite.y-3 <= destination.y &&  destination.y<= unite.y+3)){
           
 
 
