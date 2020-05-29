@@ -347,6 +347,34 @@ GLvoid Modelisation()
 
      }
 
+       //formation en carré
+       if(!formation.empty()){
+          int startForm = formation.size();
+          int ligne = 0 - startForm;
+          int colonne = 0;
+          int x = Joueur1->getUnites()[formation.front()]->getX();
+          int y = Joueur1->getUnites()[formation.front()]->getY();
+            for(int i :formation){
+              
+              if(ligne == startForm){
+                ligne = -startForm;
+                colonne+=2;
+              }else{
+                ligne+=2;
+              }
+              x += ligne;
+              y += colonne;
+              while(astar::obstacle[x+250][y+250]==true){
+                colonne +=2;
+              }
+
+              Joueur1->getUnites()[i]->setPosition(x,y);
+              Joueur1->getUnites()[i]->setFormed(true);
+
+            }
+       }
+          
+
    }glPopMatrix();
 
 
