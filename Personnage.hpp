@@ -46,6 +46,7 @@ protected:
 
     int selected;
     bool formed;
+    bool setFormedOnce;
     std::array<float,3> couleur;
 
     State etat;

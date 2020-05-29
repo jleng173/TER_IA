@@ -18,6 +18,7 @@ Personnage::Personnage(float x, float y, float angle, float v, std::array<float,
     etat = SLEEP;
     std::copy(std::begin(col), std::end(col), std::begin(couleur));
     ListPositions = {};
+    setFormedOnce = true;
 }
 
 
@@ -41,11 +42,11 @@ void Personnage::tpCibleAStar(){
 
     if(!ListPositions.empty()){
         deplacementCibleAStar(ListPositions[0][0],ListPositions[0][1]);
- 
+        setFormedOnce = true;
     }else {
-        if(mouv !=0 && avance !=0) //switch pour faire le setFormed qu'une fois 
-        setFormed(false);
-
+        if(setFormedOnce) //switch pour faire le setFormed qu'une fois 
+            setFormed(false);
+        setFormedOnce = false;
         mouv=0; 
         avance = 0;
     }

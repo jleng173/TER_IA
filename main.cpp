@@ -218,15 +218,15 @@ GLvoid Modelisation()
       clickX = initGL::xpose;
       clickY = initGL::ypose;
 
-      for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
-        if( posx >= Joueur1->getBatiments()[i]->getHitbox().x1 && posx <= Joueur1->getBatiments()[i]->getHitbox().x2 && posy >= Joueur1->getBatiments()[i]->getHitbox().y1 && posy <= Joueur1->getBatiments()[i]->getHitbox().y2){
-          Joueur1->getBatiments()[i]->setSelected(1);
+      // for(int i = 0 ; i < Joueur1->getBatiments().size(); i++){
+      //   if( posx >= Joueur1->getBatiments()[i]->getHitbox().x1 && posx <= Joueur1->getBatiments()[i]->getHitbox().x2 && posy >= Joueur1->getBatiments()[i]->getHitbox().y1 && posy <= Joueur1->getBatiments()[i]->getHitbox().y2){
+      //     Joueur1->getBatiments()[i]->setSelected(1);
           
-        }else{
-          Joueur1->getBatiments()[i]->setSelected(0);
-          //listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
-        }
-      }
+      //   }else{
+      //     Joueur1->getBatiments()[i]->setSelected(0);
+      //     //listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
+      //   }
+      // }
       initGL::pose = 2;
 	  }
 	
@@ -281,10 +281,10 @@ GLvoid Modelisation()
             if(Joueur1->getBatiments()[i]->getHp() == Joueur1->getBatiments()[i]->getHpMax())
                 Joueur1->getBatiments()[i]->setEnConstruction(false);
         }
-        if (Joueur1->getBatiments()[i]->isSelected()){
-          listeBatimentInterface.clear();
-          listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
-        }
+        // if (Joueur1->getBatiments()[i]->isSelected()){
+        //   listeBatimentInterface.clear();
+        //   listeBatimentInterface.push_back(Joueur1->getBatiments()[i]);
+        // }
         toutLesElements.push_back(dynamic_cast<Element*>(Joueur1->getBatiments()[i]));
       }
    }glPopMatrix();
