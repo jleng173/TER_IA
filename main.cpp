@@ -314,8 +314,6 @@ GLvoid Modelisation()
 
 
 
-      //A faire : deplacement de groupe ?, formations, autre hitbox, deplacement naturel
-
             if(Joueur1->getUnites()[i]->ListPositions.empty()){
                 Joueur1->getUnites()[i]->ListPositions = Joueur1->getUnites()[i]->GenerateListPos(posx,posy);
 
@@ -445,7 +443,7 @@ int main(int argc, char **argv){
 
   initGL* init = new initGL();
 
-	init->mainInit(argc,argv,&Modelisation);
+	init->mainInit(argc,argv,&Modelisation,WIDTH,HEIGHT);
 
 	return 0;
 }

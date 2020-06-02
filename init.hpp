@@ -24,7 +24,7 @@ public:
 	~initGL();
 
 	//init
-	int mainInit(int argc, char** argv, void (*DrawGLScene)());
+	int mainInit(int argc, char** argv, void (*DrawGLScene)(),int WIDTH, int HEIGHT);
 
 	static void VM_init();
 

@@ -61,7 +61,7 @@ GLvoid initGL::ReSizeGLScene(int Width, int Height)
 
 
 
-int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)()) 
+int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)(),int WIDTH, int HEIGHT) 
 {  
 
 
@@ -77,7 +77,7 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)())
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH | GLUT_ALPHA);  
 
     /* get a 640 x 480 window */
-    glutInitWindowSize(1600, 900);  
+    glutInitWindowSize(WIDTH, HEIGHT);  
 
     /* the window starts at the upper left corner of the screen */
     glutInitWindowPosition(0, 0);  
@@ -89,7 +89,7 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)())
     glutDisplayFunc(DrawGLScene);  
 
     /* Go fullscreen.  This is as soon as possible. */
-    //    glutFullScreen();
+     //   glutFullScreen();
 
     /* Even if there are no events, redraw our gl scene. */
     glutIdleFunc(DrawGLScene); 
@@ -106,7 +106,7 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)())
 
 
     /* Initialize our window. */
-    generalInit(1600, 900);
+    generalInit(WIDTH, HEIGHT);
 
 
 
