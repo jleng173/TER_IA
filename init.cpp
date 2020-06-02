@@ -83,7 +83,7 @@ int initGL::mainInit(int argc, char** argv, void (*DrawGLScene)(),int WIDTH, int
     glutInitWindowPosition(0, 0);  
 
     /* Open a window */  
-    window = glutCreateWindow("OpenGL");  
+    window = glutCreateWindow("COMMAND & CONQUER TOTAL WAR-CRAFT: AGE OF EMPIRE");  
 
     /* Register the function to do all our OpenGL drawing. */
     glutDisplayFunc(DrawGLScene);  

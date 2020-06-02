@@ -30,13 +30,14 @@
 using namespace std;
 
 //Taille Fenetre
- int WIDTH = 1600;
- int HEIGHT = 900;
+ float WIDTH = 1600*(float)initGL::coefx;
+ float HEIGHT = 900*(float)initGL::coefy;
 
 std::array<float,3> rouge={1,0,0};
 std::array<float,3> bleu ={0,0,1};
 
-
+float initGL::coefx=1.1875;
+float initGL::coefy=(float)10/9;
 float initGL::z = 0;
 float initGL::xrot = 0;
 float initGL::yrot = 0;
@@ -207,7 +208,7 @@ GLvoid Modelisation()
         compX = 0;
       }
     if (initGL::pose == 1){
-      if(initGL::ypose<676 && initGL::ypose>49){
+      if(initGL::ypose<676*initGL::coefy && initGL::ypose>49*initGL::coefy){
         int limiteC = sqrt((carte.getTailleCarte()*2)*(carte.getTailleCarte()*2)/2);
         if( (SP.positionX + compX <= limiteC -(SP.positionY + compY)) && (SP.positionY + compY <= limiteC -(SP.positionX + compX)) && (SP.positionX + compX >= -1*limiteC +(SP.positionY + compY)) && (SP.positionY + compY >= -1*limiteC +(SP.positionX + compX))){
 
@@ -429,7 +430,7 @@ GLvoid Modelisation()
 
 
 int main(int argc, char **argv){
-
+  std::cout<<WIDTH << " " << HEIGHT;
   Batiment * castle = new Chateau(0,0,carte.decors,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Batiment * caserne = new Caserne(10,10,initGL::Texture_chateau,initGL::Texture_pierre,initGL::Texture_toit,initGL::Texture_porte,initGL::Texture_paille);
   Joueur1->addBatiment(castle);

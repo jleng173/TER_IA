@@ -288,8 +288,8 @@ GLvoid InterfaceHUD::creerInterfaceHUD(std::vector<Personnage *> p, std::vector<
     glMatrixMode(GL_MODELVIEW);
     glEnable(GL_DEPTH_TEST);
 
-    std::string Title = "COMMAND & CONQUER TOTAL WAR-CRAFT: AGE OF EMPIRE";
-    drawText(Title,Title.size(),5,6);
+    // std::string Title = "COMMAND & CONQUER TOTAL WAR-CRAFT: AGE OF EMPIRE";
+    // drawText(Title,Title.size(),5,6);
 
 }
 
@@ -632,66 +632,66 @@ void InterfaceHUD::drawUnitInformation(std::vector<Personnage *> p, std::vector<
 //Renvoie un entier permettant, au paysan notamment, de rentrer dans son "second" menu correspondant à la création de batiment, 0 étant le menu principal de chaque unité
 int InterfaceHUD::ActionClick(std::vector<Personnage *>p, std::vector<Batiment *> b, Joueur * j){
   //Creation d'unites pour la caserne
-  if(x>1105 && x<1232 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
-    if(y>713 && y<757){
+  if(x>1105*initGL::coefx && x<1232*initGL::coefx && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
+    if(y>713*initGL::coefy && y<757*initGL::coefy){
       dynamic_cast<Caserne *>(b[0])->creerGuerrier(j);
       return 0;
     }
   }
-  if(x>1265 && x<1392 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
-    if(y>713 && y<757){
+  if(x>1265*initGL::coefx && x<1392*initGL::coefx && p.size()<1 && b.size()==1 && b[0]->getNom()=="Caserne"){
+    if(y>713*initGL::coefy && y<757*initGL::coefy){
       dynamic_cast<Caserne *>(b[0])->creerArbaletrier(j);
       return 0;
     }
   }
   //Creation d'unites pour le chateau
-  if(x>1105 && x<1232 && p.size()<1 && b.size()==1 && b[0]->getNom()=="Chateau"){
-    if(y>713 && y<757){
+  if(x>1105*initGL::coefx && x<1232*initGL::coefx && p.size()<1 && b.size()==1 && b[0]->getNom()=="Chateau"){
+    if(y>713*initGL::coefy && y<757*initGL::coefy){
       dynamic_cast<Chateau *>(b[0])->creerPaysan(j);
       return 0;
     }
   }
 
   //Construction depuis le menu du paysan
-  if(x>1105 && x<1231 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
-      if(y>821 && y<863){
+  if(x>1105*initGL::coefx && x<1231*initGL::coefx && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==0){
+      if(y>821*initGL::coefy && y<863*initGL::coefy){
         return 1;
       }
   }
-  if(x>1105 && x<1232 && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==1){
-    if(y>713 && y<757){
+  if(x>1105*initGL::coefx && x<1232*initGL::coefx && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==1){
+    if(y>713*initGL::coefy && y<757*initGL::coefy){
       dynamic_cast<Paysan *>(p[0])->construireCaserne(j, p[0]->getX(), p[0]->getY()+10);
       return 0;
     }
   }
-  if(x>1265 && x<1392 && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==1){
-    if(y>713 && y<757){
+  if(x>1265*initGL::coefx && x<1392*initGL::coefx && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==1){
+    if(y>713*initGL::coefy && y<757*initGL::coefy){
       dynamic_cast<Paysan *>(p[0])->construireFerme(j, p[0]->getX(), p[0]->getY()+10);
       return 0;
     }
   }
-  if(x>1424 && x<1552 && p.size()==1 && p[0]->isSelected() &&  p[0]->getNom()=="Paysan" && modeAction==1){
-    if(y>713 && y<757){
+  if(x>1424*initGL::coefx && x<1552*initGL::coefx && p.size()==1 && p[0]->isSelected() &&  p[0]->getNom()=="Paysan" && modeAction==1){
+    if(y>713*initGL::coefy && y<757*initGL::coefy){
       dynamic_cast<Paysan *>(p[0])->construireTour(j, p[0]->getX(), p[0]->getY()+10);
       return 0;
     }
   }
-  if(x>1105 && x<1231 && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
-      if(y>821 && y<863){
+  if(x>1105*initGL::coefx && x<1231*initGL::coefx && p.size()==1 && p[0]->getNom()=="Paysan" && modeAction==1){
+      if(y>821*initGL::coefy && y<863*initGL::coefy){
         return 0;
       }
   }
 
   //Action du paysan
-  if(x>1105 && x<1232 && p.size()==1 &&  p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==0){
-    if(y>767 && y<811){
+  if(x>1105*initGL::coefx && x<1232*initGL::coefx && p.size()==1 &&  p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==0){
+    if(y>767*initGL::coefy && y<811*initGL::coefy){
       dynamic_cast<Paysan *>(p[0])->modeBois();
       return 0;
     }
   }
 
-  if(x>1265 && x<1392 && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==0){
-    if(y>767 && y<811){
+  if(x>1265*initGL::coefx && x<1392*initGL::coefx && p.size()==1 && p[0]->isSelected() && p[0]->getNom()=="Paysan" && modeAction==0){
+    if(y>767*initGL::coefy && y<811*initGL::coefy){
       dynamic_cast<Paysan *>(p[0])->modePierre();
       return 0;
     }

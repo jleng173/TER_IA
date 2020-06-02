@@ -56,6 +56,8 @@ protected:
 
  public:
 	//Main
+ static float coefx;
+ static float coefy;
  static float z;
  static float xrot;   
  static float yrot; 
