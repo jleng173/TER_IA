@@ -39,6 +39,7 @@ void initGL::generalInit(unsigned int width,unsigned int height)	// We call this
 	glTexParameteri (GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	// glGenerateMipmap(GL_TEXTURE_2D);
 	glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
    
 
 }

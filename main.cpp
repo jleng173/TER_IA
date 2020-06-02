@@ -30,14 +30,17 @@
 using namespace std;
 
 //Taille Fenetre
- float WIDTH = 1600*(float)initGL::coefx;
- float HEIGHT = 900*(float)initGL::coefy;
+
+ float WIDTH = 1900; 
+ float HEIGHT = 1000;
+
+float initGL::coefx=(float)WIDTH/1600;
+float initGL::coefy=(float)HEIGHT/900;
+
 
 std::array<float,3> rouge={1,0,0};
 std::array<float,3> bleu ={0,0,1};
 
-float initGL::coefx=1.1875;
-float initGL::coefy=(float)10/9;
 float initGL::z = 0;
 float initGL::xrot = 0;
 float initGL::yrot = 0;
